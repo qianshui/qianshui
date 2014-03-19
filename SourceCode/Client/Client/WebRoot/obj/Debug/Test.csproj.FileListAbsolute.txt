@@ -1,4 +1,0 @@
-F:\Projects\Test\bin\Test.dll
-F:\Projects\Test\bin\Test.pdb
-F:\Projects\Test\obj\Debug\Test.dll
-F:\Projects\Test\obj\Debug\Test.pdb
