@@ -17,6 +17,7 @@
 Ext.Loader.setConfig({
 	 enabled: true,
       paths: {
+      	
           'YongYou':'app'
       }
 
