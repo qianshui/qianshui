@@ -14,7 +14,6 @@ public class Category implements java.io.Serializable {
 	private String type;
 	private String parentId;
 	private String leaf;
-	private String flowId;
 
 	// Constructors
 
@@ -29,14 +28,13 @@ public class Category implements java.io.Serializable {
 
 	/** full constructor */
 	public Category(String id, String title, String icon, String type,
-			String parentId, String leaf, String flowId) {
+			String parentId, String leaf) {
 		this.id = id;
 		this.title = title;
 		this.icon = icon;
 		this.type = type;
 		this.parentId = parentId;
 		this.leaf = leaf;
-		this.flowId = flowId;
 	}
 
 	// Property accessors
@@ -87,14 +85,6 @@ public class Category implements java.io.Serializable {
 
 	public void setLeaf(String leaf) {
 		this.leaf = leaf;
-	}
-
-	public String getFlowId() {
-		return this.flowId;
-	}
-
-	public void setFlowId(String flowId) {
-		this.flowId = flowId;
 	}
 
 }
