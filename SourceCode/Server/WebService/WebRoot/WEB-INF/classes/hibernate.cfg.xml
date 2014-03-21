@@ -27,6 +27,7 @@
 		<mapping resource="DataBase/Flow.hbm.xml" />
 		<mapping resource="DataBase/Locationsite.hbm.xml"></mapping>
 		<mapping resource="DataBase/Street.hbm.xml"></mapping>
+		<mapping resource="DataBase/Category.hbm.xml" />
 
 	</session-factory>
 
