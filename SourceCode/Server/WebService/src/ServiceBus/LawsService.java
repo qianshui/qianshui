@@ -31,7 +31,7 @@ import DataBase.Subjecttype;
  * *************************************************************
  */
 @Path("LowsService")
-public class LowsService {
+public class LawsService {
 	/**
 	 * *************************************************************
 	 * FunName : LowsService

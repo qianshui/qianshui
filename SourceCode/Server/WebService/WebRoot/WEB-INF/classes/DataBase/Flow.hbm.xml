@@ -28,5 +28,8 @@
         <property name="type" type="string">
             <column name="Type" length="1" />
         </property>
+        <property name="categoryId" type="string">
+            <column name="CategoryID" length="10" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -11,6 +11,7 @@ public class MyRunApplication extends Application {
 	public MyRunApplication() {
 		singletons.add(new IndustryService());
 		singletons.add(new MapService());
+		singletons.add(new CategoryService());
 	}
 
 	@Override
