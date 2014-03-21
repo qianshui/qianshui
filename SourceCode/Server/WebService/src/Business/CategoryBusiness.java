@@ -72,7 +72,7 @@ public class CategoryBusiness {
      * Output:void
      * *************************************************************
 	 */
-    public Category getPreListByID(String strID,List<Category> childList) {
+    public void getPreListByID(String strID,List<Category> childList) {
     	try {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
@@ -82,14 +82,10 @@ public class CategoryBusiness {
 			Transaction tx = session.beginTransaction();
 			tx.commit();
 			session.clear();
-			System.out.println(obj.getTitle());
-			return obj;
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
-		return null;
     }
     
     /**
