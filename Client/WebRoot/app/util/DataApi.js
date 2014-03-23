@@ -7,9 +7,14 @@ Ext.define('YongYou.util.DataApi', {
         this.initConfig(config);
     },
     Core:{
-    		getAreaByLngLat:function(callback,scope,param){
+    	getAreaByLngLat:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		"http://127.0.0.1:8080/WebService/MapService/getAreaByLngLat",param,
+    	    		callback,scope)
+    	},
+    	getMenuList:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		"http://127.0.0.1:8080/WebService/ConfigUtilService/getMenuList",param,
     	    		callback,scope)
     	},
     	getBZList:function(callback,scope,param){
