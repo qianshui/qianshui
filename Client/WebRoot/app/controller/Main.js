@@ -7,7 +7,8 @@ Ext.define('YongYou.controller.Main', {
 		refs : {
 			main : 'main',
 			subject:'subject',
-            navibar:'#navigationbar'
+            navibar:'#navigationbar',
+            query:'#nav-query'
 		},
 
 		control : {
@@ -27,31 +28,52 @@ Ext.define('YongYou.controller.Main', {
 	},
 
 	onMainItemTap : function(view, index, target, record, e) {
-		var navigatePanel = Ext.create('YongYou.view.MyNavigationView', {});
+		var navigatePanel = Ext.create('YongYou.view.query.NavigationPanel', {});
 
 		if (record == '办事指南') {
-			var queryPanel = Ext.ComponentQuery.query("container[id='ttd']")[0];
-			if (!queryPanel) {
-				queryPanel = Ext.create('YongYou.view.QueryPanel', {
+			
+				navigationPanel = Ext.ComponentQuery.query("container[id='nav-query']")[0];
+
+			if (!navigationPanel) {
+				navigationPanel = Ext.create('YongYou.view.query.NavigationPanel', {
 							title : 'title2',
 							fullscreen : true
 						});
-
-				queryPanel.initialPanel();
-				// navigatePanel.push(queryPanel);
-				Ext.Viewport.add(queryPanel);
+				
+				Ext.Viewport.add(navigationPanel);
 			} else {
-				Ext.ComponentQuery.query("container[id='contain']")[0]
-						.setActiveItem('#QueryPanelMain');
-						
-				Ext.ComponentQuery.query("nestedlist[id='QueryList']")[0]
-						.getStore().load();
+				
 			}
-			Ext.Viewport.setActiveItem(queryPanel, {
+			Ext.Viewport.setActiveItem(navigationPanel, {
 						type : 'slide',
 						direction : 'right'
 					});
-
+			flag=0;
+			
+			
+//********************************	old  Code***********************************************************		
+//			var queryPanel = Ext.ComponentQuery.query("container[id='btab']")[0];
+//			if (!queryPanel) {
+//				queryPanel = Ext.create('YongYou.view.query.bottomTab', {
+//							title : 'title2',
+//							fullscreen : true
+//						});
+//
+//				queryPanel.initialPanel();
+//				// navigatePanel.push(queryPanel);
+//				Ext.Viewport.add(queryPanel);
+//			} else {
+////				Ext.ComponentQuery.query("container[id='contain']")[0]
+////						.setActiveItem('#QueryPanelMain');
+////						
+////				Ext.ComponentQuery.query("nestedlist[id='QueryList']")[0]
+////						.getStore().load();
+//			}
+//			Ext.Viewport.setActiveItem(queryPanel, {
+//						type : 'slide',
+//						direction : 'right'
+//					});
+//***********************************************************************************************************
 		} else if (record == '微企指南') {
 			YongYou.util.DataApi.Core.getFlowChart(function(res, scope) {
 

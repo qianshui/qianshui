@@ -7,9 +7,24 @@ Ext.define('YongYou.util.DataApi', {
         this.initConfig(config);
     },
     Core:{
-    		getAreaByLngLat:function(callback,scope,param){
+    	getAreaByLngLat:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
-    	    		"http://127.0.0.1:8080/WebService/MapService/getAreaByLngLat",param,
+    	    		YongYou.util.Config.getService()+"MapService/getAreaByLngLat",param,
+    	    		callback,scope)
+    	},
+    	getMenuList:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"ConfigUtilService/getMenuList",param,
+    	    		callback,scope)
+    	},
+    	getFlowChart:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    		YongYou.util.Config.getWebsite()+"Resource/getFlowChart",param,
+    		callback,scope)
+    	},
+    	getChildByID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getChildByID",param,
     	    		callback,scope)
     	},
     	getBZList:function(callback,scope,param){
@@ -42,11 +57,7 @@ Ext.define('YongYou.util.DataApi', {
     		YongYou.util.Config.getWebsite()+"Resource/getZC",param,
     		callback,scope)
     	},
-    	getFlowChart:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getFlowChart",param,
-    		callback,scope)
-    	},
+
     	getFlowItemContent:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     		YongYou.util.Config.getWebsite()+"Resource/getFlowItemContent",param,

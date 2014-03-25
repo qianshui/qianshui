@@ -31,11 +31,12 @@ Ext.application({
         'MainMenu',       
         'SubjectMenu',
           'IndustryMenu',
-        'AddressMenu'
+        'AddressMenu',
+        'QueryRoot'
     ],
      requires:[
     ],
-    controllers: ['Main','ConsultingControl','QueryPanelControl'], 
+    controllers: ['Main','ConsultingControl','QueryControl'], 
     views: [
         'Main'
     ],
