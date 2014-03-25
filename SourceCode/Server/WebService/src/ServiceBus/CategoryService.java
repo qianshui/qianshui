@@ -19,7 +19,9 @@ import javax.ws.rs.core.MediaType;
 
 import Business.CategoryBusiness;
 import Common.CommonJson;
+import DataBase.Attachment;
 import DataBase.Category;
+import DataBase.Node;
 
 
 /**
@@ -85,6 +87,58 @@ public class CategoryService {
 		List<Category> ChildList = new ArrayList<Category>();
 		CategoryBusiness.getInstance().getChildByID(strID,ChildList);
 		return CommonJson.list2Json(ChildList);
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getFlowByCategoryID
+     * Description：根据分类ID获取对应的流程
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getFlowByCategoryID?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getFlowByCategoryID")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getFlowByCategoryID(@QueryParam("id") String categoryID) {
+		return CommonJson.object2Json(CategoryBusiness.getInstance().getFlowByCategoryID(categoryID));
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getNodeByFlowID
+     * Description： 根据FlowID获取Node
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getNodeByFlowID?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getNodeByFlowID")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getNodeByFlowID(@QueryParam("id") String flowID) {
+		List<Node> NodeList = new ArrayList<Node>();
+		CategoryBusiness.getInstance().getNodeByFlowID(flowID,NodeList);
+		return CommonJson.list2Json(NodeList);
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getAttachmentByNodeID
+     * Description： 根据FlowID获取Node
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getAttachmentByNodeID?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getAttachmentByNodeID")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getAttachmentByNodeID(@QueryParam("id") String nodeID) {
+		List<Attachment> AttachmentList = new ArrayList<Attachment>();
+		CategoryBusiness.getInstance().getAttachmentByNodeID(nodeID,AttachmentList);
+		return CommonJson.list2Json(AttachmentList);
 	}
 }
 

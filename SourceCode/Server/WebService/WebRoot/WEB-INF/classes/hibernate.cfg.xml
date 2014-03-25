@@ -29,6 +29,10 @@
 		<mapping resource="DataBase/Street.hbm.xml"></mapping>
 		<mapping resource="DataBase/Category.hbm.xml" />
 		<mapping resource="DataBase/Menu.hbm.xml" />
+		<mapping resource="DataBase/Node.hbm.xml" />
+		<mapping resource="DataBase/Contact.hbm.xml" />
+		<mapping resource="DataBase/Attachment.hbm.xml" />
+		<mapping resource="DataBase/Narelation.hbm.xml" />
 
 	</session-factory>
 
