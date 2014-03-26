@@ -15,7 +15,7 @@ Ext.define('YongYou.controller.QueryControl', {
 					root : {
 						itemtap : 'onRootTap'
 					},
-					desktop: {
+					desktop : {
 						itemtap : 'onDesktopTap'
 					}
 				}
@@ -34,17 +34,19 @@ Ext.define('YongYou.controller.QueryControl', {
 				view.parent.push(desktop);
 			},
 			onDesktopTap : function(view, index, target, record, e) {
-				if(record.leaf=="1"){	
-					flowpanel=Ext.create('YongYou.flow.FlowViewport', {id:record.id+'-flowviewport'})
-					YongYou.util.DataApi.Core.getFlowChart(
-							function(res, scope) {
-								scope.getFlowpanel().initialPanelCard(res,record.id+'-');
-								scope.getContain()
-										.setActiveItem('#queryPanel-flowviewport');
+				if (record.leaf == "1") {
 
-							}, this, {
-								'ID' : record.id
+					detailTab = Ext.create('YongYou.view.query.DetailTab',{id:record.id,title:record.title})
+					YongYou.util.DataApi.Core.getFlowByCategoryID(function(res,
+									scope) {
+								flow = Ext.decode(res);
+								scope.title=flow.title;
+								scope.initialPanel(flow);
+
+							}, detailTab, {
+								'id' : record.id
 							})
+					view.parent.push(detailTab);
 				}
 			}
 		});
