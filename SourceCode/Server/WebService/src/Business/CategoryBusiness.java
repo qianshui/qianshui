@@ -199,7 +199,8 @@ public class CategoryBusiness {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
 			Session session = sf.openSession();
-			List<Narelation> list = session.createQuery("from Attachment,Narelation where Attachment.id = Narelation.nid  and Narelation.NID = :nodeID")
+			List<Attachment> list = session.createSQLQuery("select a.* from Attachment a,Narelation n " +
+					"where a.id = n.aid  and n.nid = :nodeID").addEntity(Attachment.class)
 			       .setParameter("nodeID", nodeID).list();
 			Transaction tx = session.beginTransaction();
 			if (list != null) {

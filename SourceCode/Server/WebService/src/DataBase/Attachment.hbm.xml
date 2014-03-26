@@ -22,11 +22,11 @@
         <property name="downloadLink" type="string">
             <column name="DownloadLink" length="100" />
         </property>
-        <!--  <set name="narelations" inverse="true">
+<!--        <set name="narelations" inverse="true">
             <key>
                 <column name="AID" length="10" not-null="true" />
             </key>
             <one-to-many class="DataBase.Narelation" />
-        </set>-->
+        </set> --> 
     </class>
 </hibernate-mapping>

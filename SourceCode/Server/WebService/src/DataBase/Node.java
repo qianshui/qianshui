@@ -18,7 +18,7 @@ public class Node implements java.io.Serializable {
 	private String prevNode;
 	private Integer no;
 	private String contactId;
-	//private Set narelations = new HashSet(0);
+//	private Set narelations = new HashSet(0);
 
 	// Constructors
 
@@ -41,7 +41,7 @@ public class Node implements java.io.Serializable {
 		this.prevNode = prevNode;
 		this.no = no;
 		this.contactId = contactId;
-		//this.narelations = narelations;
+	//	this.narelations = narelations;
 	}
 
 	// Property accessors
