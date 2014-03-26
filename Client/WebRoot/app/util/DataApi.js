@@ -42,6 +42,23 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+"CategoryService/getContactByContactID",param,
     	    		callback,scope)
     	},
+    	getIndustryByID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getIndustryByID",param,
+    	    		callback,scope)
+    	},
+    	getLawsByIndustryID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getLawsByIndustryID",param,
+    	    		callback,scope)
+    	},
+    	getPolicyByIndustryID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getPolicyByIndustryID",param,
+    	    		callback,scope)
+    	},
+    	
+    	
     	
     	/*************************Demo Service**********************************************************
     	 * 

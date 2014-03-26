@@ -10,9 +10,9 @@
             <column name="ID" length="10" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="subject" class="DataBase.Subject" fetch="select">
-            <column name="SubjectID" length="10" />
-        </many-to-one>
+         <property name="subjectId" type="string">
+            <column name="SubjectID" length="100" />
+        </property>
         <property name="title" type="string">
             <column name="Title" length="100" />
         </property>
