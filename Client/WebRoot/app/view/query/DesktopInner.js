@@ -24,7 +24,7 @@ Ext.define('YongYou.view.query.DesktopInner', {
 
 					var me = this, store = me.getStore();
 					if (store.data.items[target]) {
-						record = store.data.items[target].data.id;
+						record = store.data.items[target].data;
 
 						this.parent.parent.fireEvent('itemtap', this.parent.parent, index,
 								target, record, e);
@@ -48,6 +48,9 @@ Ext.define('YongYou.view.query.DesktopInner', {
 								type : 'string'
 							}, {
 								name : 'id',
+								type : 'string'
+							},{
+								name : 'leaf',
 								type : 'string'
 							}],
 					data : red

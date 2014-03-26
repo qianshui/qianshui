@@ -18,7 +18,9 @@ public class Node implements java.io.Serializable {
 	private String prevNode;
 	private Integer no;
 	private String contactId;
-//	private Set narelations = new HashSet(0);
+	private String imgId;
+	private Integer rowid;
+	//private Set narelations = new HashSet(0);
 
 	// Constructors
 
@@ -27,13 +29,16 @@ public class Node implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Node(String id) {
+	public Node(String id, String imgId, Integer rowid) {
 		this.id = id;
+		this.imgId = imgId;
+		this.rowid = rowid;
 	}
 
 	/** full constructor */
 	public Node(String id, String flowId, String title, String description,
-			String prevNode, Integer no, String contactId, Set narelations) {
+			String prevNode, Integer no, String contactId, String imgId,
+			Integer rowid, Set narelations) {
 		this.id = id;
 		this.flowId = flowId;
 		this.title = title;
@@ -41,7 +46,9 @@ public class Node implements java.io.Serializable {
 		this.prevNode = prevNode;
 		this.no = no;
 		this.contactId = contactId;
-	//	this.narelations = narelations;
+		this.imgId = imgId;
+		this.rowid = rowid;
+		//this.narelations = narelations;
 	}
 
 	// Property accessors
@@ -100,6 +107,22 @@ public class Node implements java.io.Serializable {
 
 	public void setContactId(String contactId) {
 		this.contactId = contactId;
+	}
+
+	public String getImgId() {
+		return this.imgId;
+	}
+
+	public void setImgId(String imgId) {
+		this.imgId = imgId;
+	}
+
+	public Integer getRowid() {
+		return this.rowid;
+	}
+
+	public void setRowid(Integer rowid) {
+		this.rowid = rowid;
 	}
 
 //	public Set getNarelations() {

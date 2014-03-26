@@ -17,7 +17,7 @@
             <column name="Title" length="100" />
         </property>
         <property name="description" type="string">
-            <column name="Description" length="100" />
+            <column name="Description" length="65535" />
         </property>
         <property name="prevNode" type="string">
             <column name="PrevNode" length="100" />
@@ -28,11 +28,17 @@
         <property name="contactId" type="string">
             <column name="ContactID" length="10" />
         </property>
- <!--       <set name="narelations" inverse="true" lazy="false">
+        <property name="imgId" type="string">
+            <column name="ImgId" length="100" not-null="true" />
+        </property>
+        <property name="rowid" type="integer">
+            <column name="Rowid" not-null="true" />
+        </property>
+<!--       <set name="narelations" inverse="true">
             <key>
                 <column name="NID" length="10" not-null="true" />
             </key>
             <one-to-many class="DataBase.Narelation" />
-        </set>  --> 
+        </set> -->  
     </class>
 </hibernate-mapping>
