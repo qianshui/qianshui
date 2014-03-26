@@ -152,8 +152,7 @@ public class Industry {
             /*获取session对象*/
         	SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	        session = sf.openSession();
-            Subjecttype obj = (Subjecttype)session.get(Subjecttype.class, strID);
-            return obj;
+            return (Subjecttype)session.get(Subjecttype.class, strID);
         }finally {//保证资源得到释放
                if(session != null) {
                   session.close();

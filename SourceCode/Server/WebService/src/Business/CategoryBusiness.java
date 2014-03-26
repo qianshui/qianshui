@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import DataBase.Category;
+import DataBase.Contact;
 import DataBase.Flow;
 import DataBase.Node;
 import DataBase.Attachment;
@@ -217,5 +218,27 @@ public class CategoryBusiness {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+    }
+    
+    /**
+     * *************************************************************
+	 * FunName : getContactByContactID
+     * Description： 根据联系人ID获取联系人信息
+     * Input: @param strID
+     * Output:void
+     * *************************************************************
+	 */
+    public Contact getContactByContactID(String contactID) {
+    	Session session = null;
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+            return (Contact)session.get(Contact.class, contactID);
+        }finally {//保证资源得到释放
+               if(session != null) {
+                  session.close();
+               }
+        }
     }
 }

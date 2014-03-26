@@ -140,6 +140,22 @@ public class CategoryService {
 		CategoryBusiness.getInstance().getAttachmentByNodeID(nodeID,AttachmentList);
 		return CommonJson.list2Json(AttachmentList);
 	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getContactByContactID
+     * Description：根据联系人ID获取联系人信息
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getContactByContactID?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getContactByContactID")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getContactByContactID(@QueryParam("id") String contactID) {
+		return CommonJson.object2Json(CategoryBusiness.getInstance().getContactByContactID(contactID));
+	}
 }
 
 
