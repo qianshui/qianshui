@@ -25,9 +25,9 @@
         <property name="type" type="string">
             <column name="Type" length="1" />
         </property>
-        <property name="micro" type="boolean">
+        <!--  <property name="micro" type="boolean">
             <column name="Micro" />
-        </property>
+        </property>-->
         <!-- <set name="sprelations" inverse="true">
             <key>
                 <column name="PID" length="10" />
