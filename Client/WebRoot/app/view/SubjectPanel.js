@@ -9,7 +9,7 @@
 
         itemTpl: [
             '<div class="image" style="background-image:url(\'resources/img/phone_startup.png\')"></div>',
-            '<div class="name">{label}</div>'
+            '<div class="name">{description}</div>'
 
         ].join('')
     },

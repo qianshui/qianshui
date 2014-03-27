@@ -111,7 +111,7 @@ Ext.define('YongYou.controller.Main', {
 					
 //					Ext.ComponentQuery.query("container[id='contain2']")[0]
 //					.setActiveItem('#IndustrylistPanel');
-				},this,{'HYID':record.internalId});
+				},this,{});
 				
 				Ext.Viewport.add(navigationPanel);
 			} else {
@@ -123,7 +123,7 @@ Ext.define('YongYou.controller.Main', {
 					
 //					Ext.ComponentQuery.query("container[id='contain2']")[0]
 //					.setActiveItem('#IndustrylistPanel');
-				},this,{'HYID':record.internalId});
+				},this,{});
 				Ext.ComponentQuery.query("container[id='contain2']")[0]
 						.setActiveItem('#SubjectPanel', {
         					type: 'slide',

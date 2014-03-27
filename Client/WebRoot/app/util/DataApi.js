@@ -120,7 +120,7 @@ Ext.define('YongYou.util.DataApi', {
     	getCommonSectors:function(callback,scope,params)
     	{
     		YongYou.util.DataApi.queryData(
-    	    		YongYou.util.Config.getWebsite()+"Sectorslist",params,
+    				YongYou.util.Config.getService()+"IndustryService/getIndustryClass",params,
     	    		callback,scope);
     	},
     	getCommonIndustry:function(callback,scope,params)

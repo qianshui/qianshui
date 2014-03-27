@@ -86,7 +86,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 											});
 							scope.getNavibar().setTitle("选择行业");
 						}, this, {
-							'HYID' : record.internalId
+							//'HYID' : record.internalId
 						});
 				industry1 = record;
 
