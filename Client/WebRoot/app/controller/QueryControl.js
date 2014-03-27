@@ -21,6 +21,8 @@ Ext.define('YongYou.controller.QueryControl', {
 				}
 			},
 			onRootTap : function(view, index, target, record, e) {
+				var desktop= Ext.ComponentQuery.query("tabpanel[id='query-desktop']")[0];
+				if(!desktop){
 				desktop = Ext.create('YongYou.view.query.desktop', {
 							title : record.label
 						})
@@ -31,12 +33,15 @@ Ext.define('YongYou.controller.QueryControl', {
 						}, desktop, {
 							'id' : record.id
 						})
-				view.parent.push(desktop);
+				view.parent.push(desktop);}
+				else{
+					view.parent.setActiveItem(desktop);
+				}
 			},
 			onDesktopTap : function(view, index, target, record, e) {
 				if (record.leaf == "1") {
 
-					detailTab = Ext.create('YongYou.view.query.DetailTab',{id:record.id,title:record.title})
+					detailTab = Ext.create('YongYou.view.query.DetailTab',{title:record.title})
 					YongYou.util.DataApi.Core.getFlowByCategoryID(function(res,
 									scope) {
 								flow = Ext.decode(res);

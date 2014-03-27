@@ -1,3 +1,4 @@
+
 Ext.define('YongYou.view.query.DetailTab', {
 	extend : 'Ext.TabPanel',
 	requires : [],
@@ -19,47 +20,62 @@ Ext.define('YongYou.view.query.DetailTab', {
 	initialPanel : function(flow) {
 
 		if (flow) {
+			
 			YongYou.util.DataApi.Core.getNodeByFlowID(function(res, scope) {
+			//	flowpanel= Ext.ComponentQuery.query("container[id='flowviewport']")[0];
+			//if(!flowpanel){
 				flowpanel = Ext.create('YongYou.flow.FlowViewport', {
 							title : '办事流程'
+							
 						})
-				flowpanel.initialPanelCard(res, this.id + '-');
+						//}
+				flowpanel.initialPanelCard(res, scope.id + '-');
 				scope.add(flowpanel);
 				if (flow.subjectId) {
 					YongYou.util.DataApi.Core.getLawsByIndustryID(function(res,
 									scope) {
 								if (res) {
-									res = Ext.decode(res);
+									lawres = Ext.decode(res);
 									lawpanel = Ext.create(
 											'YongYou.view.query.DetailList', {
 												title : '法律法规',
 												type : 'fg'
 											})
-									lawpanel.getItems().items[0].getStore()
-											.add(res);
+									store = new Ext.data.Store({
+												autoLoad : true,
+												model : 'YongYou.model.ListItem',
+												data : lawres
+											}), lawpanel.getItems().items[0]
+											.setStore(store)
+									// .add(res);
 									scope.add(lawpanel);
 								}
 
 							}, scope, {
 								'id' : flow.subjectId
 							});
-							
-					YongYou.util.DataApi.Core.getPolicyByIndustryID(function(
-							res, scope) {
-						if (res) {
-							res = Ext.decode(res);
-							policypanel = Ext.create(
-									'YongYou.view.query.DetailList', {
-										title : '优惠政策',
-										type : 'zc'
-									})
-							policypanel.getItems().items[0].getStore().add(res);
-							scope.add(policypanel);
-						}
 
-					}, scope, {
-						'id' : flow.subjectId
-					});
+					YongYou.util.DataApi.Core.getPolicyByIndustryID(function(
+									res, scope) {
+								if (res) {
+									pres = Ext.decode(res);
+									policypanel = Ext.create(
+											'YongYou.view.query.DetailList', {
+												title : '优惠政策',
+												type : 'zc'
+											})
+									store = new Ext.data.Store({
+												autoLoad : true,
+												model : 'YongYou.model.ListItem',
+												data : pres
+											}), policypanel.getItems().items[0]
+											.setStore(store)// .add(res);
+									scope.add(policypanel);
+								}
+
+							}, scope, {
+								'id' : flow.subjectId
+							});
 				}
 
 			}, this, {

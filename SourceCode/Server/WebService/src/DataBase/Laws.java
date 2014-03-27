@@ -17,7 +17,8 @@ public class Laws implements java.io.Serializable {
 	private String content;
 	private Date addTime;
 	private String submitter;
-	//private boolean micro;
+	private String subTitle;
+	private String imgId;
 	//private Set slrelations = new HashSet(0);
 
 	// Constructors
@@ -33,14 +34,15 @@ public class Laws implements java.io.Serializable {
 
 	/** full constructor */
 	public Laws(String id, String title, String content, Date addTime,
-			String submitter, boolean micro, Set slrelations) {
+			String submitter, String subTitle, String imgId, Set slrelations) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.addTime = addTime;
 		this.submitter = submitter;
-		//this.micro = micro;
-		//this.slrelations = slrelations;
+		this.subTitle = subTitle;
+		this.imgId = imgId;
+	//	this.slrelations = slrelations;
 	}
 
 	// Property accessors
@@ -85,13 +87,21 @@ public class Laws implements java.io.Serializable {
 		this.submitter = submitter;
 	}
 
-//	public boolean getMicro() {
-//		return this.micro;
-//	}
-//
-//	public void setMicro(boolean micro) {
-//		this.micro = micro;
-//	}
+	public String getSubTitle() {
+		return this.subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public String getImgId() {
+		return this.imgId;
+	}
+
+	public void setImgId(String imgId) {
+		this.imgId = imgId;
+	}
 
 //	public Set getSlrelations() {
 //		return this.slrelations;

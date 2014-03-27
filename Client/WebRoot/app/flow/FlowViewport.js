@@ -2,11 +2,12 @@ Ext.define('YongYou.flow.FlowViewport', {
 			extend : 'Ext.Container',
 			alias : 'widget.flowport',
 			requires : ['Ext.TitleBar'],
-			autoDestory : true,
+			
 			config : {
 				// cls : 'card card1',
-				id : 'flowviewport',
+			//	id : 'flowviewport',
 				fullscreen : true,
+				autoDestory : true,
 				layout : 'hbox',
 				items : []
 			},

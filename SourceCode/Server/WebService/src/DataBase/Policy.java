@@ -18,7 +18,8 @@ public class Policy implements java.io.Serializable {
 	private Date addTime;
 	private String submitter;
 	private String type;
-	//private boolean micro;
+	private String subTitle;
+	private String imgId;
 	//private Set sprelations = new HashSet(0);
 
 	// Constructors
@@ -34,15 +35,17 @@ public class Policy implements java.io.Serializable {
 
 	/** full constructor */
 	public Policy(String id, String title, String content, Date addTime,
-			String submitter, String type, boolean micro, Set sprelations) {
+			String submitter, String type, String subTitle, String imgId,
+			Set sprelations) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.addTime = addTime;
 		this.submitter = submitter;
 		this.type = type;
-		//this.micro = micro;
-		//this.sprelations = sprelations;
+		this.subTitle = subTitle;
+		this.imgId = imgId;
+	//	this.sprelations = sprelations;
 	}
 
 	// Property accessors
@@ -95,13 +98,21 @@ public class Policy implements java.io.Serializable {
 		this.type = type;
 	}
 
-//	public boolean getMicro() {
-//		return this.micro;
-//	}
-//
-//	public void setMicro(boolean micro) {
-//		this.micro = micro;
-//	}
+	public String getSubTitle() {
+		return this.subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public String getImgId() {
+		return this.imgId;
+	}
+
+	public void setImgId(String imgId) {
+		this.imgId = imgId;
+	}
 
 //	public Set getSprelations() {
 //		return this.sprelations;

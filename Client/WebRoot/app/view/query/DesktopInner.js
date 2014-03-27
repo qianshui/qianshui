@@ -36,7 +36,7 @@ Ext.define('YongYou.view.query.DesktopInner', {
 	initialPanel : function(res) {
 		red = Ext.decode(res);
 		store=Ext.create("Ext.data.Store", {
-					storeId : "usersStore",
+					//storeId : "usersStore",
 					fields : [{
 								name : 'title',
 								type : 'string'

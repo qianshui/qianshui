@@ -14,7 +14,7 @@
             <column name="Title" length="100" />
         </property>
         <property name="content" type="string">
-            <column name="Content" />
+            <column name="Content" length="65535" />
         </property>
         <property name="addTime" type="timestamp">
             <column name="AddTime" length="19" />
@@ -22,15 +22,17 @@
         <property name="submitter" type="string">
             <column name="Submitter" />
         </property>
-        <!--<property name="micro" type="boolean">
-            <column name="Micro" />
+        <property name="subTitle" type="string">
+            <column name="SubTitle" length="100" />
         </property>
-         <set name="slrelations" inverse="true">
+        <property name="imgId" type="string">
+            <column name="ImgId" length="100" />
+        </property>
+     <!--    <set name="slrelations" inverse="true">
             <key>
                 <column name="LID" length="10" not-null="true" />
             </key>
             <one-to-many class="DataBase.Slrelation" />
-        </set>
-         -->
+        </set> -->
     </class>
 </hibernate-mapping>
