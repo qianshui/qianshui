@@ -28,7 +28,7 @@ Ext.define('YongYou.controller.Main', {
 	},
 
 	onMainItemTap : function(view, index, target, record, e) {
-		var navigatePanel = Ext.create('YongYou.view.query.NavigationPanel', {});
+		var navigatePanel = Ext.create('YongYou.view.NavigationPanel', {});
 
 		if (record == '办事指南') {
 			
@@ -36,13 +36,14 @@ Ext.define('YongYou.controller.Main', {
 
 			if (!navigationPanel) {
 				navigationPanel = Ext.create('YongYou.view.query.NavigationPanel', {
-							title : 'title2',
+							title : '办事指南',
 							fullscreen : true
 						});
 				
 				Ext.Viewport.add(navigationPanel);
 			} else {
-				
+				navigationPanel.getItems().items[0].title='办事指南';
+				navigationPanel.setActiveItem(navigationPanel.getItems().items[0])
 			}
 			Ext.Viewport.setActiveItem(navigationPanel, {
 						type : 'slide',

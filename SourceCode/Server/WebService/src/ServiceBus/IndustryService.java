@@ -7,7 +7,7 @@
  * *************************************************************
  */
 package ServiceBus;
-import javax.ws.rs.GET;  
+import javax.ws.rs.GET; 
 import javax.ws.rs.Path; 
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -15,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 import Business.Industry;
 import DataBase.Laws;
 import DataBase.Policy;
+import DataBase.Street;
+import DataBase.Subject;
 import DataBase.Subjecttype;
 import java.util.List;
 import java.util.ArrayList;
@@ -48,6 +50,42 @@ public class IndustryService {
 		List<Subjecttype> IndustryList = new ArrayList<Subjecttype>();
 		Industry.getInstance().getIndustryList(IndustryList);
 		return CommonJson.list2Json(IndustryList);
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getSubjectList
+     * Description： 获取某行业类别的常用行业
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/IndustryService/getSubjectList?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getSubjectList")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getSubjectList(@QueryParam("id") String SubjecttypeID) {
+		List<Subject> SubjectList = new ArrayList<Subject>();
+		Industry.getInstance().getSubjectList(SubjecttypeID,SubjectList);
+		return CommonJson.list2Json(SubjectList);
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getStreetList
+     * Description： 获取常用的街道
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/IndustryService/getStreetList
+     * *************************************************************
+	 */
+	@GET
+	@Path("getStreetList")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getStreetList() {
+		List<Street> StreetList = new ArrayList<Street>();
+		Industry.getInstance().getStreetList(StreetList);
+		return CommonJson.list2Json(StreetList);
 	}
 	
 	/**

@@ -1,39 +1,4 @@
-Ext.define('YongYou.view.query.DetailTab', {
-			extend : 'Ext.TabPanel',
-			requires : [],
-			config : {
-				id : 'query-detailtab',
-				fullscreen : true,
-				width : '100%',
-				hight : '100%',
-				border : true,
-				activeTab : 0,
-				tabBar : {
-					layout : {
-						pack : 'center'
-					}
-				},
-				items : []
-			},
-			initialPanel : function(res) {
-				items = Ext.decode(res);
-				for (i = 0; i < items.length; i++) {
-					inner = Ext.create('YongYou.view.query.DesktopInner', {
-								title : items[i].title,
-								id : items[i].id + '-inner'
-							})
-					YongYou.util.DataApi.Core.getChildByID(
-							function(res, scope) {
 
-								scope.initialPanel(res);
-
-							}, inner, {
-								'id' : items[i].id
-							})
-					this.add(inner);
-				}
-			}
-		});
 Ext.define('YongYou.view.query.DetailTab', {
 	extend : 'Ext.TabPanel',
 	requires : [],
@@ -55,11 +20,16 @@ Ext.define('YongYou.view.query.DetailTab', {
 	initialPanel : function(flow) {
 
 		if (flow) {
+			
 			YongYou.util.DataApi.Core.getNodeByFlowID(function(res, scope) {
+			//	flowpanel= Ext.ComponentQuery.query("container[id='flowviewport']")[0];
+			//if(!flowpanel){
 				flowpanel = Ext.create('YongYou.flow.FlowViewport', {
 							title : '办事流程'
+							
 						})
-				flowpanel.initialPanelCard(res, this.id + '-');
+						//}
+				flowpanel.initialPanelCard(res, scope.id + '-');
 				scope.add(flowpanel);
 				if (flow.subjectId) {
 					YongYou.util.DataApi.Core.getLawsByIndustryID(function(res,
