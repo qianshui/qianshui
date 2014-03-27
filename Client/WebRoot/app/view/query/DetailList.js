@@ -6,7 +6,8 @@ Ext.define('YongYou.view.query.DetailList', {
 		cls : 'ks-basic',
 		//id : 'QueryPanelDetailList',
 		scrollable : true,
-
+		title:"",
+		type:null,
 		height : '100%',
 		items : [{
 			xtype : 'dataview',
@@ -17,24 +18,21 @@ Ext.define('YongYou.view.query.DetailList', {
 			itemTpl : '<div class="img" style="background-image: url(\'{imgId}\')">'
 					+ '</div><div class="content"><div class="name">{title}</div>'
 					+ '<div class="affiliation">{subtitle}</div></div>',
-			store : new Ext.data.Store({
-						autoLoad : true,
-						model : 'YongYou.model.ListItem'
-					}),
+			//store : 
 			listeners : {
 				itemtap : function(me, list, index, item, e) {
 
-					if (me.type == "bz") {
+					if (me.parent.getType() == "bz") {
 						YongYou.util.DataApi.Core.getBZ(showDetail, item, {
 									'ID' : item.internalId
 								})
-					} else if (me.type == "fg") {
-						YongYou.util.DataApi.Core.getFG(showDetail, item, {
-									'ID' : item.internalId
+					} else if (me.parent.getType() == "fg") {
+						YongYou.util.DataApi.Core.getLawByLawID(showDetail, item, {
+									'id' : item.internalId
 								})
-					} else if (me.type == "zc") {
-						YongYou.util.DataApi.Core.getZC(showDetail, item, {
-									'ID' : item.internalId
+					} else if (me.parent.getType() == "zc") {
+						YongYou.util.DataApi.Core.getPolicyByPolicyID(showDetail, item, {
+									'id' : item.internalId
 								})
 					}
 
