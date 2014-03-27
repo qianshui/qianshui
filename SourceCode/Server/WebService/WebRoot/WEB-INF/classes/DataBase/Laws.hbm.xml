@@ -22,10 +22,10 @@
         <property name="submitter" type="string">
             <column name="Submitter" />
         </property>
-        <property name="micro" type="boolean">
+        <!--<property name="micro" type="boolean">
             <column name="Micro" />
         </property>
-        <!-- <set name="slrelations" inverse="true">
+         <set name="slrelations" inverse="true">
             <key>
                 <column name="LID" length="10" not-null="true" />
             </key>
