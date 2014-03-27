@@ -18,7 +18,7 @@ public class Policy implements java.io.Serializable {
 	private Date addTime;
 	private String submitter;
 	private String type;
-	private boolean micro;
+	//private boolean micro;
 	//private Set sprelations = new HashSet(0);
 
 	// Constructors
@@ -41,7 +41,7 @@ public class Policy implements java.io.Serializable {
 		this.addTime = addTime;
 		this.submitter = submitter;
 		this.type = type;
-		this.micro = micro;
+		//this.micro = micro;
 		//this.sprelations = sprelations;
 	}
 
@@ -95,13 +95,13 @@ public class Policy implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public boolean getMicro() {
-		return this.micro;
-	}
-
-	public void setMicro(boolean micro) {
-		this.micro = micro;
-	}
+//	public boolean getMicro() {
+//		return this.micro;
+//	}
+//
+//	public void setMicro(boolean micro) {
+//		this.micro = micro;
+//	}
 
 //	public Set getSprelations() {
 //		return this.sprelations;
