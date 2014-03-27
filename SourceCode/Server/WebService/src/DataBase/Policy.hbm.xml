@@ -28,11 +28,11 @@
         <property name="micro" type="boolean">
             <column name="Micro" />
         </property>
-        <set name="sprelations" inverse="true">
+        <!-- <set name="sprelations" inverse="true">
             <key>
                 <column name="PID" length="10" />
             </key>
             <one-to-many class="DataBase.Sprelation" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

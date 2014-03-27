@@ -16,7 +16,7 @@ public class Attachment implements java.io.Serializable {
 	private String description;
 	private String comments;
 	private String downloadLink;
-	private Set narelations = new HashSet(0);
+	//private Set narelations = new HashSet(0);
 
 	// Constructors
 

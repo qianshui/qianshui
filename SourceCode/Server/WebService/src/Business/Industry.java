@@ -214,13 +214,12 @@ public class Industry {
 	 */
 	public void getLawsByIndustryID(String industryID,List<Laws> lawsList) {
 		try {
-			SessionFactory sf = new Configuration().configure()
-			.buildSessionFactory();
+			SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	        Session session = sf.openSession();
-	        Transaction tx = session.beginTransaction();
 	        List<Laws> list = session.createSQLQuery("select l.* from Laws l,Slrelation s " +
-			"where l.id = s.lid  and s.sid = :industryID").addEntity(Laws.class)
-	       .setParameter("industryID", industryID).list();
+					"where l.id = s.lid  and s.sid = :industryID").addEntity(Laws.class)
+					.setParameter("industryID", industryID).list();
+	        Transaction tx = session.beginTransaction();
 	        if (list.size() != 0) {
 		        Iterator it = list.iterator();
 		        while (it.hasNext()) {
@@ -249,11 +248,11 @@ public class Industry {
 		try {
 			SessionFactory sf = new Configuration().configure()
 			.buildSessionFactory();
-	        Session session = sf.openSession();
-	        Transaction tx = session.beginTransaction();
+	        Session session = sf.openSession();       
 	        List<Policy> list = session.createSQLQuery("select p.* from Policy p,Sprelation s " +
 					"where p.id = s.pid  and s.sid = :industryID").addEntity(Policy.class)
 					.setParameter("industryID", industryID).list();
+	        Transaction tx = session.beginTransaction();
 	        if (list.size() != 0) {
 		        Iterator it = list.iterator();
 		        while (it.hasNext()) {

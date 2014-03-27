@@ -28,7 +28,7 @@
         <property name="title" type="string">
             <column name="Title" length="100" />
         </property>
-        <set name="flows" inverse="true">
+        <!-- <set name="flows" inverse="true">
             <key>
                 <column name="SubjectID" length="10" />
             </key>
@@ -46,5 +46,6 @@
             </key>
             <one-to-many class="DataBase.Slrelation" />
         </set>
+         -->
     </class>
 </hibernate-mapping>
