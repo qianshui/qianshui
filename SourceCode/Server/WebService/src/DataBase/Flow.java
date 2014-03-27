@@ -11,7 +11,7 @@ public class Flow implements java.io.Serializable {
 	// Fields
 
 	private String id;
-	private Subject subject;
+	private String subjectId;
 	private String title;
 	private String description;
 	private Date addTime;
@@ -31,10 +31,10 @@ public class Flow implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Flow(String id, Subject subject, String title, String description,
+	public Flow(String id, String subjectId, String title, String description,
 			Date addTime, String submitter, String type, String categoryId) {
 		this.id = id;
-		this.subject = subject;
+		this.subjectId = subjectId;
 		this.title = title;
 		this.description = description;
 		this.addTime = addTime;
@@ -53,12 +53,12 @@ public class Flow implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Subject getSubject() {
-		return this.subject;
+	public String getSubjectId() {
+		return this.subjectId;
 	}
 
-	public void setSubject(Subject subject) {
-		this.subject = subject;
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
 	}
 
 	public String getTitle() {

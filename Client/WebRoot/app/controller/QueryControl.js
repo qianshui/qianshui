@@ -36,19 +36,17 @@ Ext.define('YongYou.controller.QueryControl', {
 			onDesktopTap : function(view, index, target, record, e) {
 				if (record.leaf == "1") {
 
-					detailpanel = Ext.create('YongYou.view.query.DetailTab', {
-								id : record.id + '-flowviewport'
-							})
+					detailTab = Ext.create('YongYou.view.query.DetailTab',{id:record.id,title:record.title})
+					YongYou.util.DataApi.Core.getFlowByCategoryID(function(res,
+									scope) {
+								flow = Ext.decode(res);
+								scope.title=flow.title;
+								scope.initialPanel(flow);
 
-					YongYou.util.DataApi.Core.getFlowChart(
-							function(res, scope) {
-								scope.initialPanelCard(res,
-										scope.id + '-');
-
-							}, detailpanel, {
-								'ID' : 'HY01'//record.id
+							}, detailTab, {
+								'id' : record.id
 							})
-					view.parent.push(detailpanel);
+					view.parent.push(detailTab);
 				}
 			}
 		});

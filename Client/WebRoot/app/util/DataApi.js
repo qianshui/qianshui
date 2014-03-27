@@ -17,16 +17,61 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+"ConfigUtilService/getMenuList",param,
     	    		callback,scope)
     	},
-    	getFlowChart:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getFlowChart",param,
-    		callback,scope)
-    	},
     	getChildByID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getChildByID",param,
     	    		callback,scope)
     	},
+    	getFlowByCategoryID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getFlowByCategoryID",param,
+    	    		callback,scope)
+    	},
+    	getNodeByFlowID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getNodeByFlowID",param,
+    	    		callback,scope)
+    	},
+    	getAttachmentByNodeID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getAttachmentByNodeID",param,
+    	    		callback,scope)
+    	},
+    	getContactByContactID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getContactByContactID",param,
+    	    		callback,scope)
+    	},
+    	getIndustryByID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getIndustryByID",param,
+    	    		callback,scope)
+    	},
+    	getLawsByIndustryID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getLawsByIndustryID",param,
+    	    		callback,scope)
+    	},
+    	getPolicyByIndustryID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getPolicyByIndustryID",param,
+    	    		callback,scope)
+    	},
+    	
+    	
+    	
+    	/*************************Demo Service**********************************************************
+    	 * 
+    	 * @param {} callback
+    	 * @param {} scope
+    	 * @param {} param
+    	 */
+    	getFlowChart:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    		YongYou.util.Config.getWebsite()+"Resource/getFlowChart",param,
+    		callback,scope)
+    	},
+
     	getBZList:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     		YongYou.util.Config.getWebsite()+"Resource/getBZList",param,

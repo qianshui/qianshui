@@ -6,8 +6,9 @@ Ext.define('YongYou.flow.FlowItem', {
 	config : {
 		cls : 'flow-item',
 		width : 160,
-		actid:null,
-		key:null,
+		actid : null,
+		key : null,
+		data:null,
 		items : [
 
 		]
@@ -39,7 +40,7 @@ Ext.define('YongYou.flow.FlowItem', {
 
 		var me = this, mainEl = me.getParent().getParent().element;
 		if (mainEl.hasCls('out')) {
-						mainEl.removeCls('out').addCls('in');
+			mainEl.removeCls('out').addCls('in');
 
 		}
 		// else {
@@ -52,7 +53,7 @@ Ext.define('YongYou.flow.FlowItem', {
 		} else {
 			items = Ext.ComponentQuery.query("panel[alias='widget.flowitem']");
 			for (i = 0; i < items.length; i++) {
-				if (items[i].hover) {
+				if (items[i].hover && items[i].element) {
 					items[i].element.removeCls('hover').addCls('out');
 					items[i].hover = false;
 				}
@@ -62,21 +63,16 @@ Ext.define('YongYou.flow.FlowItem', {
 		}
 
 		if (this.hover) {
-			YongYou.util.DataApi.Core.getFlowItemContent(function(res, scope) {
 
-						var content = Ext.decode(res);
-						var key=scope.getKey();
-						if (mainEl.hasCls('slide')) {
-							setTimeout(function(a,b) {
-											
-									item = Ext.ComponentQuery.query("panel[id='"+key+"iteminfo']")[0];
-									item.setValue(content);
-										mainEl.removeCls('in').addCls('out');
-									}, 300)
-						}
-					}, this, {
-						'ID' : this.getId()
-					})
+			var key = this.getKey();
+			if (mainEl.hasCls('slide')) {
+				// setTimeout(function(a, b) {
+				item = Ext.ComponentQuery.query("panel[id='" + key
+						+ "iteminfo']")[0];
+				item.setValue(this, mainEl);
+
+				// }, 300)
+			}
 		}
 
 	},
@@ -86,8 +82,9 @@ Ext.define('YongYou.flow.FlowItem', {
 						+ item.imgId
 						+ '\');">'
 						+ '</div><div class="name">'
-						+ item.name + '</div>');
-		this.setId(item.id)
+						+ item.title + '</div>');
+		this.setId(item.id);
+		this.setData(item);
 	}
 
 });

@@ -7,6 +7,9 @@
  * *************************************************************
  */
 package Business;
+import DataBase.Attachment;
+import DataBase.Laws;
+import DataBase.Policy;
 import DataBase.Subjecttype;
 import java.util.Iterator;
 import java.util.List;
@@ -43,13 +46,13 @@ public class Industry {
     
     /**
      * *************************************************************
-	 * FunName : getDataList
+	 * FunName : getIndustryList
      * Description： 获取行业列表
      * Input: @param IndustryList
      * Output:void
      * *************************************************************
 	 */
-    public void getDataList(List<Subjecttype> IndustryList) {
+    public void getIndustryList(List<Subjecttype> IndustryList) {
     	try {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
@@ -75,26 +78,197 @@ public class Industry {
     
     /**
      * *************************************************************
+	 * FunName : getLawsList
+     * Description： 获取法规列表
+     * Input: @param IndustryList
+     * Output:void
+     * *************************************************************
+	 */
+    public void getLawsList(List<Laws> lowsList) {
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List list = null;
+			list = session.createQuery("from Laws").list();
+			Transaction tx = session.beginTransaction();
+			if (list != null) {
+				Iterator it = list.iterator();
+				while (it.hasNext()) {
+					/*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
+					lowsList.add((Laws)it.next());
+				}
+			}
+			tx.commit();
+			session.clear();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    /**
+     * *************************************************************
+	 * FunName : getPolicyList
+     * Description： 获取政策列表
+     * Input: @param IndustryList
+     * Output:void
+     * *************************************************************
+	 */
+    public void getPolicyList(List<Policy> policyList) {
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List list = null;
+			list = session.createQuery("from Policy").list();
+			Transaction tx = session.beginTransaction();
+			if (list != null) {
+				Iterator it = list.iterator();
+				while (it.hasNext()) {
+					/*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
+					policyList.add((Policy)it.next());
+				}
+			}
+			tx.commit();
+			session.clear();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    /**
+     * *************************************************************
 	 * FunName : getObjectByID
      * Description： 根据ID获取行业对象
      * Input: @param strID
      * Output:void
      * *************************************************************
 	 */
-    public Subjecttype getObjectByID(String strID) {
+    public Subjecttype getIndustryByID(String strID) {
     	Session session = null;
         try{
             /*获取session对象*/
         	SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	        session = sf.openSession();
-            Subjecttype obj = (Subjecttype)session.get(Subjecttype.class, strID);
-            return obj;
+            return (Subjecttype)session.get(Subjecttype.class, strID);
         }finally {//保证资源得到释放
                if(session != null) {
                   session.close();
                }
         }
     }
+    
+	/**
+     * *************************************************************
+	 * FunName : getLawByLawID
+     * Description： 根据法规ID获取法规对象
+     * Input: @param lawID
+     * Output:Laws
+     * *************************************************************
+	 */
+    public Laws getLawByLawID(String lawID) {
+    	Session session = null;
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+            return (Laws)session.get(Laws.class, lawID);
+        }finally {//保证资源得到释放
+               if(session != null) {
+                  session.close();
+               }
+        }
+    }
+    
+    /**
+     * *************************************************************
+	 * FunName : getLawByLawID
+     * Description： 根据政策ID获取政策对象
+     * Input: @param policyID
+     * Output:Policy
+     * *************************************************************
+	 */
+    public Policy getPolicyByPolicyID(String policyID) {
+    	Session session = null;
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+            return (Policy)session.get(Policy.class, policyID);
+        }finally {//保证资源得到释放
+               if(session != null) {
+                  session.close();
+               }
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : getLawsByIndustryID
+	 * Description： 根据行业id获取相应的法规列表
+	 * @param industryID  (输入)： 行业ID
+	 * @param lawsList (输出)： 法规列表
+	 * *************************************************************
+	 */
+	public void getLawsByIndustryID(String industryID,List<Laws> lawsList) {
+		try {
+			SessionFactory sf = new Configuration().configure()
+			.buildSessionFactory();
+	        Session session = sf.openSession();
+	        Transaction tx = session.beginTransaction();
+	        List<Laws> list = session.createSQLQuery("select l.* from Laws l,Slrelation s " +
+			"where l.id = s.lid  and s.sid = :industryID").addEntity(Laws.class)
+	       .setParameter("industryID", industryID).list();
+	        if (list.size() != 0) {
+		        Iterator it = list.iterator();
+		        while (it.hasNext()) {
+			    /*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
+			    lawsList.add((Laws)it.next());
+		        }
+	       }
+			
+			tx.commit();
+			session.clear();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getPolicyByIndustryID
+	 * Description： 根据行业id获取相应的政策列表
+	 * @param industryID  (输入)： 行业ID
+	 * @param policyList  (输出)： 政策列表
+	 * *************************************************************
+	 */
+	public void getPolicyByIndustryID(String industryID,List<Policy> policyList) {
+		try {
+			SessionFactory sf = new Configuration().configure()
+			.buildSessionFactory();
+	        Session session = sf.openSession();
+	        Transaction tx = session.beginTransaction();
+	        List<Policy> list = session.createSQLQuery("select p.* from Policy p,Sprelation s " +
+					"where p.id = s.pid  and s.sid = :industryID").addEntity(Policy.class)
+					.setParameter("industryID", industryID).list();
+	        if (list.size() != 0) {
+		        Iterator it = list.iterator();
+		        while (it.hasNext()) {
+			    /*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
+			    policyList.add((Policy)it.next());
+		        }
+	       }
+			
+			tx.commit();
+			session.clear();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
     
     /**
 	 * *************************************************************

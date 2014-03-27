@@ -14,9 +14,6 @@ Ext.define('YongYou.flow.FlowPanel', {
 					type : 'vbox'
 				},
 				items : [{
-				xtype:'titlebar',
-				title:'流程图'
-				},{
 							xtype : 'panel',
 							centered : false,
 							height : 75,

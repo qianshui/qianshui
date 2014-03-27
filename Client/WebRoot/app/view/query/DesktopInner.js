@@ -49,7 +49,11 @@ Ext.define('YongYou.view.query.DesktopInner', {
 							}, {
 								name : 'id',
 								type : 'string'
+<<<<<<< HEAD
 							}, {
+=======
+							},{
+>>>>>>> branch 'master' of https://github.com/qianshui/qianshui.git
 								name : 'leaf',
 								type : 'string'
 							}],
