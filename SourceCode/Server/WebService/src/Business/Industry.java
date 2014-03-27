@@ -10,6 +10,8 @@ package Business;
 import DataBase.Attachment;
 import DataBase.Laws;
 import DataBase.Policy;
+import DataBase.Street;
+import DataBase.Subject;
 import DataBase.Subjecttype;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +49,7 @@ public class Industry {
     /**
      * *************************************************************
 	 * FunName : getIndustryList
-     * Description： 获取行业列表
+     * Description： 获取常用行业列表
      * Input: @param IndustryList
      * Output:void
      * *************************************************************
@@ -58,14 +60,76 @@ public class Industry {
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Subjecttype").list();
+			list = session.createQuery("from Subjecttype where CommonFlag=1").list();
 			Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
 					/*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
 					IndustryList.add((Subjecttype) it.next());
-					//System.out.println((Subjecttype)it.next());
+				}
+			}
+			tx.commit();
+			session.clear();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    /**
+     * *************************************************************
+	 * FunName : getIndustryList
+     * Description： 获取常用行业列表
+     * Input: @param IndustryList
+     * Output:void
+     * *************************************************************
+	 */
+    public void getSubjectList(String SubjecttypeID, List<Subject> SubjectList) {
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List list = null;
+			list = session.createQuery("from Subject where SubjecttypeID=:SubjecttypeID and CommonFlag=1")
+					.setParameter("SubjecttypeID", SubjecttypeID).list();
+			Transaction tx = session.beginTransaction();
+			if (list != null) {
+				Iterator it = list.iterator();
+				while (it.hasNext()) {
+					/*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
+					SubjectList.add((Subject) it.next());
+				}
+			}
+			tx.commit();
+			session.clear();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    /**
+     * *************************************************************
+	 * FunName : getIndustryList
+     * Description： 获取常用行业列表
+     * Input: @param IndustryList
+     * Output:void
+     * *************************************************************
+	 */
+    public void getStreetList(List<Street> StreetList) {
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List list = null;
+			list = session.createQuery("from Street where CommonFlag=1").list();
+			Transaction tx = session.beginTransaction();
+			if (list != null) {
+				Iterator it = list.iterator();
+				while (it.hasNext()) {
+					/*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
+					StreetList.add((Street) it.next());
 				}
 			}
 			tx.commit();
