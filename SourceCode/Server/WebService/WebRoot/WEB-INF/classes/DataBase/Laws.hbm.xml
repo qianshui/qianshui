@@ -25,11 +25,12 @@
         <property name="micro" type="boolean">
             <column name="Micro" />
         </property>
-        <set name="slrelations" inverse="true">
+        <!-- <set name="slrelations" inverse="true">
             <key>
                 <column name="LID" length="10" not-null="true" />
             </key>
             <one-to-many class="DataBase.Slrelation" />
         </set>
+         -->
     </class>
 </hibernate-mapping>

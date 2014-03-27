@@ -18,7 +18,7 @@ public class Laws implements java.io.Serializable {
 	private Date addTime;
 	private String submitter;
 	private boolean micro;
-	private Set slrelations = new HashSet(0);
+	//private Set slrelations = new HashSet(0);
 
 	// Constructors
 
@@ -40,7 +40,7 @@ public class Laws implements java.io.Serializable {
 		this.addTime = addTime;
 		this.submitter = submitter;
 		this.micro = micro;
-		this.slrelations = slrelations;
+		//this.slrelations = slrelations;
 	}
 
 	// Property accessors
@@ -93,12 +93,12 @@ public class Laws implements java.io.Serializable {
 		this.micro = micro;
 	}
 
-	public Set getSlrelations() {
-		return this.slrelations;
-	}
-
-	public void setSlrelations(Set slrelations) {
-		this.slrelations = slrelations;
-	}
+//	public Set getSlrelations() {
+//		return this.slrelations;
+//	}
+//
+//	public void setSlrelations(Set slrelations) {
+//		this.slrelations = slrelations;
+//	}
 
 }

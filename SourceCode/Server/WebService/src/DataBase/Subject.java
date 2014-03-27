@@ -18,9 +18,9 @@ public class Subject implements java.io.Serializable {
 	private String imgPath;
 	private String keyWords;
 	private String title;
-	private Set flows = new HashSet(0);
-	private Set sprelations = new HashSet(0);
-	private Set slrelations = new HashSet(0);
+	//private Set flows = new HashSet(0);
+	//private Set sprelations = new HashSet(0);
+	//private Set slrelations = new HashSet(0);
 
 	// Constructors
 
@@ -45,9 +45,9 @@ public class Subject implements java.io.Serializable {
 		this.imgPath = imgPath;
 		this.keyWords = keyWords;
 		this.title = title;
-		this.flows = flows;
-		this.sprelations = sprelations;
-		this.slrelations = slrelations;
+//		this.flows = flows;
+//		this.sprelations = sprelations;
+//		this.slrelations = slrelations;
 	}
 
 	// Property accessors
@@ -108,28 +108,28 @@ public class Subject implements java.io.Serializable {
 		this.title = title;
 	}
 
-	public Set getFlows() {
-		return this.flows;
-	}
-
-	public void setFlows(Set flows) {
-		this.flows = flows;
-	}
-
-	public Set getSprelations() {
-		return this.sprelations;
-	}
-
-	public void setSprelations(Set sprelations) {
-		this.sprelations = sprelations;
-	}
-
-	public Set getSlrelations() {
-		return this.slrelations;
-	}
-
-	public void setSlrelations(Set slrelations) {
-		this.slrelations = slrelations;
-	}
+//	public Set getFlows() {
+//		return this.flows;
+//	}
+//
+//	public void setFlows(Set flows) {
+//		this.flows = flows;
+//	}
+//
+//	public Set getSprelations() {
+//		return this.sprelations;
+//	}
+//
+//	public void setSprelations(Set sprelations) {
+//		this.sprelations = sprelations;
+//	}
+//
+//	public Set getSlrelations() {
+//		return this.slrelations;
+//	}
+//
+//	public void setSlrelations(Set slrelations) {
+//		this.slrelations = slrelations;
+//	}
 
 }

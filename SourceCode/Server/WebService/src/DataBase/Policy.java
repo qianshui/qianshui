@@ -19,7 +19,7 @@ public class Policy implements java.io.Serializable {
 	private String submitter;
 	private String type;
 	private boolean micro;
-	private Set sprelations = new HashSet(0);
+	//private Set sprelations = new HashSet(0);
 
 	// Constructors
 
@@ -42,7 +42,7 @@ public class Policy implements java.io.Serializable {
 		this.submitter = submitter;
 		this.type = type;
 		this.micro = micro;
-		this.sprelations = sprelations;
+		//this.sprelations = sprelations;
 	}
 
 	// Property accessors
@@ -103,12 +103,12 @@ public class Policy implements java.io.Serializable {
 		this.micro = micro;
 	}
 
-	public Set getSprelations() {
-		return this.sprelations;
-	}
-
-	public void setSprelations(Set sprelations) {
-		this.sprelations = sprelations;
-	}
+//	public Set getSprelations() {
+//		return this.sprelations;
+//	}
+//
+//	public void setSprelations(Set sprelations) {
+//		this.sprelations = sprelations;
+//	}
 
 }
