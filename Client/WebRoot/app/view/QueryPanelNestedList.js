@@ -9,6 +9,7 @@ Ext.define('YongYou.view.QueryPanelNestedList', {
         left: 0,
         width: '18%',
         itemHeight: 50
+        ///
 //   		listeners: {
 //                itemtap: function(me, list, index, item, e) {
 //               
