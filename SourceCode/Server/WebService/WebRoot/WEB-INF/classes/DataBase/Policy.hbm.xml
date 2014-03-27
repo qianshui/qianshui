@@ -14,7 +14,7 @@
             <column name="Title" length="100" />
         </property>
         <property name="content" type="string">
-            <column name="Content" length="100" />
+            <column name="Content" length="65535" />
         </property>
         <property name="addTime" type="timestamp">
             <column name="AddTime" length="19" />
@@ -25,14 +25,17 @@
         <property name="type" type="string">
             <column name="Type" length="1" />
         </property>
-        <!--  <property name="micro" type="boolean">
-            <column name="Micro" />
-        </property>-->
-        <!-- <set name="sprelations" inverse="true">
+        <property name="subTitle" type="string">
+            <column name="SubTitle" length="100" />
+        </property>
+        <property name="imgId" type="string">
+            <column name="ImgId" length="100" />
+        </property>
+   <!--     <set name="sprelations" inverse="true">
             <key>
                 <column name="PID" length="10" />
             </key>
             <one-to-many class="DataBase.Sprelation" />
-        </set> -->
+        </set> --> 
     </class>
 </hibernate-mapping>
