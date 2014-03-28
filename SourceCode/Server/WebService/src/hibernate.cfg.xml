@@ -33,6 +33,7 @@
 		<mapping resource="DataBase/Contact.hbm.xml" />
 		<mapping resource="DataBase/Attachment.hbm.xml" />
 		<mapping resource="DataBase/Narelation.hbm.xml" />
+		<mapping resource="DataBase/Classid.hbm.xml" />
 
 	</session-factory>
 
