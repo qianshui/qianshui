@@ -68,22 +68,23 @@ public class test {
 //				}
 //			}
 			//Subjecttype obj= new Subjecttype("0001");
-		    LngLatInfo obj = new LngLatInfo();
-		    obj.setLng("111");
-		    obj.setLat("111");
-		    obj.setResult("");
-			System.out.println(CommonJson.object2Json(obj));
-			List<String> addressList = new ArrayList<String>();	
-			try {
-				Map.getAddressListByKey(URLEncoder.encode("洋河", "UTF-8"),addressList);
-				System.out.println(CommonJson.list2Json(addressList));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		    LngLatInfo obj = new LngLatInfo();
+//		    obj.setLng("111");
+//		    obj.setLat("111");
+//		    obj.setResult("");
+//			System.out.println(CommonJson.object2Json(obj));
+//			List<String> addressList = new ArrayList<String>();	
+//			try {
+//				Map.getAddressListByKey(URLEncoder.encode("洋河", "UTF-8"),addressList);
+//				System.out.println(CommonJson.list2Json(addressList));
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 //			List<AreaInfo> areaInfo = new ArrayList<AreaInfo>();
 //			Map.getAreaByLngLat(29.627476,106.645922, areaInfo);
 //			System.out.println(CommonJson.list2Json(areaInfo));
+		System.out.println(IDOperation.getClassID("subject"));
 	}
 }
