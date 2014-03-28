@@ -12,7 +12,6 @@ Ext.define('YongYou.util.EventHandle', {
     	{
     		alert('sss');
     	}
-    	
     }
     
     

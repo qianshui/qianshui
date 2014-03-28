@@ -25,9 +25,10 @@ Ext.define('YongYou.view.query.DesktopInner', {
 					var me = this, store = me.getStore();
 					if (store.data.items[target]) {
 						record = store.data.items[target].data;
-
-						this.parent.parent.fireEvent('itemtap', this.parent.parent, index,
-								target, record, e);
+						YongYou.util.ClientEventHandle.events.onCatrgotyItemTap(this.parent.parent, index,
+								target, record, e)
+//						this.parent.parent.fireEvent('itemtap', this.parent.parent, index,
+//								target, record, e);
 					}
 				}
 			}

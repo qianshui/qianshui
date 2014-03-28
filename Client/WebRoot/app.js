@@ -24,7 +24,7 @@ Ext.Loader.setConfig({
 });
 
 Ext.require(['YongYou.util.Config','YongYou.util.DataApi'
-,'YongYou.model.ListItem', 'YongYou.layout.Accordion']);
+,'YongYou.model.ListItem', 'YongYou.layout.Accordion','YongYou.util.ClientEventHandle']);
 
 Ext.application({
     stores: [
