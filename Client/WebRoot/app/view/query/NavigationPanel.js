@@ -13,6 +13,7 @@ Ext.define('YongYou.view.query.NavigationPanel', {
 								align : 'right',
 								listeners : {
 									'tap' : function(b, e) {
+										
 										Ext.Viewport.setActiveItem('#main', {
 													type : 'slide',
 													direction : 'right',

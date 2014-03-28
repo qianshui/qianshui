@@ -30,7 +30,12 @@ Ext.define('YongYou.controller.QueryControl', {
 		if (!desktop) {
 			desktop = Ext.create('YongYou.view.query.desktop', {
 						title : record.label
-					})
+					});
+		view.parent.push(desktop);
+		} else {
+			desktop.title=record.label
+			view.parent.setActiveItem(desktop);
+		}
 			YongYou.util.DataApi.Core.getChildByID(function(res, scope) {
 
 						scope.initialPanel(res);
@@ -38,10 +43,7 @@ Ext.define('YongYou.controller.QueryControl', {
 					}, desktop, {
 						'id' : record.id
 					})
-			view.parent.push(desktop);
-		} else {
-			view.parent.setActiveItem(desktop);
-		}
+			
 	}
 	
 });
