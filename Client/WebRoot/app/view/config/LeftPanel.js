@@ -51,9 +51,8 @@ Ext.define('YongYou.view.config.LeftPanel', {
 								for (x = 0; x < menulist[i].children.length; x++) {
 
 									menuConfig.items.push({
-									
 									id:menulist[i].children[x].id,
-												text : menulist[i].children[x].title
+									text : menulist[i].children[x].title
 											});
 								}
 							}

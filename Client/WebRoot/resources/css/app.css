@@ -263,7 +263,7 @@ background: white;
 }
 
 .desktop-list {
-	text-align:center
+	text-align:left
 }
 .desktop-list .categories-list-container {
 	max-width:1024px;
@@ -306,7 +306,7 @@ body:not(.x-phone) .desktop-list .desktop-list-item .image {
 .desktop-list .desktop-list-item .name {
 	padding-top:20px;
 	font-size:20px;
-	
+	text-align:center;
 	color:#2784C9;
 	font-family:"Quattrocento Sans",sans-serif
 }
@@ -332,17 +332,4 @@ body:not(.x-phone) .desktop-list .desktop-list-item .image {
 	padding-top:20px;
 	padding-bottom:20px
 }
-.categories-list.root {
-	background-image:url(../images/bg.jpg);
-	background-position:top center;
-	background-repeat:no-repeat
-}
-body:not(.x-phone).x-landscape .categories-list.root .categories-list-item:first-child {
-	margin-right:345px
-}
-.x-phone .categories-list.root .categories-list-inner {
-	padding-top:100px
-}
-body:not(.x-phone).x-portrait .categories-list.root .categories-list-inner {
-	padding-top:280px
-}
+

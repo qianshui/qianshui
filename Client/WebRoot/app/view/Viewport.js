@@ -7,8 +7,7 @@
 Ext.define('YongYou.view.Viewport', {
 
     extend: 'Ext.container.Viewport',
-    requires: [
-    'YongYou.view.config.LeftPanel'],
+    requires: ['YongYou.view.config.LeftPanel'],
 
     getTools: function(){
         return [{
