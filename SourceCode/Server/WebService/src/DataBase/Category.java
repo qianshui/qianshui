@@ -1,5 +1,7 @@
 package DataBase;
 
+import java.util.ArrayList;
+
 /**
  * Category entity. @author MyEclipse Persistence Tools
  */
@@ -14,7 +16,7 @@ public class Category implements java.io.Serializable {
 	private String type;
 	private String parentId;
 	private String leaf;
-
+	private ArrayList<Category> children= new ArrayList<Category>();
 	// Constructors
 
 	/** default constructor */
@@ -86,5 +88,13 @@ public class Category implements java.io.Serializable {
 	public void setLeaf(String leaf) {
 		this.leaf = leaf;
 	}
-
+	
+	public void setChildren(Category node){
+		if(this.id.equals(node.getParentId()) && !this.children.contains(node)){	
+			this.children.add(node);
+		}	
+	}
+	public ArrayList<Category> getChildren(){
+		return children;
+	}
 }

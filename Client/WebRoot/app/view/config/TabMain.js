@@ -8,10 +8,7 @@ Ext.define('YongYou.view.config.TabMain', {
 		bodyPadding : 10,
 		autoScroll : true
 	},
-	items : [{
-        title: '主页',
-        html: 'sssssssssssssssssssssssssssssssssssssssss'
-    }
+	items : [Ext.create('YongYou.view.config.TreeGrid')
 //    , {
 //        title: 'Inactive Tab',
 //        html: 'ddddddddddddddddddddddd',

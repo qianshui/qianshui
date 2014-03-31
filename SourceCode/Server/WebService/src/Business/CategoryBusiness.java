@@ -7,6 +7,7 @@
  * *************************************************************
  */
 package Business;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -18,6 +19,7 @@ import org.hibernate.cfg.Configuration;
 import DataBase.Category;
 import DataBase.Contact;
 import DataBase.Flow;
+import DataBase.Menu;
 import DataBase.Node;
 import DataBase.Attachment;
 import DataBase.Narelation;
@@ -38,6 +40,67 @@ public class CategoryBusiness {
         return m_Instance;
     }
     
+    /******************************************************************************************************
+     * Add by Brett
+     * get categories data by tree structure for tree grid
+     * 
+     *******************************************************************************************************/
+    public List<Category> getCategoryTree(){
+    	List<Category> CategoryList = new ArrayList<Category>();
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List list = null;
+			list = session.createQuery("from Category where parentId = :strID")
+		       .setParameter("strID", "0").list();
+			Transaction tx = session.beginTransaction();
+			if (list != null) {
+				Iterator it = list.iterator();
+				while (it.hasNext()) {
+					
+					Category Temp = (Category) it.next();
+					
+					CategoryList.add(BuildCategoyTree(Temp));
+				}
+			}
+			tx.commit();
+			session.clear();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return CategoryList;
+    	
+    }
+    
+    Category BuildCategoyTree(Category item){
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List rs = session.createQuery("from Category where parentId= :pid")
+			.setParameter("pid", item.getId()).list();
+			if (rs != null) {
+				Iterator temp = rs.iterator();
+				while (temp.hasNext()) {
+					Category cate= (Category)temp.next();
+					if(cate.getLeaf()!=null &&cate.getLeaf().contentEquals("1")){
+						item.setChildren(cate);
+					}else{
+					item.setChildren(BuildCategoyTree(cate));
+					}
+				}
+		}
+		}catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    	return item;
+    }
+    //******************************************************************************************************
+
     /**
      * *************************************************************
 	 * FunName : getDataList

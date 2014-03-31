@@ -55,6 +55,23 @@ public class CategoryService {
 	
 	/**
 	 * *************************************************************
+	 * FunName : getCategoryTree
+     * Description： 获取分类树
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getCategoryTree
+     * *************************************************************
+	 */
+	@GET
+	@Path("getCategoryTree")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getCategoryTree() {
+		List<Category> CategoryList = CategoryBusiness.getInstance().getCategoryTree();
+		return CommonJson.list2Json(CategoryList);
+	}
+	
+	/**
+	 * *************************************************************
 	 * FunName : getPreListByID
      * Description： 根据ID获取其父节点下的所有子节点
      * Input: 无
