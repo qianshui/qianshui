@@ -144,7 +144,11 @@ public class CategoryBusiness {
 			Transaction tx = session.beginTransaction();
 			tx.commit();
 			session.clear();
-			return list.get(0);
+			if (list.size() != 0) {
+				return list.get(0);
+			}
+			
+			return null;
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
