@@ -42,12 +42,11 @@ Ext.define('YongYou.controller.Main', {
 				
 				Ext.Viewport.add(navigationPanel);
 			} else {
-				navigationPanel.getItems().items[0].title='办事指南';
-				navigationPanel.setActiveItem(navigationPanel.getItems().items[0])
+				navigationPanel.reset();
 			}
 			Ext.Viewport.setActiveItem(navigationPanel, {
 						type : 'slide',
-						direction : 'right'
+						direction : 'left'
 					});
 			flag=0;
 			

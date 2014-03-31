@@ -8,6 +8,7 @@ Ext.define('YongYou.view.query.desktop', {
 		hight : '100%',
 		border : true,
 		activeTab : 0,
+		title:'',
 		tabBar : {
 			layout : {
 				pack : 'center'
@@ -16,6 +17,7 @@ Ext.define('YongYou.view.query.desktop', {
 		items : []
 	},
 	initialPanel : function(res) {
+		this.removeAll();
 		items = Ext.decode(res);
 		for (i = 0; i < items.length; i++) {
 			inner = Ext.create('YongYou.view.query.DesktopInner', {

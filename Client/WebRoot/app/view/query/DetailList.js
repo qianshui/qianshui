@@ -7,6 +7,7 @@ Ext.define('YongYou.view.query.DetailList', {
 		// id : 'QueryPanelDetailList',
 		scrollable : true,
 		title : "",
+		style : "background-color:white;!important",
 		type : null,
 		height : '100%',
 		items : [{

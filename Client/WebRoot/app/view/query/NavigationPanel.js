@@ -4,6 +4,7 @@ Ext.define('YongYou.view.query.NavigationPanel', {
 			config : {
 				id:'nav-query',
 				fullscreen: true,
+				defaultBackButtonText: '返回',
 				navigationBar : {
 					items : [{
 								xtype : 'button',
@@ -16,7 +17,7 @@ Ext.define('YongYou.view.query.NavigationPanel', {
 										
 										Ext.Viewport.setActiveItem('#main', {
 													type : 'slide',
-													direction : 'right',
+													direction : 'left',
 													duration : 250
 												});
 									}
@@ -24,6 +25,7 @@ Ext.define('YongYou.view.query.NavigationPanel', {
 							}]
 				},
 				items:[Ext.create('YongYou.view.query.Root')]
+				
 
 			}
 
