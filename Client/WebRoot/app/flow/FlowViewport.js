@@ -45,7 +45,7 @@ Ext.define('YongYou.flow.FlowViewport', {
 								id:key+'flowpanel'
 							})
 					info = Ext.create('YongYou.flow.FlowItemInfo', {
-								width : 350,
+								width : 550,
 								cls : 'nav-list',
 								id:key+'iteminfo'
 							})

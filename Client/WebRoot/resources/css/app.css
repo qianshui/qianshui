@@ -209,7 +209,7 @@ background: white;
  
 .slide.out {
 -webkit-animation-name: slideout !important;
--webkit-transform: translateX(-350px) !important;
+-webkit-transform: translateX(-550px) !important;
 
 }
  
@@ -224,13 +224,13 @@ from {
 }
  
 to {
--webkit-transform: translateX(-350px)!important;
+-webkit-transform: translateX(-550px)!important;
 };
 }
  
 @-webkit-keyframes slidein {
 from {
--webkit-transform: translateX(-350px)!important;
+-webkit-transform: translateX(-550px)!important;
 }
  
 to {

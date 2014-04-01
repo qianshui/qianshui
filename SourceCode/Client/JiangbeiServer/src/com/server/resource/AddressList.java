@@ -10,12 +10,12 @@ public class AddressList {
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public String getValue(){
        return "["
-               +"{\"label\":\"三峡广场\",\"imgId\":\"resources/img/phone_startup.png\"},"
-               +"{\"label\":\"信阳广场\",\"imgId\":\"resources/img/phone_startup.png\"},"
-               +"{\"label\":\"磁器口\",\"imgId\":\"resources/img/phone_startup.png\"},"
-               +"{\"label\":\"朝天门\",\"imgId\":\"resources/img/phone_startup.png\"},"
-               +"{\"label\":\"菁英公寓\",\"imgId\":\"resources/img/phone_startup.png\"},"
-               +"{\"label\":\"重庆大学\",\"imgId\":\"resources/img/phone_startup.png\"}"
+               +"{\"label\":\"观音桥商圈\",\"imgId\":\"resources/img/phone_startup.png\"},"
+               +"{\"label\":\"五里店\",\"imgId\":\"resources/img/phone_startup.png\"},"
+               +"{\"label\":\"港城工业园区\",\"imgId\":\"resources/img/phone_startup.png\"},"
+               +"{\"label\":\"寸滩街道\",\"imgId\":\"resources/img/phone_startup.png\"},"
+               +"{\"label\":\"华新街\",\"imgId\":\"resources/img/phone_startup.png\"},"
+               +"{\"label\":\"黄泥磅\",\"imgId\":\"resources/img/phone_startup.png\"}"
                +"]";
     }
 }

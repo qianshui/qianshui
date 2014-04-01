@@ -67,8 +67,8 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 
 		item_list.items[0]
 				.setHtml('<div style=text-align:center;font-size: 20px;font-weight: bold;>'
-						+ node.getData().title
-						+ '</div></br></br></br></br><div>'
+//						+ node.getData().title
+//						+ '</div></br></br></br></br><div>'
 						+ node.getData().description + '</div>');
 
 		YongYou.util.DataApi.Core.getContactByContactID(function(res, scope) {
@@ -111,7 +111,7 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 					+ "' style='color:black;'>"
 					+ files[i].title + "</a></br>";
 		}
-		html += "</div>";
+		html += "</br></br></div>";
 		return html;
 	}
 });

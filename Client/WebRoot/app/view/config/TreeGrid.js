@@ -38,7 +38,7 @@ Ext.define('YongYou.view.config.TreeGrid', {
 						}],
 				proxy : {
 					type : 'ajax',
-					url : 'http://127.0.0.1:8080/WebService/CategoryService/getCategoryTree',
+					url : 'http://127.0.0.1:8086/WebService/CategoryService/getCategoryTree',
 					reader : 'json'
 				},
 				folderSort : true,
