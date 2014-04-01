@@ -7,7 +7,6 @@
  * *************************************************************
  */
 package Business;
-import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -17,7 +16,14 @@ import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration; 
 
-import DataBase.Locationsite;
+import DBOperation.ContactOperation;
+import DBOperation.DataOperation;
+import DBOperation.LawsOperation;
+import DBOperation.SubjectOperation;
+import DataBase.Contact;
+import DataBase.Laws;
+import DataBase.Slrelation;
+import DataBase.Subject;
 import DataBase.Subjecttype;
 import Common.*;
 
@@ -85,6 +91,15 @@ public class test {
 //			List<AreaInfo> areaInfo = new ArrayList<AreaInfo>();
 //			Map.getAreaByLngLat(29.627476,106.645922, areaInfo);
 //			System.out.println(CommonJson.list2Json(areaInfo));
-		System.out.println(IDOperation.getClassID("subject"));
+		//System.out.println(IDOperation.getClassID("subject"));
+		Laws law = new Laws(IDOperation.getClassID("Laws"));
+		LawsOperation obj = new LawsOperation(law);
+		DataOperation.add(obj);
+//		Contact cont = new Contact(IDOperation.getClassID("Contact"));
+//		ContactOperation ct = new ContactOperation(cont);
+//		DataOperation.add(ct);
+		Subject sj = new Subject(IDOperation.getClassID("Subject"),"ST0001");
+		SubjectOperation so = new SubjectOperation(sj);
+		DataOperation.add(so);
 	}
 }

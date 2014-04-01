@@ -1,25 +1,24 @@
 /**
  * *************************************************************
  * @FileName:DataOperation.java
- * @Description:为web服务层提供统一的操作层，暂未使用
+ * @Description:为业务层提供统一的数据表操作层
  * @Author: wanghong
  * @Create date:   2014.03.06
  * *************************************************************
  */
 
-package Operation;
-import Business.IDBOperation;
+package DBOperation;
 
 public class DataOperation {
-	public void add(IDBOperation obj) {
+	public static boolean add(IDBOperation obj) {
+		return obj.add(obj);
+	}
+	
+	public static void alter(IDBOperation obj) {
 		
 	}
 	
-	public void alter(IDBOperation obj) {
-		
-	}
-	
-	public void delete(IDBOperation obj) {
+	public static void delete(IDBOperation obj) {
 		
 	}
 }
