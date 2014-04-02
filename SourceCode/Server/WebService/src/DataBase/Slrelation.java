@@ -9,8 +9,8 @@ public class Slrelation implements java.io.Serializable {
 	// Fields
 
 	private String id;
-	private Laws laws;
-	private Subject subject;
+	private String sid;
+	private String lid;
 
 	// Constructors
 
@@ -19,10 +19,10 @@ public class Slrelation implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Slrelation(String id, Laws laws, Subject subject) {
+	public Slrelation(String id, String sid, String lid) {
 		this.id = id;
-		this.laws = laws;
-		this.subject = subject;
+		this.sid = sid;
+		this.lid = lid;
 	}
 
 	// Property accessors
@@ -35,20 +35,20 @@ public class Slrelation implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Laws getLaws() {
-		return this.laws;
+	public String getSid() {
+		return this.sid;
 	}
 
-	public void setLaws(Laws laws) {
-		this.laws = laws;
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 
-	public Subject getSubject() {
-		return this.subject;
+	public String getLid() {
+		return this.lid;
 	}
 
-	public void setSubject(Subject subject) {
-		this.subject = subject;
+	public void setLid(String lid) {
+		this.lid = lid;
 	}
 
 }

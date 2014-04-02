@@ -52,7 +52,7 @@ public class ConfigUtil {
 				}
 			}
 			tx.commit();
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();

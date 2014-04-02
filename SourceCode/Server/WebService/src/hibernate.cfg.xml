@@ -34,6 +34,7 @@
 		<mapping resource="DataBase/Attachment.hbm.xml" />
 		<mapping resource="DataBase/Narelation.hbm.xml" />
 		<mapping resource="DataBase/Classid.hbm.xml" />
+		<mapping resource="DataBase/Prrelation.hbm.xml" />
 
 	</session-factory>
 

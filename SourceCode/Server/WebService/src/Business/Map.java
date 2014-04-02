@@ -56,7 +56,7 @@ public class Map {
 			}
 			
 			//tx.commit();
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -125,7 +125,7 @@ public class Map {
 			}
 			
 			tx.commit();
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();

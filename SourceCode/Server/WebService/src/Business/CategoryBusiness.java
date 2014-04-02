@@ -62,7 +62,7 @@ public class CategoryBusiness {
 				}
 			}
 			tx.commit();
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -121,7 +121,8 @@ public class CategoryBusiness {
 					//System.out.println((Subjecttype)it.next());
 				}
 			}
-			session.clear();
+			
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -143,7 +144,7 @@ public class CategoryBusiness {
 			Session session = sf.openSession();
 			Category obj = (Category)session.get(Category.class,strID);
 			getChildByID(obj.getParentId(),childList);
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -176,7 +177,7 @@ public class CategoryBusiness {
 			}
 			
 			//tx.commit();
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -197,7 +198,7 @@ public class CategoryBusiness {
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List<Flow> list = session.createQuery("from Flow where CategoryId = :id").setParameter("id", categoryID).list();
-			session.clear();
+			session.close();
 			if (list.size() != 0) {
 				return list.get(0);
 			}
@@ -237,7 +238,7 @@ public class CategoryBusiness {
 			}
 			
 			//tx.commit();
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -269,7 +270,7 @@ public class CategoryBusiness {
 				}
 			}
 			
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();

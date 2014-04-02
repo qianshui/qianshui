@@ -69,7 +69,7 @@ public class Industry {
 				}
 			}
 			
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -100,7 +100,7 @@ public class Industry {
 				}
 			}
 			
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -131,7 +131,7 @@ public class Industry {
 				}
 			}
 			
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -162,7 +162,7 @@ public class Industry {
 				}
 			}
 			
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -289,7 +289,7 @@ public class Industry {
 		        }
 	        }
 			
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -320,7 +320,7 @@ public class Industry {
 		        }
 	        }
 			
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -356,7 +356,7 @@ public class Industry {
 	        }
 			
 			//tx.commit();
-			session.clear();
+			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -1,33 +1,28 @@
 package DataBase;
 
 /**
- * Sprelation entity. @author MyEclipse Persistence Tools
+ * Prrelation entity. @author MyEclipse Persistence Tools
  */
 
-public class Sprelation implements java.io.Serializable {
+public class Prrelation implements java.io.Serializable {
 
 	// Fields
 
 	private String id;
-	private String sid;
 	private String pid;
+	private String rid;
 
 	// Constructors
 
 	/** default constructor */
-	public Sprelation() {
-	}
-
-	/** minimal constructor */
-	public Sprelation(String id) {
-		this.id = id;
+	public Prrelation() {
 	}
 
 	/** full constructor */
-	public Sprelation(String id, String sid, String pid) {
+	public Prrelation(String id, String pid, String rid) {
 		this.id = id;
-		this.sid = sid;
 		this.pid = pid;
+		this.rid = rid;
 	}
 
 	// Property accessors
@@ -40,20 +35,20 @@ public class Sprelation implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public String getSid() {
-		return this.sid;
-	}
-
-	public void setSid(String sid) {
-		this.sid = sid;
-	}
-
 	public String getPid() {
 		return this.pid;
 	}
 
 	public void setPid(String pid) {
 		this.pid = pid;
+	}
+
+	public String getRid() {
+		return this.rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
 	}
 
 }

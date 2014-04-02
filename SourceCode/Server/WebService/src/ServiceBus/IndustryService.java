@@ -7,20 +7,27 @@
  * *************************************************************
  */
 package ServiceBus;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET; 
+import javax.ws.rs.POST;
 import javax.ws.rs.Path; 
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import Business.Industry;
 import DataBase.Laws;
 import DataBase.Policy;
+import DataBase.Slrelation;
 import DataBase.Street;
 import DataBase.Subject;
 import DataBase.Subjecttype;
 import java.util.List;
 import java.util.ArrayList;
 import Common.CommonJson;
+import Common.DBOperation;
+import Common.IDOperation;
 
 /**
  * *************************************************************
@@ -225,4 +232,80 @@ public class IndustryService {
 		Industry.getInstance().getPolicyList(PolicyList);
 		return CommonJson.list2Json(PolicyList);
 	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : addSubjecttype
+     * Description： 增加行业类别信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/WebService/IndustryService/addSubjecttype
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addSubjecttype")
+    @Consumes("application/json")
+    public Response addSubjecttype(Subjecttype subjecttype) {
+		subjecttype.setId(IDOperation.getClassID("subjecttype"));
+        DBOperation.add(subjecttype);
+        String result = "Product created : " + subjecttype;
+        return Response.status(201).entity(result).build();  
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addSubject
+     * Description： 增加具体行业信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/WebService/IndustryService/addSubject
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addSubjecttype")
+    @Consumes("application/json")
+    public Response addSubject(Subject subject) {
+		subject.setId(IDOperation.getClassID("subject"));
+        DBOperation.add(subject);
+        String result = "Product created : " + subject;
+        return Response.status(201).entity(result).build();  
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addLaws
+     * Description： 增加法规信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/WebService/IndustryService/addLaws
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addLaws")
+    @Consumes("application/json")
+    public Response addLaws(Laws law) {
+		law.setId(IDOperation.getClassID("laws"));
+        DBOperation.add(law);
+        String result = "Product created : " + law;
+        return Response.status(201).entity(result).build();  
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addSlrelation
+     * Description： 增加行业法规关系信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/WebService/IndustryService/addSlrelation
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addSlrelation")
+    @Consumes("application/json")
+    public Response addSlrelation(Slrelation sl) {
+		sl.setId(IDOperation.getClassID("Slrelation"));
+        DBOperation.add(sl);
+        String result = "Product created : " + sl;
+        return Response.status(201).entity(result).build();  
+    }
 }

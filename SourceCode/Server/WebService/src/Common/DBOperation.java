@@ -1,9 +1,9 @@
 /**
  * *************************************************************
- * @FileName:DataOperation.java
+ * @FileName:DBOperation.java
  * @Description:为业务层提供统一的数据表操作层
  * @Author: wanghong
- * @Create date:   2014.03.06
+ * @Create date:   2014.04.01
  * *************************************************************
  */
 
@@ -39,11 +39,53 @@ public class DBOperation {
         }
 	}
 	
-	public static <Object> void alter(Object obj) {
-		
+	public static <Object> boolean update(Object obj) {
+		Configuration cfg = new Configuration().configure(); 
+        SessionFactory factory = cfg.buildSessionFactory();
+        
+        Session session = null;
+        try {  
+            session = factory.openSession();    
+            session.beginTransaction(); 
+            session.update(obj);
+            session.getTransaction().commit();  
+            return true;
+        }catch(Exception e) {  
+            e.printStackTrace();  
+            session.getTransaction().rollback();
+            return false;
+        }finally {
+            if (session != null) {  
+                if (session.isOpen()) {  
+                    //关闭session  
+                    session.close();  
+                }  
+            }
+        }
 	}
 	
-	public static <Object> void delete(Object obj) {
-		
+	public static <Object> boolean delete(Object obj) {
+		Configuration cfg = new Configuration().configure(); 
+        SessionFactory factory = cfg.buildSessionFactory();
+        
+        Session session = null;
+        try {  
+            session = factory.openSession();    
+            session.beginTransaction(); 
+            session.delete(obj);   
+            session.getTransaction().commit();  
+            return true;
+        }catch(Exception e) {  
+            e.printStackTrace();  
+            session.getTransaction().rollback();
+            return false;
+        }finally {
+            if (session != null) {  
+                if (session.isOpen()) {  
+                    //关闭session  
+                    session.close();  
+                }  
+            }
+        }
 	}
 }
