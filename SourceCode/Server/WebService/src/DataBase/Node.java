@@ -2,6 +2,8 @@ package DataBase;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Node entity. @author MyEclipse Persistence Tools
@@ -132,5 +134,4 @@ public class Node implements java.io.Serializable {
 //	public void setNarelations(Set narelations) {
 //		this.narelations = narelations;
 //	}
-
 }

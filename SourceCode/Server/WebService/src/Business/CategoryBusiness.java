@@ -260,7 +260,7 @@ public class CategoryBusiness {
 			Session session = sf.openSession();
 			List<Attachment> list = session.createSQLQuery("select a.* from Attachment a,Narelation n " +
 					"where a.id = n.aid  and n.nid = :nodeID").addEntity(Attachment.class)
-			       .setParameter("nodeID", nodeID).list();
+			        .setParameter("nodeID", nodeID).list();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {

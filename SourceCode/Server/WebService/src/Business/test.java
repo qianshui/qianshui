@@ -16,12 +16,11 @@ import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration; 
 
-import DBOperation.ContactOperation;
-import DBOperation.DataOperation;
-import DBOperation.LawsOperation;
-import DBOperation.SubjectOperation;
+import DataBase.Attachment;
 import DataBase.Contact;
 import DataBase.Laws;
+import DataBase.Narelation;
+import DataBase.Node;
 import DataBase.Slrelation;
 import DataBase.Subject;
 import DataBase.Subjecttype;
@@ -92,14 +91,19 @@ public class test {
 //			Map.getAreaByLngLat(29.627476,106.645922, areaInfo);
 //			System.out.println(CommonJson.list2Json(areaInfo));
 		//System.out.println(IDOperation.getClassID("subject"));
-		Laws law = new Laws(IDOperation.getClassID("Laws"));
-		LawsOperation obj = new LawsOperation(law);
-		DataOperation.add(obj);
+//		Laws law = new Laws(IDOperation.getClassID("Laws"));
+//		LawsOperation obj = new LawsOperation(law);
+//		DataOperation.add(obj);
 //		Contact cont = new Contact(IDOperation.getClassID("Contact"));
 //		ContactOperation ct = new ContactOperation(cont);
 //		DataOperation.add(ct);
-		Subject sj = new Subject(IDOperation.getClassID("Subject"),"ST0001");
-		SubjectOperation so = new SubjectOperation(sj);
-		DataOperation.add(so);
+//		Subject sj = new Subject(IDOperation.getClassID("Subject"),"ST0001");
+//		SubjectOperation so = new SubjectOperation(sj);
+//		DataOperation.add(so);
+//		Attachment att = new Attachment(IDOperation.getClassID("attachment"));
+//		AttachmentOperation atto = new AttachmentOperation(att);
+//		DataOperation.add(atto);
+		Node node = new Node(IDOperation.getClassID("node"),"111",11);
+		DBOperation.add(node);
 	}
 }

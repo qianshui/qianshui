@@ -10,11 +10,11 @@
             <column name="ID" length="10" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="node" class="DataBase.Node" fetch="select">
+        <property name="nid" type="string">
             <column name="NID" length="10" not-null="true" />
-        </many-to-one>
-        <many-to-one name="attachment" class="DataBase.Attachment" fetch="select">
+        </property>
+        <property name="aid" type="string">
             <column name="AID" length="10" not-null="true" />
-        </many-to-one>
+        </property>
     </class>
 </hibernate-mapping>

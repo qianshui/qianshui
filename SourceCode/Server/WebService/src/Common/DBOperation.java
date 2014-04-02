@@ -1,35 +1,20 @@
-/** 
+/**
  * *************************************************************
- * @FileName:LawsOperation.java
- * @Description:法律数据表操作文件，包括添加、更改、删除数据记录
+ * @FileName:DataOperation.java
+ * @Description:为业务层提供统一的数据表操作层
  * @Author: wanghong
- * @Create date: 2014.04.01
+ * @Create date:   2014.03.06
  * *************************************************************
  */
 
-package DBOperation;
-import DataBase.Laws;
+package Common;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class LawsOperation implements IDBOperation{
-    private Laws law;
-    
-    public LawsOperation(Laws law) {
-    	this.law = law;
-    }
-    
-    /**
-	 * *************************************************************
-	 * FunName : add
-	 * Description：向Laws数据表添加一条法律记录
-	 * @param Lng  (输入)： LawsOperation对象
-	 * return : boolean
-	 * *************************************************************
-	 */
-	public <Object> boolean add(Object obj) {
-		this.law = ((LawsOperation)obj).law;
+public class DBOperation {
+	public static <Object> boolean add(Object obj) {
 		Configuration cfg = new Configuration().configure(); 
         SessionFactory factory = cfg.buildSessionFactory();
         
@@ -37,7 +22,7 @@ public class LawsOperation implements IDBOperation{
         try {  
             session = factory.openSession();    
             session.beginTransaction(); 
-            session.save(this.law);
+            session.save(obj);   
             session.getTransaction().commit();  
             return true;
         }catch(Exception e) {  
@@ -47,9 +32,18 @@ public class LawsOperation implements IDBOperation{
         }finally {
             if (session != null) {  
                 if (session.isOpen()) {  
+                    //关闭session  
                     session.close();  
-                }
+                }  
             }
         }
+	}
+	
+	public static <Object> void alter(Object obj) {
+		
+	}
+	
+	public static <Object> void delete(Object obj) {
+		
 	}
 }

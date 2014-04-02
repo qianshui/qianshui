@@ -9,8 +9,8 @@ public class Narelation implements java.io.Serializable {
 	// Fields
 
 	private String id;
-	private Node node;
-	private Attachment attachment;
+	private String nid;
+	private String aid;
 
 	// Constructors
 
@@ -19,10 +19,10 @@ public class Narelation implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Narelation(String id, Node node, Attachment attachment) {
+	public Narelation(String id, String nid, String aid) {
 		this.id = id;
-		this.node = node;
-		this.attachment = attachment;
+		this.nid = nid;
+		this.aid = aid;
 	}
 
 	// Property accessors
@@ -35,20 +35,20 @@ public class Narelation implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Node getNode() {
-		return this.node;
+	public String getNid() {
+		return this.nid;
 	}
 
-	public void setNode(Node node) {
-		this.node = node;
+	public void setNid(String nid) {
+		this.nid = nid;
 	}
 
-	public Attachment getAttachment() {
-		return this.attachment;
+	public String getAid() {
+		return this.aid;
 	}
 
-	public void setAttachment(Attachment attachment) {
-		this.attachment = attachment;
+	public void setAid(String aid) {
+		this.aid = aid;
 	}
 
 }

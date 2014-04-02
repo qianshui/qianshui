@@ -2,7 +2,8 @@ package DataBase;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Attachment entity. @author MyEclipse Persistence Tools
  */
@@ -37,8 +38,9 @@ public class Attachment implements java.io.Serializable {
 		this.description = description;
 		this.comments = comments;
 		this.downloadLink = downloadLink;
-		//this.narelations = narelations;
+		//this.narelations = narelations;	
 	}
+	
 
 	// Property accessors
 

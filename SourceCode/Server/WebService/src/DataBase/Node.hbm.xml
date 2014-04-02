@@ -39,6 +39,6 @@
                 <column name="NID" length="10" not-null="true" />
             </key>
             <one-to-many class="DataBase.Narelation" />
-        </set> -->  
+        </set> -->
     </class>
 </hibernate-mapping>
