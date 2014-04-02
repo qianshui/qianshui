@@ -41,22 +41,30 @@ public class IDOperation {
 	        session = sf.openSession();
 	        Transaction tx = session.beginTransaction();
 	        Classid obj = ((Classid)session.get(Classid.class, className));
-	        if (obj != null) {
-	        	/*ID值加1后更改数据库*/
-	        	SQLQuery query = session.createSQLQuery("update Classid set num=:num where ClassName=:ClassName");
-	        	query.setParameter("num",obj.getNum()+1);
-	        	query.setParameter("ClassName", className);
-	        	query.executeUpdate();
-	        	tx.commit();
-	        }
-	        
-	        String value = String.valueOf(obj.getNum());
-	        String classID = obj.getKey() + baseValue.substring(0, baseValue.length()- value.length()) + value;
-            return classID;
-        }finally {//保证资源得到释放
+			if (obj != null) {
+				/* ID值加1后更改数据库 */
+				SQLQuery query = session
+						.createSQLQuery("update Classid set num=:num where ClassName=:ClassName");
+				query.setParameter("num", obj.getNum() + 1);
+				query.setParameter("ClassName", className);
+				query.executeUpdate();
+				tx.commit();
+
+				String value = String.valueOf(obj.getNum());
+				String classID = obj.getKey() + baseValue.substring(0, baseValue.length() - value.length()) + value;
+				return classID;
+			}
+			
+        }catch(Exception e){
+        	e.printStackTrace();  
+            session.getTransaction().rollback();
+        }
+        finally {//保证资源得到释放
                if(session != null) {
                   session.close();
                }
         }
+        
+		return null;
 	}
 }

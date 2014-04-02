@@ -19,11 +19,8 @@ import org.hibernate.cfg.Configuration;
 import DataBase.Category;
 import DataBase.Contact;
 import DataBase.Flow;
-import DataBase.Menu;
 import DataBase.Node;
 import DataBase.Attachment;
-import DataBase.Narelation;
-import DataBase.Subjecttype;
 
 public class CategoryBusiness {
 	private static CategoryBusiness m_Instance = null;
@@ -116,7 +113,6 @@ public class CategoryBusiness {
 			Session session = sf.openSession();
 			List list = null;
 			list = session.createQuery("from Category").list();
-			Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -125,7 +121,6 @@ public class CategoryBusiness {
 					//System.out.println((Subjecttype)it.next());
 				}
 			}
-			tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -148,8 +143,6 @@ public class CategoryBusiness {
 			Session session = sf.openSession();
 			Category obj = (Category)session.get(Category.class,strID);
 			getChildByID(obj.getParentId(),childList);
-			Transaction tx = session.beginTransaction();
-			tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -173,7 +166,7 @@ public class CategoryBusiness {
 			List list = null;
 			list = session.createQuery("from Category where parentId = :strID")
 			       .setParameter("strID", strID).list();
-			Transaction tx = session.beginTransaction();
+			//Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -182,7 +175,7 @@ public class CategoryBusiness {
 				}
 			}
 			
-			tx.commit();
+			//tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -204,8 +197,6 @@ public class CategoryBusiness {
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List<Flow> list = session.createQuery("from Flow where CategoryId = :id").setParameter("id", categoryID).list();
-			Transaction tx = session.beginTransaction();
-			tx.commit();
 			session.clear();
 			if (list.size() != 0) {
 				return list.get(0);
@@ -236,7 +227,7 @@ public class CategoryBusiness {
 			List list = null;
 			list = session.createQuery("from Node where FlowID = :strID")
 			       .setParameter("strID", flowID).list();
-			Transaction tx = session.beginTransaction();
+			//Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -245,7 +236,7 @@ public class CategoryBusiness {
 				}
 			}
 			
-			tx.commit();
+			//tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -270,7 +261,6 @@ public class CategoryBusiness {
 			List<Attachment> list = session.createSQLQuery("select a.* from Attachment a,Narelation n " +
 					"where a.id = n.aid  and n.nid = :nodeID").addEntity(Attachment.class)
 			       .setParameter("nodeID", nodeID).list();
-			Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -279,7 +269,6 @@ public class CategoryBusiness {
 				}
 			}
 			
-			tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception

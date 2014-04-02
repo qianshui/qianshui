@@ -48,7 +48,7 @@ public class CategoryOperation implements IDBOperation{
 	            if (session != null) {  
 	                if (session.isOpen()) {
 	                    session.close();  
-	                }  
+	                }
 	            }
 	        }
 		}

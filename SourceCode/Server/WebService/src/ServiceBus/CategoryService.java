@@ -146,7 +146,7 @@ public class CategoryService {
      * Description： 根据NodeID获取attchment列表
      * Input: 无
      * Output:JSON格式数据
-     * Call URL:localhost:8080/WebService/CategoryService/getAttachmentByNodeID?id=
+     * Call URL:localhost:8080/WebService/CategoryService/getAttachmentByNodeID?id=ACT0001
      * *************************************************************
 	 */
 	@GET

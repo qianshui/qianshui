@@ -61,7 +61,6 @@ public class Industry {
 			Session session = sf.openSession();
 			List list = null;
 			list = session.createQuery("from Subjecttype where CommonFlag=1").list();
-			Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -69,7 +68,7 @@ public class Industry {
 					IndustryList.add((Subjecttype) it.next());
 				}
 			}
-			tx.commit();
+			
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -93,7 +92,6 @@ public class Industry {
 			List list = null;
 			list = session.createQuery("from Subject where SubjecttypeID=:SubjecttypeID and CommonFlag=1")
 					.setParameter("SubjecttypeID", SubjecttypeID).list();
-			Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -101,7 +99,7 @@ public class Industry {
 					SubjectList.add((Subject) it.next());
 				}
 			}
-			tx.commit();
+			
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -124,7 +122,7 @@ public class Industry {
 			Session session = sf.openSession();
 			List list = null;
 			list = session.createQuery("from Street where CommonFlag=1").list();
-			Transaction tx = session.beginTransaction();
+			
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -132,7 +130,7 @@ public class Industry {
 					StreetList.add((Street) it.next());
 				}
 			}
-			tx.commit();
+			
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -155,7 +153,7 @@ public class Industry {
 			Session session = sf.openSession();
 			List list = null;
 			list = session.createQuery("from Laws").list();
-			Transaction tx = session.beginTransaction();
+			
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -163,7 +161,7 @@ public class Industry {
 					lowsList.add((Laws)it.next());
 				}
 			}
-			tx.commit();
+			
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -186,7 +184,7 @@ public class Industry {
 			Session session = sf.openSession();
 			List list = null;
 			list = session.createQuery("from Policy").list();
-			Transaction tx = session.beginTransaction();
+			
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -194,7 +192,7 @@ public class Industry {
 					policyList.add((Policy)it.next());
 				}
 			}
-			tx.commit();
+			
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -283,16 +281,14 @@ public class Industry {
 	        List<Laws> list = session.createSQLQuery("select l.* from Laws l,Slrelation s " +
 					"where l.id = s.lid  and s.sid = :industryID").addEntity(Laws.class)
 					.setParameter("industryID", industryID).list();
-	        Transaction tx = session.beginTransaction();
 	        if (list.size() != 0) {
 		        Iterator it = list.iterator();
 		        while (it.hasNext()) {
 			    /*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
 			    lawsList.add((Laws)it.next());
 		        }
-	       }
+	        }
 			
-			tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -316,16 +312,14 @@ public class Industry {
 	        List<Policy> list = session.createSQLQuery("select p.* from Policy p,Sprelation s " +
 					"where p.id = s.pid  and s.sid = :industryID").addEntity(Policy.class)
 					.setParameter("industryID", industryID).list();
-	        Transaction tx = session.beginTransaction();
 	        if (list.size() != 0) {
 		        Iterator it = list.iterator();
 		        while (it.hasNext()) {
 			    /*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
 			    policyList.add((Policy)it.next());
 		        }
-	       }
+	        }
 			
-			tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -346,7 +340,7 @@ public class Industry {
 			SessionFactory sf = new Configuration().configure()
 			.buildSessionFactory();
 	        Session session = sf.openSession();
-	        Transaction tx = session.beginTransaction();
+	        //Transaction tx = session.beginTransaction();
 	        List<String> list = null;
 	        String sql = "{call getIndustryListByKey(?)}";
 	        SQLQuery query= session.createSQLQuery(sql);
@@ -359,9 +353,9 @@ public class Industry {
 			    /*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
 			    addressList.add((String) it.next());
 		        }
-	       }
+	        }
 			
-			tx.commit();
+			//tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception

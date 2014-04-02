@@ -37,7 +37,7 @@ public class Map {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
 			Session session = sf.openSession();
-			Transaction tx = session.beginTransaction();
+			//Transaction tx = session.beginTransaction();
 			List<String> list = null;
 			String sql = "{call getAddressListByKey(?)}";
 			SQLQuery query= session.createSQLQuery(sql);
@@ -55,7 +55,7 @@ public class Map {
 				System.out.println("list is null");
 			}
 			
-			tx.commit();
+			//tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
