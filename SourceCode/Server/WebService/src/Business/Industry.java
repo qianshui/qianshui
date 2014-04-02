@@ -7,6 +7,7 @@
  * *************************************************************
  */
 package Business;
+import Common.DBOperation;
 import DataBase.Attachment;
 import DataBase.Laws;
 import DataBase.Policy;
@@ -15,6 +16,12 @@ import DataBase.Subject;
 import DataBase.Subjecttype;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.ws.rs.DELETE;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -209,17 +216,20 @@ public class Industry {
      * *************************************************************
 	 */
     public Subjecttype getIndustryByID(String strID) {
+    	Subjecttype st = null;
     	Session session = null;
         try{
             /*获取session对象*/
         	SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	        session = sf.openSession();
-            return (Subjecttype)session.get(Subjecttype.class, strID);
+	        st = (Subjecttype)session.get(Subjecttype.class, strID);
+            return st;
         }finally {//保证资源得到释放
                if(session != null) {
                   session.close();
                }
         }
+        
     }
     
 	/**
@@ -362,4 +372,23 @@ public class Industry {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : deleteSubjecttype
+     * Description： 删除行业类别信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/WebService/IndustryService/deleteSubjecttype
+     * *************************************************************
+	 */
+	
+    public Response deleteSubjecttype(String id) {
+    	Subjecttype st = getIndustryByID(id);
+    	if (st != null) {
+    		DBOperation.delete(st);
+    	}
+    	
+        return Response.status(201).entity(st).build();  
+    }
 }

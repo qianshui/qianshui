@@ -8,9 +8,12 @@
  */
 package ServiceBus;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET; 
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path; 
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -248,8 +251,7 @@ public class IndustryService {
     public Response addSubjecttype(Subjecttype subjecttype) {
 		subjecttype.setId(IDOperation.getClassID("subjecttype"));
         DBOperation.add(subjecttype);
-        String result = "Product created : " + subjecttype;
-        return Response.status(201).entity(result).build();  
+        return Response.status(201).entity(subjecttype).build();  
     }
 	
 	/**
@@ -267,8 +269,7 @@ public class IndustryService {
     public Response addSubject(Subject subject) {
 		subject.setId(IDOperation.getClassID("subject"));
         DBOperation.add(subject);
-        String result = "Product created : " + subject;
-        return Response.status(201).entity(result).build();  
+        return Response.status(201).entity(subject).build();  
     }
 	
 	/**
@@ -286,8 +287,7 @@ public class IndustryService {
     public Response addLaws(Laws law) {
 		law.setId(IDOperation.getClassID("laws"));
         DBOperation.add(law);
-        String result = "Product created : " + law;
-        return Response.status(201).entity(result).build();  
+        return Response.status(201).entity(law).build();  
     }
 	
 	/**
@@ -305,7 +305,39 @@ public class IndustryService {
     public Response addSlrelation(Slrelation sl) {
 		sl.setId(IDOperation.getClassID("Slrelation"));
         DBOperation.add(sl);
-        String result = "Product created : " + sl;
-        return Response.status(201).entity(result).build();  
+        return Response.status(201).entity(sl).build();  
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateSubjecttype
+     * Description： 更新行业类别信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/WebService/IndustryService/updateSubjecttype
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateSubjecttype")
+    @Consumes("application/json")
+    public Response updateSubjecttype(Subjecttype subjecttype) {
+        DBOperation.update(subjecttype);
+        return Response.status(201).entity(subjecttype).build();
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : deleteSubjecttype
+     * Description： 删除行业类别信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/WebService/IndustryService/deleteSubjecttype
+     * *************************************************************
+	 */
+	@DELETE
+    @Path("/deleteSubjecttype")
+    public Response deleteSubjecttype(@PathParam("id") String id) {
+		
+        return Industry.getInstance().deleteSubjecttype(id);  
     }
 }
