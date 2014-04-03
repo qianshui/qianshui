@@ -264,7 +264,7 @@ public class IndustryService {
      * *************************************************************
 	 */
 	@POST
-    @Path("/addSubjecttype")
+    @Path("/addSubject")
     @Consumes("application/json")
     public Response addSubject(Subject subject) {
 		subject.setId(IDOperation.getClassID("subject"));
