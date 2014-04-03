@@ -250,8 +250,13 @@ public class IndustryService {
     @Consumes("application/json")
     public Response addSubjecttype(Subjecttype subjecttype) {
 		subjecttype.setId(IDOperation.getClassID("subjecttype"));
-        DBOperation.add(subjecttype);
-        return Response.status(201).entity(subjecttype).build();  
+		if (DBOperation.add(subjecttype)) {
+			return Response.status(201).entity(subjecttype).build();
+		}
+		
+		return Response.status(201).entity(subjecttype).build();
+        
+        
     }
 	
 	/**

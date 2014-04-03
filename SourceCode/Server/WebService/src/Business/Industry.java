@@ -215,14 +215,14 @@ public class Industry {
      * Output:void
      * *************************************************************
 	 */
-    public Subjecttype getIndustryByID(String strID) {
-    	Subjecttype st = null;
+    public Subject getIndustryByID(String strID) {
+    	Subject st = null;
     	Session session = null;
         try{
             /*获取session对象*/
         	SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	        session = sf.openSession();
-	        st = (Subjecttype)session.get(Subjecttype.class, strID);
+	        st = (Subject)session.get(Subject.class, strID);
             return st;
         }finally {//保证资源得到释放
                if(session != null) {
@@ -375,8 +375,8 @@ public class Industry {
 	
 	/**
 	 * *************************************************************
-	 * FunName : deleteSubjecttype
-     * Description： 删除行业类别信息
+	 * FunName : deleteSubject
+     * Description： 删除行业信息
      * Input: JSON格式数据
      * Output:
      * Call URL:localhost:8080/WebService/IndustryService/deleteSubjecttype
@@ -384,7 +384,7 @@ public class Industry {
 	 */
 	
     public Response deleteSubjecttype(String id) {
-    	Subjecttype st = getIndustryByID(id);
+    	Subject st = getIndustryByID(id);
     	if (st != null) {
     		DBOperation.delete(st);
     	}
