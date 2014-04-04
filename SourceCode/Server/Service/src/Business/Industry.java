@@ -376,19 +376,60 @@ public class Industry {
 	/**
 	 * *************************************************************
 	 * FunName : deleteSubject
-     * Description： 删除行业信息
-     * Input: JSON格式数据
-     * Output:
-     * Call URL:localhost:8080/WebService/IndustryService/deleteSubjecttype
+     * Description： 删除行业类别信息
+     * Input: id
+     * Output:boolean
      * *************************************************************
 	 */
 	
-    public Response deleteSubjecttype(String id) {
+    public boolean deleteSubject(String id) {
     	Subject st = getIndustryByID(id);
     	if (st != null) {
-    		DBOperation.delete(st);
+    		if (DBOperation.delete(st)) {
+    			return true;
+    		}
     	}
     	
-        return Response.status(201).entity(st).build();  
+    	return false;
+    }
+    
+    /**
+	 * *************************************************************
+	 * FunName : deleteLaws
+     * Description： 删除法规信息
+     * Input: id
+     * Output:boolean
+     * *************************************************************
+	 */
+	
+    public boolean deleteLaws(String id) {
+    	Laws law = getLawByLawID(id);
+    	if (law != null) {
+    		if (DBOperation.delete(law)) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
+    }
+    
+    /**
+	 * *************************************************************
+	 * FunName : deletePolicy
+     * Description： 删除优惠政策信息
+     * Input: id
+     * Output:boolean
+     * *************************************************************
+	 */
+	
+    public boolean deletePolicy(String id) {
+    	Policy pl = getPolicyByPolicyID(id);
+    	if (pl != null) {
+    		if (DBOperation.delete(pl)) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
     }
 }

@@ -12,8 +12,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET; 
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
-import javax.ws.rs.Path; 
-import javax.ws.rs.PathParam;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -23,6 +22,7 @@ import Business.Industry;
 import DataBase.Laws;
 import DataBase.Policy;
 import DataBase.Slrelation;
+import DataBase.Sprelation;
 import DataBase.Street;
 import DataBase.Subject;
 import DataBase.Subjecttype;
@@ -104,7 +104,7 @@ public class IndustryService {
      * Description： 根据行业ID获取行业对象
      * Input: id
      * Output:JSON格式数据
-     * Call URL:localhost:8080/WebService/IndustryService/getIndustryByID?id=
+     * Call URL:localhost:8080/Service/IndustryService/getIndustryByID?id=
      * *************************************************************
 	 */
 	@GET
@@ -224,7 +224,7 @@ public class IndustryService {
      * Description： 获取所有政策列表
      * Input: 无
      * Output:JSON格式数据
-     * Call URL:localhost:8080/WebService/IndustryService/getPolicyList
+     * Call URL:localhost:8080/Service/IndustryService/getPolicyList
      * *************************************************************
 	 */
 	@GET
@@ -242,21 +242,21 @@ public class IndustryService {
      * Description： 增加行业类别信息
      * Input: JSON格式数据
      * Output:
-     * Call URL:localhost:8080/WebService/IndustryService/addSubjecttype
+     * Call URL:localhost:8080/Service/IndustryService/addSubjecttype
      * *************************************************************
 	 */
 	@POST
-    @Path("/addSubjecttype")
-    @Consumes("application/json")
+    @Path("addSubjecttype")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response addSubjecttype(Subjecttype subjecttype) {
 		subjecttype.setId(IDOperation.getClassID("subjecttype"));
 		if (DBOperation.add(subjecttype)) {
-			return Response.status(201).entity(subjecttype).build();
-		}
-		
-		return Response.status(201).entity(subjecttype).build();
-        
-        
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
     }
 	
 	/**
@@ -265,16 +265,21 @@ public class IndustryService {
      * Description： 增加具体行业信息
      * Input: JSON格式数据
      * Output:
-     * Call URL:localhost:8080/WebService/IndustryService/addSubject
+     * Call URL:localhost:8080/Service/IndustryService/addSubject
      * *************************************************************
 	 */
 	@POST
     @Path("/addSubject")
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response addSubject(Subject subject) {
 		subject.setId(IDOperation.getClassID("subject"));
-        DBOperation.add(subject);
-        return Response.status(201).entity(subject).build();  
+		if (DBOperation.add(subject)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
     }
 	
 	/**
@@ -283,7 +288,7 @@ public class IndustryService {
      * Description： 增加法规信息
      * Input: JSON格式数据
      * Output:
-     * Call URL:localhost:8080/WebService/IndustryService/addLaws
+     * Call URL:localhost:8080/Service/IndustryService/addLaws
      * *************************************************************
 	 */
 	@POST
@@ -291,9 +296,59 @@ public class IndustryService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addLaws(Laws law) {
 		law.setId(IDOperation.getClassID("laws"));
-        boolean res = DBOperation.add(law);
-        
-        return Response.status(201).entity(law.getId()).build();  
+        if (DBOperation.add(law)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addPolicy
+     * Description： 增加优惠政策信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/addPolicy
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addPolicy")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addPolicy(Policy policy) {
+		policy.setId(IDOperation.getClassID("policy"));
+        if (DBOperation.add(policy)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addSlrelation
+     * Description： 增加行业优惠政策关系表记录
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/addSprelation
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addSprelation")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addSprelation(Sprelation sp) {
+		sp.setId(IDOperation.getClassID("sprelaion"));
+        if (DBOperation.add(sp)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
     }
 	
 	/**
@@ -302,16 +357,21 @@ public class IndustryService {
      * Description： 增加行业法规关系信息
      * Input: JSON格式数据
      * Output:
-     * Call URL:localhost:8080/WebService/IndustryService/addSlrelation
+     * Call URL:localhost:8080/Service/IndustryService/addSlrelation
      * *************************************************************
 	 */
 	@POST
     @Path("/addSlrelation")
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response addSlrelation(Slrelation sl) {
 		sl.setId(IDOperation.getClassID("Slrelation"));
-        DBOperation.add(sl);
-        return Response.status(201).entity(sl).build();  
+		if (DBOperation.add(sl)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
     }
 	
 	/**
@@ -320,30 +380,192 @@ public class IndustryService {
      * Description： 更新行业类别信息
      * Input: JSON格式数据
      * Output:
-     * Call URL:localhost:8080/WebService/IndustryService/updateSubjecttype
+     * Call URL:localhost:8080/Service/IndustryService/updateSubjecttype
      * *************************************************************
 	 */
 	@PUT
     @Path("/updateSubjecttype")
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response updateSubjecttype(Subjecttype subjecttype) {
-        DBOperation.update(subjecttype);
-        return Response.status(201).entity(subjecttype).build();
+        if (DBOperation.update(subjecttype)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
     }
 	
 	/**
 	 * *************************************************************
-	 * FunName : deleteSubjecttype
-     * Description： 删除行业类别信息
+	 * FunName : updateSubject
+     * Description： 更新具体行业信息
      * Input: JSON格式数据
      * Output:
-     * Call URL:localhost:8080/WebService/IndustryService/deleteSubjecttype
+     * Call URL:localhost:8080/Service/IndustryService/updateSubject
      * *************************************************************
 	 */
-	@DELETE
-    @Path("/deleteSubjecttype")
-    public Response deleteSubjecttype(@PathParam("id") String id) {
-		
-        return Industry.getInstance().deleteSubjecttype(id);  
+	@PUT
+    @Path("/updateSubject")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateSubject(Subject subject) {
+        if (DBOperation.update(subject)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
     }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateLaws
+     * Description： 更新法律法规信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/updateLaws
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateLaws")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateLaws(Laws laws) {
+        if (DBOperation.update(laws)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updatePolicy
+     * Description： 更新优惠政策信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/updatePolicy
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updatePolicy")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updatePolicy(Policy policy) {
+        if (DBOperation.update(policy)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateSlrelation
+     * Description： 更新行业法规关系表信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/updateSlrelation
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateSlrelation")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateSlrelation(Slrelation sl) {
+        if (DBOperation.update(sl)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateSprelation
+     * Description： 更新行业优惠政策关系表信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/updateSprelation
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateSprelation")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateSprelation(Sprelation sp) {
+        if (DBOperation.update(sp)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : deleteSubject
+     * Description： 删除具体行业
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/deleteSubject?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("deleteSubject")
+	public Response deleteSubjecttype(@QueryParam("id") String SubjectID) {
+		if (Industry.getInstance().deleteSubject(SubjectID)) {
+			return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : deleteLaws
+     * Description： 删除法规信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/deleteLaws?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("deleteLaws")
+	public Response deleteLaws(@QueryParam("id") String lawID) {
+		if (Industry.getInstance().deleteSubject(lawID)) {
+			return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : deletePolicy
+     * Description： 删除法规信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/IndustryService/deletePolicy?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("deletePolicy")
+	public Response deletePolicy(@QueryParam("id") String policyID) {
+		if (Industry.getInstance().deletePolicy(policyID)) {
+			return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+	}
 }
