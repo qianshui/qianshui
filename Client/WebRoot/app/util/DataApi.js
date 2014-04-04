@@ -26,7 +26,7 @@ Ext.define('YongYou.util.DataApi', {
     	},
     	getFlowByCategoryID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
-    	    		"app/localdata/getFlowByCategoryID.json",param,
+    	    		YongYou.util.Config.getService()+"CategoryService/getFlowByCategoryID",param,
     	    		callback,scope)
     	},
     	getNodeByFlowID:function(callback,scope,param){
