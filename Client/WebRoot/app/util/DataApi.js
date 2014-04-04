@@ -11,26 +11,29 @@ Ext.define('YongYou.util.DataApi', {
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"MapService/getAreaByLngLat",param,
     	    		callback,scope)
+
     	},
     	getMenuList:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"ConfigUtilService/getMenuList",param,
     	    		callback,scope)
     	},
-    	getChildByID:function(callback,scope,param){
+    	getChildByID:function(callback,scope,param,uppa){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getChildByID",param,
     	    		callback,scope)
+
     	},
     	getFlowByCategoryID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
-    	    		YongYou.util.Config.getService()+"CategoryService/getFlowByCategoryID",param,
+    	    		"app/localdata/getFlowByCategoryID.json",param,
     	    		callback,scope)
     	},
     	getNodeByFlowID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getNodeByFlowID",param,
     	    		callback,scope)
+
     	},
     	getAttachmentByNodeID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
@@ -77,8 +80,9 @@ Ext.define('YongYou.util.DataApi', {
     	 */
     	getFlowChart:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getFlowChart",param,
+    		YongYou.util.Config.getService()+"CategoryService/getNodeByFlowID",param,
     		callback,scope)
+
     	},
 
     	getBZList:function(callback,scope,param){
@@ -103,13 +107,15 @@ Ext.define('YongYou.util.DataApi', {
     	},
     	getFG:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getFG",param,
+    		YongYou.util.Config.getService()+"IndustryService/getLawsByIndustryID",param,
     		callback,scope)
+
     	},
     	getZC:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getZC",param,
+    		YongYou.util.Config.getService()+"IndustryService/getPolicyByIndustryID",param,
     		callback,scope)
+
     	},
 
     	getFlowItemContent:function(callback,scope,param){
@@ -119,21 +125,25 @@ Ext.define('YongYou.util.DataApi', {
     	},
     	getCommonSectors:function(callback,scope,params)
     	{
+
     		YongYou.util.DataApi.queryData(
     				YongYou.util.Config.getService()+"IndustryService/getIndustryClass",params,
     	    		callback,scope);
+
     	},
     	getCommonIndustry:function(callback,scope,params)
     	{
     		YongYou.util.DataApi.queryData(
-    	    		YongYou.util.Config.getWebsite()+"Industrylist",params,
+    	    		YongYou.util.Config.getService()+"IndustryService/getSubjectList?id=ST0003",params,
     	    		callback,scope);
+
     	},
     	getAddressList:function(callback,scope,params)
     	{
     		YongYou.util.DataApi.queryData(
-    	    		YongYou.util.Config.getWebsite()+"Addresslist",params,
+    	    		YongYou.util.Config.getService()+"IndustryService/getStreetList",params,
     	    		callback,scope);
+
     	},
     	judge_adrs:function(callback,scope,params)
     	{
@@ -143,7 +153,7 @@ Ext.define('YongYou.util.DataApi', {
     	}
     	
     },
-    queryData:function(url, params, callback, scope) {
+    queryData:function(url, params, callback, scope,uppa) {
        // Ext.data.JsonP.request({
          Ext.Ajax.request({
          	url: url,
@@ -153,7 +163,7 @@ Ext.define('YongYou.util.DataApi', {
             scope: scope,
             success: function(response) {
                 if (callback) {
-                    callback(response.responseText, this);
+                    callback(response.responseText, this,uppa);
                 }
             },
             failure: function(a, b, c) {

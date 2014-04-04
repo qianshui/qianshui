@@ -28,7 +28,7 @@ Ext.define('YongYou.controller.Main', {
 	},
 
 	onMainItemTap : function(view, index, target, record, e) {
-		var navigatePanel = Ext.create('YongYou.view.NavigationPanel', {});
+		//var navigatePanel = Ext.create('YongYou.view.NavigationPanel', {});
 
 		if (record == '办事指南') {
 			

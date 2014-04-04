@@ -4,9 +4,10 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 	config : {
 		id : 'SelectAddressPanel',
 		baseCls : 'categories-list',
+		style : "background-color:white;!important",
 		itemTpl : [
-				'<div class="image" style="background-image:url(\'resources/img/phone_startup.png\')"></div>',
-				'<div class="name">{label}</div>'
+				'<div class="image" style="background-image:url(\'resources/img/industry/jiedao2.jpg\')"></div>',
+				'<div class="name">{name}</div>'
 
 		].join(''),
 		store : 'AddressMenu',
@@ -20,13 +21,15 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 				id : 'get_address',
 				width : 182,
 				border : 3,
+				height:52,
+				
 				style : 'float:left;margin-left:165px;border-color: gray; border-style: solid;'
 			}, {
 				xtype : 'button',
 				ui : 'round',
 				height : 52,
 				width : 172,
-				style : 'float:left;background:-webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);',
+				style : 'height:50px;float:left;background:-webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);',
 				text : '提交地址',
 				listeners : {
 					'tap' : function(b, e) {
@@ -60,7 +63,7 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 
 	},
 	onItemTap : function(container, target, index, e) {
-		var me = this, store = me.getStore(), record = store.data.items[index].data.label;
+		var me = this, store = me.getStore(), record = store.data.items[index].data.name;
 
 		me.fireEvent('itemtap', me, index, target, record, e);
 	}

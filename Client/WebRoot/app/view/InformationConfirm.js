@@ -8,17 +8,18 @@ Ext.define('YongYou.view.InformationConfirm', {
         items: [
 			{
 			    xtype: 'label',
+			    style:'font-size:24px;',
 			    id: 'show_indus_adres',
 			    html: '行业信息，地址信息'
 			},
 			{
 			    xtype: 'textareafield',
-			    style:'height:300px;border:solid 2px red;',
-			    value:'周边配套信息'
+			    style:'height:300px;font-size:24px;',
+			    value:'周边配套'
 			},
 			{
 			    xtype: 'textareafield',
-			    style:'height:200px;border:solid 2px red;',
+			    style:'height:200px;font-size:24px;',
 			    value:'投资建议'
 			}
         ]

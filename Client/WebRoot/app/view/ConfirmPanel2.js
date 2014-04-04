@@ -13,7 +13,7 @@ Ext.define('YongYou.view.ConfirmPanel2', {
 					layout : {
 						pack : 'center'
 					},
-					style : 'background:#99FFFF'
+					//style : 'background:#99FFFF'
 				},
 
 				items : [
