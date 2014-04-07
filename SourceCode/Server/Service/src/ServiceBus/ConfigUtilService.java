@@ -30,4 +30,13 @@ public class ConfigUtilService {
 		return CommonJson.list2Json(MenuList);
 	}
 	
+	
+	@GET
+	@Path("getIconList")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getIconList() {
+		List IconList = ConfigUtil.getInstance().getIconList();
+		return CommonJson.list2Json(IconList);
+	}
+	
 }

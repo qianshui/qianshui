@@ -10,6 +10,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import DataBase.Category;
+import DataBase.Icon;
 import DataBase.Menu;
 
 public class ConfigUtil {
@@ -58,5 +60,32 @@ public class ConfigUtil {
 			e.printStackTrace();
 		}
 		return MenuList;
+    }
+    
+    /**
+     * 获取图标列表
+     * @return
+     */
+    public List getIconList() {
+    	List list = null;
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			
+			list = session.createQuery("from Icon").list();
+			if (list != null) {
+				Iterator it = list.iterator();
+			
+			}
+			
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;
+		
+		
     }
 }

@@ -150,7 +150,14 @@ Ext.define('YongYou.util.DataApi', {
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getWebsite()+"Judge_address",params,
     	    		callback,scope);
+    	},
+    	updateCategory:function(callback,scope,params)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/updateCategory',params,
+    	    		callback,scope);
     	}
+    	
     	
     },
     queryData:function(url, params, callback, scope,uppa) {
@@ -159,6 +166,27 @@ Ext.define('YongYou.util.DataApi', {
          	url: url,
             params: params,
             method: 'GET',
+            dataType:'json',
+            scope: scope,
+            success: function(response) {
+                if (callback) {
+                    callback(response.responseText, this,uppa);
+                }
+            },
+            failure: function(a, b, c) {
+                Ext.Msg.alert('提示', '远程连接失败:' + url);
+            }
+        });
+    },
+     postData:function(url, params, callback, scope,uppa) {
+       // Ext.data.JsonP.request({
+         Ext.Ajax.request({
+         	url: url,
+         	headers: {
+             'Content-Type': 'application/json;charset=utf-8'
+            },
+            params: Ext.JSON.encode(params),
+            method: 'POST',
             dataType:'json',
             scope: scope,
             success: function(response) {

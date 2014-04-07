@@ -11,17 +11,23 @@ package ServiceBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import Business.CategoryBusiness;
 import Common.CommonJson;
+import Common.DBOperation;
 import DataBase.Attachment;
 import DataBase.Category;
 import DataBase.Node;
+import DataBase.Policy;
 
 
 /**
@@ -173,6 +179,28 @@ public class CategoryService {
 	public String getContactByContactID(@QueryParam("id") String contactID) {
 		return CommonJson.object2Json(CategoryBusiness.getInstance().getContactByContactID(contactID));
 	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : updatePolicy
+     * Description： 更新优惠政策信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/updateCategory
+     * *************************************************************
+	 */
+	@POST
+    @Path("/updateCategory")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updatePolicy(Category category) {
+        if (DBOperation.update(category)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
 }
 
 
