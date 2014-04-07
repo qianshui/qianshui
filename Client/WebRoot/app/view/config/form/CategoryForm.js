@@ -50,7 +50,8 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 				// readOnly : true
 		},	{
 				xtype : 'icontrigger',
-				fieldLabel : '流程'
+				fieldLabel : '流程',
+				name : 'flowId'
 				// readOnly : true
 		}	, {
 				xtype : 'textfield',
@@ -65,7 +66,7 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 			}],
 
 	buttons : [{
-		text : 'Submit',
+		text : '提交',
 		handler : function() {
 			// The getForm() method returns the Ext.form.Basic instance:
 			var form = this.up('form').getForm();
@@ -74,17 +75,6 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 					Ext.Msg.alert('提示', '执行操作成功！');
 				},form,form.getValues())
 				
-//				// Submit the Ajax request and handle the response
-//				form.submit({
-//							success : function(form, action) {
-//								Ext.Msg.alert('Success', action.result.message);
-//							},
-//							failure : function(form, action) {
-//								Ext.Msg.alert('Failed', action.result
-//												? action.result.message
-//												: 'No response');
-//							}
-//						});
 			}
 		}
 	}]

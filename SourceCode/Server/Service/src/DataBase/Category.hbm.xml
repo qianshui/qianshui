@@ -25,5 +25,8 @@
         <property name="leaf" type="string">
             <column name="leaf" length="10" />
         </property>
+         <property name="flowId" type="string">
+            <column name="FlowID" length="10" />
+        </property>
     </class>
 </hibernate-mapping>

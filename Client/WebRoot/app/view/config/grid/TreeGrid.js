@@ -35,6 +35,9 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 										}, {
 											name : 'type',
 											type : 'string'
+										},{
+											name:'flowId',
+											type:'string'
 										}],
 								proxy : {
 									type : 'ajax',
