@@ -63,19 +63,10 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 				fieldLabel : '叶节点',
 				name : 'leaf',
 				hidden:true
-			}],
+			}]
 
-	buttons : [{
-		text : '提交',
-		handler : function() {
-			// The getForm() method returns the Ext.form.Basic instance:
-			var form = this.up('form').getForm();
-			if (form.isValid()) {
-				YongYou.util.DataApi.Core.updateCategory(function(res,scope){
-					Ext.Msg.alert('提示', '执行操作成功！');
-				},form,form.getValues())
-				
-			}
-		}
-	}]
+//	buttons : [{
+//		text : '提交',
+//		
+//	}]
 });

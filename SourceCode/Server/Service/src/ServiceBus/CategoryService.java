@@ -24,8 +24,10 @@ import javax.ws.rs.core.Response;
 import Business.CategoryBusiness;
 import Common.CommonJson;
 import Common.DBOperation;
+import Common.IDOperation;
 import DataBase.Attachment;
 import DataBase.Category;
+import DataBase.Laws;
 import DataBase.Node;
 import DataBase.Policy;
 
@@ -182,8 +184,8 @@ public class CategoryService {
 	
 	/**
 	 * *************************************************************
-	 * FunName : updatePolicy
-     * Description： 更新优惠政策信息
+	 * FunName : updateCategory
+     * Description： 更新流程分类
      * Input: JSON格式数据
      * Output:
      * Call URL:localhost:8080/Service/CategoryService/updateCategory
@@ -194,6 +196,29 @@ public class CategoryService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updatePolicy(Category category) {
         if (DBOperation.update(category)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addCategory
+     * Description： 增加流程分类
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/addCategory
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addCategory")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addCategory(Category category) {
+		category.setId(IDOperation.getClassID("category"));
+        if (DBOperation.add(category)) {
         	return Response.status(201).entity("Seccess").build();
         }
         else

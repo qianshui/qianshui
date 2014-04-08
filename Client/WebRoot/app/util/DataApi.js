@@ -151,13 +151,18 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getWebsite()+"Judge_address",params,
     	    		callback,scope);
     	},
-    	updateCategory:function(callback,scope,params)
+    	updateCategory:function(callback,scope,params,uppa)
     	{
     		YongYou.util.DataApi.postData(
     	    		YongYou.util.Config.getService()+'CategoryService/updateCategory',params,
-    	    		callback,scope);
+    	    		callback,scope,uppa);
+    	},
+    	addCategory:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/addCategory',params,
+    	    		callback,scope,uppa);
     	}
-    	
     	
     },
     queryData:function(url, params, callback, scope,uppa) {

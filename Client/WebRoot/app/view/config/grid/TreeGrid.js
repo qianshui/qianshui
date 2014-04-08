@@ -1,21 +1,4 @@
-Ext.define('YongYou.view.config.grid.TreeGrid', {
-	extend : 'Ext.tree.Panel',
-
-	requires : ['Ext.data.*', 'Ext.grid.*', 'Ext.tree.*', 'Ext.ux.CheckColumn'],
-	xtype : 'tree-grid',
-
-	title : '主页',
-	height : '100%',
-	useArrows : true,
-	rootVisible : false,
-	multiSelect : true,
-	singleExpand : true,
-
-	initComponent : function() {
-		this.width = '100%';
-
-		Ext.apply(this, {
-					store : new Ext.data.TreeStore({
+treeStore=new Ext.data.TreeStore({
 								autoLoad : true,
 								fields : [{
 											name : 'title',
@@ -35,9 +18,9 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 										}, {
 											name : 'type',
 											type : 'string'
-										},{
-											name:'flowId',
-											type:'string'
+										}, {
+											name : 'flowId',
+											type : 'string'
 										}],
 								proxy : {
 									type : 'ajax',
@@ -49,13 +32,32 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 								listeners : {
 									load : function(store, node, records,
 											successful, eOpts) {
-										// test();
+										
 									}
 								}
-							}),
+							})
+
+Ext.define('YongYou.view.config.grid.TreeGrid', {
+	extend : 'Ext.tree.Panel',
+
+	requires : ['Ext.data.*', 'Ext.grid.*', 'Ext.tree.*', 'Ext.ux.CheckColumn'],
+	xtype : 'tree-grid',
+
+	title : '主页',
+	height : '100%',
+	useArrows : true,
+	rootVisible : false,
+	multiSelect : true,
+	singleExpand : true,
+
+	initComponent : function() {
+		this.width = '100%';
+
+		Ext.apply(this, {
+					store : treeStore,
 					columns : [{
 								xtype : 'treecolumn', // this is so we know
-														// which
+								// which
 								// column will
 								// show the tree
 								text : '标题',
@@ -74,7 +76,11 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 								xtype : 'actioncolumn',
 								tooltip : '添加子分类',
 								align : 'center',
-								icon : 'resources/images/icons/fam/add.png'
+								icon : 'resources/images/icons/fam/add.png',
+								handler : function(grid, rowIndex, colIndex,
+										actionItem, event, record, row) {
+										ShowForm(false,grid,record,{data:{paretId:record.data.id}})
+								}
 							}, {
 								text : '添加流程',
 								width : 70,
@@ -93,15 +99,7 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 								icon : 'resources/images/edit_task.png',
 								handler : function(grid, rowIndex, colIndex,
 										actionItem, event, record, row) {
-									form = Ext.create('YongYou.view.config.form.CategoryForm');
-									form.getForm().loadRecord(record)
-									Ext.create('Ext.window.Window', {
-										title:'编辑分类',
-										height : 500,
-										width : 600,
-										layout : 'fit',
-										items :[form]
-									}).show();
+										ShowForm(true,grid,record)
 								},
 								// Only leaf level tasks may be edited
 								isDisabled : function(view, rowIdx, colIdx,
@@ -121,3 +119,52 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 		this.callParent();
 	}
 });
+
+ShowForm = function(isUpdate, grid,record) {
+	form = Ext.create('YongYou.view.config.form.CategoryForm');
+	if(isUpdate){
+	form.getForm().loadRecord(record)
+	}else{
+		parentField=form.getForm().findField('parentId');
+		parentField.setValue(record.data.id);
+		leafField=form.getForm().findField('leaf');
+		leafField.setValue(0);
+	}
+	Ext.create('Ext.window.Window', {
+		title : '编辑分类',
+		height : 500,
+		width : 600,
+		layout : 'fit',
+		items : [form],
+		dockedItems : [{
+			xtype : 'toolbar',
+			dock : 'bottom',
+			ui : 'footer',
+			items : [{
+						xtype : 'component',
+						flex : 1
+					}, {
+						xtype : 'button',
+						text : '提交',
+						handler : function() {
+
+							if (form.isValid()) {
+								if (isUpdate) {
+									YongYou.util.DataApi.Core.updateCategory(
+											callback, form, form.getValues(),grid)
+								} else {
+									YongYou.util.DataApi.Core.addCategory(
+											callback, form, form.getValues(),grid)
+								}
+							}
+						}
+
+					}]
+		}]
+	}).show();
+}
+callback = function(res, scope,grid) {
+	Ext.Msg.alert('提示', '执行操作成功！');
+	scope.up('panel').close();
+	grid.getStore().treeStore.reload();
+}
