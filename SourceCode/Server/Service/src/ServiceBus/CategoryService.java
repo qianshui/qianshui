@@ -132,6 +132,22 @@ public class CategoryService {
 	
 	/**
 	 * *************************************************************
+	 * FunName : getFlowByID
+     * Description：根据分类ID获取对应的流程
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getFlowByID?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getFlowByID")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getFlowByID(@QueryParam("id") String ID) {
+		return CommonJson.object2Json(CategoryBusiness.getInstance().getFlowByID(ID));
+	}
+	
+	/**
+	 * *************************************************************
 	 * FunName : getNodeByFlowID
      * Description： 根据FlowID获取Node
      * Input: 无

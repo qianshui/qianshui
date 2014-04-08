@@ -21,18 +21,18 @@ Ext.define('YongYou.util.ClientEventHandle', {
 		else
 			navPort=view;
 		
-		if (record.leaf == "1") {
+		if (record.flowId) {
 
 			detailTab = Ext.create('YongYou.view.query.DetailTab', {
 						title : record.title
 					})
-			YongYou.util.DataApi.Core.getFlowByCategoryID(function(res, scope) {
+			YongYou.util.DataApi.Core.getFlowByID(function(res, scope) {
 						flow = Ext.decode(res);
 						scope.title = flow.title;
 						scope.initialPanel(flow);
 
 					}, detailTab, {
-						'id' : record.id
+						'id' : record.flowId
 					})
 			navPort.push(detailTab);
 		} else {

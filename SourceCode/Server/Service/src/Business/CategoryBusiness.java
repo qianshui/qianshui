@@ -214,6 +214,33 @@ public class CategoryBusiness {
     
     /**
      * *************************************************************
+	 * FunName : getFlowByID
+     * Description： 根据ID获取对应的流程
+     * Input: @param flowID
+     * Output:void
+     * *************************************************************
+	 */
+    public Flow getFlowByID(String ID) {
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List<Flow> list = session.createQuery("from Flow where id = :id").setParameter("id", ID).list();
+			session.close();
+			if (list.size() != 0) {
+				return list.get(0);
+			}
+			
+			return null;
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return null;
+    }
+    /**
+     * *************************************************************
 	 * FunName : getNodeByFlowID
      * Description： 根据FlowID获取Node
      * Input: @param flowID
