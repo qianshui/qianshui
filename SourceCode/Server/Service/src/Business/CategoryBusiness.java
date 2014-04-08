@@ -129,6 +129,32 @@ public class CategoryBusiness {
 		}
     }
     
+    
+    /**
+     * *************************************************************
+	 * FunName : getFlowList
+     * Description： 获取流程列表
+     * Input: 
+     * Output:void
+     * *************************************************************
+	 */
+    public List getFlowList() {
+    	List list = null;
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			
+			list = session.createQuery("from Flow").list();	
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;
+    }
+    
+    
     /**
      * *************************************************************
 	 * FunName : getPreListByID

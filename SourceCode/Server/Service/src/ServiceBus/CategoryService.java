@@ -63,6 +63,25 @@ public class CategoryService {
 	
 	/**
 	 * *************************************************************
+	 * FunName : getFlowList
+     * Description： 获取流程列表
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getFlowList
+     * *************************************************************
+	 */
+	@GET
+	@Path("getFlowList")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getFlowList() {
+		
+		List list = CategoryBusiness.getInstance().getFlowList();
+		return CommonJson.list2Json(list);
+	}
+	
+	
+	/**
+	 * *************************************************************
 	 * FunName : getCategoryTree
      * Description： 获取分类树
      * Input: 无

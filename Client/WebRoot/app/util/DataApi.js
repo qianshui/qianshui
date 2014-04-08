@@ -34,6 +34,11 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+"CategoryService/getFlowByID",param,
     	    		callback,scope)
     	},
+    	getFlowList:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getFlowList",param,
+    	    		callback,scope)
+    	},
     	getNodeByFlowID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getNodeByFlowID",param,

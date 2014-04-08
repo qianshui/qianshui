@@ -16,9 +16,44 @@ Ext.define('YongYou.view.config.form.IconTrigger', {
 							height : 500,
 							width : 600,
 							layout : 'fit',
-							trigger:this
+							trigger : this
 						}).show();
 				win.add(dataview)
+			}
+		});
+
+Ext.define('YongYou.view.config.form.FlowTrigger', {
+			extend : 'Ext.form.field.Trigger',
+			alias : 'widget.flowtrigger',
+			onTriggerClick : function(a) {
+				YongYou.util.DataApi.Core.getFlowList(function(res, scope) {
+							records = Ext.decode(res);
+							model = Ext.create('YongYou.model.Flow');
+							store = Ext.create('Ext.data.Store', {
+										fields : model.config.fields
+
+									});
+
+							grid = Ext.create(
+									'YongYou.view.config.grid.SelectGrid', {
+										store : store,
+										columns : model.config.columns
+									});
+							store.add(records);
+							win = Ext.create('Ext.window.Window', {
+										title : '流程选择',
+										// id : 'imgselector',
+										height : 500,
+										width : 600,
+										layout : 'fit',
+										trigger : scope,
+										setValue:function(value){
+											this.trigger.items.items[4].setValue(value);
+											this.trigger.items.items[6].setValue("1");
+										}
+									}).show();
+							win.add(grid)
+						},this.up('panel'))
 			}
 		});
 
@@ -33,13 +68,13 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 				xtype : 'textfield',
 				fieldLabel : 'ID',
 				name : 'id',
-				hidden:true
-			},{
+				hidden : true
+			}, {
 				xtype : 'textfield',
 				fieldLabel : '父节点ID',
 				name : 'parentId',
-				hidden:true
-			},{
+				hidden : true
+			}, {
 				xtype : 'textfield',
 				fieldLabel : '标题',
 				name : 'title'
@@ -48,8 +83,8 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 				fieldLabel : '图标',
 				name : 'icon'
 				// readOnly : true
-		},	{
-				xtype : 'icontrigger',
+		}	, {
+				xtype : 'flowtrigger',
 				fieldLabel : '流程',
 				name : 'flowId'
 				// readOnly : true
@@ -57,16 +92,16 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 				xtype : 'textfield',
 				fieldLabel : '类别',
 				name : 'type',
-				hidden:true
+				hidden : true
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '叶节点',
 				name : 'leaf',
-				hidden:true
+				hidden : true
 			}]
 
-//	buttons : [{
-//		text : '提交',
-//		
-//	}]
-});
+		// buttons : [{
+		// text : '提交',
+		//		
+		// }]
+	});
