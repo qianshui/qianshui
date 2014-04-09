@@ -27,9 +27,13 @@ import Common.DBOperation;
 import Common.IDOperation;
 import DataBase.Attachment;
 import DataBase.Category;
+import DataBase.Contact;
+import DataBase.Flow;
 import DataBase.Laws;
+import DataBase.Narelation;
 import DataBase.Node;
 import DataBase.Policy;
+import DataBase.Sprelation;
 
 
 /**
@@ -155,7 +159,7 @@ public class CategoryService {
      * Description：根据分类ID获取对应的流程
      * Input: 无
      * Output:JSON格式数据
-     * Call URL:localhost:8080/WebService/CategoryService/getFlowByID?id=
+     * Call URL:localhost:8080/Service/CategoryService/getFlowByID?id=
      * *************************************************************
 	 */
 	@GET
@@ -254,6 +258,242 @@ public class CategoryService {
     public Response addCategory(Category category) {
 		category.setId(IDOperation.getClassID("category"));
         if (DBOperation.add(category)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addContact
+     * Description： 增加联系人
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/addContact
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addContact")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addContact(Contact cont) {
+		cont.setId(IDOperation.getClassID("Contact"));
+        if (DBOperation.add(cont)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateContact
+     * Description： 更新联系人信息
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/updateContact
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateContact")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateContact(Contact contact) {
+        if (DBOperation.update(contact)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addFlow
+     * Description： 增加flow
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/addFlow
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addFlow")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addFlow(Flow flow) {
+		flow.setId(IDOperation.getClassID("Flow"));
+        if (DBOperation.add(flow)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateFlow
+     * Description： 更新Flow
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/updateFlow
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateFlow")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateFlow(Flow flow) {
+        if (DBOperation.update(flow)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addNode
+     * Description： 增加Node
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/addNode
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addNode")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addNode(Node node) {
+		node.setId(IDOperation.getClassID("Node"));
+        if (DBOperation.add(node)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateNode
+     * Description： 更新Node
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/updateNode
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateNode")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateNode(Node node) {
+        if (DBOperation.update(node)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addAttachment
+     * Description： 增加Attachment
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/addAttachment
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addAttachment")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addAttachment(Attachment att) {
+		att.setId(IDOperation.getClassID("Attachment"));
+        if (DBOperation.add(att)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateAttachment
+     * Description： 更新Attachment
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/updateAttachment
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateAttachment")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateAttachment(Attachment att) {
+        if (DBOperation.update(att)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : addNarelation
+     * Description： 增加Narelation关系表
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/addNarelation
+     * *************************************************************
+	 */
+	@POST
+    @Path("/addNarelation")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addNarelation(Narelation na) {
+		/*增加之前检查对应node和attachment是否存在，不存在则返回node或attachment不存在*/
+		if (CategoryBusiness.getInstance().getNodeByNodeID(na.getNid()) == null)
+		{
+			return Response.status(201).entity("node not exist").build();
+		}
+		
+		if (CategoryBusiness.getInstance().getAttachmentByAttID(na.getAid()) == null)
+		{
+			return Response.status(201).entity("attachment not exist").build();
+		}
+		
+		na.setId(IDOperation.getClassID("Narelation"));
+        if (DBOperation.add(na)) {
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateNarelation
+     * Description： 更新Narelation关系表
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/updateNarelation
+     * *************************************************************
+	 */
+	@PUT
+    @Path("/updateNarelation")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateNarelation(Narelation na) {
+        if (DBOperation.update(na)) {
         	return Response.status(201).entity("Seccess").build();
         }
         else

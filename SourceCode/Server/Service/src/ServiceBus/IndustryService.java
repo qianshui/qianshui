@@ -341,6 +341,17 @@ public class IndustryService {
     @Path("/addSprelation")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSprelation(Sprelation sp) {
+		/*增加之前检查对应行业和政策是否存在，不存在则返回行业或政策不存在*/
+		if (Industry.getInstance().getIndustryByID(sp.getSid()) == null)
+		{
+			return Response.status(201).entity("subject not exist").build();
+		}
+		
+		if (Industry.getInstance().getPolicyByPolicyID(sp.getPid()) == null)
+		{
+			return Response.status(201).entity("policy not exist").build();
+		}
+		
 		sp.setId(IDOperation.getClassID("sprelaion"));
         if (DBOperation.add(sp)) {
         	return Response.status(201).entity("Seccess").build();
@@ -364,6 +375,17 @@ public class IndustryService {
     @Path("/addSlrelation")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSlrelation(Slrelation sl) {
+		/*增加之前检查对应行业和法规是否存在，不存在则返回行业或法规不存在*/
+		if (Industry.getInstance().getIndustryByID(sl.getSid()) == null)
+		{
+			return Response.status(201).entity("subject not exist").build();
+		}
+		
+		if (Industry.getInstance().getPolicyByPolicyID(sl.getLid()) == null)
+		{
+			return Response.status(201).entity("policy not exist").build();
+		}
+		
 		sl.setId(IDOperation.getClassID("Slrelation"));
 		if (DBOperation.add(sl)) {
         	return Response.status(201).entity("Seccess").build();
@@ -518,6 +540,7 @@ public class IndustryService {
 	@GET
 	@Path("deleteSubject")
 	public Response deleteSubjecttype(@QueryParam("id") String SubjectID) {
+		/*删除行业后没有检查行业法规关系表和行业政策关系表中是否有对应行业的记录，若有应将其删掉*/
 		if (Industry.getInstance().deleteSubject(SubjectID)) {
 			return Response.status(201).entity("Seccess").build();
         }
@@ -539,6 +562,7 @@ public class IndustryService {
 	@GET
 	@Path("deleteLaws")
 	public Response deleteLaws(@QueryParam("id") String lawID) {
+		/*删除法规后没有检查行业法规关系表中是否有对应法律的记录，若有应将其删掉*/
 		if (Industry.getInstance().deleteSubject(lawID)) {
 			return Response.status(201).entity("Seccess").build();
         }
@@ -560,6 +584,7 @@ public class IndustryService {
 	@GET
 	@Path("deletePolicy")
 	public Response deletePolicy(@QueryParam("id") String policyID) {
+		/*删除政策后没有检查行业政策关系表中是否有对应政策的记录，若有应将其删掉*/
 		if (Industry.getInstance().deletePolicy(policyID)) {
 			return Response.status(201).entity("Seccess").build();
         }

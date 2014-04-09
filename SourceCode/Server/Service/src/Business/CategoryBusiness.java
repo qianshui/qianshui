@@ -351,4 +351,52 @@ public class CategoryBusiness {
                }
         }
     }
+    
+    /**
+     * *************************************************************
+	 * FunName : getNodeByNodeID
+     * Description： 根据NodeID获取Node对象
+     * Input: @param lawID
+     * Output:Laws
+     * *************************************************************
+	 */
+    public Node getNodeByNodeID(String nodeID) {
+    	Node node = null;
+    	Session session = null;
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+	        node = (Node)session.get(Node.class, nodeID);
+            return node;
+        }finally {//保证资源得到释放
+               if(session != null) {
+                  session.close();
+               }
+        }
+    }
+    
+    /**
+     * *************************************************************
+	 * FunName : getAttachmentByAttID
+     * Description： 根据AttachmentID获取Attachment对象
+     * Input: @param lawID
+     * Output:Laws
+     * *************************************************************
+	 */
+    public Attachment getAttachmentByAttID(String attachmentID) {
+    	Attachment att = null;
+    	Session session = null;
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+	        att = (Attachment)session.get(Attachment.class, attachmentID);
+            return att;
+        }finally {//保证资源得到释放
+               if(session != null) {
+                  session.close();
+               }
+        }
+    }
 }
