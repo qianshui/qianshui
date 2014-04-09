@@ -230,7 +230,7 @@ public class CategoryService {
      * Call URL:localhost:8080/Service/CategoryService/updateCategory
      * *************************************************************
 	 */
-	@POST
+	@PUT
     @Path("/updateCategory")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updatePolicy(Category category) {
