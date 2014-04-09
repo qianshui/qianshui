@@ -7,7 +7,9 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
 		<property name="connection.url">
 			jdbc:mysql://localhost:3306/qianshui
 		</property>
@@ -36,7 +38,7 @@
 		<mapping resource="DataBase/Narelation.hbm.xml" />
 		<mapping resource="DataBase/Classid.hbm.xml" />
 		<mapping resource="DataBase/Prrelation.hbm.xml" />
-<mapping resource="DataBase/Icon.hbm.xml" />
+		<mapping resource="DataBase/Icon.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

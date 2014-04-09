@@ -41,7 +41,7 @@ Ext.define('YongYou.view.config.LeftPanel', {
 								collapsed : i > 0,
 								listeners : {
 									click:function( menu, item, e, eOpts){
-										YongYou.util.EventHandle.events.leftMenuClick(this.parent,item)
+										YongYou.util.EventHandle.events.leftMenuClick(this.parent,item.data)
 									
 									}
 								}
@@ -52,7 +52,8 @@ Ext.define('YongYou.view.config.LeftPanel', {
 
 									menuConfig.items.push({
 									id:menulist[i].children[x].id,
-									text : menulist[i].children[x].title
+									text : menulist[i].children[x].title,
+									data:menulist[i].children[x]
 											});
 								}
 							}

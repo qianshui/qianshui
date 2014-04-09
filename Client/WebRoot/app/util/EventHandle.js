@@ -10,12 +10,16 @@ Ext.define('YongYou.util.EventHandle', {
 				leftMenuClick : function(parent, item, callback) {
 					var desktop = Ext.ComponentQuery
 							.query("panel[id='tab-main']")[0];
-					desktop.add({
-								title : 'Inactive Tab',
-								html : 'ddddddddddddddddddddddd',
-								closable : true
-							})
-					desktop.setActiveItem(1);
+
+					if (!desktop.queryById(item.id)) {
+						panel = Ext.create(item.panel, {
+									title : item.title,
+									id : item.id,
+									closable : true
+								})
+						desktop.add(panel)
+					}
+					desktop.setActiveTab(item.id);
 				}
 			}
 
