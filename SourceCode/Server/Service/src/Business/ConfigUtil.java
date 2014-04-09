@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import DataBase.Attachment;
 import DataBase.Category;
 import DataBase.Icon;
 import DataBase.Menu;
@@ -91,18 +92,19 @@ public class ConfigUtil {
      * 根据图标的类型(Type字段)获取图标列表
      * @return
      */
-    public List<Icon> getIconListByIconType(String strIconType) {
-    	List<Icon> list = null;
+    public List getIconListByIconType(String strIconType) {
+    	List IconList = null;
     	try {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
 			Session session = sf.openSession();			
-			list = session.createSQLQuery("select * from icon where type = :strID").setParameter("strID", strIconType).list();	
+			IconList = session.createSQLQuery("select * from Icon where type = :strID").addEntity(Icon.class).setParameter("strID", strIconType).list();	
 			session.close();
+			
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return list;	
+		return IconList;	
     }
 }

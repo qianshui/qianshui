@@ -410,7 +410,7 @@ public class CategoryBusiness {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
 			Session session = sf.openSession();
-			list = session.createSQLQuery("SELECT * from flow where flow.ID not in(SELECT category.FlowID from category where flow.ID = category.FlowID)").list();
+			list = session.createSQLQuery("SELECT * from flow where flow.ID not in(SELECT category.FlowID from category)").addEntity(Flow.class).list();
 			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -429,7 +429,7 @@ public class CategoryBusiness {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
 			Session session = sf.openSession();
-			list = session.createSQLQuery("SELECT * from flow WHERE SubjectID is null").list();
+			list = session.createSQLQuery("SELECT * from flow WHERE SubjectID is null").addEntity(Flow.class).list();
 			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
@@ -448,7 +448,7 @@ public class CategoryBusiness {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
 			Session session = sf.openSession();
-			list = session.createSQLQuery("SELECT * from flow WHERE flow.ID not in(SELECT DISTINCT category.FlowID from category WHERE category.FlowID = flow.ID) and flow.SubjectID is null").list();
+			list = session.createSQLQuery("SELECT * from flow WHERE flow.ID not in(SELECT DISTINCT category.FlowID from category) and flow.SubjectID is null").addEntity(Flow.class).list();
 			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception

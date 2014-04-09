@@ -13,15 +13,16 @@ var store = Ext.create('Ext.data.Store', {
 				type : 'ajax',
 
 				url : YongYou.util.Config.getService()
-						+ 'ConfigUtilService/getIconList',
-
+						+ 'ConfigUtilService/getIconListByIconType',
 				reader : {
 					type : 'json',
 					root : 'images'
 				}
 			}
 		});
-store.load();
+store.load({params: {
+type : 'desktop'
+    }});
 
 Ext.define('YongYou.view.config.form.IconDataview', {
 	extend : 'Ext.view.View',
@@ -32,8 +33,8 @@ Ext.define('YongYou.view.config.form.IconDataview', {
 			'<tpl for=".">',
 			'<div class="thumb-wrap" id="{name:stripTags}">',
 			'<div class="thumb"><img src="{url}" title="{name:htmlEncode}"></div>',
-			'<span class="x-editable">{name}</span>', '</div>',
-			'</tpl>', '<div class="x-clear"></div>'],
+			'<span class="x-editable">{name}</span>', '</div>', '</tpl>',
+			'<div class="x-clear"></div>'],
 	// multiSelect : true,
 	height : 450,
 	autoScroll : true,
@@ -51,11 +52,10 @@ Ext.define('YongYou.view.config.form.IconDataview', {
 		return data;
 	},
 	listeners : {
-		itemdblclick:function( dataview, record, item, index, e, eOpts ){
+		itemdblclick : function(dataview, record, item, index, e, eOpts) {
 			this.up('panel').trigger.setValue(record.data.name);
 			this.up('panel').close();
-			
+
 		}
 	}
 })
-
