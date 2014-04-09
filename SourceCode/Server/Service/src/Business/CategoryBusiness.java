@@ -399,4 +399,23 @@ public class CategoryBusiness {
                }
         }
     }
+    
+    /******************************************************************************************************
+     * 获取没有在category中出现的流程记录
+     * 
+     *******************************************************************************************************/
+    public List<Flow> getNotAppearFlow(){
+    	List<Flow> list = new ArrayList<Flow>();
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			list = session.createSQLQuery("SELECT * from flow where flow.ID not in(SELECT category.FlowID from category where flow.ID = category.FlowID)").list();
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;   	
+    }
 }
