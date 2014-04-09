@@ -42,7 +42,60 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 							record = store.data.items[target].data;
 //							YongYou.util.ClientEventHandle.events.onCatrgotyItemTap(this.parent.parent, index,
 //									target, record, e)
-							alert(record.name);
+							//alert(record.name);
+							if(record.name=="行业占比")
+							{
+								YongYou.util.DataApi.Core.getAreaByLngLat(function(
+										res, scope) {
+									res = Ext.decode(res);
+									for (i = 0; i < res.length; i++) {
+										var marker = new BMap.Marker(new BMap.Point(
+												res[i].lat, res[i].lng));
+										var info = res[i].name;
+										marker.setTitle(info);
+										marker.setLabel(info);
+										marker.addEventListener("click", function(
+												a, b) {
+											this
+													.openInfoWindow(new BMap.InfoWindow(a.currentTarget
+															.getTitle()));
+										});
+										scope.addOverlay(marker);
+									}
+								}, map, {
+									'lng' : 29.582719,
+									'lat' : 106.535602
+								});
+							}
+							else if(record.name=="周边配套")
+							{
+								YongYou.util.DataApi.Core.getZbptByLngLat(function(
+										res, scope) {
+									res = Ext.decode(res);
+									//alert(res.length);
+									for (i = 0; i < res.length; i++) {
+										var marker = new BMap.Marker(new BMap.Point(
+												res[i].lat, res[i].lng));
+										var info = res[i].name;
+										marker.setTitle(info);
+										marker.setLabel(info);
+										marker.addEventListener("click", function(
+												a, b) {
+											this
+													.openInfoWindow(new BMap.InfoWindow(a.currentTarget
+															.getTitle()));
+										});
+										scope.addOverlay(marker);
+									}
+								}, map, {
+									'lng' : 29.582719,
+									'lat' : 106.535602
+								});
+							}
+							else if(record.name=="点我确认")
+							{
+								
+							}
 
 						}
 					}
