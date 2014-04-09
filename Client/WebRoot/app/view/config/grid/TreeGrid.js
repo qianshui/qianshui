@@ -110,7 +110,7 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
         'afterrender': function(view,e){
         	
             loading = new Ext.LoadMask(view,{
-               msg : 'Loading...',
+               msg : '正在加载...',
                removeMask : true// 完成后移除
             });            
             loading.show();

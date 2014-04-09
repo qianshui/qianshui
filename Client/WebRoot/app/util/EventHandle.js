@@ -19,6 +19,7 @@ Ext.define('YongYou.util.EventHandle', {
 								})
 						desktop.add(panel)
 					}
+
 					desktop.setActiveTab(item.id);
 				}
 			}
