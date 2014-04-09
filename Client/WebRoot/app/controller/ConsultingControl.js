@@ -13,7 +13,10 @@ Ext.define('YongYou.controller.ConsultingControl', {
 
 					naviback : '#navibar_back',
 					mapconfirm : '#map_confirm',
-					navibar : '#navigationbar'
+					navibar : '#navigationbar',
+						
+				    yhzc_list:'#yhzc_list',
+				    flfg_list:'#flfg_list'
 				},
 
 				control : {
@@ -139,7 +142,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 											});
 							scope.getNavibar().setTitle("选择地址");
 						}, this, {
-							'HYID' : record.internalId
+							//'HYID' : record.internalId
 						});
 				industry2 = record;
 
@@ -264,23 +267,11 @@ Ext.define('YongYou.controller.ConsultingControl', {
 						+ industry2 + "&nbsp;&nbsp;&nbsp;&nbsp;地址：" + address);
 				this.getConfirm().add(infocon);
 				// b 办事指南
-				//var bszn = Ext.create('YongYou.view.LawGuide', {});
-				// YongYou.util.DataApi.Core.getFlowChart(function(res, scope) {
-				//
-				// flowpanel = Ext.create('YongYou.flow.FlowViewport', {})
-				// flowpanel.initialPanelCard(res);
-				//
-				// scope.add(flowpanel);
-				//				
-				// }, bszn, {
-				// 'ID' : 'HY01'
-				// })
 
-				YongYou.util.DataApi.Core.getFlowChart(function(res, scope) {
+				YongYou.util.DataApi.Core.getNodeByFlowID(function(res, scope) {
 					var bszn = Ext.create('YongYou.view.LawGuide', {});
 							flowview = Ext.create('YongYou.flow.FlowViewport',
 									{
-//										title : '办事指南',
 										id : 'confirm-flowviewport',
 										width : '95%',
 										height:'95%',
@@ -290,25 +281,43 @@ Ext.define('YongYou.controller.ConsultingControl', {
 							bszn.add(flowview)
 							scope.getConfirm().add(bszn);
 						}, this, {
-							'ID' : 'HY01'
+							'id' : 'FL002'
 						})
 
 				// c 优惠政策
-				var yhzc = Ext.create('YongYou.view.PreferentialPolicies', {});
-				YongYou.util.DataApi.Core.getFG(function(res, scope) {
-							scope.getItems().items[0].setHtml(res);
-						}, yhzc, {
-							'ID' : 'FG01'
+//				var yhzc = Ext.create('YongYou.view.PreferentialPolicies', {});
+//				YongYou.util.DataApi.Core.getFG(function(res, scope) {
+//							scope.getItems().items[0].setHtml(res);
+//						}, yhzc, {
+//							'ID' : 'FG01'
+//						});
+//				this.getConfirm().add(yhzc);
+				var yhzc = Ext.create('YongYou.view.QueryPanelDetailList', {});
+				YongYou.util.DataApi.Core.getZC(function(res, scope) {
+					        res = Ext.decode(res);
+					        scope.getYhzc_list().getStore().removeAll();
+					        scope.getYhzc_list().getStore().add(res);
+						}, this, {
+							'id' : 'SJ0001'
 						});
 				this.getConfirm().add(yhzc);
 				// d 法律法规
-				var flfg = Ext.create('YongYou.view.Regulations', {});
+				var flfg = Ext.create('YongYou.view.FlfgDetailList', {});
 				YongYou.util.DataApi.Core.getFG(function(res, scope) {
-							scope.getItems().items[0].setHtml(res);
-						}, flfg, {
-							'ID' : 'FG02'
+					        res = Ext.decode(res);
+					        scope.getFlfg_list().getStore().removeAll();
+					        scope.getFlfg_list().getStore().add(res);
+						}, this, {
+							'id' : 'SJ0001'
 						});
 				this.getConfirm().add(flfg);
+//				var flfg = Ext.create('YongYou.view.Regulations', {});
+//				YongYou.util.DataApi.Core.getFG(function(res, scope) {
+//							scope.getItems().items[0].setHtml(res);
+//						}, flfg, {
+//							'ID' : 'FG02'
+//						});
+//				this.getConfirm().add(flfg);
 				// 页面跳转
 				Ext.ComponentQuery.query("container[id='contain2']")[0]
 						.setActiveItem('#ConfirmPanel2', {
@@ -322,7 +331,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 
 function initializeMap() {
 	map = new BMap.Map("mapDiv");
-	var point1 = new BMap.Point(106.53422, 29.564098);
+	var point1 = new BMap.Point(106.54253, 29.574688);
 	map.centerAndZoom(point1, 15);
 
 	var polygon1 = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
@@ -330,6 +339,42 @@ function initializeMap() {
 					new BMap.Point(106.53422, 29.564098)], {
 				fillColor : 'red'
 			});
+	
+	polygon1.addEventListener("click", function(){
+		map.removeOverlay(polygon1);
+		map.removeOverlay(polygon2);
+		var polygon_cur = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
+		             					new BMap.Point(106.538654, 29.579954),
+		             					new BMap.Point(106.53422, 29.564098)],
+		             					{strokeWeight: 2, strokeColor: "blue",fillColor : 'red'});
+		map.addOverlay(polygon_cur);
+		map.centerAndZoom(point1, 17);
+		
+//		polygon_cur.addEventListener("click",function(e){
+//			if(confirm("确定选择此区域吗？"))
+//			{
+//				if(marker_flag)
+//				{map.removeOverlay(marker_cur);}
+//				var point_cur=new BMap.Point(e.point.lng, e.point.lat);
+//				var myIcon = new BMap.Icon("resources/img/map/cur_posi.png", new BMap.Size(32,32));
+//				var marker_cur = new BMap.Marker(point_cur,{icon:myIcon});
+//				map.addOverlay(marker_cur);
+//				marker_flag=1;
+//			}
+//		});
+		var myIcon = new BMap.Icon("resources/img/map/cur_posi.png", new BMap.Size(32,32));
+		var marker_cur = new BMap.Marker(point1,{icon:myIcon});
+		map.addOverlay(marker_cur);
+		marker_cur.enableDragging();
+		var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
+		marker_cur.openInfoWindow(infoWindow1);
+		marker_cur.addEventListener("dragend", function(e){    
+			 if(confirm("您选择了"+e.point.lng+"  "+e.point.lat+
+					 "，是否进行验证？"))
+			 {}
+			});    
+		});
+	
 	map.addOverlay(polygon1);
 	var polygon2 = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
 					new BMap.Point(106.538654, 29.579954),

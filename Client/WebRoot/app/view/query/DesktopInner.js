@@ -51,6 +51,9 @@ Ext.define('YongYou.view.query.DesktopInner', {
 								name : 'id',
 								type : 'string'
 							},{
+								name : 'flowId',
+								type : 'string'
+							},{
 								name : 'leaf',
 								type : 'string'
 							}],

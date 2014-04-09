@@ -103,4 +103,30 @@ public class MapService {
 		
 		return CommonJson.list2Json(areaInfo);
 	}
+	/**
+	 * *************************************************************
+	 * FunName : MapService
+     * Description： 根据经纬度获取附近区域的周边配套经纬度
+     * Input: 经纬度
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/MapService/getZbptByLngLat?lng=29.582719&lat=106.535602
+     * *************************************************************
+	 */
+	@GET
+	@Path("getAreaByLngLat")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getZbptByLngLat(@QueryParam("lng") double lng,@QueryParam("lat") double lat) {
+		List<AreaInfo> areaInfo = new ArrayList<AreaInfo>();
+		try {
+			//Map.getAreaByLngLat(lng, lat,areaInfo);
+			areaInfo.add(new AreaInfo(lng+0.000032,lat+0.000032,"幼儿园"));
+			areaInfo.add(new AreaInfo(lng-0.000032,lat-0.000032,"医院"));
+			areaInfo.add(new AreaInfo(lng+0.000032,lat-0.000032,"学校"));
+			areaInfo.add(new AreaInfo(lng-0.000032,lat+0.000032,"小面馆"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return CommonJson.list2Json(areaInfo);
+	}
 }

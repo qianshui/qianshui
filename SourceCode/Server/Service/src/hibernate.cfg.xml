@@ -7,17 +7,18 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<property name="dialect">
-			org.hibernate.dialect.MySQLDialect
-		</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="connection.url">
 			jdbc:mysql://localhost:3306/qianshui
 		</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
+		<property name="connection.useUnicode">true</property>
+		<property name="connection.characterEncoding">UTF-8</property>
 		<property name="connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
+		<property name="myeclipse.connection.profile">mysql</property>
 		<mapping resource="DataBase/Subject.hbm.xml" />
 		<mapping resource="DataBase/Slrelation.hbm.xml" />
 		<mapping resource="DataBase/Laws.hbm.xml" />
@@ -35,7 +36,7 @@
 		<mapping resource="DataBase/Narelation.hbm.xml" />
 		<mapping resource="DataBase/Classid.hbm.xml" />
 		<mapping resource="DataBase/Prrelation.hbm.xml" />
-
+<mapping resource="DataBase/Icon.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

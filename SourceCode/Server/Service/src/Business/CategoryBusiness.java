@@ -129,6 +129,32 @@ public class CategoryBusiness {
 		}
     }
     
+    
+    /**
+     * *************************************************************
+	 * FunName : getFlowList
+     * Description： 获取流程列表
+     * Input: 
+     * Output:void
+     * *************************************************************
+	 */
+    public List getFlowList() {
+    	List list = null;
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			
+			list = session.createQuery("from Flow").list();	
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;
+    }
+    
+    
     /**
      * *************************************************************
 	 * FunName : getPreListByID
@@ -214,6 +240,33 @@ public class CategoryBusiness {
     
     /**
      * *************************************************************
+	 * FunName : getFlowByID
+     * Description： 根据ID获取对应的流程
+     * Input: @param flowID
+     * Output:void
+     * *************************************************************
+	 */
+    public Flow getFlowByID(String ID) {
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List<Flow> list = session.createQuery("from Flow where id = :id").setParameter("id", ID).list();
+			session.close();
+			if (list.size() != 0) {
+				return list.get(0);
+			}
+			
+			return null;
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return null;
+    }
+    /**
+     * *************************************************************
 	 * FunName : getNodeByFlowID
      * Description： 根据FlowID获取Node
      * Input: @param flowID
@@ -292,6 +345,54 @@ public class CategoryBusiness {
         	SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	        session = sf.openSession();
             return (Contact)session.get(Contact.class, contactID);
+        }finally {//保证资源得到释放
+               if(session != null) {
+                  session.close();
+               }
+        }
+    }
+    
+    /**
+     * *************************************************************
+	 * FunName : getNodeByNodeID
+     * Description： 根据NodeID获取Node对象
+     * Input: @param lawID
+     * Output:Laws
+     * *************************************************************
+	 */
+    public Node getNodeByNodeID(String nodeID) {
+    	Node node = null;
+    	Session session = null;
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+	        node = (Node)session.get(Node.class, nodeID);
+            return node;
+        }finally {//保证资源得到释放
+               if(session != null) {
+                  session.close();
+               }
+        }
+    }
+    
+    /**
+     * *************************************************************
+	 * FunName : getAttachmentByAttID
+     * Description： 根据AttachmentID获取Attachment对象
+     * Input: @param lawID
+     * Output:Laws
+     * *************************************************************
+	 */
+    public Attachment getAttachmentByAttID(String attachmentID) {
+    	Attachment att = null;
+    	Session session = null;
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+	        att = (Attachment)session.get(Attachment.class, attachmentID);
+            return att;
         }finally {//保证资源得到释放
                if(session != null) {
                   session.close();

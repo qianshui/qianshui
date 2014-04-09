@@ -1,17 +1,16 @@
-Ext.define('YongYou.view.QueryPanelDetailList', {
+Ext.define('YongYou.view.FlfgDetailList', {
 	extend : 'Ext.Container',
 	requires : ['YongYou.util.Window', 'YongYou.model.ListItem'],
 	config : {
-	    title:'优惠政策',
+	    title:'法律法规',
 		layout : 'fit',
 		cls : 'ks-basic',
-		id : 'QueryPanelDetailList',
+		id : 'FlfgDetailList',
 		scrollable : true,
 		style : "background-color:white;!important",
-
 		height : '100%',
 		items : [{
-			id:'yhzc_list',
+			id:'flfg_list',
 			xtype : 'dataview',
 			scrollable : {
 				direction : 'vertical'
