@@ -119,10 +119,10 @@ public class MapService {
 		List<AreaInfo> areaInfo = new ArrayList<AreaInfo>();
 		try {
 			//Map.getAreaByLngLat(lng, lat,areaInfo);
-			areaInfo.add(new AreaInfo(lng+0.000032,lat+0.000032,"幼儿园"));
-			areaInfo.add(new AreaInfo(lng-0.000032,lat-0.000032,"医院"));
-			areaInfo.add(new AreaInfo(lng+0.000032,lat-0.000032,"学校"));
-			areaInfo.add(new AreaInfo(lng-0.000032,lat+0.000032,"小面馆"));
+			areaInfo.add(new AreaInfo(lng+0.000582,lat+0.000582,"幼儿园"));
+			areaInfo.add(new AreaInfo(lng-0.000582,lat-0.000582,"医院"));
+			areaInfo.add(new AreaInfo(lng+0.000582,lat-0.000582,"学校"));
+			areaInfo.add(new AreaInfo(lng-0.000582,lat+0.000582,"小面馆"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
