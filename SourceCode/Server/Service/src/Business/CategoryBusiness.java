@@ -418,4 +418,42 @@ public class CategoryBusiness {
 		}
 		return list;   	
     }
+    
+    /******************************************************************************************************
+     * 获取没有在SubjectID为空的流程记录
+     * 
+     *******************************************************************************************************/
+    public List<Flow> getFlowSubjectIdEqualNULL(){
+    	List<Flow> list = new ArrayList<Flow>();
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			list = session.createSQLQuery("SELECT * from flow WHERE SubjectID is null").list();
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;   	
+    }
+    
+    /******************************************************************************************************
+     * 获取没有在category中出现并且SubjectID为空的流程记录
+     * 
+     *******************************************************************************************************/
+    public List<Flow> getFlowNotInCategoryAndSubjecIDIsNull(){
+    	List<Flow> list = new ArrayList<Flow>();
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			list = session.createSQLQuery("SELECT * from flow WHERE flow.ID not in(SELECT DISTINCT category.FlowID from category WHERE category.FlowID = flow.ID) and flow.SubjectID is null").list();
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;   	
+    }
 }
