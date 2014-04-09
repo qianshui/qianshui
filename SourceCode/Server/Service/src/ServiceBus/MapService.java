@@ -113,7 +113,7 @@ public class MapService {
      * *************************************************************
 	 */
 	@GET
-	@Path("getAreaByLngLat")
+	@Path("getZbptByLngLat")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public String getZbptByLngLat(@QueryParam("lng") double lng,@QueryParam("lat") double lat) {
 		List<AreaInfo> areaInfo = new ArrayList<AreaInfo>();
