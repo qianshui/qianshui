@@ -28,13 +28,8 @@ treeStore=new Ext.data.TreeStore({
 											+ 'CategoryService/getCategoryTree',
 									reader : 'json'
 								},
-								folderSort : true,
-								listeners : {
-									load : function(store, node, records,
-											successful, eOpts) {
-										
-									}
-								}
+								folderSort : true
+		
 							})
 
 Ext.define('YongYou.view.config.grid.TreeGrid', {
@@ -45,11 +40,12 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 
 	title : '主页',
 	height : '100%',
+	id:'tree-grid',
 	useArrows : true,
 	rootVisible : false,
 	multiSelect : true,
 	singleExpand : true,
-
+	loadMask:true,
 	initComponent : function() {
 		this.width = '100%';
 
@@ -81,15 +77,7 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 										actionItem, event, record, row) {
 										ShowForm(false,grid,record,{data:{paretId:record.data.id}})
 								}
-							}, {
-								text : '添加流程',
-								width : 70,
-								menuDisabled : true,
-								xtype : 'actioncolumn',
-								tooltip : '添加流程',
-								align : 'center',
-								icon : 'resources/images/icons/fam/add.png'
-							}, {
+							},  {
 								text : '编辑',
 								width : 55,
 								menuDisabled : true,
@@ -117,7 +105,18 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 							}]
 				});
 		this.callParent();
-	}
+	},
+	listeners:{
+        'afterrender': function(view,e){
+        	
+            loading = new Ext.LoadMask(view,{
+               msg : '正在加载...',
+               removeMask : true// 完成后移除
+            });            
+            loading.show();
+        },//加载前
+        'load': function(){loading.hide();}   //加载完成后
+    }
 });
 
 ShowForm = function(isUpdate, grid,record) {

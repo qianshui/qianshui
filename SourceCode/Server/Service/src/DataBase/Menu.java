@@ -1,9 +1,11 @@
 package DataBase;
 
+import java.util.ArrayList;
+
 /**
  * Menu entity. @author MyEclipse Persistence Tools
  */
-import java.util.ArrayList;
+
 public class Menu implements java.io.Serializable {
 
 	// Fields
@@ -11,13 +13,12 @@ public class Menu implements java.io.Serializable {
 	private String id;
 	private String title;
 	private String parentid;
+	private String panel;
 	private ArrayList<Menu> children= new ArrayList<Menu>();
-	
 	// Constructors
 
 	/** default constructor */
 	public Menu() {
-		
 	}
 
 	/** minimal constructor */
@@ -27,15 +28,15 @@ public class Menu implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Menu(String id, String title, String parentid) {
+	public Menu(String id, String title, String parentid, String panel) {
 		this.id = id;
 		this.title = title;
 		this.parentid = parentid;
+		this.panel = panel;
 	}
 
 	// Property accessors
-	
-	
+
 	public String getId() {
 		return this.id;
 	}
@@ -58,6 +59,14 @@ public class Menu implements java.io.Serializable {
 
 	public void setParentid(String parentid) {
 		this.parentid = parentid;
+	}
+
+	public String getPanel() {
+		return this.panel;
+	}
+
+	public void setPanel(String panel) {
+		this.panel = panel;
 	}
 	public void setChildren(Menu node){
 		if(this.id.equals(node.getParentid()) && !this.children.contains(node)){	
