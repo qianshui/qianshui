@@ -331,7 +331,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 
 function initializeMap() {
 	map = new BMap.Map("mapDiv");
-	var point1 = new BMap.Point(106.53422, 29.564098);
+	var point1 = new BMap.Point(106.54253, 29.574688);
 	map.centerAndZoom(point1, 15);
 
 	var polygon1 = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
@@ -339,6 +339,42 @@ function initializeMap() {
 					new BMap.Point(106.53422, 29.564098)], {
 				fillColor : 'red'
 			});
+	
+	polygon1.addEventListener("click", function(){
+		map.removeOverlay(polygon1);
+		map.removeOverlay(polygon2);
+		var polygon_cur = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
+		             					new BMap.Point(106.538654, 29.579954),
+		             					new BMap.Point(106.53422, 29.564098)],
+		             					{strokeWeight: 2, strokeColor: "blue",fillColor : 'red'});
+		map.addOverlay(polygon_cur);
+		map.centerAndZoom(point1, 17);
+		
+//		polygon_cur.addEventListener("click",function(e){
+//			if(confirm("确定选择此区域吗？"))
+//			{
+//				if(marker_flag)
+//				{map.removeOverlay(marker_cur);}
+//				var point_cur=new BMap.Point(e.point.lng, e.point.lat);
+//				var myIcon = new BMap.Icon("resources/img/map/cur_posi.png", new BMap.Size(32,32));
+//				var marker_cur = new BMap.Marker(point_cur,{icon:myIcon});
+//				map.addOverlay(marker_cur);
+//				marker_flag=1;
+//			}
+//		});
+		var myIcon = new BMap.Icon("resources/img/map/cur_posi.png", new BMap.Size(32,32));
+		var marker_cur = new BMap.Marker(point1,{icon:myIcon});
+		map.addOverlay(marker_cur);
+		marker_cur.enableDragging();
+		var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
+		marker_cur.openInfoWindow(infoWindow1);
+		marker_cur.addEventListener("dragend", function(e){    
+			 if(confirm("您选择了"+e.point.lng+"  "+e.point.lat+
+					 "，是否进行验证？"))
+			 {}
+			});    
+		});
+	
 	map.addOverlay(polygon1);
 	var polygon2 = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
 					new BMap.Point(106.538654, 29.579954),
