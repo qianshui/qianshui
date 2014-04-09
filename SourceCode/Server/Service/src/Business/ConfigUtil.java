@@ -84,8 +84,25 @@ public class ConfigUtil {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return list;
-		
-		
+		return list;	
+    }
+    
+    /**
+     * 根据图标的类型(Type字段)获取图标列表
+     * @return
+     */
+    public List<Icon> getIconListByIconType(String strIconType) {
+    	List<Icon> list = null;
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();			
+			list = session.createSQLQuery("select * from icon where type = :strID").setParameter("strID", strIconType).list();	
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;	
     }
 }

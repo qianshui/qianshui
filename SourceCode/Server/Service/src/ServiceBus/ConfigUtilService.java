@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import Common.CommonJson;
 import DataBase.Category;
 import DataBase.Menu;
+import DataBase.Icon;
 import Business.CategoryBusiness;
 import Business.ConfigUtil;
 
@@ -36,6 +37,14 @@ public class ConfigUtilService {
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public String getIconList() {
 		List IconList = ConfigUtil.getInstance().getIconList();
+		return CommonJson.list2Json(IconList);
+	}
+	
+	@GET
+	@Path("getIconListByIconType")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getIconListByIconType(String strIconType) {
+		List<Icon> IconList = ConfigUtil.getInstance().getIconListByIconType(strIconType);
 		return CommonJson.list2Json(IconList);
 	}
 	
