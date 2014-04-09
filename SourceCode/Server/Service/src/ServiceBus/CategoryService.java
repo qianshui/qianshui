@@ -46,7 +46,7 @@ import DataBase.Sprelation;
  * *************************************************************
  */
 @Path("CategoryService")
-public class CategoryService {
+public class CategoryService {	
 	/**
 	 * *************************************************************
 	 * FunName : getCategoryList
@@ -501,6 +501,62 @@ public class CategoryService {
         	return Response.status(201).entity("Failure").build();
         }
     }
+	
+	/**
+	 * *************************************************************
+	 * FunName : getFlowNotInCategory
+     * Description： 获取表flow中ID没有出现在category的FlowID字段中的记录
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getFlowNotInCategory
+     * *************************************************************
+	 */
+	@GET
+	@Path("getFlowNotInCategory")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getFlowNotInCategory() {
+		List<Flow> FlowList = new ArrayList<Flow>();
+		FlowList = CategoryBusiness.getInstance().getNotAppearFlow();
+		return CommonJson.list2Json(FlowList);
+	}	
+	
+	
+	/**
+	 * *************************************************************
+	 * FunName : getFlowSubjectIdEqualNULL
+     * Description： 获取表flow中SubjectID为空的记录
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getFlowSubjectIdEqualNULL
+     * *************************************************************
+	 */
+	@GET
+	@Path("getFlowSubjectIdEqualNULL")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getFlowSubjectIdEqualNULL() {
+		List<Flow> FlowList = new ArrayList<Flow>();
+		FlowList = CategoryBusiness.getInstance().getFlowSubjectIdEqualNULL();
+		return CommonJson.list2Json(FlowList);
+	}	
+	
+	/**
+	 * *************************************************************
+	 * FunName : getFlowNotInCategoryAndFlow
+     * Description： 获取表flow中ID没有出现在category的FlowID字段中并且SubjectID为空的记录
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getFlowNotInCategoryAndSubjecIDIsNull
+     * *************************************************************
+	 */
+	@GET
+	@Path("getFlowNotInCategoryAndSubjecIDIsNull")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getFlowNotInCategoryAndSubjecIDIsNull() {
+		List<Flow> CategoryList = new ArrayList<Flow>();
+		CategoryList = CategoryBusiness.getInstance().getFlowNotInCategoryAndSubjecIDIsNull();
+		return CommonJson.list2Json(CategoryList);
+	}	
+	
 }
 
 

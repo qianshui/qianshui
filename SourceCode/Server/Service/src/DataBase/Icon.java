@@ -11,6 +11,7 @@ public class Icon implements java.io.Serializable {
 	private Integer id;
 	private String name;
 	private String url;
+	private String type;
 
 	// Constructors
 
@@ -19,9 +20,10 @@ public class Icon implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Icon(String name, String url) {
+	public Icon(String name, String url, String type) {
 		this.name = name;
 		this.url = url;
+		this.type = type;
 	}
 
 	// Property accessors
@@ -48,6 +50,14 @@ public class Icon implements java.io.Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

@@ -24,7 +24,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 			        data: [
 			            {name: '行业占比'},
 			            {name: '周边配套'},
-			            {name: '点我确认'},
+			            {name: '点我确认'}
 			        ]
 			    },
 			    itemTpl : [
@@ -42,6 +42,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 							record = store.data.items[target].data;
 //							YongYou.util.ClientEventHandle.events.onCatrgotyItemTap(this.parent.parent, index,
 //									target, record, e)
+
 							//alert(record.name);
 							if(record.name=="行业占比")
 							{
@@ -126,10 +127,8 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 								this.parent.parent.fireEvent('itemtap', this.parent.parent, index,
 										target, record, e);
 							}
-
-						}
-					}
-				}
+		}}}
+				
 			},{
 				xtype:'list',
 				id:'list_about_map',
