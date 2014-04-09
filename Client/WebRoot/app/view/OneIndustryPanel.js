@@ -30,7 +30,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 			    itemTpl : [
 			                '<div style="float:left;margin-left:30px;marin-right:30px;margin-top:26px;">'+
 							'<div class="image" style="margin-left:6px;width:60px;height:70px;background-image:url(\'resources/img/desktop/root_gr_ztfl_ns.png\')"></div>'+
-							'<div class="name">{name}</div>'+
+							'<div class="name" style="font-weight:bold">{name}</div>'+
 							'</div>'
 
 					].join(''),
@@ -45,9 +45,23 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 							//alert(record.name);
 							if(record.name=="行业占比")
 							{
+								if(point_cur==null)
+								{
+									alert("请选择当前位置！");
+									return;
+								}
 								YongYou.util.DataApi.Core.getAreaByLngLat(function(
 										res, scope) {
 									res = Ext.decode(res);
+									
+									var store=scope.scope.parent.items.items[1].getStore();
+									store.removeAll();
+									store.add(res);
+									
+									for(i=0;i<array_about_map.length;i++){
+										scope.map.removeOverlay(array_about_map[i]);
+									}
+									array_about_map=[];
 									for (i = 0; i < res.length; i++) {
 										var marker = new BMap.Marker(new BMap.Point(
 												res[i].lat, res[i].lng));
@@ -60,19 +74,33 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 													.openInfoWindow(new BMap.InfoWindow(a.currentTarget
 															.getTitle()));
 										});
-										scope.addOverlay(marker);
+										scope.map.addOverlay(marker);
+										array_about_map.push(marker);
 									}
-								}, map, {
-									'lng' : 29.582719,
-									'lat' : 106.535602
+								}, {'map':map,'scope':this}, {
+									'lng' : point_cur.lat,
+									'lat' : point_cur.lng
 								});
 							}
 							else if(record.name=="周边配套")
 							{
+								if(point_cur==null)
+								{
+									alert("请选择当前位置！");
+									return;
+								}
 								YongYou.util.DataApi.Core.getZbptByLngLat(function(
 										res, scope) {
 									res = Ext.decode(res);
-									//alert(res.length);
+									
+									var store=scope.scope.parent.items.items[1].getStore();
+									store.removeAll();
+									store.add(res);
+									
+									for(i=0;i<array_about_map.length;i++){
+										scope.map.removeOverlay(array_about_map[i]);
+									}
+									array_about_map=[];
 									for (i = 0; i < res.length; i++) {
 										var marker = new BMap.Marker(new BMap.Point(
 												res[i].lat, res[i].lng));
@@ -85,16 +113,18 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 													.openInfoWindow(new BMap.InfoWindow(a.currentTarget
 															.getTitle()));
 										});
-										scope.addOverlay(marker);
+										scope.map.addOverlay(marker);
+										array_about_map.push(marker);
 									}
-								}, map, {
-									'lng' : 29.582719,
-									'lat' : 106.535602
+								}, {'map':map,'scope':this}, {
+									'lng' : point_cur.lat,
+									'lat' : point_cur.lng
 								});
 							}
 							else if(record.name=="点我确认")
 							{
-								
+								this.parent.parent.fireEvent('itemtap', this.parent.parent, index,
+										target, record, e);
 							}
 
 						}
@@ -102,17 +132,29 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 				}
 			},{
 				xtype:'list',
+				id:'list_about_map',
 				flex:3,
 				store: {
-		            fields: ['name'],
+		            fields: ['lng','lat','name'],
 			        data: [
-			            {name: '江北区人民医院'},
-			            {name: '江北大石坝'},
-			            {name: '蚂蝗梁立交'},
-			            {name: '鸿恩寺立交'}
+			            
 			        ]
 		        },
-                itemTpl: '<span style="padding-left:40px;">{name}</span>'
+                itemTpl: '<span style="padding-left:40px;font-size:10px;">{name}</span>',
+                listeners:{
+		        	itemtap:function(container, target, index, e){
+			        	var me = this, store = me.getStore();
+						if (store.data.items[target]) {
+							record = store.data.items[target].data;
+							//alert(record.lng+"  "+record.lat);
+							var marker = new BMap.Marker(new BMap.Point(
+									record.lat, record.lng));
+							map.addOverlay(marker);
+							marker.openInfoWindow(new BMap.InfoWindow(record.name));
+							
+						}
+		        	}
+		        }
 			}
 					
 			]

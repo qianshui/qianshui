@@ -12,11 +12,12 @@ Ext.define('YongYou.controller.ConsultingControl', {
 					confirm : '#ConfirmPanel2',
 
 					naviback : '#navibar_back',
-					mapconfirm : '#map_confirm',
+					mapconfirm : '#OneIndustryPanel',
 					navibar : '#navigationbar',
 						
 				    yhzc_list:'#yhzc_list',
-				    flfg_list:'#flfg_list'
+				    flfg_list:'#flfg_list',
+				    list_about_map:'#list_about_map'
 				},
 
 				control : {
@@ -33,7 +34,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 						tap : 'onNavibackTap'
 					},
 					mapconfirm : {
-						tap : 'onMapconfirmTap'
+						itemtap : 'onMapconfirmTap'
 					}
 				},
 
@@ -200,7 +201,8 @@ Ext.define('YongYou.controller.ConsultingControl', {
 							initializeMap();
 						}, navigationPanel);
 				address = record;
-
+                point_cur=null;
+                array_about_map=new Array();
 			},
 			onNavibackTap : function(b, e) {
 				var activeid = Ext.ComponentQuery
@@ -228,6 +230,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 										duration : 250
 									});
 					this.getNavibar().setTitle("选择地址");
+					this.getList_about_map().getStore().removeAll();
 				} else if (activeid == 'SelectAddressPanel') {
 					Ext.ComponentQuery.query("container[id='contain2']")[0]
 							.setActiveItem("#IndustrylistPanel", {
@@ -350,20 +353,9 @@ function initializeMap() {
 		map.addOverlay(polygon_cur);
 		map.centerAndZoom(point1, 17);
 		
-//		polygon_cur.addEventListener("click",function(e){
-//			if(confirm("确定选择此区域吗？"))
-//			{
-//				if(marker_flag)
-//				{map.removeOverlay(marker_cur);}
-//				var point_cur=new BMap.Point(e.point.lng, e.point.lat);
-//				var myIcon = new BMap.Icon("resources/img/map/cur_posi.png", new BMap.Size(32,32));
-//				var marker_cur = new BMap.Marker(point_cur,{icon:myIcon});
-//				map.addOverlay(marker_cur);
-//				marker_flag=1;
-//			}
-//		});
+		point_cur=point1;
 		var myIcon = new BMap.Icon("resources/img/map/cur_posi.png", new BMap.Size(32,32));
-		var marker_cur = new BMap.Marker(point1,{icon:myIcon});
+		var marker_cur = new BMap.Marker(point_cur,{icon:myIcon});
 		map.addOverlay(marker_cur);
 		marker_cur.enableDragging();
 		var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
@@ -371,7 +363,13 @@ function initializeMap() {
 		marker_cur.addEventListener("dragend", function(e){    
 			 if(confirm("您选择了"+e.point.lng+"  "+e.point.lat+
 					 "，是否进行验证？"))
-			 {}
+			 {
+				 point_cur=new BMap.Point(e.point.lng,e.point.lat);
+				 for(i=0;i<array_about_map.length;i++){
+					 array_about_map[i].closeInfoWindow();
+						map.removeOverlay(array_about_map[i]);
+					}
+			 }
 			});    
 		});
 	
@@ -382,18 +380,4 @@ function initializeMap() {
 				fillColor : 'blue'
 			});
 	map.addOverlay(polygon2);
-	// var myIcon = new BMap.Icon("resources/img/biaoshi.png", new
-	// BMap.Size(80,120));
-	// var marker2 = new BMap.Marker(point1); // 创建标注
-	// map.addOverlay(marker2);
-	// var infoWindow1 = new BMap.InfoWindow("普通标注");
-	// marker2.addEventListener("click",
-	// function(){this.openInfoWindow(infoWindow1);});
-
-	// map.addEventListener("click", function(e){
-	// YongYou.util.DataApi.Core.judge_adrs(
-	// function(res,obj){
-	// alert(res);
-	// },map,e.point.lng + ", " + e.point.lat);
-	// });
 }
