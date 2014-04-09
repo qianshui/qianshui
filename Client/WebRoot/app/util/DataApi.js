@@ -13,6 +13,12 @@ Ext.define('YongYou.util.DataApi', {
     	    		callback,scope)
 
     	},
+    	getZbptByLngLat:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"MapService/getZbptByLngLat",param,
+    	    		callback,scope)
+
+    	},
     	getMenuList:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"ConfigUtilService/getMenuList",param,
