@@ -150,7 +150,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 									record.lat, record.lng));
 							map.addOverlay(marker);
 							marker.openInfoWindow(new BMap.InfoWindow(record.name));
-							
+							array_about_map.push(marker);
 						}
 		        	}
 		        }
