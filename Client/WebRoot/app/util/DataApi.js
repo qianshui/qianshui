@@ -66,6 +66,16 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+"IndustryService/getIndustryByID",param,
     	    		callback,scope)
     	},
+    	getIndustryClass:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getIndustryClass",param,
+    	    		callback,scope)
+    	},
+    	getSubjectList:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getSubjectList",param,
+    	    		callback,scope)
+    	},
     	getLawsByIndustryID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"IndustryService/getLawsByIndustryID",param,
@@ -177,6 +187,18 @@ Ext.define('YongYou.util.DataApi', {
     	{
     		YongYou.util.DataApi.postData(
     	    		YongYou.util.Config.getService()+'CategoryService/addCategory',params,
+    	    		callback,scope,uppa);
+    	},
+    	updateFlow:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/updateFlow',params,
+    	    		callback,scope,uppa);
+    	},
+    	addFlow:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/addFlow',params,
     	    		callback,scope,uppa);
     	}
     	

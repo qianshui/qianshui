@@ -21,6 +21,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import net.sf.json.JSONObject;
+
 import Business.CategoryBusiness;
 import Common.CommonJson;
 import Common.DBOperation;
@@ -323,9 +325,10 @@ public class CategoryService {
 	@POST
     @Path("/addFlow")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addFlow(Flow flow) {
-		flow.setId(IDOperation.getClassID("Flow"));
-        if (DBOperation.add(flow)) {
+    public Response addFlow(String flow) {
+		Flow bean = (Flow)CommonJson.Json2Obj(flow,Flow.class);
+		bean.setId(IDOperation.getClassID("Flow"));
+        if (DBOperation.add(bean)) {
         	return Response.status(201).entity("Seccess").build();
         }
         else
@@ -343,11 +346,13 @@ public class CategoryService {
      * Call URL:localhost:8080/Service/CategoryService/updateFlow
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateFlow")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateFlow(Flow flow) {
-        if (DBOperation.update(flow)) {
+    public Response updateFlow(String flow) {
+		
+		Flow bean = (Flow)CommonJson.Json2Obj(flow,Flow.class);
+        if (DBOperation.update(bean)) {
         	return Response.status(201).entity("Seccess").build();
         }
         else
@@ -388,7 +393,7 @@ public class CategoryService {
      * Call URL:localhost:8080/Service/CategoryService/updateNode
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateNode")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateNode(Node node) {
@@ -433,7 +438,7 @@ public class CategoryService {
      * Call URL:localhost:8080/Service/CategoryService/updateAttachment
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateAttachment")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateAttachment(Attachment att) {
@@ -489,7 +494,7 @@ public class CategoryService {
      * Call URL:localhost:8080/Service/CategoryService/updateNarelation
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateNarelation")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateNarelation(Narelation na) {

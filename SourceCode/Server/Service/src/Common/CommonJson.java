@@ -9,7 +9,10 @@
  */
 package Common;
 import net.sf.json.*;
+
 import java.util.List;
+
+import DataBase.Flow;
 
 /**
  * *************************************************************
@@ -47,5 +50,19 @@ public class CommonJson {
 	public static <Object> String object2Json(Object obj) {
 	    JSONObject json = JSONObject.fromObject(obj);
 	    return json.toString();
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : Json2Object
+     * Description： 将Json转化为对象
+     * Input: @param String
+     * Input: @param Class
+     * Output:Object
+     * *************************************************************
+	 */
+	public static  Object Json2Obj(String json, Class objClass) {
+		JSONObject jsonObject= JSONObject.fromObject(json);
+		return JSONObject.toBean(jsonObject, objClass);
 	}
 }
