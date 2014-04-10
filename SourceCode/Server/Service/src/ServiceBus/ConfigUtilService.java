@@ -43,8 +43,8 @@ public class ConfigUtilService {
 	@GET
 	@Path("getIconListByIconType")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public String getIconListByIconType(String strIconType) {
-		List<Icon> IconList = ConfigUtil.getInstance().getIconListByIconType(strIconType);
+	public String getIconListByIconType(@QueryParam("type") String strIconType) {
+		List IconList = ConfigUtil.getInstance().getIconListByIconType(strIconType);
 		return CommonJson.list2Json(IconList);
 	}
 	
