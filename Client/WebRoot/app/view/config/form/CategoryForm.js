@@ -1,6 +1,6 @@
-Ext.define('YongYou.view.config.form.IconTrigger', {
+Ext.define('YongYou.view.config.form.CateIconTrigger', {
 			extend : 'Ext.form.field.Trigger',
-			alias : 'widget.icontrigger',
+			alias : 'widget.cateicontrigger',
 
 			// override onTriggerClick
 			onTriggerClick : function(a) {
@@ -8,7 +8,13 @@ Ext.define('YongYou.view.config.form.IconTrigger', {
 				dataview = Ext.getCmp('images-view')
 				if (!dataview) {
 					dataview = Ext
-							.create('YongYou.view.config.form.IconDataview')
+							.create('YongYou.view.config.form.IconDataview');
+					dataview.getStore().removeAll();
+					dataview.getStore().load({
+								params : {
+									type : 'desktop'
+								}
+							});
 				}
 				win = Ext.create('Ext.window.Window', {
 							title : '图标选择',
@@ -23,39 +29,38 @@ Ext.define('YongYou.view.config.form.IconTrigger', {
 		});
 
 Ext.define('YongYou.view.config.form.FlowTrigger', {
-			extend : 'Ext.form.field.Trigger',
-			alias : 'widget.flowtrigger',
-			onTriggerClick : function(a) {
-				YongYou.util.DataApi.Core.getFlowList(function(res, scope) {
-							records = Ext.decode(res);
-							model = Ext.create('YongYou.model.Flow');
-							store = Ext.create('Ext.data.Store', {
-										fields : model.config.fields
+	extend : 'Ext.form.field.Trigger',
+	alias : 'widget.flowtrigger',
+	onTriggerClick : function(a) {
+		YongYou.util.DataApi.Core.getFlowList(function(res, scope) {
+					records = Ext.decode(res);
+					model = Ext.create('YongYou.model.Flow');
+					store = Ext.create('Ext.data.Store', {
+								fields : model.config.fields
 
-									});
+							});
 
-							grid = Ext.create(
-									'YongYou.view.config.grid.SelectGrid', {
-										store : store,
-										columns : model.config.columns
-									});
-							store.add(records);
-							win = Ext.create('Ext.window.Window', {
-										title : '流程选择',
-										// id : 'imgselector',
-										height : 500,
-										width : 600,
-										layout : 'fit',
-										trigger : scope,
-										setValue:function(value){
-											this.trigger.items.items[4].setValue(value);
-											this.trigger.items.items[6].setValue("1");
-										}
-									}).show();
-							win.add(grid)
-						},this.up('panel'))
-			}
-		});
+					grid = Ext.create('YongYou.view.config.grid.SelectGrid', {
+								store : store,
+								columns : model.config.columns
+							});
+					store.add(records);
+					win = Ext.create('Ext.window.Window', {
+								title : '流程选择',
+								// id : 'imgselector',
+								height : 500,
+								width : 600,
+								layout : 'fit',
+								trigger : scope,
+								setValue : function(value) {
+									this.trigger.items.items[4].setValue(value);
+									this.trigger.items.items[6].setValue("1");
+								}
+							}).show();
+					win.add(grid)
+				}, this.up('panel'))
+	}
+});
 
 Ext.define('YongYou.view.config.form.CategoryForm', {
 	extend : 'Ext.form.Panel',
@@ -79,7 +84,7 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 				fieldLabel : '标题',
 				name : 'title'
 			}, {
-				xtype : 'icontrigger',
+				xtype : 'cateicontrigger',
 				fieldLabel : '图标',
 				name : 'icon'
 				// readOnly : true

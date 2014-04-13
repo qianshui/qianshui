@@ -20,9 +20,9 @@ var store = Ext.create('Ext.data.Store', {
 				}
 			}
 		});
-store.load({params: {
-type : 'desktop'
-    }});
+//store.load({params: {
+//type : 'desktop'
+//    }});
 
 Ext.define('YongYou.view.config.form.IconDataview', {
 	extend : 'Ext.view.View',
