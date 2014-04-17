@@ -5395,12 +5395,12 @@ body.x-desktop {
 /* line 44, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/_Toolbar.scss */
 .x-toolbar-dark {
   background-image: none;
-  background-color: #1468a2;
-  background-image: -webkit-linear-gradient(top, #1e93e4, #1676b9 3%, #11598c);
+  background:  -webkit-linear-gradient(left, rgba(169,3,41,1) 71%,rgba(109,0,25,1) 100%);;
+ /* background-image: -webkit-linear-gradient(top, #1e93e4, #1676b9 3%, #11598c);
   background-image: -moz-linear-gradient(top, #1e93e4, #1676b9 3%, #11598c);
   background-image: -o-linear-gradient(top, #1e93e4, #1676b9 3%, #11598c);
-  background-image: linear-gradient(top, #1e93e4, #1676b9 3%, #11598c);
-  border-color: black;
+  background-image: linear-gradient(top, #1e93e4, #1676b9 3%, #11598c);*/
+  border-color: #9d2627;
 }
 /* line 48, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/_Toolbar.scss */
 .x-toolbar-dark .x-title {
@@ -5409,27 +5409,27 @@ body.x-desktop {
 }
 /* line 53, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/_Toolbar.scss */
 .x-toolbar-dark.x-docked-top {
-  border-bottom-color: black;
+  border-bottom-color: #6e0019;
 }
 /* line 57, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/_Toolbar.scss */
 .x-toolbar-dark.x-docked-bottom {
-  border-top-color: black;
+  border-top-color: #6e0019;
 }
 /* line 61, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/_Toolbar.scss */
 .x-toolbar-dark.x-docked-left {
-  border-right-color: black;
+  border-right-color: #6e0019;
 }
 /* line 65, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/_Toolbar.scss */
 .x-toolbar-dark.x-docked-right {
-  border-left-color: black;
+  border-left-color: #6e0019;
 }
 /* line 13, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/mixins/_Class.scss */
 .x-toolbar-dark .x-button, .x-toolbar .x-toolbar-dark .x-button,
 .x-toolbar-dark .x-field-select .x-component-outer, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer {
   border: 1px solid #061f31;
-  border-top-color: #092e47;
-  background-color: #11598c;
+  border-top-color: #8d2324;
+  background-color: #8d2324;
   color: white;
 }
 /* line 20, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/mixins/_Class.scss */
@@ -5438,7 +5438,7 @@ body.x-desktop {
 .x-toolbar-dark .x-field-select .x-component-outer.x-button-forward:before, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer.x-button-back:before, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer.x-button-forward:before {
-  background: #061f31;
+  background: #6E0019;
 }
 /* line 26, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/mixins/_Class.scss */
 .x-toolbar-dark .x-button, .x-toolbar-dark .x-button.x-button-back:after, .x-toolbar-dark .x-button.x-button-forward:after, .x-toolbar .x-toolbar-dark .x-button, .x-toolbar .x-toolbar-dark .x-button.x-button-back:after, .x-toolbar .x-toolbar-dark .x-button.x-button-forward:after,
@@ -5449,11 +5449,12 @@ body.x-desktop {
 .x-toolbar-dark .x-field-select .x-component-outer.x-button-back:after, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer.x-button-forward:after {
   background-image: none;
-  background-color: #11598c;
-  background-image: -webkit-linear-gradient(top, #1985d0, #1468a2 3%, #0e4b75);
+  background-color: #8d2324;
+/*  background-image: -webkit-linear-gradient(top, #1985d0, #1468a2 3%, #0e4b75);
   background-image: -moz-linear-gradient(top, #1985d0, #1468a2 3%, #0e4b75);
   background-image: -o-linear-gradient(top, #1985d0, #1468a2 3%, #0e4b75);
   background-image: linear-gradient(top, #1985d0, #1468a2 3%, #0e4b75);
+  background-image:-webkit-linear-gradient(top, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); */
 }
 /* line 31, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/mixins/_Class.scss */
 .x-toolbar-dark .x-button.x-button-pressing, .x-toolbar-dark .x-button.x-button-pressing:after, .x-toolbar-dark .x-button.x-button-pressed, .x-toolbar-dark .x-button.x-button-pressed:after, .x-toolbar-dark .x-button.x-button-active, .x-toolbar-dark .x-button.x-button-active:after, .x-toolbar .x-toolbar-dark .x-button.x-button-pressing, .x-toolbar .x-toolbar-dark .x-button.x-button-pressing:after, .x-toolbar .x-toolbar-dark .x-button.x-button-pressed, .x-toolbar .x-toolbar-dark .x-button.x-button-pressed:after, .x-toolbar .x-toolbar-dark .x-button.x-button-active, .x-toolbar .x-toolbar-dark .x-button.x-button-active:after,
@@ -5470,11 +5471,12 @@ body.x-desktop {
 .x-toolbar-dark .x-field-select .x-component-outer.x-button-active, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer.x-button-active:after {
   background-image: none;
-  background-color: #0f517e;
-  background-image: -webkit-linear-gradient(top, #0a3351, #0c4267 10%, #0f517e 65%, #0f5280);
+  background-color: #8d2324;
+ /* background-image: -webkit-linear-gradient(top, #0a3351, #0c4267 10%, #0f517e 65%, #0f5280);
   background-image: -moz-linear-gradient(top, #0a3351, #0c4267 10%, #0f517e 65%, #0f5280);
   background-image: -o-linear-gradient(top, #0a3351, #0c4267 10%, #0f517e 65%, #0f5280);
-  background-image: linear-gradient(top, #0a3351, #0c4267 10%, #0f517e 65%, #0f5280);
+  background-image: linear-gradient(top, #0a3351, #0c4267 10%, #0f517e 65%, #0f5280);*/
+   background-image:-webkit-linear-gradient(top, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%);
 }
 /* line 76, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/_Toolbar.scss */
 .x-toolbar-dark .x-label,
@@ -7255,7 +7257,67 @@ body.x-desktop {
   background-image: linear-gradient(top, #061f31, #092e47 10%, #0b3c5e 65%, #0c3e60);
   color: white;
 }
+.x-tabbar-red {
+  border-top-color: #8c0000;
+  border-bottom-color: #8c0000;
+  background-image: none;
+  background-color: #9d2627;
+  /*background-image: -webkit-linear-gradient(top, #56a7df, #2b91d7 3%, #2175af);
+  background-image: -moz-linear-gradient(top, #56a7df, #2b91d7 3%, #2175af);
+  background-image: -o-linear-gradient(top, #56a7df, #2b91d7 3%, #2175af);
+  background-image: linear-gradient(top, #56a7df, #2b91d7 3%, #2175af);*/
+}
+/* line 140, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
+.x-tabbar-red .x-tab {
+  color: #c1dff4;
+  border-bottom: 1px solid transparent;
+}
+/* line 145, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
+.x-tabbar-red .x-tab-active {
+  color: white;
+  border-bottom-color: #278bd1;
+}
+/* line 149, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
+.x-tabbar-red .x-tab-active .x-button-icon:before {
+  color: #1da2ff;
+}
+/* line 154, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
+.x-tabbar-red .x-tab-pressed {
+  color: white;
+}
 
+/* line 161, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
+.x-tabbar-red.x-docked-bottom .x-tab {
+  text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+}
+/* line 165, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
+.x-tabbar-red.x-docked-bottom .x-tab-active {
+  background-image: none;
+  background-color: #2175af;
+  background-image: -webkit-linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
+  background-image: -moz-linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
+  background-image: -o-linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
+  background-image: linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
+  text-shadow: rgba(255, 255, 255, 0.25) 0 0.08em 0;
+  -webkit-box-shadow: #1d6699 0 0 0.25em inset;
+  -moz-box-shadow: #1d6699 0 0 0.25em inset;
+  box-shadow: #1d6699 0 0 0.25em inset;
+}
+/* line 173, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
+.x-tabbar-red.x-docked-bottom .x-tab-active .x-button-icon:before {
+  color: #1da2ff;
+}
+
+/* line 182, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
+.x-tabbar-red.x-docked-top .x-tab-active {
+  background-image: none;
+  background-color: #8d2324;
+ /* background-image: -webkit-linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
+  background-image: -moz-linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
+  background-image: -o-linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);*/
+  background-image: -webkit-radial-gradient(center, ellipse cover, #a90329 0%,#8f0222 44%,#6d0019 100%);
+  color: white;
+}
 /* line 135, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/tab/_Panel.scss */
 .x-tabbar-neutral {
   border-top-color: lightgrey;

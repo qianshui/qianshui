@@ -5,7 +5,7 @@ Ext.define('YongYou.view.query.DesktopInner', {
 		height : '100%',
 		width : '100%',
 		dock : 'top',
-		style : "background-color:white;!important",
+		cls:'x-fullscreen',
 		items : [{
 			xtype : 'dataview',
 			store : 'QueryRoot',

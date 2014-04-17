@@ -9,7 +9,10 @@ Ext.define('YongYou.view.query.desktop', {
 		border : true,
 		activeTab : 0,
 		title:'',
+		
 		tabBar : {
+			//style : "background:#9d2627;!important",
+			ui:'red',
 			layout : {
 				pack : 'center'
 			}

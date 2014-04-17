@@ -7,7 +7,8 @@ Ext.define('YongYou.view.query.Root', {
 		height : '100%',
 		width : '100%',
 		dock : 'top',
-		style : "background-color:white;!important",
+		cls:'x-fullscreen',
+		//style : "background:url(../image/folow.gif) no-repeat 6px 50%;background-color:#FFF4D6;",
 		title:'办事指南',
 		items : [{
 					xtype : 'dataview',
@@ -19,8 +20,8 @@ Ext.define('YongYou.view.query.Root', {
 					baseCls : 'categories-list',
 					style:'	margin-top:160px;!important',
 					itemTpl : [
-							'<div class="image" style="background-image:url({imgId})"></div>',
-							'<div class="name">{label}</div>'
+							'<div class="image" style="background-image:url({imgId})"></div>'
+							//'<div class="name">{label}</div>'
 
 					].join(''),
 					listeners : {

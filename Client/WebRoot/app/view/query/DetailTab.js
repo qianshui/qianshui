@@ -11,6 +11,7 @@ Ext.define('YongYou.view.query.DetailTab', {
 		activeTab : 0,
 		title : '详细信息',
 		tabBar : {
+			ui:'red',
 			layout : {
 				pack : 'center'
 			}

@@ -4,6 +4,7 @@
 	width:100%;
 	height:100%
 }
+
 .shadow {    
  -moz-box-shadow: 3px 3px 4px #000;    
  -webkit-box-shadow: 3px 3px 4px #000;     
@@ -14,11 +15,15 @@ box-shadow: 3px 3px 4px #000;
 filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000'); 
 }
 .x-fullscreen {
-	position:absolute !important
+	position:absolute !important;
+	
+	background:url(../image/folow.gif) no-repeat 6px 50%;
+	background-color:#FFF4D6;
 }
 .x-body {
 	position:relative;
-	z-index:0
+	z-index:0;
+
 }
 .x-inner,.x-body {
 	width:100%;
@@ -34,22 +39,18 @@ filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Colo
 	text-align:center
 }
 .categories-list .categories-list-container {
-	max-width:1024px;
+	max-width:1440px;
 	margin:0 auto
 }
 .categories-list .categories-list-item {
-	background: -webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);
-	border:1px solid rgba(67,67,67,0.5);
-	height:180px;
-	-webkit-transition:background 0.2s ease-in,border-color 0.2s ease-in;
-	border-radius: 15px;
+
 	
 }
 
 body.x-phone .categories-list .categories-list-item {
-	margin:0 20px;
+	margin:0 10px;
 	margin-top:20px;
-	padding:30px
+	padding:10px
 	
 }
 body.x-phone .categories-list .categories-list-item:first-child {
@@ -63,14 +64,14 @@ body:not(.x-phone) .categories-list .categories-list-item {
 	background-color:#fff;
 	background-position:center;
 	background-repeat:no-repeat;
-	height:87px;
-	max-width:212px
+	height:175px;
+	max-width:313px
 }
 body.x-phone .categories-list .categories-list-item .image {
 	margin:0 auto
 }
 body:not(.x-phone) .categories-list .categories-list-item .image {
-	width:212px
+	width:313px
 }
 .categories-list .categories-list-item .name {
 	padding-top:20px;
@@ -160,6 +161,7 @@ body:not(.x-phone).x-portrait .categories-list.root .categories-list-inner {
   padding: 15px;
   border-bottom: 1px solid #c2c2c2;
   height: 80px;
+  
 }
 /* line 172, ../sass/_shared.scss */
 .dataview-basic .x-dataview-item:last-child {
@@ -279,10 +281,11 @@ background: white;
 	margin:0 auto
 }
 .desktop-list .desktop-list-item {
-	background: white;
+	background: rgba(255,255,255,0.5);
 	height:140px;
 	-webkit-transition:background 0.2s ease-in,border-color 0.2s ease-in;
 	border-radius: 15px;
+	
 	
 }
 

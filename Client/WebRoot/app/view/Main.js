@@ -7,11 +7,12 @@
 		height : '100%',
 		width : '100%',
 		dock : 'top',
-		style : "background-color:white;!important",
+		//style : "!important",
 		items : [{
 					xtype : 'titlebar',
-					title : '江北区行政服务中心自助查询系统'
-				}, {
+					title : '江北区行政服务中心自助查询系统',
+					style : "background: -webkit-linear-gradient(left, rgba(169,3,41,1) 71%,rgba(109,0,25,1) 100%);!important"
+				}, { 
 					xtype : 'dataview',
 					store : 'MainMenu',
 					flex : 1,
@@ -21,8 +22,9 @@
 					baseCls : 'categories-list',
 					style:'	margin-top:160px;!important',
 					itemTpl : [
-							'<div class="image" style="background-image:url({imgId})"></div>',
-							'<div class="name">{label}</div>'
+							'<div class="image" style="background-image:url({imgId})"></div>'
+							//,
+							//'<div class="name">{label}</div>'
 
 					].join(''),
 					listeners : {
