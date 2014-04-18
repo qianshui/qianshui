@@ -4,6 +4,7 @@ Ext.define('YongYou.view.ConfirmPanel', {
     config: {
     	id:'ConfirmPanel',
     	layout: {
+
             type: 'vbox'
         },
     items:[

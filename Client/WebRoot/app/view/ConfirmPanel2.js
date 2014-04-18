@@ -10,9 +10,10 @@ Ext.define('YongYou.view.ConfirmPanel2', {
 				},
 
 				tabBar : {
+					ui:'red',
 					layout : {
 						pack : 'center'
-					},
+					}
 					//style : 'background:#99FFFF'
 				},
 
