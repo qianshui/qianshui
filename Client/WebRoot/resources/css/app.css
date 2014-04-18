@@ -126,7 +126,7 @@ body:not(.x-phone).x-portrait .categories-list.root .categories-list-inner {
 }
 .flow-item.hover{
 	
-	background: rgba(255, 255, 255,0.8);
+	background: rgba(171, 93, 57,0.8);
 }
 .flow-item-img {
 	margin-top:5px;
@@ -150,7 +150,47 @@ body:not(.x-phone).x-portrait .categories-list.root .categories-list-inner {
 	height:75px;
 	background-repeat:no-repeat;
 	background-size:contain;
+	
   	
+}
+
+.flow-item-info-contact-title {
+	
+	width:150px;
+	
+	float:left; 
+	
+  	
+}
+.flow-item-info-contact-title .title{
+	height:35px;
+	line-height:35px;
+	background: rgba(171, 93, 57,0.8);
+	border-radius: 15px;
+	margin:10px 10px 10px 10px;
+	text-align:right;
+	font-size:20px;
+	text-shadow:0 1px 0 #000;
+	color:#fff;
+}
+.flow-item-info-contact-content {
+	
+	width:380px;
+	
+	float:left; 
+	
+  	
+}
+.flow-item-info-contact-content .item{
+
+	height:35px;
+	line-height:35px;
+	background: rgba(255, 204, 102,0.8);
+	border-radius: 15px;
+	margin:10px 10px 10px 10px;
+	text-align:left;
+	font-size:17px;
+	color:#000;
 }
 .dataview-basic .x-dataview-item {
   width: 100%;

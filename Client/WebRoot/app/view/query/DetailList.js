@@ -16,7 +16,7 @@ Ext.define('YongYou.view.query.DetailList', {
 				direction : 'vertical'
 			},
 			cls : 'dataview-basic',
-			itemTpl : '<div class="img" style="background-image: url(\'resources/img/{imgId}\')">'
+			itemTpl : '<div class="img" style="background-image: url(\'resources/image/{imgId}\')">'
 					+ '</div><div class="content"><div class="name">{title}</div>'
 					+ '<div class="affiliation">{subTitle}</div></div>',
 			listeners : {

@@ -4,7 +4,7 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 	autoDestory : true,
 	config : {
 		// cls : 'nav-list',
-		style : "text-align:center;background-color:white;!important",
+		style : "text-align:center;background-color:#FFF4D6;!important",
 		scrollable : true,
 		// layout : {
 		// type : 'accordion',
@@ -13,44 +13,43 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 		// },
 		items : [{
 			xtype : 'panel',
+			height : 30,
+			style : 'background: url(\'resources/image/about.gif\') no-repeat center'
+		}, {
+			xtype : 'panel',
+			height : 10,
+			style : 'background: url(\'resources/image/line.gif\') no-repeat center'
+		}, {
+			xtype : 'panel',
 			collapsed : false,
-			title : '说明',
-			layout : 'fit'
-
-				// height : 400,
-				// scrollable : 'vertical'
-			}, {
-			xtype : 'titlebar',
-			title : '联系人'
-		}, {
-			xtype : 'formpanel',
-			title : '联系人',
-			collapsed : true,
-			height : 200,
-			// scrollable : 'vertical',
 			layout : 'fit',
-			cls : 'card-item',
+			style : 'background: url(\'resources/image/zhengwu.gif\') no-repeat center',
+			height : 350
+		}, {
+			xtype : 'panel',
+			height : 36,
+			style : 'background: url(\'resources/image/line2.gif\') no-repeat center',
 			items : [{
-						xtype : 'textfield',
-						readOnly : true,
-						label : '姓名',
-						name : 'name'
-					}, {
-						xtype : 'textfield',
-						readOnly : true,
-						label : '电话',
-						name : 'tel'
-					}, {
-						xtype : 'textareafield',
-						readOnly : true,
-						label : '地址',
-						maxRows : 4,
-						name : 'seat'
-					}]
+				xtype : 'panel',
+				height : 36,
+				style : 'background: url(\'resources/image/lianxi.gif\') no-repeat center'
+			}]
+		}, {
+			xtype : 'panel',
+			title : '联系人',
+			height : 200,
+			layout : 'fit'
+			
 
 		}, {
-			xtype : 'titlebar',
-			title : '附件'
+			xtype : 'panel',
+			height : 36,
+			style : 'background: url(\'resources/image/line2.gif\') no-repeat center',
+			items : [{
+				xtype : 'panel',
+				height : 36,
+				style : 'background: url(\'resources/image/fujian.gif\') no-repeat center'
+			}]
 		}, {
 			xtype : 'panel',
 			collapsed : true,
@@ -62,31 +61,38 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 
 		}]
 	},
+	// {
+	// xtype : 'image',
+	// style : ''
+	// }, {
+	// xtype : 'image',
+	// style : 'background-image:url(\'resources/image/line.gif\')'
+	// },
 	setValue : function(node, mainEl) {
 		item_list = this.getItems();
 
-		item_list.items[0]
-				.setHtml('<div style=text-align:center;font-size: 20px;font-weight: bold;>'
-//						+ node.getData().title
-//						+ '</div></br></br></br></br><div>'
+		item_list.items[2]
+				.setHtml( '<div style=text-align:center;font-size: 20px;font-weight: bold;>'
+						// + node.getData().title
+						// + '</div></br></br></br></br><div>'
 						+ node.getData().description + '</div>');
 
 		YongYou.util.DataApi.Core.getContactByContactID(function(res, scope) {
 					res = Ext.decode(res);
-					scope.setValues({
+					scope.setContact({
 								name : res.name,
 								seat : res.address,
 								tel : res.tel
-							})
+							},scope.getItems().items[4])
 
-				}, item_list.items[2], {
+				}, this, {
 					'id' : node.getData().contactId
 				})
 
 		YongYou.util.DataApi.Core.getAttachmentByNodeID(function(res, scope) {
 					res = Ext.decode(res);
 					var html = scope.formatFiles(res)
-					scope.getItems().items[4].setHtml(html)
+					scope.getItems().items[6].setHtml(html)
 					mainEl.removeCls('in').addCls('out');
 
 				}, this, {
@@ -95,23 +101,52 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 
 	},
 	clearValue : function() {
-		this.items.items[0].setHtml('<div></div>')
-		this.items.items[2].setValues({
-					name : '',
-					seat : '',
-					tel : ''
-				});
-		this.items.items[4].setHtml('<div></div>')
+		this.items.items[2].setHtml('<div></div>')
+		this.clearContact(this.items.items[4]);
+		this.items.items[6].setHtml('<div></div>')
 	},
 	formatFiles : function(files) {
 		var html = "</br><div style='margin-left:10px'>";
 		for (i = 0; i < files.length; i++) {
-			html += "<img src='resources/img/rar.png' width='18' height='14' /><a href='"
+			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='"
 					+ files[i].downloadlink
 					+ "' style='color:black;'>"
 					+ files[i].title + "</a></br>";
 		}
 		html += "</br></br></div>";
 		return html;
-	}
+	},
+	setContact : function(values,scope) {
+				html = '<div class="flow-item-info-contact-title"><div class="title" >姓名:&nbsp;</div>'
+						+ '<div class="title">联系电话:&nbsp;</div>'
+						+ '<div class="title">地址:&nbsp;</div></div>'
+						+ '<div class="flow-item-info-contact-content">'
+						+ '<div class="item">&nbsp;'
+						+ values.name
+						+ '</div>'
+						+ '<div class="item">&nbsp;'
+						+ values.tel
+						+ '</div>'
+						+ '<div class="item">&nbsp;'
+						+ values.seat
+						+ '</div></div>';
+				scope.setHtml(html);
+			},
+	clearContact : function(scope) {
+				html = '<div class="flow-item-info-contact-title"><div class="title" >姓名:&nbsp;</div>'
+						+ '<div class="title">联系电话:&nbsp;</div>'
+						+ '<div class="title">地址:&nbsp;</div></div>'
+						+ '<div class="flow-item-info-contact-content">'
+						+ '<div class="item">&nbsp;'
+						
+						+ '</div>'
+						+ '<div class="item">&nbsp;'
+						
+						+ '</div>'
+						+ '<div class="item">&nbsp;'
+						
+						+ '</div></div>';
+				scope.setHtml(html);
+			}
+			
 });
