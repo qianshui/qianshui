@@ -1,7 +1,7 @@
 Ext.define('YongYou.view.NavigationPanel', {
     extend: 'Ext.Container',
     requires:['YongYou.view.SubjectPanel','YongYou.view.IndustrylistPanel','YongYou.view.SelectAddressPanel',
-    'YongYou.view.OneIndustryPanel','YongYou.view.ConfirmPanel'],
+    'YongYou.view.OneIndustryPanel','YongYou.view.ConfirmPanel2'],
     
     config: {
     	id:'ttd2',
@@ -53,50 +53,6 @@ Ext.define('YongYou.view.NavigationPanel', {
             					{
                 					'tap': function (b, e) {
                 						
-//                						var activeid=Ext.ComponentQuery.query("container[id='contain2']")[0]
-//                						.getActiveItem().getId();
-//                						Ext.ComponentQuery.query("container[id='contain2']")[0]
-//										.getLayout().setAnimation({type: 'slide',direction: 'right',duration: 250}) 
-//                						if(activeid=='ConfirmPanel2')
-//                						{
-//                							Ext.ComponentQuery.query("container[id='contain2']")[0]
-//                    						.setActiveItem("#OneIndustryPanel", {
-//                            					type: 'slide',
-//                            					direction: 'right',
-//                            					duration:250
-//                        						});
-//                						}else if(activeid=='OneIndustryPanel')
-//                						{
-//                							Ext.ComponentQuery.query("container[id='contain2']")[0]
-//                    						.setActiveItem("#SelectAddressPanel", {
-//                            					type: 'slide',
-//                            					direction: 'right',
-//                            					duration:250
-//                        						});
-//                						}else if(activeid=='SelectAddressPanel')
-//                						{
-//                							Ext.ComponentQuery.query("container[id='contain2']")[0]
-//                    						.setActiveItem("#IndustrylistPanel", {
-//                            					type: 'slide',
-//                            					direction: 'right',
-//                            					duration:250
-//                        						});
-//                						}else if(activeid=='IndustrylistPanel')
-//                						{
-//                							Ext.ComponentQuery.query("container[id='contain2']")[0]
-//                    						.setActiveItem("#SubjectPanel", {
-//                            					type: 'slide',
-//                            					direction: 'right',
-//                            					duration:250
-//                        						});
-//                						}else if(activeid=='SubjectPanel')
-//                						{
-//                							Ext.Viewport.setActiveItem('#main', {
-//                            					type: 'slide',
-//                            					direction: 'right',
-//                            					duration:250
-//                        						});
-//                						}
                 					}
             					}
         					}
@@ -112,25 +68,5 @@ Ext.define('YongYou.view.NavigationPanel', {
             }
         ]    
     }
-//	initialPanel:function(jsonStr){
-//		var menuStore=new Ext.data.TreeStore({         			
-//        			autoLoad: true,
-//					model:'YongYou.model.QueryMenu',
-//        			storeId: 'QueryMenu',
-//        			nodeParam:'key',
-//        			proxy:{
-//                 			type:'ajax',
-//                 			url:YongYou.util.Config.getWebsite()+"Resource/find",
-//                 			reader: 'json'
-//  						},
-//               		root:{ 
-//                    		label:'根节点', 
-//                  			expanded : true,//根节点是否展开 
-//                    		id:'1' 
-//               		}
-//		});
-//		var menuList=Ext.create('YongYou.view.QueryPanelNestedList', {
-//            		store:menuStore,getItemTextTpl: function(recordnode) {  return '<div><strong>{label}</strong></div>';}});
-//        this.add(menuList);
-//   }
+
 });

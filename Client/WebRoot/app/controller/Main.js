@@ -51,29 +51,6 @@ Ext.define('YongYou.controller.Main', {
 			flag=0;
 			
 			
-//********************************	old  Code***********************************************************		
-//			var queryPanel = Ext.ComponentQuery.query("container[id='btab']")[0];
-//			if (!queryPanel) {
-//				queryPanel = Ext.create('YongYou.view.query.bottomTab', {
-//							title : 'title2',
-//							fullscreen : true
-//						});
-//
-//				queryPanel.initialPanel();
-//				// navigatePanel.push(queryPanel);
-//				Ext.Viewport.add(queryPanel);
-//			} else {
-////				Ext.ComponentQuery.query("container[id='contain']")[0]
-////						.setActiveItem('#QueryPanelMain');
-////						
-////				Ext.ComponentQuery.query("nestedlist[id='QueryList']")[0]
-////						.getStore().load();
-//			}
-//			Ext.Viewport.setActiveItem(queryPanel, {
-//						type : 'slide',
-//						direction : 'right'
-//					});
-//***********************************************************************************************************
 		} else if (record == '微企指南') {
 			YongYou.util.DataApi.Core.getFlowChart(function(res, scope) {
 
@@ -90,8 +67,6 @@ Ext.define('YongYou.controller.Main', {
 						'ID' : 'HY01'
 					})
 
-			// var win = Ext.create('YongYou.util.Window', {});
-			// win.initialPanelControl(flowPanel, 'Flow Chart')
 
 		}  else if (record == '投资咨询') {
 			industry1='';industry2='';address='';
