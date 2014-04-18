@@ -4,7 +4,7 @@ Ext.define('YongYou.view.ConfirmPanel2', {
 			config : {
 				id : 'ConfirmPanel2',
 				fullscreen : true,
-				style : "background-color:white;!important",
+				//style : "background-color:white;!important",
 				defaults : {
 					styleHtmlContent : true
 				},

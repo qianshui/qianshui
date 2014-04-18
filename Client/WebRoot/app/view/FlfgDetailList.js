@@ -7,7 +7,7 @@ Ext.define('YongYou.view.FlfgDetailList', {
 		cls : 'ks-basic',
 		id : 'FlfgDetailList',
 		scrollable : true,
-		style : "background-color:white;!important",
+		//style : "background-color:white;!important",
 		height : '100%',
 		items : [{
 			id:'flfg_list',

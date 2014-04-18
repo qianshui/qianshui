@@ -4,6 +4,6 @@ Ext.define('YongYou.view.LawGuide', {
 				title : '办事指南',
 				id : 'LawGuide',
 				height : '100%',
-				 style : "background-color:white;!important"
+			    //style : "background-color:white;!important"
 			}
 		});

@@ -9,9 +9,8 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 		{
 			xtype:'container',
 			height : '100%',
-			width : '25%',
 			docked : 'left',
-			style:'border:1px gray solid;',
+			style:'border:1px gray solid;width:326px;',
 			layout : {
 				type : 'vbox'
 			},
@@ -161,7 +160,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 			style : 'float:right;',
 			xtype : 'component',
 
-			html : '<div id=\'mapDiv\' style=\'width:978px;height:655px;\'>请重新尝试一次。。。</div>'
+			html : '<div id=\'mapDiv\' style=\'width:978px;height:655px;\'>您的设备好像没有联网，请保证网络连接，然后重新尝试一次。。。</div>'
 		}
 
 		]

@@ -102,59 +102,23 @@ Ext.define('YongYou.controller.Main', {
 							title : 'title2',
 							fullscreen : true
 						});
-
-				YongYou.util.DataApi.Core.getCommonSectors(function(res, scope) {
-					res= Ext.decode(res);
-
-					scope.getSubject().getStore().removeAll();
-					scope.getSubject().getStore().add(res);
-					
-//					Ext.ComponentQuery.query("container[id='contain2']")[0]
-//					.setActiveItem('#IndustrylistPanel');
-				},this,{});
-				
 				Ext.Viewport.add(navigationPanel);
 			} else {
-				YongYou.util.DataApi.Core.getCommonSectors(function(res, scope) {
-					res= Ext.decode(res);
-
-					scope.getSubject().getStore().removeAll();
-					scope.getSubject().getStore().add(res);
-					
-//					Ext.ComponentQuery.query("container[id='contain2']")[0]
-//					.setActiveItem('#IndustrylistPanel');
-				},this,{});
+				
 				Ext.ComponentQuery.query("container[id='contain2']")[0]
-						.setActiveItem('#SubjectPanel', {
+						.setActiveItem('#SelectPeoplePanel', {
         					type: 'slide',
         					direction: 'right',
         					duration:250
     						});
-			}
-			Ext.Viewport.setActiveItem(navigationPanel, {
-						type : 'slide',
-						direction : 'right'
-					});
-			flag=0;
-			this.getNavibar().setTitle("选择行业类别");
-//			YongYou.util.DataApi.Core.getCommonSectors(
-//        	    	function(res,obj){
-//        	    		var jsonObj = Ext.decode(res);
-//        	    		var menuStore = Ext.create('YongYou.store.SubjectMenu',{});
-//        	    		menuStore.add(jsonObj);
-//        	    		var subjectPanel=Ext.create('YongYou.view.SubjectPanel', {
-//        	        		title: 'title2',
-//        	        		fullscreen: true,
-//        	        		store:menuStore
-//        	    			});
-//        	    		obj.push(subjectPanel);
-//        	    		Ext.Viewport.add(obj);
-//        	    	},navigatePanel,record);
-//            Ext.Viewport.add(navigatePanel);
-//            Ext.Viewport.setActiveItem(navigatePanel, {
-//				type : 'slide',
-//				direction : 'right'
-//			});
+				}
+				Ext.Viewport.setActiveItem(navigationPanel, {
+							type : 'slide',
+							direction : 'right'
+						});
+				flag=0;
+				this.getNavibar().setTitle("选择投资人群");
+
 		}
 
 	}

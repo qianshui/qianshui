@@ -25,20 +25,20 @@ Ext.define('YongYou.util.Window', {
 				items : [],
 				scrollable : true,
 				listeners : {
-//					hide:function(win,opt){
-//						
-//						for(i=win.getItems().length-1;i>=0;i--){
-//							win.getItems().items[i].destroy();
-//						}
-//						win.destroy();
-//					}
+
 				}
 			},
 			initialize : function() {
 				this.toolBar=Ext.create('Ext.Toolbar',{
 							docked : 'top',
 							xtype : 'toolbar',
-							title : ''
+							title : '',
+							items:[{
+								xtype:'button',
+								docked : 'right',
+								style:'padding-top:6px;',
+								html:'<span style="font-size:16px;">打印</span>'
+							}]
 						})
 				this.add(this.toolBar);
 			},

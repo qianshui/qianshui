@@ -6,6 +6,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 			QueryType : null,
 			config : {
 				refs : {
+	                people:'#SelectPeoplePanel',
 					subject : 'subject',
 					industry : '#IndustrylistPanel',
 					address : 'selectaddress',
@@ -21,6 +22,9 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				},
 
 				control : {
+					people:{
+					    itemtap : 'onPeopleItemTap'
+				    },
 					subject : {
 						itemtap : 'onSubjectItemTap'
 					},
@@ -41,6 +45,33 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				currentRecord : null,
 
 				stack : []
+			},
+			onPeopleItemTap:function (view, index, target, record, e){
+				YongYou.util.DataApi.Core.getCommonSectors(function(res, scope) {
+					res= Ext.decode(res);
+
+					scope.getSubject().getStore().removeAll();
+					scope.getSubject().getStore().add(res);
+					
+//					Ext.ComponentQuery.query("container[id='contain2']")[0]
+//					.setActiveItem('#IndustrylistPanel');
+				},this,{});
+				Ext.ComponentQuery
+				.query("container[id='contain2']")[0]
+				.getLayout().setAnimation({
+							type : 'slide',
+							direction : 'left',
+							duration : 250
+						})
+				Ext.ComponentQuery.query("container[id='contain2']")[0]
+						.setActiveItem('#SubjectPanel', {
+        					type: 'slide',
+        					direction: 'right',
+        					duration:250
+    						});
+
+				flag=0;
+				this.getNavibar().setTitle("选择行业类别");
 			},
 			onSubjectItemTap : function(view, index, target, record, e) {
 				// var navigatePanel =
@@ -248,6 +279,15 @@ Ext.define('YongYou.controller.ConsultingControl', {
 									});
 					this.getNavibar().setTitle("选择行业类别");
 				} else if (activeid == 'SubjectPanel') {
+					Ext.ComponentQuery.query("container[id='contain2']")[0]
+							.setActiveItem("#SelectPeoplePanel", {
+										type : 'slide',
+										direction : 'right',
+										duration : 250
+									});
+					this.getNavibar().setTitle("选择投资人群");
+				}
+				else if (activeid == 'SelectPeoplePanel') {
 					Ext.Viewport.setActiveItem('#main', {
 								type : 'slide',
 								direction : 'right',
@@ -264,13 +304,33 @@ Ext.define('YongYou.controller.ConsultingControl', {
 			onMapconfirmTap : function(b, e) {
 				// 汇总页初始化阶段
 				this.getConfirm().removeAll();
+				// d 法律法规
+				var flfg = Ext.create('YongYou.view.FlfgDetailList', {});
+				YongYou.util.DataApi.Core.getFG(function(res, scope) {
+					        res = Ext.decode(res);
+					        scope.getFlfg_list().getStore().removeAll();
+					        scope.getFlfg_list().getStore().add(res);
+						}, this, {
+							'id' : 'SJ0001'
+						});
+				//this.getConfirm().add(flfg);
+				// c 优惠政策
+				var yhzc = Ext.create('YongYou.view.QueryPanelDetailList', {});
+				YongYou.util.DataApi.Core.getZC(function(res, scope) {
+					        res = Ext.decode(res);
+					        scope.getYhzc_list().getStore().removeAll();
+					        scope.getYhzc_list().getStore().add(res);
+						}, this, {
+							'id' : 'SJ0001'
+						});
+				//this.getConfirm().add(yhzc);
+				
 				// a 信息确认
 				var infocon = Ext.create('YongYou.view.InformationConfirm', {});
 				infocon.getItems().items[0].setHtml("行业：" + industry1
 						+ industry2 + "&nbsp;&nbsp;&nbsp;&nbsp;地址：" + address);
-				this.getConfirm().add(infocon);
+				//this.getConfirm().add(infocon);
 				// b 办事指南
-
 				YongYou.util.DataApi.Core.getNodeByFlowID(function(res, scope) {
 					var bszn = Ext.create('YongYou.view.LawGuide', {});
 							flowview = Ext.create('YongYou.flow.FlowViewport',
@@ -281,46 +341,21 @@ Ext.define('YongYou.controller.ConsultingControl', {
 										style : "margin-right:20px;!important"
 									})
 							flowview.initialPanelCard(res,'confirm-');
-							bszn.add(flowview)
-							scope.getConfirm().add(bszn);
-						}, this, {
+							bszn.add(flowview);
+							scope.scope.getConfirm().add(bszn);
+							scope.scope.getConfirm().add(scope.flfg);
+							scope.scope.getConfirm().add(scope.yhzc);
+							scope.scope.getConfirm().add(scope.zxhz);
+						}, {'scope':this,'zxhz':infocon,'flfg':flfg,'yhzc':yhzc}, {
 							'id' : 'FL002'
 						})
-
-				// c 优惠政策
-//				var yhzc = Ext.create('YongYou.view.PreferentialPolicies', {});
-//				YongYou.util.DataApi.Core.getFG(function(res, scope) {
-//							scope.getItems().items[0].setHtml(res);
-//						}, yhzc, {
-//							'ID' : 'FG01'
-//						});
-//				this.getConfirm().add(yhzc);
-				var yhzc = Ext.create('YongYou.view.QueryPanelDetailList', {});
-				YongYou.util.DataApi.Core.getZC(function(res, scope) {
-					        res = Ext.decode(res);
-					        scope.getYhzc_list().getStore().removeAll();
-					        scope.getYhzc_list().getStore().add(res);
-						}, this, {
-							'id' : 'SJ0001'
-						});
-				this.getConfirm().add(yhzc);
-				// d 法律法规
-				var flfg = Ext.create('YongYou.view.FlfgDetailList', {});
-				YongYou.util.DataApi.Core.getFG(function(res, scope) {
-					        res = Ext.decode(res);
-					        scope.getFlfg_list().getStore().removeAll();
-					        scope.getFlfg_list().getStore().add(res);
-						}, this, {
-							'id' : 'SJ0001'
-						});
-				this.getConfirm().add(flfg);
-//				var flfg = Ext.create('YongYou.view.Regulations', {});
-//				YongYou.util.DataApi.Core.getFG(function(res, scope) {
-//							scope.getItems().items[0].setHtml(res);
-//						}, flfg, {
-//							'ID' : 'FG02'
-//						});
-//				this.getConfirm().add(flfg);
+                
+				Ext.ComponentQuery.query("container[id='contain2']")[0]
+						.getLayout().setAnimation({
+									type : 'slide',
+									direction : 'left',
+									duration : 250
+								})
 				// 页面跳转
 				Ext.ComponentQuery.query("container[id='contain2']")[0]
 						.setActiveItem('#ConfirmPanel2', {
@@ -328,7 +363,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 									direction : 'right',
 									duration : 250
 								});
-				this.getNavibar().setTitle("信息确认");
+				this.getNavibar().setTitle("咨询汇总");
 			}
 		});
 

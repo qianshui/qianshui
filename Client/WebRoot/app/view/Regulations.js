@@ -6,7 +6,7 @@ Ext.define('YongYou.view.Regulations', {
     config: {
     	title:'相关法规',
         id:'Regulations',
-        style : "background-color:white;!important",
+        //style : "background-color:white;!important",
         height: '100%',
         items: [
 			{

@@ -102,6 +102,7 @@ Ext.define('YongYou.view.NavigationPanel', {
         					}
     					]
               		}, 
+              		Ext.create('YongYou.view.SelectPeoplePanel',{}),
               		Ext.create('YongYou.view.SubjectPanel',{}),
               		Ext.create('YongYou.view.IndustrylistPanel',{}),
               		Ext.create('YongYou.view.SelectAddressPanel',{}),
