@@ -4,7 +4,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 	config : {
 		id : 'OneIndustryPanel',
 		scrollable : false,
-		style : "background-color:white;!important",
+		//style : "background-color:white;!important",
 		items : [
 		{
 			xtype:'container',
@@ -27,7 +27,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 			        ]
 			    },
 			    itemTpl : [
-			                '<div style="float:left;margin-left:30px;marin-right:30px;margin-top:26px;">'+
+			                '<div style="float:left;margin-left:20px;marin-right:20px;margin-top:26px;">'+
 							'<div class="image" style="margin-left:6px;width:60px;height:70px;background-image:url(\'resources/img/desktop/root_gr_ztfl_ns.png\')"></div>'+
 							'<div class="name" style="font-weight:bold">{name}</div>'+
 							'</div>'
