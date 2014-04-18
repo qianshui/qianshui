@@ -7,8 +7,8 @@ Ext.define('YongYou.view.IndustrylistPanel', {
 		cls:'x-fullscreen',
 		//style : "background-color:white;!important",
 		itemTpl : [
-				'<div class="image" style="background-image:url(\'resources/img/industry/indus2.jpg\')"></div>',
-				'<div class="name">{description}</div>'
+				'<div class="image" style="background-image:url(\'resources/image/subject/{imgPath}\')"></div>'
+				//'<div class="name">{description}</div>'
 
 		].join(''),
 		store : 'IndustryMenu',
@@ -19,10 +19,11 @@ Ext.define('YongYou.view.IndustrylistPanel', {
 			items : [{
 				xtype : 'button',
 				ui : 'round',
+				style:'float:right;margin-right:165px;background-image:url(\'resources/image/submit.jpg\')',
 				height : 52,
-				width : 172,
-				text : '提交行业',
-				style : 'float:right;margin-right:165px;background:-webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);',
+				width : 149,
+				//text : '提交行业',
+				//style : 'float:right;margin-right:165px;background:-webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);',
 				listeners : {
 					'tap' : function(b, e) {
 						industry2 = Ext.getCmp("get_industry").getValue();
@@ -54,8 +55,8 @@ Ext.define('YongYou.view.IndustrylistPanel', {
 				ui : 'round',
 				id : 'get_industry',
 				border : 3,
-				style : 'float:right;border-color: gray; border-style: solid;',
-				width : 182
+				style : 'border-radius: 15px;float:right;border-color: gray; border-style: solid;',
+				width : 300
 			}
 			]
 		}]

@@ -1,9 +1,5 @@
 #MyEclipse Hibernate Properties
-<<<<<<< HEAD
-#Wed Apr 09 15:19:50 CST 2014
-=======
-#Wed Apr 09 13:29:49 CST 2014
->>>>>>> branch 'master' of https://git@github.com/qianshui/qianshui.git
+#Fri Apr 18 15:02:29 CST 2014
 sessionFactoryName=DataBase.HibernateSessionFactory
 genBasicCompId=false
 profile=

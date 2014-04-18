@@ -4,10 +4,11 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 	config : {
 		id : 'SelectAddressPanel',
 		baseCls : 'categories-list',
-		style : "background-color:white;!important",
+		cls:'x-fullscreen',
+		//style : "background-color:white;!important",
 		itemTpl : [
-				'<div class="image" style="background-image:url(\'resources/img/industry/jiedao2.jpg\')"></div>',
-				'<div class="name">{name}</div>'
+				'<div class="image" style="background-image:url(\'resources/image/location/{imgPath}\')"></div>'
+				//'<div class="name">{name}</div>'
 
 		].join(''),
 		store : 'AddressMenu',
@@ -19,18 +20,19 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 				xtype : 'textfield',
 				ui : 'round',
 				id : 'get_address',
-				width : 182,
+				width : 300,
 				border : 3,
 				height:52,
 				
-				style : 'float:left;margin-left:165px;border-color: gray; border-style: solid;'
+				style : 'border-radius: 15px;float:left;margin-left:165px;border-color: gray; border-style: solid;'
 			}, {
 				xtype : 'button',
 				ui : 'round',
+				style:'float:left;background-image:url(\'resources/image/submit.jpg\')',
 				height : 52,
-				width : 172,
-				style : 'height:50px;float:left;background:-webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);',
-				text : '提交地址',
+				width : 149,
+				//style : 'height:50px;float:left;background:-webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);',
+				//text : '提交地址',
 				listeners : {
 					'tap' : function(b, e) {
 						// alert("完善中。。。。");
@@ -43,12 +45,12 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 					}
 				}
 			}, {
-				xtype : 'button',
-				ui : 'round',
-				height : 52,
-				style : 'float:right;margin-right:164px;background:-webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);',
-				width : 172,
-				text : '我要在地图点选',
+				xtype : 'image',
+				//ui : 'round',
+				height : 73,
+				style : 'float:right;margin-right:164px;background-image:url(\'resources/image/mapbutton.gif\')',
+				width : 304,
+				//text : '我要在地图点选',
 				listeners : {
 					'tap' : function(b, e) {
 						Ext.ComponentQuery.query("container[id='contain2']")[0]

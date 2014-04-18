@@ -13,5 +13,11 @@
         <property name="name" type="string">
             <column name="Name" length="100" not-null="true" />
         </property>
+        <property name="commonFlag" type="boolean">
+            <column name="CommonFlag" />
+        </property>
+        <property name="imgPath" type="string">
+            <column name="ImgPath" length="100" />
+        </property>
     </class>
 </hibernate-mapping>
