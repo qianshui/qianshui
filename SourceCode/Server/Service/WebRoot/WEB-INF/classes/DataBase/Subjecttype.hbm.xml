@@ -19,5 +19,8 @@
         <property name="title" type="string">
             <column name="Title" length="100" />
         </property>
+        <property name="imgPath" type="string">
+            <column name="ImgPath" length="100" />
+        </property>
     </class>
 </hibernate-mapping>

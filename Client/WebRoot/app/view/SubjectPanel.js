@@ -6,10 +6,10 @@
         id:'SubjectPanel',
        // scrollable: 'vertical',
         baseCls: 'categories-list',
-        style : "background-color:white;!important",
+        cls:'x-fullscreen',
         itemTpl: [
-            '<div class="image" style="background-image:url(\'resources/img/industry/jiuba.jpg\')"></div>',
-            '<div class="name">{description}</div>'
+            '<div class="image" style="background-image:url(\'resources/image/subject/{imgPath}\')"></div>'
+           // '<div class="name">{description}</div>'
 
         ].join('')
     },

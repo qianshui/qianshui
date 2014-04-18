@@ -4,7 +4,8 @@ Ext.define('YongYou.view.IndustrylistPanel', {
 	config : {
 		id : 'IndustrylistPanel',
 		baseCls : 'categories-list',
-		style : "background-color:white;!important",
+		cls:'x-fullscreen',
+		//style : "background-color:white;!important",
 		itemTpl : [
 				'<div class="image" style="background-image:url(\'resources/img/industry/indus2.jpg\')"></div>',
 				'<div class="name">{description}</div>'

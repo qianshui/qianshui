@@ -12,7 +12,7 @@ public class Subjecttype implements java.io.Serializable {
 	private String description;
 	private boolean commonFlag;
 	private String title;
-
+	private String imgPath;
 	// Constructors
 
 	/** default constructor */
@@ -66,5 +66,11 @@ public class Subjecttype implements java.io.Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getImgPath() {
+		return this.imgPath;
+	}
 
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 }

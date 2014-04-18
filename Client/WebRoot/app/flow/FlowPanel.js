@@ -9,7 +9,7 @@ Ext.define('YongYou.flow.FlowPanel', {
 				dock : 'top',
 				title : '流程图',
 				scrollable : true,
-				style : "background-color:white;!important",
+				style : "background-color:#FFF4D6;!important",
 				layout : {
 					type : 'vbox'
 				},
@@ -42,7 +42,7 @@ Ext.define('YongYou.flow.FlowPanel', {
 						this.add(Ext.create('YongYou.flow.FlowRow', {
 									items : [Ext.create('Ext.Img', {
 												cls : 'flow-item-img',
-												src : 'resources/img/down.png'
+												src : 'resources/image/flow/arrow.gif'
 											})]
 								}));
 						rowLog = Ext.create('YongYou.flow.FlowRow', {
