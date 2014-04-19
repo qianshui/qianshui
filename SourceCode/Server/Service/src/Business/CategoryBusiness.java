@@ -438,6 +438,8 @@ public class CategoryBusiness {
 		return list;   	
     }
     
+  
+    
     /******************************************************************************************************
      * 获取没有在category中出现并且SubjectID为空的流程记录
      * 
@@ -456,4 +458,43 @@ public class CategoryBusiness {
 		}
 		return list;   	
     }
+    
+    
+    
+    /******************************************************************************************************
+     * 获取指定SubjectID的流程记录
+     * 
+     *******************************************************************************************************/
+    public Flow getFlowBySubjectId(String subnjectID){
+    	List<Flow> list = new ArrayList<Flow>();
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			list = session.createQuery("from Flow where SubjectID = :strID")
+		       .setParameter("strID", subnjectID).list();
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list.get(0);   	
+    }
+    
+    
+    
+    /**
+     * *************************************************************
+	 * FunName : getNodeBySubjectID
+     * Description： 根据FlowID获取Node
+     * Input: @param flowID
+     * Output:@param nodeList
+     * *************************************************************
+	 */
+    public void getNodeBySubjectID(String subnjectID,List<Node> nodeList) {
+    	
+    	Flow flow=getFlowBySubjectId(subnjectID);
+    	this.getNodeByFlowID(flow.getId(), nodeList);
+    }
+	
 }

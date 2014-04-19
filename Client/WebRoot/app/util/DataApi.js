@@ -51,6 +51,12 @@ Ext.define('YongYou.util.DataApi', {
     	    		callback,scope)
 
     	},
+    	getNodeBySubjectID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getNodeBySubjectID",param,
+    	    		callback,scope)
+
+    	},
     	getAttachmentByNodeID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getAttachmentByNodeID",param,

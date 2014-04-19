@@ -191,6 +191,24 @@ public class CategoryService {
 	
 	/**
 	 * *************************************************************
+	 * FunName : getNodeBySubjectID
+     * Description： 根据FlowID获取Node
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getNodeByFlowID?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getNodeBySubjectID")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getNodeBySubjectID(@QueryParam("id") String subnjectID) {
+		List<Node> NodeList = new ArrayList<Node>();
+		CategoryBusiness.getInstance().getNodeBySubjectID(subnjectID,NodeList);
+		return CommonJson.list2Json(NodeList);
+	}
+	
+	/**
+	 * *************************************************************
 	 * FunName : getAttachmentByNodeID
      * Description： 根据NodeID获取attchment列表
      * Input: 无

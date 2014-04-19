@@ -63,7 +63,7 @@ Ext.define('YongYou.view.IndustrylistPanel', {
 
 	},
 	onItemTap : function(container, target, index, e) {
-		var me = this, store = me.getStore(), record = store.data.items[index].data.description;
+		var me = this, store = me.getStore(), record = store.data.items[index].data;
 
 		me.fireEvent('itemtap', me, index, target, record, e);
 	}

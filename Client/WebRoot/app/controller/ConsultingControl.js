@@ -310,7 +310,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 							scope.getFlfg_list().getStore().removeAll();
 							scope.getFlfg_list().getStore().add(res);
 						}, this, {
-							'id' : 'SJ0001'
+							'id' : industry2.id
 						});
 				// this.getConfirm().add(flfg);
 				// c 优惠政策
@@ -320,13 +320,13 @@ Ext.define('YongYou.controller.ConsultingControl', {
 							scope.getYhzc_list().getStore().removeAll();
 							scope.getYhzc_list().getStore().add(res);
 						}, this, {
-							'id' : 'SJ0001'
+							'id' : industry2.id
 						});
 				// this.getConfirm().add(yhzc);
 
 				// a 信息确认
 				var infocon = Ext.create('YongYou.view.InformationConfirm', {});
-				infocon.setSelectValue(industry1 + '业&nbsp;&nbsp;' + industry2,
+				infocon.setSelectValue(industry1 + '业&nbsp;&nbsp;' + industry2.description,
 						'大学生', address)
 				infocon.setAroundValue({
 							gongjian : '中餐厅;超市;西餐厅;茶餐厅;美容美发;家政中心;娱乐中心;洗衣房;',
@@ -337,13 +337,13 @@ Ext.define('YongYou.controller.ConsultingControl', {
 							jiuxue : '区级建新中学、重庆市直辖后首批重点中学重庆18中、区级华新小学 查找周边学校',
 							shangye : '重百商场、北京华联商厦、苏宁电器、香港新世界百货、观音桥步行街等 查找周边商场'
 						})
-				infocon.setAdviseValue('<div style="margin-left:20px;"><font size="14px">您</font>选择的开办地点与相邻'+industry2+'不足100米，不符合'
+				infocon.setAdviseValue('<div style="margin-left:20px;"><font size="14px">您</font>选择的开办地点与相邻'+industry2.description+'不足100米，不符合'
 				+industry1+'许可中关于同行业距离不应小于100米的规定，建议您更换开办地址</div>')
 				// infocon.getItems().items[0].setHtml("行业：" + industry1
 				// + industry2 + "&nbsp;&nbsp;&nbsp;&nbsp;地址：" + address);
 				// this.getConfirm().add(infocon);
 				// b 办事指南
-				YongYou.util.DataApi.Core.getNodeByFlowID(function(res, scope) {
+				YongYou.util.DataApi.Core.getNodeBySubjectID(function(res, scope) {
 							var bszn = Ext.create('YongYou.view.LawGuide', {});
 							flowview = Ext.create('YongYou.flow.FlowViewport',
 									{
@@ -365,7 +365,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 							'flfg' : flfg,
 							'yhzc' : yhzc
 						}, {
-							'id' : 'FL002'
+							'id' : industry2.id
 						})
 
 				Ext.ComponentQuery.query("container[id='contain2']")[0]
