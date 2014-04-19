@@ -384,32 +384,33 @@ body:not(.x-phone) .desktop-list .desktop-list-item .image {
 .confirm-logo {	
 	width:92px;
 	float:left; 
-	margin:10px 10px 10px 10px;
+	margin:10px 10px 5px 10px;
+
 }
 .confirm-selectinfo {	
 	width:200px;
 	float:left; 	
 }
 .confirm-selectinfo .subject{
-	width:300px;
-	line-height:35px;
+	width:400px;
+	line-height:15px;
 	background: rgba(0, 0, 0);
 	border-radius: 15px;
-	margin:5px 1px 2px 15px;
+	margin:10px 1px 1px 40px;
 	text-align:left;
-	font-size:20px;
+	font-size:15px;
 	font-family: Georgia;
 	font-weight:bold;
 	color:rgba(171, 93, 57,0.8);
 }
 .confirm-selectinfo .person{
-	width:300px;
-	line-height:20px;
+	width:200px;
+	line-height:15px;
 	background: rgba(171, 93, 57,0.8);
 	border-radius: 15px;
-	margin:0px 1px 5px 15px;
+	margin:0px 1px 1px 40px;
 	text-align:left;
-	font-size:16px;
+	font-size:13px;
 	font-family: Georgia;
 	color:#fff;
 }
@@ -417,12 +418,24 @@ body:not(.x-phone) .desktop-list .desktop-list-item .image {
 .confirm-selectinfo .address{
 
 	width:300px;
-	line-height:20px;
+	line-height:15px;
 	background: rgba(255, 204, 102,0.8);
 	border-radius: 15px;
-	margin:0px 1px 5px 15px;
+	margin:0px 1px 1px 40px;
 	text-align:left;
-	font-size:16px;
+	font-size:13px;
 	font-family: Georgia;
 	color:#000;
+}
+.confirm-selectinfo .title{
+	width:400px;
+	line-height:17px;
+	background: rgba(0, 0, 0);
+	border-radius: 15px;
+	margin:15px 1px 1px 25px;
+	text-align:left;
+	font-size:17px;
+	font-family: Georgia;
+	font-weight:bold;
+	color:rgba(171, 93, 57,0.8);
 }
