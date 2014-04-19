@@ -4,17 +4,20 @@ Ext.define('YongYou.view.ConfirmPanel2', {
 			config : {
 				id : 'ConfirmPanel2',
 				fullscreen : true,
-				//style : "background-color:white;!important",
-				defaults : {
-					styleHtmlContent : true
-				},
+				width : '100%',
+				hight : '100%',
+				border : true,
+				// style : "background-color:white;!important",
+//				defaults : {
+//					styleHtmlContent : true
+//				},
 
 				tabBar : {
-					ui:'red',
+					ui : 'red',
 					layout : {
 						pack : 'center'
 					}
-					//style : 'background:#99FFFF'
+					// style : 'background:#99FFFF'
 				},
 
 				items : [

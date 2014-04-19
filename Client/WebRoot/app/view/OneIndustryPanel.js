@@ -4,13 +4,13 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 	config : {
 		id : 'OneIndustryPanel',
 		scrollable : false,
-		//style : "background-color:white;!important",
+		style : "background-color:white;!important",
 		items : [
 		{
 			xtype:'container',
 			height : '100%',
 			docked : 'left',
-			style:'border:1px gray solid;width:326px;',
+			style:'border:1px gray solid;width:326px;background-color:white;!important',
 			layout : {
 				type : 'vbox'
 			},
@@ -157,10 +157,11 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 					
 			]
 		},{
-			style : 'float:right;',
+			//style : 'float:right;',
 			xtype : 'component',
-
-			html : '<div id=\'mapDiv\' style=\'width:978px;height:655px;\'>您的设备好像没有联网，请保证网络连接，然后重新尝试一次。。。</div>'
+			width:'100%',
+			height:'100%',
+			html : '<div id=\'mapDiv\' style=\'width:978px;height:655px;\'>您的设备没有联网，请保证网络连接，然后重新尝试一次。。。</div>'
 		}
 
 		]

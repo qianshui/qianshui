@@ -232,10 +232,10 @@ public class CategoryService {
      * Call URL:localhost:8080/Service/CategoryService/updateCategory
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateCategory")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updatePolicy(Category category) {
+    public Response updateCategory(Category category) {
         if (DBOperation.update(category)) {
         	return Response.status(201).entity("Seccess").build();
         }

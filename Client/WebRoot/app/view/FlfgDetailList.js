@@ -7,7 +7,7 @@ Ext.define('YongYou.view.FlfgDetailList', {
 		cls : 'ks-basic',
 		id : 'FlfgDetailList',
 		scrollable : true,
-		//style : "background-color:white;!important",
+		style : "background-color:white;!important",
 		height : '100%',
 		items : [{
 			id:'flfg_list',
@@ -16,7 +16,7 @@ Ext.define('YongYou.view.FlfgDetailList', {
 				direction : 'vertical'
 			},
 			cls : 'dataview-basic',
-			itemTpl : '<div class="img" style="background-image: url(\'resources/img/{imgId}\')">'
+			itemTpl : '<div class="img" style="background-image: url(\'resources/image/{imgId}\')">'
 					+ '</div><div class="content"><div class="name">{title}</div>'
 					+ '<div class="affiliation">{subtitle}</div></div>',
 			store : new Ext.data.Store({

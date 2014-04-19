@@ -7,7 +7,7 @@ Ext.define('YongYou.view.QueryPanelDetailList', {
 		cls : 'ks-basic',
 		id : 'QueryPanelDetailList',
 		scrollable : true,
-		//style : "background-color:white;!important",
+		style : "background-color:white;!important",
 
 		height : '100%',
 		items : [{
@@ -17,7 +17,7 @@ Ext.define('YongYou.view.QueryPanelDetailList', {
 				direction : 'vertical'
 			},
 			cls : 'dataview-basic',
-			itemTpl : '<div class="img" style="background-image: url(\'resources/img/{imgId}\')">'
+			itemTpl : '<div class="img" style="background-image: url(\'resources/image/{imgId}\')">'
 					+ '</div><div class="content"><div class="name">{title}</div>'
 					+ '<div class="affiliation">{subtitle}</div></div>',
 			store : new Ext.data.Store({
