@@ -183,6 +183,12 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getWebsite()+"Judge_address",params,
     	    		callback,scope);
     	},
+    	
+    	/*******************************************************************************************************************
+    	 ************************************************************************************************ 
+    	 * config
+    	 ************************************************************************************************ 
+    	 ********************************************************************************************************************/
     	updateCategory:function(callback,scope,params,uppa)
     	{
     		YongYou.util.DataApi.postData(
@@ -206,8 +212,31 @@ Ext.define('YongYou.util.DataApi', {
     		YongYou.util.DataApi.postData(
     	    		YongYou.util.Config.getService()+'CategoryService/addFlow',params,
     	    		callback,scope,uppa);
+    	},
+    	updateSubject:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'IndustryService/updateSubject',params,
+    	    		callback,scope,uppa);
+    	},
+    	addSubject:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'IndustryService/addSubject',params,
+    	    		callback,scope,uppa);
+    	},
+    	updateLaws:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'IndustryService/updateLaws',params,
+    	    		callback,scope,uppa);
+    	},
+    	addLaws:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'IndustryService/addLaws',params,
+    	    		callback,scope,uppa);
     	}
-    	
     },
     queryData:function(url, params, callback, scope,uppa) {
        // Ext.data.JsonP.request({

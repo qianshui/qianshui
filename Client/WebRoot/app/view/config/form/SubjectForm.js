@@ -82,7 +82,7 @@ Ext.define('YongYou.view.config.form.SubjectForm', {
 						fieldLabel : '选择行业类别',
 						displayField : 'title',
 						valueField : 'id',
-						name : 'SubjectTypeID',
+						name : 'subjectTypeId',
 						store : Ext.create('Ext.data.Store', {
 									fields : subjectType_model.config.fields,
 									proxy : {
@@ -95,16 +95,18 @@ Ext.define('YongYou.view.config.form.SubjectForm', {
 					}, {
 						xtype : 'checkbox',
 						fieldLabel : '常用',
-						name : 'CommonFlag'
+						name : 'commonFlag',
+						inputValue: 'true',
+						uncheckedValue:'false'
 
 				}	, {
 						xtype : 'subjecticontrigger',
 						fieldLabel : '图标',
-						name : 'ImgPath'
+						name : 'imgPath'
 				}	, {
 						xtype : 'textfield',
 						fieldLabel : '关键字',
-						name : 'KeyWords'
+						name : 'keyWords'
 
 				}]
 

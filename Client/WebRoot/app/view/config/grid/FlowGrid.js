@@ -17,7 +17,7 @@ flow_model.config.columns.push({
 								icon : 'resources/images/edit_task.png',
 								handler : function(grid, rowIndex, colIndex,
 										actionItem, event, record, row) {
-										ShowForm(true,grid,record)
+										ShowFlowForm(true,grid,record)
 								}
 							}, {
 								text : '删除流程',
@@ -41,7 +41,7 @@ Ext.define('YongYou.view.config.grid.FlowGrid', {
 						icon : 'resources/images/icons/fam/add.png',
 						handler : function(view, rowIndex, colIndex,
 										actionItem, event, record, row) {
-										ShowForm(false,view.up('panel'),record)
+										ShowFlowForm(false,view.up('panel'),record)
 								}
 					}],
 			listeners : {
@@ -52,7 +52,7 @@ Ext.define('YongYou.view.config.grid.FlowGrid', {
 				}
 			}
 		});
-ShowForm = function(isUpdate, grid,record) {
+ShowFlowForm = function(isUpdate, grid,record) {
 	form = Ext.create('YongYou.view.config.form.FlowForm');
 	if(isUpdate){
 	form.getForm().loadRecord(record)

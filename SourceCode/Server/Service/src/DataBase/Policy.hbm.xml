@@ -31,6 +31,12 @@
         <property name="imgId" type="string">
             <column name="ImgId" length="100" />
         </property>
+          <property name="group" type="string">
+            <column name="Group" length="100" />
+        </property>
+        <property name="street" type="string">
+            <column name="Street" length="100" />
+        </property>
    <!--     <set name="sprelations" inverse="true">
             <key>
                 <column name="PID" length="10" />

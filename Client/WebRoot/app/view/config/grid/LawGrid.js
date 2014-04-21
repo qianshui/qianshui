@@ -1,4 +1,4 @@
-var subject_model = Ext.create('YongYou.model.Subject');
+var law_model = Ext.create('YongYou.model.Law');
 var subjectType_model = Ext.create('YongYou.model.SubjectType');
 var subject_store = Ext.create('Ext.data.Store', {
 			fields : subject_model.config.fields

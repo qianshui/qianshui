@@ -20,6 +20,8 @@ public class Policy implements java.io.Serializable {
 	private String type;
 	private String subTitle;
 	private String imgId;
+	private String group;
+	private String street;
 	//private Set sprelations = new HashSet(0);
 
 	// Constructors
@@ -112,6 +114,20 @@ public class Policy implements java.io.Serializable {
 
 	public void setImgId(String imgId) {
 		this.imgId = imgId;
+	}
+	public String getStreet() {
+		return this.street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public String getGroup() {
+		return this.group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
 	}
 
 //	public Set getSprelations() {

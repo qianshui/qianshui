@@ -405,7 +405,7 @@ public class IndustryService {
      * Call URL:localhost:8080/Service/IndustryService/updateSubjecttype
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateSubjecttype")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateSubjecttype(Subjecttype subjecttype) {
@@ -427,7 +427,7 @@ public class IndustryService {
      * Call URL:localhost:8080/Service/IndustryService/updateSubject
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateSubject")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateSubject(Subject subject) {
@@ -449,7 +449,7 @@ public class IndustryService {
      * Call URL:localhost:8080/Service/IndustryService/updateLaws
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateLaws")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateLaws(Laws laws) {
@@ -471,7 +471,7 @@ public class IndustryService {
      * Call URL:localhost:8080/Service/IndustryService/updatePolicy
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updatePolicy")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updatePolicy(Policy policy) {
@@ -493,7 +493,7 @@ public class IndustryService {
      * Call URL:localhost:8080/Service/IndustryService/updateSlrelation
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateSlrelation")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateSlrelation(Slrelation sl) {
@@ -515,7 +515,7 @@ public class IndustryService {
      * Call URL:localhost:8080/Service/IndustryService/updateSprelation
      * *************************************************************
 	 */
-	@PUT
+	@POST
     @Path("/updateSprelation")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateSprelation(Sprelation sp) {

@@ -75,7 +75,7 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 								icon : 'resources/images/icons/fam/add.png',
 								handler : function(grid, rowIndex, colIndex,
 										actionItem, event, record, row) {
-										ShowForm(false,grid,record,{data:{paretId:record.data.id}})
+										ShowCategoryForm(false,grid,record,{data:{paretId:record.data.id}})
 								}
 							},  {
 								text : '编辑',
@@ -87,7 +87,7 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
 								icon : 'resources/images/edit_task.png',
 								handler : function(grid, rowIndex, colIndex,
 										actionItem, event, record, row) {
-										ShowForm(true,grid,record)
+										ShowCategoryForm(true,grid,record)
 								},
 								// Only leaf level tasks may be edited
 								isDisabled : function(view, rowIdx, colIdx,
@@ -119,7 +119,7 @@ Ext.define('YongYou.view.config.grid.TreeGrid', {
     }
 });
 
-ShowForm = function(isUpdate, grid,record) {
+ShowCategoryForm = function(isUpdate, grid,record) {
 	form = Ext.create('YongYou.view.config.form.CategoryForm');
 	if(isUpdate){
 	form.getForm().loadRecord(record)
