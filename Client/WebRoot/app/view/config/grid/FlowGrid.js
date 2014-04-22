@@ -1,4 +1,4 @@
-var flow_model = Ext.create('YongYou.model.Flow');
+
 var flow_store = Ext.create('Ext.data.Store', {
 			fields : flow_model.config.fields
 		});

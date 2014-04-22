@@ -28,7 +28,12 @@ Ext.Loader.setPath('YongYou', 'app');
             'YongYou.util.DataApi',
              'YongYou.util.EventHandle'
         ]);
-
+        
+var subjectType_model = Ext.create('YongYou.model.SubjectType');
+var subject_model = Ext.create('YongYou.model.Subject');
+var law_model = Ext.create('YongYou.model.Law');
+var flow_model = Ext.create('YongYou.model.Flow');
+var policy_model = Ext.create('YongYou.model.Policy');
 
 Ext.application({
     name: 'YongYou',
