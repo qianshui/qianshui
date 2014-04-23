@@ -1,23 +1,3 @@
-law_model.config.columns.push({
-	text : '编辑',
-	width : 55,
-	menuDisabled : true,
-	xtype : 'actioncolumn',
-	tooltip : '编辑法规',
-	align : 'center',
-	icon : 'resources/images/edit_task.png',
-	handler : function(grid, rowIndex, colIndex, actionItem, event, record, row) {
-		ShowLawForm(true, grid, record)
-	}
-}, {
-	text : '删除法规',
-	width : 70,
-	menuDisabled : true,
-	xtype : 'actioncolumn',
-	tooltip : '删除法规',
-	align : 'center',
-	icon : 'resources/images/icons/fam/delete.png'
-})
 Ext.define('YongYou.view.config.grid.LawGrid', {
 			extend : 'Ext.grid.Panel',
 			height : 200,
@@ -26,7 +6,7 @@ Ext.define('YongYou.view.config.grid.LawGrid', {
 			store : Ext.create('Ext.data.Store', {
 						fields : law_model.config.fields
 					}),
-			columns : subject_model.config.columns,
+			columns : law_model.config.columns,
 			tbar : [{
 				xtype : 'combobox',
 				fieldLabel : '选择行业类别',
@@ -45,13 +25,11 @@ Ext.define('YongYou.view.config.grid.LawGrid', {
 					select : function(combo, records, eOpts) {
 						YongYou.util.DataApi.Core.getSubjectList(function(res,
 										scope) {
-									store = scope.up().items.items[1]
-											.getStore();
-									store.removeAll();
+									scope.removeAll();
 									records = Ext.decode(res);
-									store.add(records);
-									scope.up().items.items[1].reset()
-								}, this, {
+									scope.add(records);
+									
+								}, this.up().items.items[1].getStore(), {
 									id : records[0].data.id
 								})
 					}
@@ -92,7 +70,9 @@ Ext.define('YongYou.view.config.grid.LawGrid', {
 				icon : 'resources/images/icons/fam/add.png',
 				handler : function(view, rowIndex, colIndex, actionItem, event,
 						record, row) {
-					ShowLawForm(false, view.up('panel'), record)
+					YongYou.util.EventHandle.events.ShowForm(false, view
+									.up('panel'), record, '新建法规',
+							'YongYou.view.config.form.LawForm', lawCallback)
 				}
 			}],
 			listeners : {
@@ -103,58 +83,35 @@ Ext.define('YongYou.view.config.grid.LawGrid', {
 				}
 			}
 		});
-ShowLawForm = function(isUpdate, grid, record) {
-	form = Ext.create('YongYou.view.config.form.LawForm');
-	if (isUpdate) {
-		form.getForm().loadRecord(record)
-	}
-	Ext.create('Ext.window.Window', {
-		title : '编辑法规',
-		height : 500,
-		width : 600,
-		layout : 'fit',
-		items : [form],
-		dockedItems : [{
-			xtype : 'toolbar',
-			dock : 'bottom',
-			ui : 'footer',
-			items : [{
-						xtype : 'component',
-						flex : 1
-					}, {
-						xtype : 'button',
-						text : '提交',
-						handler : function() {
-
-							if (form.isValid()) {
-								if (isUpdate) {
-									YongYou.util.DataApi.Core.updateSubject(
-											callback, form, form.getValues(),
-											form.getValues().subjectTypeId)
-								} else {
-									YongYou.util.DataApi.Core.addSubject(
-											callback, form, form.getValues(),
-											form.getValues().subjectTypeId)
-								}
-							}
-						}
-
-					}]
-		}]
-	}).show();
-
-	callback = function(res, scope, typeid) {
+lawCallback = function(form, grid, isUpdate) {
+	this.callback = function(res, scope, subjectId) {
 		Ext.Msg.alert('提示', '执行操作成功！');
 		scope.up('panel').close();
-		grid.dockedItems.items[1].items.items[0].setValue(typeid);
+		var store;
+		if (grid.dockedItems) {
+			grid.dockedItems.items[1].items.items[0].setValue(subjectId);
+			store = grid.items.items[0].getStore();
+		} else {
+			store = grid.getStore();
+			grid.up().dockedItems.items[1].items.items[0].setValue(subjectId);
+		}
 
-		YongYou.util.DataApi.Core.getSubjectList(function(res, scope) {
+		YongYou.util.DataApi.Core.getLawsByIndustryID(function(res, scope) {
 					scope.removeAll();
 					records = Ext.decode(res);
 					scope.add(records);
 
-				}, subject_store, {
-					id : typeid
+				}, store, {
+					id : subjectId
 				})
+	}
+	if (form.isValid()) {
+		if (isUpdate) {
+			YongYou.util.DataApi.Core.updateLaw(this.callback, form, form
+							.getValues(), form.getValues().subjectId)
+		} else {
+			YongYou.util.DataApi.Core.addLaw(this.callback, form, form
+							.getValues(), form.getValues().subjectId)
+		}
 	}
 }

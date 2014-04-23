@@ -27,35 +27,6 @@ Ext.define('YongYou.view.config.form.SubjectIconTrigger', {
 				win.add(dataview)
 			}
 		});
-
-var subjectType_model = Ext.create('YongYou.model.SubjectType');
-subjectTypeComb = Ext.create('Ext.form.ComboBox', {
-			fieldLabel : '选择行业类别',
-			store : Ext.create('Ext.data.Store', {
-						fields : subjectType_model.config.fields,
-						proxy : {
-							type : 'ajax',
-							url : YongYou.util.Config.getService()
-									+ 'IndustryService/getIndustryClass',
-							reader : 'json'
-						}
-					}),
-			displayField : 'title',
-			valueField : 'id',
-			listeners : {
-				select : function(combo, records, eOpts) {
-					YongYou.util.DataApi.Core.getSubjectList(function(res,
-									scope) {
-								scope.removeAll();
-								records = Ext.decode(res);
-								scope.add(records);
-
-							}, subject_store, {
-								id : records[0].data.id
-							})
-				}
-			}
-		})
 Ext.define('YongYou.view.config.form.SubjectForm', {
 			extend : 'Ext.form.Panel',
 			win : null,
