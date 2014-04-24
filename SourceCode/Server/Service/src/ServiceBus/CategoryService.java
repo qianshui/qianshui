@@ -243,6 +243,23 @@ public class CategoryService {
 	
 	/**
 	 * *************************************************************
+	 * FunName : getContactList
+     * Description：根据联系人ID获取联系人信息
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/CategoryService/getContactByContactID?id=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getContactList")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getContactList() {
+		return CommonJson.list2Json(CategoryBusiness.getInstance().getContactList());
+	}
+	
+	
+	/**
+	 * *************************************************************
 	 * FunName : updateCategory
      * Description： 更新流程分类
      * Input: JSON格式数据

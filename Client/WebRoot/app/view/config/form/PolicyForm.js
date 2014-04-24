@@ -1,6 +1,6 @@
-Ext.define('YongYou.view.config.form.LawIconTrigger', {
+Ext.define('YongYou.view.config.form.PolicyIconTrigger', {
 			extend : 'Ext.form.field.Trigger',
-			alias : 'widget.LawIcontrigger',
+			alias : 'widget.PolicyIconTrigger',
 
 			// override onTriggerClick
 			onTriggerClick : function(a) {
@@ -12,7 +12,7 @@ Ext.define('YongYou.view.config.form.LawIconTrigger', {
 					dataview.getStore().removeAll();
 					dataview.getStore().load({
 								params : {
-									type : 'law'
+									type : 'policy'
 								}
 							});
 				}
@@ -27,7 +27,7 @@ Ext.define('YongYou.view.config.form.LawIconTrigger', {
 				win.add(dataview)
 			}
 		});
-Ext.define('YongYou.view.config.form.LawForm', {
+Ext.define('YongYou.view.config.form.PolicyForm', {
 			extend : 'Ext.form.Panel',
 			win : null,
 			// title: 'Basic Form',
@@ -49,7 +49,7 @@ Ext.define('YongYou.view.config.form.LawForm', {
 						name : 'subTitle'
 						// readOnly : true
 				}, {
-						xtype : 'LawIcontrigger',
+						xtype : 'PolicyIconTrigger',
 						fieldLabel : '图标',
 						name : 'imgId'
 				},	{
@@ -90,6 +90,33 @@ Ext.define('YongYou.view.config.form.LawForm', {
 						displayField : 'title',
 						valueField : 'id',
 						name : 'subjectId'
+					}, 
+						{
+						xtype : 'combobox',
+						fieldLabel : '选择人群',
+						store : Ext.create('YongYou.store.PersonGroups'),
+						queryMode : 'local',
+						displayField : 'description',
+						valueField : 'description',
+						name : 'groups'
+					}, 
+						{
+						xtype : 'combobox',
+						fieldLabel : '选择街道',
+						store : Ext.create('Ext.data.Store', {
+									fields : [{name:'id',type:'string'},{name:'name',type:'string'}],
+									proxy : {
+										type : 'ajax',
+										url : YongYou.util.Config.getService()
+												+ 'IndustryService/getAllStreetList',
+										reader : 'json'
+									},
+									autoLoad:true
+								}),
+						queryMode : 'local',
+						displayField : 'name',
+						valueField : 'name',
+						name : 'street'
 					}, {
 						xtype : 'htmleditor',
 						fieldLabel : '内容编辑',

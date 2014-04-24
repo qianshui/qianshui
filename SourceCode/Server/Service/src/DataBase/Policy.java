@@ -20,7 +20,8 @@ public class Policy implements java.io.Serializable {
 	private String type;
 	private String subTitle;
 	private String imgId;
-	private String group;
+	private String subjectId;
+	private String groups;
 	private String street;
 	//private Set sprelations = new HashSet(0);
 
@@ -38,7 +39,7 @@ public class Policy implements java.io.Serializable {
 	/** full constructor */
 	public Policy(String id, String title, String content, Date addTime,
 			String submitter, String type, String subTitle, String imgId,
-			Set sprelations) {
+			String subjectId, String group, String street, Set sprelations) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -47,7 +48,10 @@ public class Policy implements java.io.Serializable {
 		this.type = type;
 		this.subTitle = subTitle;
 		this.imgId = imgId;
-	//	this.sprelations = sprelations;
+		this.subjectId = subjectId;
+		this.groups = groups;
+		this.street = street;
+		//this.sprelations = sprelations;
 	}
 
 	// Property accessors
@@ -115,19 +119,29 @@ public class Policy implements java.io.Serializable {
 	public void setImgId(String imgId) {
 		this.imgId = imgId;
 	}
+
+	public String getSubjectId() {
+		return this.subjectId;
+	}
+
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+
+	public String getGroups() {
+		return this.groups;
+	}
+
+	public void setGroups(String groups) {
+		this.groups = groups;
+	}
+
 	public String getStreet() {
 		return this.street;
 	}
 
 	public void setStreet(String street) {
 		this.street = street;
-	}
-	public String getGroup() {
-		return this.group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
 	}
 
 //	public Set getSprelations() {

@@ -1,5 +1,5 @@
 var subject_model = Ext.create('YongYou.model.Subject');
-var subject_store = ;
+
 
 //var subjectType_model = Ext.create('YongYou.model.SubjectType');
 //subjectTypeComb = Ext.create('Ext.form.ComboBox', {

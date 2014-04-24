@@ -19,6 +19,7 @@ public class Laws implements java.io.Serializable {
 	private String submitter;
 	private String subTitle;
 	private String imgId;
+	private String subjectId;
 	//private Set slrelations = new HashSet(0);
 
 	// Constructors
@@ -34,7 +35,7 @@ public class Laws implements java.io.Serializable {
 
 	/** full constructor */
 	public Laws(String id, String title, String content, Date addTime,
-			String submitter, String subTitle, String imgId, Set slrelations) {
+			String submitter, String subTitle, String imgId, Set slrelations, String subjectId) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -42,6 +43,7 @@ public class Laws implements java.io.Serializable {
 		this.submitter = submitter;
 		this.subTitle = subTitle;
 		this.imgId = imgId;
+		this.subjectId=subjectId;
 	//	this.slrelations = slrelations;
 	}
 
@@ -102,7 +104,13 @@ public class Laws implements java.io.Serializable {
 	public void setImgId(String imgId) {
 		this.imgId = imgId;
 	}
+	public String getSubjectId() {
+		return this.subjectId;
+	}
 
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
 //	public Set getSlrelations() {
 //		return this.slrelations;
 //	}

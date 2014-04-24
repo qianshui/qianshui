@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import Business.Industry;
+import DataBase.Flow;
 import DataBase.Laws;
 import DataBase.Policy;
 import DataBase.Slrelation;
@@ -97,7 +98,17 @@ public class IndustryService {
 		Industry.getInstance().getStreetList(StreetList);
 		return CommonJson.list2Json(StreetList);
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
+	@GET
+	@Path("getAllStreetList")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getAllStreetList() {
+		List<Street> StreetList	= Industry.getInstance().getAllStreetList();
+		return CommonJson.list2Json(StreetList);
+	}
 	/**
 	 * *************************************************************
 	 * FunName : getObjectByID
@@ -294,9 +305,10 @@ public class IndustryService {
 	@POST
     @Path("/addLaws")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addLaws(Laws law) {
-		law.setId(IDOperation.getClassID("laws"));
-        if (DBOperation.add(law)) {
+    public Response addLaws(String law) {
+		Laws bean = (Laws)CommonJson.Json2Obj(law,Laws.class);
+		bean.setId(IDOperation.getClassID("Laws"));
+        if (DBOperation.add(bean)) {
         	return Response.status(201).entity("Seccess").build();
         }
         else
@@ -317,9 +329,10 @@ public class IndustryService {
 	@POST
     @Path("/addPolicy")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addPolicy(Policy policy) {
-		policy.setId(IDOperation.getClassID("policy"));
-        if (DBOperation.add(policy)) {
+    public Response addPolicy(String policy) {
+		Policy bean = (Policy)CommonJson.Json2Obj(policy,Policy.class);
+		bean.setId(IDOperation.getClassID("policy"));
+        if (DBOperation.add(bean)) {
         	return Response.status(201).entity("Seccess").build();
         }
         else
@@ -452,8 +465,10 @@ public class IndustryService {
 	@POST
     @Path("/updateLaws")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateLaws(Laws laws) {
-        if (DBOperation.update(laws)) {
+    public Response updateLaws(String laws) {
+		Laws bean = (Laws)CommonJson.Json2Obj(laws,Laws.class);
+		
+        if (DBOperation.update(bean)) {
         	return Response.status(201).entity("Seccess").build();
         }
         else
@@ -474,8 +489,9 @@ public class IndustryService {
 	@POST
     @Path("/updatePolicy")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updatePolicy(Policy policy) {
-        if (DBOperation.update(policy)) {
+    public Response updatePolicy(String policy) {
+		Policy bean = (Policy)CommonJson.Json2Obj(policy,Policy.class);
+        if (DBOperation.update(bean)) {
         	return Response.status(201).entity("Seccess").build();
         }
         else

@@ -351,7 +351,29 @@ public class CategoryBusiness {
                }
         }
     }
-    
+    /**
+     * *************************************************************
+	 * FunName : getContactList
+     * Description： 根据联系人列表
+     * Input: @param strID
+     * Output:void
+     * *************************************************************
+	 */
+    public List<Contact> getContactList() {
+    	Session session = null;
+    	List<Contact> list=new ArrayList<Contact>();
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+	        list = session.createQuery("from Contact").list();
+	        session.close();
+        }catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+        return list;
+    }
     /**
      * *************************************************************
 	 * FunName : getNodeByNodeID

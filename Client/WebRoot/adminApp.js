@@ -34,6 +34,7 @@ var subject_model = Ext.create('YongYou.model.Subject');
 var law_model = Ext.create('YongYou.model.Law');
 var flow_model = Ext.create('YongYou.model.Flow');
 var policy_model = Ext.create('YongYou.model.Policy');
+var contact_model = Ext.create('YongYou.model.Contact');
 
 
 Ext.application({

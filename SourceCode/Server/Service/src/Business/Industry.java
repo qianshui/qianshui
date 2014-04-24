@@ -14,6 +14,8 @@ import DataBase.Policy;
 import DataBase.Street;
 import DataBase.Subject;
 import DataBase.Subjecttype;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -145,6 +147,23 @@ public class Industry {
 		}
     }
     
+    
+    public List<Street> getAllStreetList() {
+    	List<Street> list=new ArrayList<Street>();
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			
+			list = session.createQuery("from Street").list();
+			
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;
+    }
     /**
      * *************************************************************
 	 * FunName : getLawsList
@@ -288,9 +307,12 @@ public class Industry {
 		try {
 			SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	        Session session = sf.openSession();
-	        List<Laws> list = session.createSQLQuery("select l.* from Laws l,Slrelation s " +
-					"where l.id = s.lid  and s.sid = :industryID").addEntity(Laws.class)
-					.setParameter("industryID", industryID).list();
+//	        List<Laws> list = session.createSQLQuery("select l.* from Laws l,Slrelation s " +
+//					"where l.id = s.lid  and s.sid = :industryID").addEntity(Laws.class)
+//					.setParameter("industryID", industryID).list();
+	        List<Laws> list = session.createSQLQuery("select l.* from Laws l " +
+			"where l.SubjectId = :industryID").addEntity(Laws.class)
+			.setParameter("industryID", industryID).list();
 	        if (list.size() != 0) {
 		        Iterator it = list.iterator();
 		        while (it.hasNext()) {
@@ -319,8 +341,11 @@ public class Industry {
 			SessionFactory sf = new Configuration().configure()
 			.buildSessionFactory();
 	        Session session = sf.openSession();       
-	        List<Policy> list = session.createSQLQuery("select p.* from Policy p,Sprelation s " +
-					"where p.id = s.pid  and s.sid = :industryID").addEntity(Policy.class)
+//	        List<Policy> list = session.createSQLQuery("select p.* from Policy p,Sprelation s " +
+//					"where p.id = s.pid  and s.sid = :industryID").addEntity(Policy.class)
+//					.setParameter("industryID", industryID).list();
+	        List<Policy> list = session.createSQLQuery("select p.* from Policy p " +
+					"where p.SubjectId = :industryID").addEntity(Policy.class)
 					.setParameter("industryID", industryID).list();
 	        if (list.size() != 0) {
 		        Iterator it = list.iterator();

@@ -7,27 +7,6 @@ YongYou.util.DataApi.Core.getFlowList(function(res, scope) {
 			scope.add(records);
 
 		}, flow_store)
-flow_model.config.columns.push({
-								text : '编辑',
-								width : 55,
-								menuDisabled : true,
-								xtype : 'actioncolumn',
-								tooltip : '编辑流程',
-								align : 'center',
-								icon : 'resources/images/edit_task.png',
-								handler : function(grid, rowIndex, colIndex,
-										actionItem, event, record, row) {
-										ShowFlowForm(true,grid,record)
-								}
-							}, {
-								text : '删除流程',
-								width : 70,
-								menuDisabled : true,
-								xtype : 'actioncolumn',
-								tooltip : '删除流程',
-								align : 'center',
-								icon : 'resources/images/icons/fam/delete.png'
-							})
 Ext.define('YongYou.view.config.grid.FlowGrid', {
 			extend : 'Ext.grid.Panel',
 			height : 200,
@@ -41,7 +20,8 @@ Ext.define('YongYou.view.config.grid.FlowGrid', {
 						icon : 'resources/images/icons/fam/add.png',
 						handler : function(view, rowIndex, colIndex,
 										actionItem, event, record, row) {
-										ShowFlowForm(false,view.up('panel'),record)
+										YongYou.util.EventHandle.events.ShowForm(false, view.up('panel'), record, '新建流程',
+							'YongYou.view.config.form.FlowForm', flowCallback)
 								}
 					}],
 			listeners : {
@@ -52,51 +32,34 @@ Ext.define('YongYou.view.config.grid.FlowGrid', {
 				}
 			}
 		});
-ShowFlowForm = function(isUpdate, grid,record) {
-	form = Ext.create('YongYou.view.config.form.FlowForm');
-	if(isUpdate){
-	form.getForm().loadRecord(record)
+
+flowCallback = function(form, grid, isUpdate) {
+	this.callback = function(res, scope, subjectId) {
+		Ext.Msg.alert('提示', '执行操作成功！');
+		scope.up('panel').close();
+		var store;
+		if (grid.dockedItems) {
+			//grid.dockedItems.items[1].items.items[0].setValue(subjectId);
+			store = grid.items.items[0].getStore();
+		} else {
+			store = grid.getStore();
+			//grid.up().dockedItems.items[1].items.items[0].setValue(subjectId);
+		}
+
+		YongYou.util.DataApi.Core.getFlowList(function(res, scope) {
+					scope.removeAll();
+					records = Ext.decode(res);
+					scope.add(records);
+
+				}, store)
 	}
-	Ext.create('Ext.window.Window', {
-		title : '编辑流程',
-		height : 500,
-		width : 600,
-		layout : 'fit',
-		items : [form],
-		dockedItems : [{
-			xtype : 'toolbar',
-			dock : 'bottom',
-			ui : 'footer',
-			items : [{
-						xtype : 'component',
-						flex : 1
-					}, {
-						xtype : 'button',
-						text : '提交',
-						handler : function() {
-
-							if (form.isValid()) {
-								if (isUpdate) {
-									YongYou.util.DataApi.Core.updateFlow(
-											callback, form, form.getValues(),grid)
-								} else {
-									YongYou.util.DataApi.Core.addFlow(
-											callback, form, form.getValues(),grid)
-								}
-							}
-						}
-
-					}]
-		}]
-	}).show();
-}
-callback = function(res, scope,grid) {
-	Ext.Msg.alert('提示', '执行操作成功！');
-	scope.up('panel').close();
-	flow_store.removeAll();
-	YongYou.util.DataApi.Core.getFlowList(function(res, scope) {
-			records = Ext.decode(res);
-			scope.add(records);
-
-		}, flow_store)
+	if (form.isValid()) {
+		if (isUpdate) {
+			YongYou.util.DataApi.Core.updateFlow(this.callback, form, form
+							.getValues(), form.getValues().subjectId)
+		} else {
+			YongYou.util.DataApi.Core.addFlow(this.callback, form, form
+							.getValues(), form.getValues().subjectId)
+		}
+	}
 }

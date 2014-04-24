@@ -67,6 +67,11 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+"CategoryService/getContactByContactID",param,
     	    		callback,scope)
     	},
+    	getContactList:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getContactList",param,
+    	    		callback,scope)
+    	},
     	getIndustryByID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"IndustryService/getIndustryByID",param,
@@ -177,6 +182,13 @@ Ext.define('YongYou.util.DataApi', {
     	    		callback,scope);
 
     	},
+    	getAllStreetList:function(callback,scope,params)
+    	{
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"IndustryService/getAllStreetList",params,
+    	    		callback,scope);
+
+    	},
     	judge_adrs:function(callback,scope,params)
     	{
     		YongYou.util.DataApi.queryData(
@@ -235,6 +247,18 @@ Ext.define('YongYou.util.DataApi', {
     	{
     		YongYou.util.DataApi.postData(
     	    		YongYou.util.Config.getService()+'IndustryService/addLaws',params,
+    	    		callback,scope,uppa);
+    	},
+    	updatePolicy:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'IndustryService/updatePolicy',params,
+    	    		callback,scope,uppa);
+    	},
+    	addPolicy:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'IndustryService/addPolicy',params,
     	    		callback,scope,uppa);
     	}
     },

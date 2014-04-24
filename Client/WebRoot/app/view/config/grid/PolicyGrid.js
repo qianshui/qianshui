@@ -1,12 +1,12 @@
-Ext.define('YongYou.view.config.grid.LawGrid', {
+Ext.define('YongYou.view.config.grid.PolicyGrid', {
 			extend : 'Ext.grid.Panel',
 			height : 200,
 			width : 400,
 			scrollable : true,
 			store : Ext.create('Ext.data.Store', {
-						fields : law_model.config.fields
+						fields : policy_model.config.fields
 					}),
-			columns : law_model.config.columns,
+			columns : policy_model.config.columns,
 			tbar : [{
 				xtype : 'combobox',
 				fieldLabel : '选择行业类别',
@@ -49,7 +49,7 @@ Ext.define('YongYou.view.config.grid.LawGrid', {
 						}),
 				listeners : {
 					select : function(combo, records, eOpts) {
-						YongYou.util.DataApi.Core.getLawsByIndustryID(function(
+						YongYou.util.DataApi.Core.getPolicyByIndustryID(function(
 										res, scope) {
 									store = scope.up('grid').getStore();
 									store.removeAll();
@@ -66,13 +66,13 @@ Ext.define('YongYou.view.config.grid.LawGrid', {
 				}
 			}, {
 				xtype : 'button',
-				text : '新建法规',
+				text : '新建优惠政策',
 				icon : 'resources/images/icons/fam/add.png',
 				handler : function(view, rowIndex, colIndex, actionItem, event,
 						record, row) {
 					YongYou.util.EventHandle.events.ShowForm(false, view
-									.up('panel'), record, '新建法规',
-							'YongYou.view.config.form.LawForm', lawCallback)
+									.up('panel'), record, '新建优惠政策',
+							'YongYou.view.config.form.PolicyForm', policyCallback)
 				}
 			}],
 			listeners : {
@@ -83,7 +83,7 @@ Ext.define('YongYou.view.config.grid.LawGrid', {
 				}
 			}
 		});
-lawCallback = function(form, grid, isUpdate) {
+policyCallback = function(form, grid, isUpdate) {
 	this.callback = function(res, scope, subjectId) {
 		Ext.Msg.alert('提示', '执行操作成功！');
 		scope.up('panel').close();
@@ -96,7 +96,7 @@ lawCallback = function(form, grid, isUpdate) {
 			//grid.up().dockedItems.items[1].items.items[0].setValue(subjectId);
 		}
 
-		YongYou.util.DataApi.Core.getLawsByIndustryID(function(res, scope) {
+		YongYou.util.DataApi.Core.getPolicyByIndustryID(function(res, scope) {
 					scope.removeAll();
 					records = Ext.decode(res);
 					scope.add(records);
@@ -107,10 +107,10 @@ lawCallback = function(form, grid, isUpdate) {
 	}
 	if (form.isValid()) {
 		if (isUpdate) {
-			YongYou.util.DataApi.Core.updateLaws(this.callback, form, form
+			YongYou.util.DataApi.Core.updatePolicy(this.callback, form, form
 							.getValues(), form.getValues().subjectId)
 		} else {
-			YongYou.util.DataApi.Core.addLaws(this.callback, form, form
+			YongYou.util.DataApi.Core.addPolicy(this.callback, form, form
 							.getValues(), form.getValues().subjectId)
 		}
 	}

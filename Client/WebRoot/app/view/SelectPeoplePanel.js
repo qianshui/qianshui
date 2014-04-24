@@ -2,15 +2,7 @@ Ext.define('YongYou.view.SelectPeoplePanel', {
     extend: 'Ext.dataview.DataView',
     xtype:'selectpeople',
     config: {
-        store: {
-	        fields: ['description','imgPath'],
-	        data: [
-	            {description: '大学生',imgPath:'daxuesheng.gif'},
-	            {description: '残疾人',imgPath:'canjiren.gif'},
-	            {description: '低保户',imgPath:'dibaohu.gif'},
-	            {description: '农民',imgPath:'nongmin.gif'}
-	        ]
-	    },
+        store: Ext.create('YongYou.store.PersonGroups'),
         id:'SelectPeoplePanel',
        // scrollable: 'vertical',
         baseCls: 'categories-list',

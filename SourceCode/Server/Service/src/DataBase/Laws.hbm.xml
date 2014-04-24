@@ -28,6 +28,9 @@
         <property name="imgId" type="string">
             <column name="ImgId" length="100" />
         </property>
+        <property name="subjectId" type="string">
+            <column name="SubjectId" length="100" />
+        </property>
      <!--    <set name="slrelations" inverse="true">
             <key>
                 <column name="LID" length="10" not-null="true" />
