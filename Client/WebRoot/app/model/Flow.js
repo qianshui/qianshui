@@ -32,8 +32,7 @@ Ext.define('YongYou.model.Flow', {
 								icon : 'resources/images/cog_edit.png',
 								handler : function(grid, rowIndex, colIndex,
 										actionItem, event, record, row) {
-										YongYou.util.EventHandle.events.ShowForm(true,
-										grid, record, '绘制流程图','YongYou.view.config.form.FlowForm',flowCallback)
+										YongYou.util.EventHandle.events.OpenFlowEditWindow(record)
 								}
 							},  {
 								text : '删除流程',

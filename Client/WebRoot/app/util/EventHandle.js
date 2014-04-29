@@ -50,6 +50,33 @@ Ext.define('YongYou.util.EventHandle', {
 											}]
 								}]
 					}).show();
+		},
+		OpenFlowEditWindow:function(record){
+		panel = Ext.create('YongYou.view.config.panel.FlowEdit');
+		panel.initialPanel(record);	
+			Ext.create('Ext.window.Window', {
+						title : "编辑流程",
+						height : 600,
+						width : 800,
+						layout : 'fit',
+						items : [panel],
+						dockedItems : [{
+									xtype : 'toolbar',
+									dock : 'bottom',
+									ui : 'footer',
+									items : [{
+												xtype : 'component',
+												flex : 1
+											}, {
+												xtype : 'button',
+												text : '提交',
+												handler : function() {
+													
+												}
+
+											}]
+								}]
+					}).show();
 		}
 	}
 
