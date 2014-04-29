@@ -7,6 +7,12 @@ Ext.define('YongYou.util.DataApi', {
         this.initConfig(config);
     },
     Core:{
+    	getZbptAndTzjy:function(callback,scope,param){
+			YongYou.util.DataApi.queryData(
+		    		YongYou.util.Config.getService()+"IndustryService/getZbptAndTzjy",param,
+		    		callback,scope)
+
+	    },
     	getAreaByLngLat:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"MapService/getAreaByLngLat",param,
@@ -171,7 +177,7 @@ Ext.define('YongYou.util.DataApi', {
     	getCommonIndustry:function(callback,scope,params)
     	{
     		YongYou.util.DataApi.queryData(
-    	    		YongYou.util.Config.getService()+"IndustryService/getSubjectList?id=ST0003",params,
+    	    		YongYou.util.Config.getService()+"IndustryService/getSubjectList",params,
     	    		callback,scope);
 
     	},

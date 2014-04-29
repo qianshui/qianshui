@@ -7,6 +7,6 @@ Ext.define('YongYou.store.AddressMenu', {
         
         ],
         storeId: 'AddressMenu',
-        fields: ['id','name','imgPath']
+        fields: ['commonFlag','id','name','imgPath']
     }
 });

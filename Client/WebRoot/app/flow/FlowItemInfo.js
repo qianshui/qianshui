@@ -91,8 +91,8 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 
 		YongYou.util.DataApi.Core.getAttachmentByNodeID(function(res, scope) {
 					res = Ext.decode(res);
-					var html = scope.formatFiles(res)
-					scope.getItems().items[6].setHtml(html)
+					var html = scope.formatFiles(res);
+					scope.getItems().items[6].setHtml(html);
 					mainEl.removeCls('in').addCls('out');
 
 				}, this, {
@@ -105,11 +105,13 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 		this.clearContact(this.items.items[4]);
 		this.items.items[6].setHtml('<div></div>')
 	},
+
 	formatFiles : function(files) {
 		var html = "</br><div style='margin-left:10px'>";
 		for (i = 0; i < files.length; i++) {
-			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='"
-					+ files[i].downloadlink
+			alert(files[i].downloadLink);
+			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='attaches/"
+					+ files[i].downloadLink
 					+ "' style='color:black;'>"
 					+ files[i].title + "</a></br>";
 		}

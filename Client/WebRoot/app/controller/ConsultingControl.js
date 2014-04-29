@@ -16,6 +16,8 @@ Ext.define('YongYou.controller.ConsultingControl', {
 					mapconfirm : '#OneIndustryPanel',
 					navibar : '#navigationbar',
 
+					other_address:'#get_address',
+					other_industry:'#get_industry',
 					yhzc_list : '#yhzc_list',
 					flfg_list : '#flfg_list',
 					list_about_map : '#list_about_map'
@@ -72,37 +74,35 @@ Ext.define('YongYou.controller.ConsultingControl', {
 
 				flag = 0;
 				this.getNavibar().setTitle("选择行业类别");
+				prsngrp=record;
 			},
 			onSubjectItemTap : function(view, index, target, record, e) {
-				// var navigatePanel =
-				// Ext.create('YongYou.view.MyNavigationView', {});
-				//	    	
-				// YongYou.util.DataApi.Core.getCommonIndustry(
-				// function(res,obj){
-				// var jsonObj = Ext.decode(res);
-				// var menuStore = Ext.create('YongYou.store.SubjectMenu',{});
-				// menuStore.add(jsonObj);
-				// var
-				// industrylistPanel=Ext.create('YongYou.view.IndustrylistPanel',
-				// {
-				// title: 'title2',
-				// fullscreen: true,
-				// store:menuStore
-				// });
-				// obj.push(industrylistPanel);
-				// Ext.Viewport.add(obj);
-				// },navigatePanel,record);
-				//	        
-				// Ext.Viewport.setActiveItem(navigatePanel, {
-				// type: 'slide',
-				// direction: 'right'
-				// });
+				
 				YongYou.util.DataApi.Core.getCommonIndustry(
 						function(res, scope) {
 							res = Ext.decode(res);
 
+						    
+							commonIdlist=new Array();
+							otherIdlist=new Array();
+							for(var adi in res)
+							{
+								
+								if(res[adi].commonFlag==1)
+								{
+									
+									commonIdlist.push(res[adi]);
+								}
+								else
+								{
+									
+									otherIdlist.push({text:res[adi].title,value:res[adi].id});
+								}
+							}
+
 							scope.getIndustry().getStore().removeAll();
-							scope.getIndustry().getStore().add(res);
+							scope.getIndustry().getStore().add(commonIdlist);
+							scope.getOther_industry().setOptions(otherIdlist);
 
 							Ext.ComponentQuery
 									.query("container[id='contain2']")[0]
@@ -121,42 +121,34 @@ Ext.define('YongYou.controller.ConsultingControl', {
 											});
 							scope.getNavibar().setTitle("选择行业");
 						}, this, {
-						// 'HYID' : record.internalId
+						   'id' : record.id
 						});
 				industry1 = record;
 
 			},
 			onIndustryListItemTap : function(view, index, target, record, e) {
 
-				// var navigatePanel =
-				// Ext.create('YongYou.view.MyNavigationView', {});
-				//	    	
-				// YongYou.util.DataApi.Core.getAddressList(
-				// function(res,obj){
-				// var jsonObj = Ext.decode(res);
-				// var menuStore = Ext.create('YongYou.store.SubjectMenu',{});
-				// menuStore.add(jsonObj);
-				// var
-				// selectaddressPanel=Ext.create('YongYou.view.SelectAddressPanel',
-				// {
-				// title: 'title2',
-				// fullscreen: true,
-				// store:menuStore
-				// });
-				// obj.push(selectaddressPanel);
-				// Ext.Viewport.add(obj);
-				// },navigatePanel,record);
-				//	        
-				// Ext.Viewport.setActiveItem(navigatePanel, {
-				// type: 'slide',
-				// direction: 'right'
-				// });
 				YongYou.util.DataApi.Core.getAddressList(function(res, scope) {
 							res = Ext.decode(res);
 
+							commonAdlist=new Array();
+							otherAdlist=new Array();
+							for(var adi in res)
+							{
+								if(res[adi].commonFlag==1)
+								{
+									commonAdlist.push(res[adi]);
+								}
+								else
+								{
+									otherAdlist.push({text:res[adi].name,value:res[adi].id});
+								}
+							}
+							
 							scope.getAddress().getStore().removeAll();
-							scope.getAddress().getStore().add(res);
-
+							scope.getAddress().getStore().add(commonAdlist);
+							scope.getOther_address().setOptions(otherAdlist);
+							
 							Ext.ComponentQuery
 									.query("container[id='contain2']")[0]
 									.getLayout().setAnimation({
@@ -177,43 +169,10 @@ Ext.define('YongYou.controller.ConsultingControl', {
 						// 'HYID' : record.internalId
 						});
 				industry2 = record;
-
-				// var navigatePanel =
-				// Ext.create('YongYou.view.MyNavigationView', {});
-				// navigatePanel.push(Ext.create('YongYou.view.OneIndustryPanel',
-				// {
-				// title: 'title2',
-				// fullscreen: true
-				// }));
-				//	        
-				// Ext.Viewport.add(navigatePanel);
-				// Ext.Viewport.setActiveItem(navigatePanel, {
-				// type: 'slide',
-				// direction: 'right'
-				// });
-				//	        
-				// new Ext.onReady(function(){
-				// initializeMap();
-				// },navigatePanel);
+				
 			},
 			onAddressItemTap : function(view, index, target, record, e) {
-				// var navigatePanel =
-				// Ext.create('YongYou.view.MyNavigationView', {});
-				// navigatePanel.push(Ext.create('YongYou.view.OneIndustryPanel',
-				// {
-				// title: 'title2',
-				// fullscreen: true
-				// }));
-				//	        
-				// Ext.Viewport.add(navigatePanel);
-				// Ext.Viewport.setActiveItem(navigatePanel, {
-				// type: 'slide',
-				// direction: 'right'
-				// });
-				//	        
-				// new Ext.onReady(function(){
-				// initializeMap();
-				// },navigationPanel);
+				
 				Ext.ComponentQuery.query("container[id='contain2']")[0]
 						.getLayout().setAnimation({
 									type : 'slide',
@@ -227,11 +186,12 @@ Ext.define('YongYou.controller.ConsultingControl', {
 									direction : 'right',
 									duration : 250
 								});
+				address = record;
 				this.getNavibar().setTitle("地图点选");
+				
 				new Ext.onReady(function() {
 							initializeMap();
 						}, navigationPanel);
-				address = record;
 				point_cur = null;
 				array_about_map = new Array();
 			},
@@ -294,12 +254,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 							});
 				}
 			},
-
-			// initializeInfoConfirm:function()
-			// {
-			//	    	
-			// },
-			//	    
+			
 			onMapconfirmTap : function(b, e) {
 				// 汇总页初始化阶段
 				this.getConfirm().removeAll();
@@ -312,7 +267,6 @@ Ext.define('YongYou.controller.ConsultingControl', {
 						}, this, {
 							'id' : industry2.id
 						});
-				// this.getConfirm().add(flfg);
 				// c 优惠政策
 				var yhzc = Ext.create('YongYou.view.QueryPanelDetailList', {});
 				YongYou.util.DataApi.Core.getZC(function(res, scope) {
@@ -320,39 +274,39 @@ Ext.define('YongYou.controller.ConsultingControl', {
 							scope.getYhzc_list().getStore().removeAll();
 							scope.getYhzc_list().getStore().add(res);
 						}, this, {
-							'id' : industry2.id
+							'id' : industry2.id,
+							'pg' : prsngrp.id
 						});
-				// this.getConfirm().add(yhzc);
-
 				// a 信息确认
+
 				var infocon = Ext.create('YongYou.view.InformationConfirm', {});
-				infocon.setSelectValue(industry1 + '业&nbsp;&nbsp;' + industry2.description,
-						'大学生', address)
-				infocon.setAroundValue({
-							gongjian : '中餐厅;超市;西餐厅;茶餐厅;美容美发;家政中心;娱乐中心;洗衣房;',
-							biaozhi : '嘉陵公园',
-							gongyuan : '嘉陵公园 查找周边公园',
-							jingguan : '嘉陵公园',
-							jiuyi : '二级长安医院、三级甲等三二四医院、二级甲等江北一院 查找周边医院',
-							jiuxue : '区级建新中学、重庆市直辖后首批重点中学重庆18中、区级华新小学 查找周边学校',
-							shangye : '重百商场、北京华联商厦、苏宁电器、香港新世界百货、观音桥步行街等 查找周边商场'
-						})
-				infocon.setAdviseValue('<div style="margin-left:20px;"><font size="14px">您</font>选择的开办地点与相邻'+industry2.description+'不足100米，不符合'
-				+industry1+'许可中关于同行业距离不应小于100米的规定，建议您更换开办地址</div>')
-				// infocon.getItems().items[0].setHtml("行业：" + industry1
-				// + industry2 + "&nbsp;&nbsp;&nbsp;&nbsp;地址：" + address);
-				// this.getConfirm().add(infocon);
+				infocon.setSelectValue(industry1.description + '业&nbsp;&nbsp;' + industry2.description,
+						prsngrp.description, address.name);
+				YongYou.util.DataApi.Core.getZbptAndTzjy(function(res, scope) {
+					
+					scope.setAroundValue({
+								xuexiao : '中餐厅;超市;西餐厅;茶餐厅;美容美发;家政中心;娱乐中心;洗衣房;',
+								shangye : '嘉陵公园',
+								jiaotong : '嘉陵公园 查找周边公园',
+								gongyuan : '嘉陵公园',
+								biaojian : '二级长安医院、三级甲等三二四医院、二级甲等江北一院 查找周边医院',
+								yiyuan : '区级建新中学、重庆市直辖后首批重点中学重庆18中、区级华新小学 查找周边学校',
+								xiaoqu : '重百商场、北京华联商厦、苏宁电器、香港新世界百货、观音桥步行街等 查找周边商场'
+							})
+					scope.setAdviseValue('<div style="margin-left:20px;"><font size="14px">您</font>选择的开办地点与相邻'+industry2.description+'不足100米，不符合'
+					+industry1.description+'许可中关于同行业距离不应小于100米的规定，建议您更换开办地址</div>')
+					
+				}, infocon,
+				{
+					'id' : industry2.id
+				});
 				// b 办事指南
 				YongYou.util.DataApi.Core.getNodeBySubjectID(function(res, scope) {
 							var bszn = Ext.create('YongYou.view.LawGuide', {});
 							flowview = Ext.create('YongYou.flow.FlowViewport',
 									{
-										// id : 'confirm-flowviewport',
-										// width : '100%',
-										// height:'100%',
 										title : '办事流程'
-										// style : "margin-right:5px;!important"
-								})
+							});
 							flowview.initialPanelCard(res, 'confirm-');
 							// bszn.add(flowview);
 							scope.scope.getConfirm().add(flowview);

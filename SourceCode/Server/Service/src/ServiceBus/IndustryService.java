@@ -65,6 +65,23 @@ public class IndustryService {
 	
 	/**
 	 * *************************************************************
+	 * FunName : getZbptAndTzjy
+     * Description： 获取周边配套和投资建议
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/IndustryService/getZbptAndTzjy
+     * *************************************************************
+	 */
+	@GET
+	@Path("getZbptAndTzjy")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getZbptAndTzjy() {
+		
+		return null;
+	}
+	
+	/**
+	 * *************************************************************
 	 * FunName : getSubjectList
      * Description： 获取某行业类别的常用行业
      * Input: 无

@@ -32,10 +32,10 @@ Ext.define('YongYou.view.InformationConfirm', {
 											readOnly : true,
 											height : 5,
 											style : 'width:100%;font-size:16px;',
-											label : '公建配套：',
+											label : '学校：',
 											labelWidth:'20%',
 											labelAlian:'right',
-											name : 'gongjian'
+											name : 'xuexiao'
 										}, {
 											xtype : 'textfield',
 											readOnly : true,
@@ -43,8 +43,8 @@ Ext.define('YongYou.view.InformationConfirm', {
 											labelWidth:'20%',
 											labelAlian:'right',
 											style : 'width:100%;font-size:16px;',
-											label : '标志建筑：',
-											name : 'biaozhi'
+											label : '商业：',
+											name : 'shangye'
 										}, {
 											xtype : 'textfield',
 											readOnly : true,
@@ -52,7 +52,16 @@ Ext.define('YongYou.view.InformationConfirm', {
 											labelWidth:'20%',
 											labelAlian:'right',
 											style : 'width:100%;font-size:16px;',
-											label : '公园绿化：',
+											label : '交通：',
+											name : 'jiaotong'
+										}, {
+											xtype : 'textfield',
+											readOnly : true,
+											height : 5,
+											labelWidth:'20%',
+											labelAlian:'right',
+											style : 'width:100%;font-size:16px;',
+											label : '公园：',
 											name : 'gongyuan'
 										}, {
 											xtype : 'textfield',
@@ -61,8 +70,8 @@ Ext.define('YongYou.view.InformationConfirm', {
 											labelWidth:'20%',
 											labelAlian:'right',
 											style : 'width:100%;font-size:16px;',
-											label : '自然景观：',
-											name : 'jingguan'
+											label : '标志建筑：',
+											name : 'biaojian'
 										}, {
 											xtype : 'textfield',
 											readOnly : true,
@@ -70,17 +79,8 @@ Ext.define('YongYou.view.InformationConfirm', {
 											labelWidth:'20%',
 											labelAlian:'right',
 											style : 'width:100%;font-size:16px;',
-											label : '就医条件：',
-											name : 'jiuyi'
-										}, {
-											xtype : 'textfield',
-											readOnly : true,
-											height : 5,
-											labelWidth:'20%',
-											labelAlian:'right',
-											style : 'width:100%;font-size:16px;',
-											label : '就学条件：',
-											name : 'jiuxue'
+											label : '医院：',
+											name : 'yiyuan'
 										}, {
 											xtype : 'textareafield',
 											readOnly : true,
@@ -88,8 +88,8 @@ Ext.define('YongYou.view.InformationConfirm', {
 											labelWidth:'20%',
 											labelAlian:'right',
 											style : 'width:100%;font-size:16px;',
-											label : '商业环境：',
-											name : 'shangye'
+											label : '小区：',
+											name : 'xiaoqu'
 
 										}]
 							}]
@@ -131,10 +131,10 @@ Ext.define('YongYou.view.InformationConfirm', {
 						+ '<div class="subject" >&nbsp;行业：'
 						+ subject
 						+ '</div>'
-						+ '<div class="person">&nbsp;人群:'
+						+ '<div class="person">&nbsp;人群:&nbsp;'
 						+ person
 						+ '</div>'
-						+ '<div class="address">&nbsp;地址:'
+						+ '<div class="address">&nbsp;地址:&nbsp;'
 						+ address
 						+ '</div>' 
 						+ '<div class="title">&nbsp;在您选取的位置方圆3公里配套情况如下：</div></div>')

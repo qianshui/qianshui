@@ -17,13 +17,24 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 			docked : 'bottom',
 			style : 'margin:20px;',
 			items : [{
-				xtype : 'textfield',
-				ui : 'round',
+//				xtype : 'textfield',
+//				ui : 'round',
+//				id : 'get_address',
+//				width : 300,
+//				border : 3,
+//				height:52,
+				xtype: 'selectfield',
+				label:'更多地址：',
 				id : 'get_address',
 				width : 300,
+				labelWidth:'40%',
 				border : 3,
 				height:52,
-				
+                options: [
+                    {text: 'First Option',  value: 'first'},
+                    {text: 'Second Option', value: 'second'},
+                    {text: 'Third Option',  value: 'third'}
+                ],
 				style : 'border-radius: 15px;float:left;margin-left:165px;border-color: gray; border-style: solid;'
 			}, {
 				xtype : 'button',
@@ -35,8 +46,18 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 				//text : '提交地址',
 				listeners : {
 					'tap' : function(b, e) {
-						// alert("完善中。。。。");
-						address = Ext.getCmp("get_address").getValue();
+						var adid = Ext.getCmp("get_address").getValue();
+
+						var temp_arr=new Array();
+						temp_arr=Ext.getCmp("get_address").getOptions();
+						for(var adi in temp_arr)
+						{
+							if(temp_arr[adi].value==adid)
+							{
+								address={name:temp_arr[adi].text,id:adid};
+								break;
+							}
+						}
 						Ext.ComponentQuery.query("container[id='contain2']")[0]
 								.setActiveItem('#OneIndustryPanel');
 						new Ext.onReady(function() {
@@ -65,7 +86,7 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 
 	},
 	onItemTap : function(container, target, index, e) {
-		var me = this, store = me.getStore(), record = store.data.items[index].data.name;
+		var me = this, store = me.getStore(), record = store.data.items[index].data;
 
 		me.fireEvent('itemtap', me, index, target, record, e);
 	}

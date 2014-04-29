@@ -17,7 +17,7 @@ Ext.define('YongYou.view.SelectPeoplePanel', {
     onItemTap: function (container, target, index, e) {
         var me = this,
             store = me.getStore(),
-            record = store.data.items[index].data.description;
+            record = store.data.items[index].data;
 
         me.fireEvent('itemtap', me, index, target, record, e);
     }

@@ -99,7 +99,7 @@ public class Industry {
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Subject where SubjecttypeID=:SubjecttypeID and CommonFlag=1")
+			list = session.createQuery("from Subject where SubjecttypeID=:SubjecttypeID")
 					.setParameter("SubjecttypeID", SubjecttypeID).list();
 			if (list != null) {
 				Iterator it = list.iterator();
@@ -130,8 +130,8 @@ public class Industry {
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Street where CommonFlag=1").list();
-			
+			//list = session.createQuery("from Street where CommonFlag=1").list();
+			list = session.createQuery("from Street").list();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
