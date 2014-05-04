@@ -31,9 +31,7 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 				border : 3,
 				height:52,
                 options: [
-                    {text: 'First Option',  value: 'first'},
-                    {text: 'Second Option', value: 'second'},
-                    {text: 'Third Option',  value: 'third'}
+                    {text: '~暂无~',  value: null}
                 ],
 				style : 'border-radius: 15px;float:left;margin-left:165px;border-color: gray; border-style: solid;'
 			}, {
@@ -48,6 +46,12 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 					'tap' : function(b, e) {
 						var adid = Ext.getCmp("get_address").getValue();
 
+						if(adid==null)
+						{
+							alert("您尚未选择地址！");
+							return;
+						}
+						
 						var temp_arr=new Array();
 						temp_arr=Ext.getCmp("get_address").getOptions();
 						for(var adi in temp_arr)

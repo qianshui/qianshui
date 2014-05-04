@@ -18,6 +18,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 
 					other_address:'#get_address',
 					other_industry:'#get_industry',
+					other_subclass:'#get_subclass',
 					yhzc_list : '#yhzc_list',
 					flfg_list : '#flfg_list',
 					list_about_map : '#list_about_map'
@@ -53,11 +54,27 @@ Ext.define('YongYou.controller.ConsultingControl', {
 						function(res, scope) {
 							res = Ext.decode(res);
 
-							scope.getSubject().getStore().removeAll();
-							scope.getSubject().getStore().add(res);
+							commonIclist=new Array();
+							otherIclist=new Array();
+							for(var adi in res)
+							{
+								
+								if(res[adi].commonFlag==1)
+								{
+									
+									commonIclist.push(res[adi]);
+								}
+								else
+								{
+									
+									otherIclist.push({text:res[adi].title,value:res[adi].id});
+								}
+							}
 
-							// Ext.ComponentQuery.query("container[id='contain2']")[0]
-							// .setActiveItem('#IndustrylistPanel');
+							scope.getSubject().getStore().removeAll();
+							scope.getSubject().getStore().add(commonIclist);
+							scope.getOther_subclass().setOptions(otherIclist);
+							
 						}, this, {});
 				Ext.ComponentQuery.query("container[id='contain2']")[0]
 						.getLayout().setAnimation({
