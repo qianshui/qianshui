@@ -439,3 +439,35 @@ body:not(.x-phone) .desktop-list .desktop-list-item .image {
 	font-weight:bold;
 	color:rgba(171, 93, 57,0.8);
 }
+
+
+.flow-edit-item{
+	margin-right:10px;
+	border-radius: 15px;
+	background: rgba(250,250,250,0.1);
+}
+.flow-edit-item .out{
+	background: rgba(250,250,250,0.1);
+}
+.flow-edit-item .hover{
+	
+	background: rgba(171, 93, 57,0.8);
+}
+
+.flow-edit-item .name {
+	margin-top:5px;
+	font-size:20px;
+	text-shadow:0 1px 0 #000;
+	color:#fff;
+	font-family:"Quattrocento Sans",sans-serif;
+}
+.flow-edit-item-icon {
+	
+	
+	width:160px;
+	height:75px;
+	background-repeat:no-repeat;
+	background-size:contain;
+	
+  	
+}

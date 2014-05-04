@@ -44,39 +44,25 @@ Ext.define('YongYou.util.EventHandle', {
 												xtype : 'button',
 												text : '提交',
 												handler : function() {
-													callback(form,grid, isUpdate)
+													callback(form, grid,
+															isUpdate)
 												}
 
 											}]
 								}]
 					}).show();
 		},
-		OpenFlowEditWindow:function(record){
-		panel = Ext.create('YongYou.view.config.panel.FlowEdit');
-		panel.initialPanel(record);	
-			Ext.create('Ext.window.Window', {
-						title : "编辑流程",
-						height : 600,
-						width : 800,
-						layout : 'fit',
-						items : [panel],
-						dockedItems : [{
-									xtype : 'toolbar',
-									dock : 'bottom',
-									ui : 'footer',
-									items : [{
-												xtype : 'component',
-												flex : 1
-											}, {
-												xtype : 'button',
-												text : '提交',
-												handler : function() {
-													
-												}
-
-											}]
-								}]
-					}).show();
+		OpenFlowEditWindow : function(record) {
+			win = Ext.getCmp('flow-win');
+			if (win) {
+				win.items.items[0].initialPanel(record);
+				
+			} else {
+				win = Ext.create('YongYou.view.config.panel.FlowContainer');
+				win.initialPanel(record);
+				
+			}
+			win.show();
 		}
 	}
 

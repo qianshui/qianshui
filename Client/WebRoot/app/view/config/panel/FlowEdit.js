@@ -1,8 +1,12 @@
 Ext.define('YongYou.view.config.panel.FlowEdit', {
 			extend : 'Ext.Panel',
 			height : 600,
-			width : 800,
+			width : 700,
+			region: 'center',
+			selectItem:null,
 			autoScroll : true,
+			id : 'flow-edit',
+				autoDestory : true,
 			layout : {
 				type : 'vbox', // Arrange child items vertically
 				align : 'stretch'
@@ -23,8 +27,8 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 						record, row) {
 					YongYou.util.EventHandle.events.ShowForm(false, view
 									.up('panel'), record, '新建行业',
-							'YongYou.view.config.form.SubjectForm',
-							subjectCallback)
+							'YongYou.view.config.form.ActivityForm',
+							actCallback)
 				}
 			}],
 			listeners : {
@@ -35,6 +39,9 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 				}
 			},
 			initialPanel : function(record) {
+				if(this.items.length>0){
+					this.removeAll();
+				}
 				YongYou.util.DataApi.Core.getNodeByFlowID(function(res, scope) {
 							items = Ext.decode(res);
 							rowLog = null;
@@ -57,28 +64,13 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 
 		});
 createRow = function() {
-	row = Ext.create('Ext.toolbar.Toolbar', {
-				layout : {
-					type : 'hbox',
-					pack : 'center'
-				},
-				listeners : {
-					click : {
-						fn : function() {
-							alert("double click");
-						},
-						// You can also pass 'body' if you don't want click
-						// on the header or
-						// docked elements
-						element : 'el'
-					}
-				}
-
-			});
+	row = Ext.create('YongYou.view.config.panel.FlowEditRow', {
+		
+	});
 	return row;
 }
 createActivity = function(record) {
-	item = Ext.create('Ext.Button', {
+	item = Ext.create('YongYou.view.config.panel.FlowEditItem', {
 				glyph : 72,
 				text : record.title,
 				scale : 'large',
@@ -86,9 +78,10 @@ createActivity = function(record) {
 				data : record
 			});
 	item.id = record.id;
+	item.setValue(record)
 	return item;
 }
-subjectCallback = function(form, grid, isUpdate) {
+actCallback = function(form, grid, isUpdate) {
 	this.callback = function(res, scope, typeid) {
 
 	}
@@ -96,3 +89,14 @@ subjectCallback = function(form, grid, isUpdate) {
 
 	}
 }
+
+removeAllColor=function(panel,color) {
+	panel.items.each(function(p) {
+				flow=Ext.getCmp('flow-edit');
+				if(flow.selectItem&&flow.selectItem.id==p.id){return true;}
+				p.body.setStyle('background', color);
+				removeAllColor(p,color);
+			}, panel)
+
+}
+

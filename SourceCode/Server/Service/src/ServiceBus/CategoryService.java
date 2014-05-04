@@ -257,6 +257,21 @@ public class CategoryService {
 		return CommonJson.list2Json(CategoryBusiness.getInstance().getContactList());
 	}
 	
+	/**
+	 * *************************************************************
+	 * FunName : getAttachmentList
+     * Description：附件列表
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/Service/CategoryService/getAttachmentList
+     * *************************************************************
+	 */
+	@GET
+	@Path("getAttachmentList")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getAttachmentList() {
+		return CommonJson.list2Json(CategoryBusiness.getInstance().getAttachmentList());
+	}
 	
 	/**
 	 * *************************************************************
@@ -347,7 +362,7 @@ public class CategoryService {
         	return Response.status(201).entity("Failure").build();
         }
     }
-	
+
 	/**
 	 * *************************************************************
 	 * FunName : addFlow

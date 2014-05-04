@@ -25,17 +25,51 @@ Ext.define('YongYou.util.DataApi', {
     	    		callback,scope)
 
     	},
+    	/**
+    	 * 菜单列表
+    	 * @param {} callback
+    	 * @param {} scope
+    	 * @param {} param
+    	 ******************************************/
     	getMenuList:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"ConfigUtilService/getMenuList",param,
     	    		callback,scope)
     	},
+    	/***************************************************************************/
+    	
+    	
+/**×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+    	 * 类别操作
+    	 * @param {} callback
+    	 * @param {} scope
+    	 * @param {} param
+  **********************************************************************************************************/  	
     	getChildByID:function(callback,scope,param,uppa){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getChildByID",param,
     	    		callback,scope)
 
     	},
+    	updateCategory:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/updateCategory',params,
+    	    		callback,scope,uppa);
+    	},
+    	addCategory:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/addCategory',params,
+    	    		callback,scope,uppa);
+    	},
+   /**********************************************************************************************************/ 
+/**×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+    	 * 流程操作
+    	 * @param {} callback
+    	 * @param {} scope
+    	 * @param {} param
+  **********************************************************************************************************/  	
     	getFlowByCategoryID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getFlowByCategoryID",param,
@@ -51,6 +85,31 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+"CategoryService/getFlowList",param,
     	    		callback,scope)
     	},
+    	updateFlow:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/updateFlow',params,
+    	    		callback,scope,uppa);
+    	},
+    	addFlow:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/addFlow',params,
+    	    		callback,scope,uppa);
+    	},
+   /**********************************************************************************************************/ 
+    /**×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+    	 * 流程节点操作
+    	 * @param {} callback
+    	 * @param {} scope
+    	 * @param {} param
+  **********************************************************************************************************/ 
+    	getFlowChart:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    		YongYou.util.Config.getService()+"CategoryService/getNodeByFlowID",param,
+    		callback,scope)
+
+    	},
     	getNodeByFlowID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getNodeByFlowID",param,
@@ -63,11 +122,12 @@ Ext.define('YongYou.util.DataApi', {
     	    		callback,scope)
 
     	},
-    	getAttachmentByNodeID:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    	    		YongYou.util.Config.getService()+"CategoryService/getAttachmentByNodeID",param,
-    	    		callback,scope)
-    	},
+  /**×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+    	 * 联系人操作
+    	 * @param {} callback
+    	 * @param {} scope
+    	 * @param {} param
+  **********************************************************************************************************/  	
     	getContactByContactID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"CategoryService/getContactByContactID",param,
@@ -78,6 +138,50 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+"CategoryService/getContactList",param,
     	    		callback,scope)
     	},
+    	updateContact:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/updateContact',params,
+    	    		callback,scope,uppa);
+    	},
+    	addContact:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/addContact',params,
+    	    		callback,scope,uppa);
+    	},
+ /************************************************************************************************************/  
+    	
+    	
+    	/**×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+    	 * 附件操作
+    	 * @param {} callback
+    	 * @param {} scope
+    	 * @param {} param
+  **********************************************************************************************************/
+    	getAttachmentByNodeID:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getAttachmentByNodeID",param,
+    	    		callback,scope)
+    	},
+    	getAttachmentList:function(callback,scope,param){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getAttachmentList",param,
+    	    		callback,scope)
+    	},
+    	updateAttachment:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/updateAttachment',params,
+    	    		callback,scope,uppa);
+    	},
+    	addAttachment:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/addAttachment',params,
+    	    		callback,scope,uppa);
+    	},
+ /************************************************************************************************************/
     	getIndustryByID:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"IndustryService/getIndustryByID",param,
@@ -121,33 +225,9 @@ Ext.define('YongYou.util.DataApi', {
     	 * @param {} scope
     	 * @param {} param
     	 */
-    	getFlowChart:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getService()+"CategoryService/getNodeByFlowID",param,
-    		callback,scope)
+    	
 
-    	},
 
-    	getBZList:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getBZList",param,
-    		callback,scope)
-    	},
-    	getFGList:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getFGList",param,
-    		callback,scope)
-    	},
-    	getZCList:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getZCList",param,
-    		callback,scope)
-    	},
-    	getBZ:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getBZ",param,
-    		callback,scope)
-    	},
     	getFG:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(
     		YongYou.util.Config.getService()+"IndustryService/getLawsByIndustryID",param,
@@ -161,11 +241,6 @@ Ext.define('YongYou.util.DataApi', {
 
     	},
 
-    	getFlowItemContent:function(callback,scope,param){
-    		YongYou.util.DataApi.queryData(
-    		YongYou.util.Config.getWebsite()+"Resource/getFlowItemContent",param,
-    		callback,scope)
-    	},
     	getCommonSectors:function(callback,scope,params)
     	{
 
@@ -207,30 +282,8 @@ Ext.define('YongYou.util.DataApi', {
     	 * config
     	 ************************************************************************************************ 
     	 ********************************************************************************************************************/
-    	updateCategory:function(callback,scope,params,uppa)
-    	{
-    		YongYou.util.DataApi.postData(
-    	    		YongYou.util.Config.getService()+'CategoryService/updateCategory',params,
-    	    		callback,scope,uppa);
-    	},
-    	addCategory:function(callback,scope,params,uppa)
-    	{
-    		YongYou.util.DataApi.postData(
-    	    		YongYou.util.Config.getService()+'CategoryService/addCategory',params,
-    	    		callback,scope,uppa);
-    	},
-    	updateFlow:function(callback,scope,params,uppa)
-    	{
-    		YongYou.util.DataApi.postData(
-    	    		YongYou.util.Config.getService()+'CategoryService/updateFlow',params,
-    	    		callback,scope,uppa);
-    	},
-    	addFlow:function(callback,scope,params,uppa)
-    	{
-    		YongYou.util.DataApi.postData(
-    	    		YongYou.util.Config.getService()+'CategoryService/addFlow',params,
-    	    		callback,scope,uppa);
-    	},
+    	
+    	
     	updateSubject:function(callback,scope,params,uppa)
     	{
     		YongYou.util.DataApi.postData(
@@ -267,6 +320,7 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+'IndustryService/addPolicy',params,
     	    		callback,scope,uppa);
     	}
+    	
     },
     queryData:function(url, params, callback, scope,uppa) {
        // Ext.data.JsonP.request({

@@ -376,6 +376,29 @@ public class CategoryBusiness {
     }
     /**
      * *************************************************************
+	 * FunName : getAttachmentList
+     * Description：附件列表
+     * Input: @param strID
+     * Output:void
+     * *************************************************************
+	 */
+    public List<Attachment> getAttachmentList() {
+    	Session session = null;
+    	List<Attachment> list=new ArrayList<Attachment>();
+        try{
+            /*获取session对象*/
+        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	        session = sf.openSession();
+	        list = session.createQuery("from Attachment").list();
+	        session.close();
+        }catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+        return list;
+    }
+    /**
+     * *************************************************************
 	 * FunName : getNodeByNodeID
      * Description： 根据NodeID获取Node对象
      * Input: @param lawID
