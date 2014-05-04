@@ -30,6 +30,12 @@ Ext.define('YongYou.view.IndustrylistPanel', {
 
 						var idid = Ext.getCmp("get_industry").getValue();
 
+						if(idid==null)
+						{
+							alert("您尚未选择行业！");
+							return;
+						}
+						
 						var temp_arr=new Array();
 						temp_arr=Ext.getCmp("get_industry").getOptions();
 						for(var adi in temp_arr)
@@ -90,11 +96,9 @@ Ext.define('YongYou.view.IndustrylistPanel', {
 				labelWidth:'40%',
 				border : 3,
 				height:52,
-                options: [
-                    {text: 'First Option',  value: 'first'},
-                    {text: 'Second Option', value: 'second'},
-                    {text: 'Third Option',  value: 'third'}
-                ],
+				options: [
+		                    {text: '~暂无~',  value: null}
+		                ],
                 style : 'border-radius: 15px;float:right;border-color: gray; border-style: solid;'
 			
 			}

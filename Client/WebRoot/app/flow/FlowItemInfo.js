@@ -109,7 +109,6 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 	formatFiles : function(files) {
 		var html = "</br><div style='margin-left:10px'>";
 		for (i = 0; i < files.length; i++) {
-			alert(files[i].downloadLink);
 			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='attaches/"
 					+ files[i].downloadLink
 					+ "' style='color:black;'>"
