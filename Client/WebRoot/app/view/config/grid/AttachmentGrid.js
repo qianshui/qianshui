@@ -8,7 +8,7 @@ Ext.define('YongYou.view.config.grid.AttachmentGrid', {
 						proxy : {
 										type : 'ajax',
 										url : YongYou.util.Config.getService()
-												+ 'CategoryService/getContactList',
+												+ 'CategoryService/getAttachmentList',
 										reader : 'json'
 									},
 						autoLoad:true
@@ -46,7 +46,7 @@ attchCallback = function(form, grid, isUpdate) {
 			//grid.up().dockedItems.items[1].items.items[0].setValue(subjectId);
 		}
 
-		YongYou.util.DataApi.Core.getContactList(function(res, scope) {
+		YongYou.util.DataApi.Core.getAttachmentList(function(res, scope) {
 					scope.removeAll();
 					records = Ext.decode(res);
 					scope.add(records);
@@ -55,10 +55,10 @@ attchCallback = function(form, grid, isUpdate) {
 	}
 	if (form.isValid()) {
 		if (isUpdate) {
-			YongYou.util.DataApi.Core.updateContact(this.callback, form, form
+			YongYou.util.DataApi.Core.updateAttachment(this.callback, form, form
 							.getValues())
 		} else {
-			YongYou.util.DataApi.Core.addContact(this.callback, form, form
+			YongYou.util.DataApi.Core.addAttachment(this.callback, form, form
 							.getValues())
 		}
 	}

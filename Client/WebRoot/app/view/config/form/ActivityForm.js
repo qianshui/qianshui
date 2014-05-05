@@ -27,14 +27,14 @@ Ext.define('YongYou.view.config.form.ActivityIconTrigger', {
 				win.add(dataview)
 			}
 		});
-		
+
 Ext.define('YongYou.view.config.form.ContactTrigger', {
 	extend : 'Ext.form.field.Trigger',
 	alias : 'widget.contacttrigger',
 	onTriggerClick : function(a) {
 		YongYou.util.DataApi.Core.getContactList(function(res, scope) {
 					records = Ext.decode(res);
-					
+
 					store = Ext.create('Ext.data.Store', {
 								fields : contact_model.config.fields
 
@@ -52,8 +52,9 @@ Ext.define('YongYou.view.config.form.ContactTrigger', {
 								width : 600,
 								layout : 'fit',
 								trigger : scope,
-								setValue : function(value) {
-									this.trigger.items.items[4].setValue(value);
+								setValue : function(id,value) {
+									this.trigger.getForm().findField("contact").setValue(value);
+									this.trigger.getForm().findField("contactId").setValue(id);
 								}
 							}).show();
 					win.add(grid)
@@ -61,69 +62,109 @@ Ext.define('YongYou.view.config.form.ContactTrigger', {
 	}
 });
 Ext.define('YongYou.view.config.form.ActivityForm', {
-			extend : 'Ext.form.Panel',
-			win : null,
-			// title: 'Basic Form',
-			// renderTo: Ext.getBody(),
-			bodyPadding : 1,
-			items : [{
-						xtype : 'textfield',
-						fieldLabel : 'ID',
-						name : 'id',
-						hidden : true
-					}, {
-						xtype : 'textfield',
-						fieldLabel : '标题',
-						name : 'title'
-					}, {
-						xtype : 'htmleditor',
-						fieldLabel : '描述',
-						name : 'description'
-						// readOnly : true
-				},	 {
-						xtype : 'acticontrigger',
-						fieldLabel : '图标',
-						name : 'imgId'
-				}	, {
-						xtype : 'contacttrigger',
-						fieldLabel : '联系人',
-						name : 'contactId',
-						inputValue: 'true',
-						uncheckedValue:'false'
+	extend : 'Ext.form.Panel',
+	win : null,
+	// title: 'Basic Form',
+	// renderTo: Ext.getBody(),
+	bodyPadding : 1,
+	items : [{
+				xtype : 'textfield',
+				fieldLabel : 'ID',
+				name : 'id',
+				hidden : true
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '标题',
+				name : 'title'
+			}, {
+				xtype : 'htmleditor',
+				fieldLabel : '描述',
+				name : 'description',
+				height : 250
+				// readOnly : true
+		}	, {
+				xtype : 'acticontrigger',
+				fieldLabel : '图标',
+				name : 'imgId'
+			}, {
+				xtype : 'contacttrigger',
+				fieldLabel : '联系人',
+				name : 'contact',
+				inputValue : 'true',
+				uncheckedValue : 'false'
 
-				}, {
-						xtype : 'textfield',
-						fieldLabel : '关键字',
-						name : 'keyWords'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '联系人',
+				name : 'contactId'
+				//hidden : true
 
-				}, {
-						xtype : 'textfield',
-						fieldLabel : '行ID',
-						name : 'rowId',
-						hidden : true
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '行ID',
+				name : 'rowId',
+				hidden : true
 
-				}, {
-						xtype : 'textfield',
-						fieldLabel : '流程ID',
-						name : 'flowId',
-						hidden : true
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '流程ID',
+				name : 'flowId',
+				hidden : true
 
-				}],
-					dockedItems : [{
-						xtype : 'toolbar',
-						dock : 'bottom',
-						ui : 'footer',
-						items : [{
-									xtype : 'component',
-									flex : 1
-								}, {
-									xtype : 'button',
-									text : '保存',
-									handler : function() {
+			},{
+				xtype : 'textfield',
+				fieldLabel : '附件',
+				name : 'attachment'
+				//hidden : true
 
-									}
+			}, {
+				xtype : 'textareafield',
+				fieldLabel : '附件',
+				enableKeyEvents : true,
+				name : 'attachmentName',
+				readOnly : true,
+				height:100,
+				width:300,
+				listeners : {
+					'render' : function(textArea) {
 
-								}]
-					}]
+						textArea.bodyEl.on('click', function() {
+							YongYou.util.DataApi.Core.getAttachmentList(
+									function(res, scope) {
+										records = Ext.decode(res);
+										store = Ext.create('Ext.data.Store', {
+													fields : attch_model.config.fields
 
-		});
+												});
+
+										grid = Ext
+												.create(
+														'YongYou.view.config.grid.MutilSelectGrid',
+														{
+															store : store,
+															columns : attch_model.config.columns
+														});
+										store.add(records);
+										win = Ext.create('Ext.window.Window', {
+													title : '流程选择',
+													// id : 'imgselector',
+													height : 500,
+													width : 600,
+													layout : 'fit',
+													trigger : scope,
+													setValue : function(id,name) {
+														this.trigger
+																.setValue(name);
+														this.trigger.up().getForm().findField("attachment")
+																.setValue(id);
+													}
+												}).show();
+										win.add(grid)
+									}, textArea)
+						})
+					}
+				}
+
+			}]
+
+});

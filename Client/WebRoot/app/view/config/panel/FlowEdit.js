@@ -6,7 +6,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 			selectItem:null,
 			autoScroll : true,
 			id : 'flow-edit',
-				autoDestory : true,
+			autoDestory : true,
 			layout : {
 				type : 'vbox', // Arrange child items vertically
 				align : 'stretch'

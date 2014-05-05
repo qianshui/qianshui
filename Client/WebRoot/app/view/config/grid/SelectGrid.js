@@ -5,7 +5,10 @@ Ext.define('YongYou.view.config.grid.SelectGrid', {
     scrollable:true,
     listeners : {
 		itemdblclick:function( dataview, record, item, index, e, eOpts ){
-			this.up('panel').setValue(record.data.id);
+			var name=record.data.title;
+			if(!name)
+				name=record.data.name;
+			this.up('panel').setValue(record.data.id,name);
 			this.up('panel').close();
 			
 		}

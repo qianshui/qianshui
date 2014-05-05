@@ -11,10 +11,10 @@ Ext.define('YongYou.model.Attachment', {
 							name : 'description',
 							type : 'string'
 						}, {
-							name : 'Comments',
+							name : 'comments',
 							type : 'string'
 						},{
-							name : 'DownloadLink',
+							name : 'downloadLink',
 							type : 'string'
 						}],
 				columns : [{
@@ -27,7 +27,7 @@ Ext.define('YongYou.model.Attachment', {
 						},
 						{
 							text : '备注',
-							dataIndex : 'Comments'
+							dataIndex : 'comments'
 						}, {
 							text : 'ID',
 							dataIndex : 'id'
@@ -43,8 +43,8 @@ Ext.define('YongYou.model.Attachment', {
 									actionItem, event, record, row) {
 								YongYou.util.EventHandle.events.ShowForm(true,
 										grid, record, '编辑附件',
-										'YongYou.view.config.form.ContactForm',
-										contactCallback)
+										'YongYou.view.config.form.AttachmentForm',
+										attchCallback)
 							}
 						}, {
 							text : '删除附件',
