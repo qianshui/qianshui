@@ -7,11 +7,23 @@ Ext.define('YongYou.util.DataApi', {
         this.initConfig(config);
     },
     Core:{
-    	getZbptAndTzjy:function(callback,scope,param){
-			YongYou.util.DataApi.queryData(
-		    		YongYou.util.Config.getService()+"IndustryService/getZbptAndTzjy",param,
-		    		callback,scope)
+    	getAdnameByPoint:function(callback,scope,param){
+		YongYou.util.DataApi.queryData(
+	    		YongYou.util.Config.getService()+"MapService/getAdnameByPoint",param,
+	    		callback,scope)
 
+	    },
+		getTzjyByInfo:function(callback,scope,param){
+			YongYou.util.DataApi.queryData(
+		    		YongYou.util.Config.getService()+"IndustryService/getTzjyByInfo",param,
+		    		callback,scope)
+	
+	    },
+		getZbptByPoint:function(callback,scope,param){
+			YongYou.util.DataApi.queryData(
+		    		YongYou.util.Config.getService()+"IndustryService/getZbptByPoint",param,
+		    		callback,scope)
+	
 	    },
     	getAreaByLngLat:function(callback,scope,param){
     		YongYou.util.DataApi.queryData(

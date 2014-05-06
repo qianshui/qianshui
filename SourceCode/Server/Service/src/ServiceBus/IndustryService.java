@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import Business.Industry;
+import Business.Map;
 import DataBase.Flow;
 import DataBase.Laws;
 import DataBase.Policy;
@@ -29,6 +30,8 @@ import DataBase.Subject;
 import DataBase.Subjecttype;
 import java.util.List;
 import java.util.ArrayList;
+
+import Common.AreaInfo;
 import Common.CommonJson;
 import Common.DBOperation;
 import Common.IDOperation;
@@ -44,6 +47,63 @@ import Common.IDOperation;
  */
 @Path("IndustryService")
 public class IndustryService {
+	
+	/**
+	 * *************************************************************
+	 * FunName : getTzjyByInfo
+     * Description： 获取行业类别信息
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/IndustryService/getTzjyByInfo
+     * *************************************************************
+	 */
+	@GET
+	@Path("getTzjyByInfo")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getTzjyByInfo(@QueryParam("ids1") String ids1,@QueryParam("ids2") String ids2,
+			@QueryParam("lat") double lat,@QueryParam("lng") double lng,@QueryParam("tzr") String tzr) {
+		//System.out.println(tzr);
+		return null;
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getZbptAndTzjy
+     * Description： 获取周边配套和投资建议
+     * Input: 无
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/IndustryService/getZbptByPoint
+     * *************************************************************
+	 */
+	@GET
+	@Path("getZbptByPoint")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getZbptByPoint(@QueryParam("lat") double lat,@QueryParam("lng") double lng) {
+		StringBuilder resultString=new StringBuilder();
+		String listPeitaoStr[]={"学校","公园","医院","交通","小区","商务"};
+		List<AreaInfo> areaInfo=null;
+		try {
+			for(int i=0;i<listPeitaoStr.length;i++)
+			{
+				if(i!=0)
+				{
+					resultString.append(",");
+				}
+				resultString.append("{classname:\"公园\",results:");
+				areaInfo= new ArrayList<AreaInfo>();
+				Map.getPoiByBaidu(lat,lng,listPeitaoStr[i],areaInfo);
+				resultString.append(CommonJson.list2Json(areaInfo));
+				resultString.append("}");
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		System.out.println(areaInfo.get(0).getName()+" "
+//				+areaInfo.get(0).getLat()+" "+areaInfo.get(0).getLng());
+		return null;
+	}
 	
 	/**
 	 * *************************************************************

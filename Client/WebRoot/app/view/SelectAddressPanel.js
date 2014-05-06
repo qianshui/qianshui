@@ -63,10 +63,21 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 							}
 						}
 						Ext.ComponentQuery.query("container[id='contain2']")[0]
-								.setActiveItem('#OneIndustryPanel');
-						new Ext.onReady(function() {
-									initializeMap();
-								}, navigationPanel);
+     						.getLayout().setAnimation({
+     									type : 'slide',
+     									direction : 'left',
+     									duration : 250
+     								})
+						Ext.ComponentQuery.query("container[id='contain2']")[0]
+								.setActiveItem('#OneIndustryPanel', {
+									type : 'slide',
+									direction : 'right',
+									duration : 250
+								});
+						new Ext.onReady(initializeMap,{ 
+								me:navigationPanel,
+								firewho:null
+						});
 					}
 				}
 			}, {

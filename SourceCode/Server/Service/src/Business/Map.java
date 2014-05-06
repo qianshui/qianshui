@@ -15,8 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 import Common.AreaInfo;
 import DataBase.Locationsite;
-
-
+import java.util.Iterator; 
+import java.util.List;   
 
 public class Map {
 	private static final String HibernateSessionFactory = null;
@@ -62,7 +62,38 @@ public class Map {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * *************************************************************
+	 * FunName : address2LatLng
+	 * Description： 根据地址获取对应的经纬度
+	 * @param strAddress  (输入)：具体地址
+	 * @param strLng      (输出)：经度
+	 * @param strLat      (输出)：纬度
+	 * @param strError    (输出)：错误码
+	 * @throws Exception
+	 * *************************************************************
+	 */
+	public static void getAddressByLatLng(double strLat,double strLng,StringBuffer strAddress,StringBuffer strError)throws Exception
+	{
+		String strUrl="http://api.map.baidu.com/geocoder/v2/?ak=GfUCaQ9XyVVqLl75Btoo2L4e"
+			+"&callback=renderReverse&location="+strLat+","+strLng+"&output=xml&pois=0";
+		URL baiduURL = new URL(strUrl);
+		SAXReader saxReader = new SAXReader();
+		Document doc = saxReader.read(baiduURL.openStream());
+		Element root = doc.getRootElement();
+		
+		if ((root.elementTextTrim("status")).equals("0"))
+        {
+			Element elementResult = root.element("result");
+			strAddress.append(elementResult.elementTextTrim("formatted_address"));
+			strError.append("OK");
+			//System.out.println("获取dizhiming成功"+strAddress.toString()+"\n");
+        }
+        else
+        {
+        	strError.append("ERROR");
+        }
+	}
 	/**
 	 * *************************************************************
 	 * FunName : address2LatLng
@@ -77,7 +108,7 @@ public class Map {
 	public static void address2LngLat(String strAddress,StringBuffer strLng,StringBuffer strLat,StringBuffer strError)throws Exception
 	{
 		String addrUTF8 = URLEncoder.encode(strAddress, "UTF-8");//将地址转化为UTF-8格式
-		String strUrl = strUrlpre + addrUTF8 + strUrlnext + "重庆市";
+		String strUrl = strUrlpre + strAddress + strUrlnext + "重庆市";
 	    URL baiduURL = new URL(strUrl);
 	    SAXReader saxReader = new SAXReader();
         Document doc = saxReader.read(baiduURL.openStream());
@@ -97,6 +128,54 @@ public class Map {
         }
 	}
 	
+	/**
+	 * *************************************************************
+	 * FunName : getPoiByBaidu
+	 * Description： 根据地址经纬度获取周边POI服务
+	 * @param strLng      (输入)：经度
+	 * @param strLat      (输入)：纬度
+	 * @param areaInfo    (输出)： POI列表
+	 * @throws Exception
+	 * *************************************************************
+	 */
+	public static void getPoiByBaidu(double strLat,double strLng,String poi,List<AreaInfo> areaInfo)throws Exception
+	{
+		String strUrl="http://api.map.baidu.com/place/v2/search?"
+			+"&query="+URLEncoder.encode(poi,"UTF-8")
+			+"&location="+strLat+","+strLng+"&radius=1000"
+			+"&output=xml&ak=GfUCaQ9XyVVqLl75Btoo2L4e";
+		
+		URL baiduURL = new URL(strUrl);
+		SAXReader saxReader = new SAXReader();
+		Document doc = saxReader.read(baiduURL.openStream());
+		Element root = doc.getRootElement();
+		//String tttem=root.elementTextTrim("status");
+		if ((root.elementTextTrim("status")).equals("0"))
+        {
+        	Element elementResult = root.element("results");
+        	List list = elementResult.elements();
+        	
+        	for (Iterator ie = list.iterator(); ie.hasNext();) {
+                //System.out.println("======");
+                Element element = (Element) ie.next();
+                //System.out.println(element.getName()+"\n");
+                AreaInfo obj=new AreaInfo();
+                obj.setName(element.elementTextTrim("name"));
+                obj.setLat(Double.parseDouble(element.element("location")
+                		.elementTextTrim("lat")));
+                obj.setLng(Double.parseDouble(element.element("location")
+                		.elementTextTrim("lng")));
+                areaInfo.add(obj);
+            }
+			//System.out.println("获取成功\n");
+            
+        }
+        else
+        {
+        	/*对错误信息的处理*/
+
+        }
+	}
 	/**
 	 * *************************************************************
 	 * FunName : getAreaByLngLat

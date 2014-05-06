@@ -39,6 +39,30 @@ public class MapService {
      * *************************************************************
 	 */
 	@GET
+	@Path("getAdnameByPoint")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getAdnameByPoint(@QueryParam("lat") double lat,@QueryParam("lng") double lng) {
+		StringBuffer strAddress=new StringBuffer();
+		StringBuffer strError=new StringBuffer();
+		try {
+			Map.getAddressByLatLng(lat, lng, strAddress, strError);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return strAddress.toString();
+	}
+	
+	/**
+	 * *************************************************************
+	 * FunName : getAddressListByKey
+     * Description： 根据关键字获取匹配的街道地址
+     * Input: 关键字
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/MapService/getAddressListByKey?key=
+     * *************************************************************
+	 */
+	@GET
 	@Path("getAddressListByKey")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public String getAddressListByKey(@QueryParam("key") String strKey) {

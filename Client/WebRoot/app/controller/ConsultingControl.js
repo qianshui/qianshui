@@ -206,11 +206,13 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				address = record;
 				this.getNavibar().setTitle("地图点选");
 				
-				new Ext.onReady(function() {
-							initializeMap();
-						}, navigationPanel);
 				point_cur = null;
 				array_about_map = new Array();
+				new Ext.onReady(initializeMap, 
+						{
+							me : navigationPanel,
+							firewho : address.name
+						});
 			},
 			onNavibackTap : function(b, e) {
 				var activeid = Ext.ComponentQuery
@@ -273,6 +275,11 @@ Ext.define('YongYou.controller.ConsultingControl', {
 			},
 			
 			onMapconfirmTap : function(b, e) {
+				//初始验证阶段，如果未获取到具体地址信息，则提示返回
+				if(point_cur==null){
+					alert("您尚未选择具体位置！");
+					return;
+				}
 				// 汇总页初始化阶段
 				this.getConfirm().removeAll();
 				// d 法律法规
@@ -297,9 +304,18 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				// a 信息确认
 
 				var infocon = Ext.create('YongYou.view.InformationConfirm', {});
-				infocon.setSelectValue(industry1.description + '业&nbsp;&nbsp;' + industry2.description,
-						prsngrp.description, address.name);
-				YongYou.util.DataApi.Core.getZbptAndTzjy(function(res, scope) {
+				// a-1 通过经纬度获取地址名称
+                YongYou.util.DataApi.Core.getAdnameByPoint(function(res, scope) {
+					
+                	scope.setSelectValue(industry1.description + '业&nbsp;&nbsp;' + industry2.description,
+    						prsngrp.description, address.name+"  "+res);
+				}, infocon,
+				{
+					'lat' : point_cur.lat,
+					'lng' : point_cur.lng
+				});
+				// a-2 通过经纬度获取周边配套
+				YongYou.util.DataApi.Core.getZbptByPoint(function(res, scope) {
 					
 					scope.setAroundValue({
 								xuexiao : '中餐厅;超市;西餐厅;茶餐厅;美容美发;家政中心;娱乐中心;洗衣房;',
@@ -310,12 +326,25 @@ Ext.define('YongYou.controller.ConsultingControl', {
 								yiyuan : '区级建新中学、重庆市直辖后首批重点中学重庆18中、区级华新小学 查找周边学校',
 								xiaoqu : '重百商场、北京华联商厦、苏宁电器、香港新世界百货、观音桥步行街等 查找周边商场'
 							})
-					scope.setAdviseValue('<div style="margin-left:20px;"><font size="14px">您</font>选择的开办地点与相邻'+industry2.description+'不足100米，不符合'
-					+industry1.description+'许可中关于同行业距离不应小于100米的规定，建议您更换开办地址</div>')
 					
 				}, infocon,
 				{
-					'id' : industry2.id
+					'lat' : point_cur.lat,
+					'lng' : point_cur.lng
+				});
+				// a-3 通过综合信息获取投资建议
+				YongYou.util.DataApi.Core.getTzjyByInfo(function(res, scope) {
+					
+                	scope.setAdviseValue('<div style="margin-left:20px;"><font size="14px">您</font>选择的开办地点与相邻'+industry2.description+'不足100米，不符合'
+        					+industry1.description+'许可中关于同行业距离不应小于100米的规定，建议您更换开办地址</div>')
+        					
+				}, infocon,
+				{
+					'ids1' : industry1.id,
+					'ids2' : industry2.id,
+					'lat' : point_cur.lat,
+					'lng' : point_cur.lng,
+					'tzr' : prsngrp.id
 				});
 				// b 办事指南
 				YongYou.util.DataApi.Core.getNodeBySubjectID(function(res, scope) {
@@ -363,164 +392,169 @@ function ZoomControl() {
 	this.defaultOffset = new BMap.Size(10, 10);
 }
 
-function setMap() {
-	// ========================区域层及其功能部分=======================//
-	var polygon1 = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
-					new BMap.Point(106.538654, 29.579954),
-					new BMap.Point(106.53422, 29.564098)], {
-				fillColor : 'red'
-			});
-
-	polygon1.addEventListener("click", function() {
-		map.removeOverlay(polygon1);
-		map.removeOverlay(polygon2);
-		var polygon_cur = new BMap.Polygon([
-						new BMap.Point(106.54253, 29.574688),
-						new BMap.Point(106.538654, 29.579954),
-						new BMap.Point(106.53422, 29.564098)], {
-					strokeWeight : 2,
-					strokeColor : "blue",
-					fillColor : 'red'
-				});
-		map.addOverlay(polygon_cur);
-		map.centerAndZoom(point1, 17);
-
-		point_cur = point1;
-		var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
-				new BMap.Size(32, 32));
-		var marker_cur = new BMap.Marker(point_cur, {
-					icon : myIcon
-				});
-		map.addOverlay(marker_cur);
-		marker_cur.enableDragging();
-		var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
-		marker_cur.openInfoWindow(infoWindow1);
-		marker_cur.addEventListener("dragend", function(e) {
-			if (confirm("您选择了" + e.point.lng + "  " + e.point.lat + "，是否进行验证？")) {
-				point_cur = new BMap.Point(e.point.lng, e.point.lat);
-				for (i = 0; i < array_about_map.length; i++) {
-					array_about_map[i].closeInfoWindow();
-					map.removeOverlay(array_about_map[i]);
-				}
-				Ext.ComponentQuery.query("#list_about_map")[0].getStore()
-						.removeAll();
-			}
-		});
-	});
-
-	map.addOverlay(polygon1);
-	var polygon2 = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
-					new BMap.Point(106.538654, 29.579954),
-					new BMap.Point(106.54586, 29.583942)], {
-				fillColor : 'blue'
-			});
-	map.addOverlay(polygon2);
-}
-
 function initializeMap() {
 	// ===========================地图初始化===========================//
 	map = new BMap.Map("mapDiv");
 	var point1 = new BMap.Point(106.54253, 29.574688);
 	map.centerAndZoom(point1, 15);
 	// ==========================地图重置控件==========================//
-	ZoomControl.prototype = new BMap.Control();
-	ZoomControl.prototype.initialize = function(map) {
-		// 创建一个DOM元素
-		var div = document.createElement("div");
-		div.style.width = "64px";
-		div.style.height = "64px";
-		// div.style.backgroundColor = "red";
-		div.style.backgroundImage = "url('resources/img/map/zoom_out.png')";
-		// 绑定事件，点击一次放大两级
-
-		div.onclick = function(e) {
-			map.clearOverlays();
-			Ext.ComponentQuery.query("#list_about_map")[0].getStore()
-					.removeAll();
-			array_about_map = [];
-			map.centerAndZoom(point1, 15);
-			point_cur = null;
-			// ========================区域层及其功能部分=======================//
-			var polygon1 = new BMap.Polygon([
-							new BMap.Point(106.54253, 29.574688),
-							new BMap.Point(106.538654, 29.579954),
-							new BMap.Point(106.53422, 29.564098)], {
-						fillColor : 'red'
-					});
-
-			polygon1.addEventListener("click", function() {
-				map.removeOverlay(polygon1);
-				map.removeOverlay(polygon2);
-				var polygon_cur = new BMap.Polygon([
-								new BMap.Point(106.54253, 29.574688),
-								new BMap.Point(106.538654, 29.579954),
-								new BMap.Point(106.53422, 29.564098)], {
-							strokeWeight : 2,
-							strokeColor : "blue",
-							fillColor : 'red'
-						});
-				map.addOverlay(polygon_cur);
-				map.centerAndZoom(point1, 17);
-
-				point_cur = point1;
-				var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
-						new BMap.Size(32, 32));
-				var marker_cur = new BMap.Marker(point_cur, {
-							icon : myIcon
-						});
-				map.addOverlay(marker_cur);
-				marker_cur.enableDragging();
-				var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
-				marker_cur.openInfoWindow(infoWindow1);
-				marker_cur.addEventListener("dragend", function(e) {
-							if (confirm("您选择了" + e.point.lng + "  "
-									+ e.point.lat + "，是否进行验证？")) {
-								point_cur = new BMap.Point(e.point.lng,
-										e.point.lat);
-								for (i = 0; i < array_about_map.length; i++) {
-									array_about_map[i].closeInfoWindow();
-									map.removeOverlay(array_about_map[i]);
-								}
-								Ext.ComponentQuery.query("#list_about_map")[0]
-										.getStore().removeAll();
-							}
-						});
-			});
-
-			map.addOverlay(polygon1);
-			var polygon2 = new BMap.Polygon([
-							new BMap.Point(106.54253, 29.574688),
-							new BMap.Point(106.538654, 29.579954),
-							new BMap.Point(106.54586, 29.583942)], {
-						fillColor : 'blue'
-					});
-			map.addOverlay(polygon2);
-		}
-		// 添加DOM元素到地图中
-		map.getContainer().appendChild(div);
-		// 将DOM元素返回
-		return div;
-	}
-	var myZoomCtrl = new ZoomControl();
-	map.addControl(myZoomCtrl);
+//	ZoomControl.prototype = new BMap.Control();
+//	ZoomControl.prototype.initialize = function(map) {
+//		// 创建一个DOM元素
+//		var div = document.createElement("div");
+//		div.style.width = "64px";
+//		div.style.height = "64px";
+//		// div.style.backgroundColor = "red";
+//		div.style.backgroundImage = "url('resources/img/map/zoom_out.png')";
+//		// 绑定事件，点击一次放大两级
+//
+//		div.onclick = function(e) {
+//			map.clearOverlays();
+//			Ext.ComponentQuery.query("#list_about_map")[0].getStore()
+//					.removeAll();
+//			array_about_map = [];
+//			map.centerAndZoom(point1, 15);
+//			point_cur = null;
+//			// ========================区域层及其功能部分=======================//
+//			var polygon1 = new BMap.Polygon([
+//							new BMap.Point(106.54253, 29.574688),
+//							new BMap.Point(106.538654, 29.579954),
+//							new BMap.Point(106.53422, 29.564098)], {
+//						fillColor : 'red'
+//					});
+//
+//			polygon1.addEventListener("click", function() {
+//				map.removeOverlay(polygon1);
+//				map.removeOverlay(polygon2);
+//				var polygon_cur = new BMap.Polygon([
+//								new BMap.Point(106.54253, 29.574688),
+//								new BMap.Point(106.538654, 29.579954),
+//								new BMap.Point(106.53422, 29.564098)], {
+//							strokeWeight : 2,
+//							strokeColor : "blue",
+//							fillColor : 'red'
+//						});
+//				map.addOverlay(polygon_cur);
+//				map.centerAndZoom(point1, 17);
+//
+//				point_cur = point1;
+//				var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
+//						new BMap.Size(32, 32));
+//				var marker_cur = new BMap.Marker(point_cur, {
+//							icon : myIcon
+//						});
+//				map.addOverlay(marker_cur);
+//				marker_cur.enableDragging();
+//				var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
+//				marker_cur.openInfoWindow(infoWindow1);
+//				marker_cur.addEventListener("dragend", function(e) {
+//							if (confirm("您选择了" + e.point.lng + "  "
+//									+ e.point.lat + "，是否进行验证？")) {
+//								point_cur = new BMap.Point(e.point.lng,
+//										e.point.lat);
+//								for (i = 0; i < array_about_map.length; i++) {
+//									array_about_map[i].closeInfoWindow();
+//									map.removeOverlay(array_about_map[i]);
+//								}
+//								Ext.ComponentQuery.query("#list_about_map")[0]
+//										.getStore().removeAll();
+//							}
+//						});
+//			});
+//
+//			map.addOverlay(polygon1);
+//			var polygon2 = new BMap.Polygon([
+//							new BMap.Point(106.54253, 29.574688),
+//							new BMap.Point(106.538654, 29.579954),
+//							new BMap.Point(106.54586, 29.583942)], {
+//						fillColor : 'blue'
+//					});
+//			map.addOverlay(polygon2);
+//		}
+//		// 添加DOM元素到地图中
+//		map.getContainer().appendChild(div);
+//		// 将DOM元素返回
+//		return div;
+//	}
+//	var myZoomCtrl = new ZoomControl();
+//	map.addControl(myZoomCtrl);
 
 	// ========================区域层及其功能部分=======================//
-	var polygon1 = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
-					new BMap.Point(106.538654, 29.579954),
-					new BMap.Point(106.53422, 29.564098)], {
-				fillColor : 'red'
-			});
+	var plcnms=["观音桥","华新街"];
+	var ppt1=[new BMap.Point(106.54253, 29.574688),
+				new BMap.Point(106.538654, 29.579954),
+				new BMap.Point(106.53422, 29.564098)];
+	var ppt2=[new BMap.Point(106.54253, 29.574688),
+				new BMap.Point(106.538654, 29.579954),
+				new BMap.Point(106.54586, 29.583942)];
+	var ppts=[ppt1,ppt2];
+	
+	polygonArr=new Array();
+	for(i=0;i<plcnms.length;i++)
+	{
+		var polygoni = new BMap.Polygon(ppts[i], {
+			fillColor : 'red'
+		});
+		polygoni.myidx=i;
+		polygoni.addEventListener("click", function() {
 
-	polygon1.addEventListener("click", function() {
-		map.removeOverlay(polygon1);
-		map.removeOverlay(polygon2);
-		var polygon_cur = new BMap.Polygon([
-						new BMap.Point(106.54253, 29.574688),
-						new BMap.Point(106.538654, 29.579954),
-						new BMap.Point(106.53422, 29.564098)], {
+			for(j=0;j<polygonArr.length;j++)
+			{
+				map.removeOverlay(polygonArr[j]);
+			}
+			polygonArr=[];
+			var polygon_cur = new BMap.Polygon(ppts[this.myidx], {
+						strokeWeight : 2,
+						strokeColor : "blue",
+						//fillColor : 'red'
+					});
+			map.addOverlay(polygon_cur);
+			map.centerAndZoom(point1, 17);
+		
+			point_cur = ppts[this.myidx][0];
+			var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
+					new BMap.Size(32, 32));
+			var marker_cur = new BMap.Marker(point_cur, {
+						icon : myIcon
+					});
+			map.addOverlay(marker_cur);
+			marker_cur.enableDragging();
+			var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
+			marker_cur.openInfoWindow(infoWindow1);
+			marker_cur.addEventListener("dragend", function(e) {
+				if (confirm("您选择了" + e.point.lng + "  " + e.point.lat + "，是否进行验证？")) {
+					point_cur = new BMap.Point(e.point.lng, e.point.lat);
+					for (i = 0; i < array_about_map.length; i++) {
+						array_about_map[i].closeInfoWindow();
+						map.removeOverlay(array_about_map[i]);
+					}
+					Ext.ComponentQuery.query("#list_about_map")[0].getStore()
+							.removeAll();
+				}
+			});
+			
+		});
+		map.addOverlay(polygoni);
+		polygonArr.push(polygoni);
+	}
+	
+//	var polygon2 = new BMap.Polygon(ppts[1], {
+//				fillColor : 'blue'
+//			});
+//	map.addOverlay(polygon2);
+	
+	//======================判断是否需要打开某区域=====================//
+	if(this.firewho!=null)
+	{
+		for(j=0;j<polygonArr.length;j++)
+		{
+			map.removeOverlay(polygonArr[j]);
+		}
+		polygonArr=[];
+		var polygon_cur = new BMap.Polygon(ppts[1], {
 					strokeWeight : 2,
 					strokeColor : "blue",
-					fillColor : 'red'
+					//fillColor : 'red'
 				});
 		map.addOverlay(polygon_cur);
 		map.centerAndZoom(point1, 17);
@@ -546,13 +580,5 @@ function initializeMap() {
 						.removeAll();
 			}
 		});
-	});
-
-	map.addOverlay(polygon1);
-	var polygon2 = new BMap.Polygon([new BMap.Point(106.54253, 29.574688),
-					new BMap.Point(106.538654, 29.579954),
-					new BMap.Point(106.54586, 29.583942)], {
-				fillColor : 'blue'
-			});
-	map.addOverlay(polygon2);
+	}
 }
