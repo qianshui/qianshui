@@ -480,22 +480,21 @@ function initializeMap() {
 //	map.addControl(myZoomCtrl);
 
 	// ========================区域层及其功能部分=======================//
-	var plcnms=["观音桥","华新街"];
-	var ppt1=[new BMap.Point(106.54253, 29.574688),
-				new BMap.Point(106.538654, 29.579954),
-				new BMap.Point(106.53422, 29.564098)];
-	var ppt2=[new BMap.Point(106.54253, 29.574688),
-				new BMap.Point(106.538654, 29.579954),
-				new BMap.Point(106.54586, 29.583942)];
+	// 模拟数据提供部分，做到与服务器或得到的完全一致
+	var ppt1={strName:"观音桥",strLat:"29.564098",strLng:"106.53422"
+		,strArea:"106.54253,29.574688;106.538654,29.579954;106.53422,29.564098;"};
+	var ppt2={strName:"华新街",strLat:"29.583942",strLng:"106.54586"
+		,strArea:"106.54253,29.574688;106.538654,29.579954;106.54586,29.583942;"};
 	var ppts=[ppt1,ppt2];
-	
+	//描画图层的部分
 	polygonArr=new Array();
-	for(i=0;i<plcnms.length;i++)
+	for(i=0;i<ppts.length;i++)
 	{
-		var polygoni = new BMap.Polygon(ppts[i], {
+		var polygoni = new BMap.Polygon(ppts[i].strArea, {
 			fillColor : 'red'
 		});
-		polygoni.myidx=i;
+		polygoni.mycnt=new BMap.Point(Number(ppts[i].strLng),Number(ppts[i].strLat));
+		polygoni.strname=ppts[i].strName;
 		polygoni.addEventListener("click", function() {
 
 			for(j=0;j<polygonArr.length;j++)
@@ -503,15 +502,9 @@ function initializeMap() {
 				map.removeOverlay(polygonArr[j]);
 			}
 			polygonArr=[];
-//			var polygon_cur = new BMap.Polygon(ppts[this.myidx], {
-//						strokeWeight : 2,
-//						strokeColor : "blue",
-//						//fillColor : 'red'
-//					});
-//			map.addOverlay(polygon_cur);
-			map.centerAndZoom(ppts[this.myidx][2], 17);
+			map.centerAndZoom(this.mycnt, 17);
 		
-			point_cur = ppts[this.myidx][2];
+			point_cur = this.mycnt;
 			var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
 					new BMap.Size(32, 32));
 			var marker_cur = new BMap.Marker(point_cur, {
@@ -538,18 +531,13 @@ function initializeMap() {
 		polygonArr.push(polygoni);
 	}
 	
-//	var polygon2 = new BMap.Polygon(ppts[1], {
-//				fillColor : 'blue'
-//			});
-//	map.addOverlay(polygon2);
-	
 	//======================判断是否需要打开某区域=====================//
 	if(this.firewho!=null)
 	{
 		var ppidx=0;
-		for(i=0;i<plcnms.length;i++)
+		for(i=0;i<polygonArr.length;i++)
 		{
-			if(this.firewho==plcnms[i])
+			if(this.firewho==polygonArr[i].strname)
 			{
 				ppidx=i;
 			}
@@ -558,16 +546,10 @@ function initializeMap() {
 		{
 			map.removeOverlay(polygonArr[j]);
 		}
-		polygonArr=[];
-//		var polygon_cur = new BMap.Polygon(ppts[ppidx], {
-//					strokeWeight : 2,
-//					strokeColor : "blue",
-//					//fillColor : 'red'
-//				});
-//		map.addOverlay(polygon_cur);
-		map.centerAndZoom(ppts[ppidx][2], 17);
-
-		point_cur = ppts[ppidx][2];
+		map.centerAndZoom(polygonArr[ppidx].mycnt, 17);
+        point_cur = polygonArr[ppidx].mycnt;
+        polygonArr=[];
+        
 		var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
 				new BMap.Size(32, 32));
 		var marker_cur = new BMap.Marker(point_cur, {
