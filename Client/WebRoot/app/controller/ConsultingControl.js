@@ -486,6 +486,13 @@ function initializeMap() {
 	var ppt2={strName:"华新街",strLat:"29.583942",strLng:"106.54586"
 		,strArea:"106.54253,29.574688;106.538654,29.579954;106.54586,29.583942;"};
 	var ppts=[ppt1,ppt2];
+	
+//	YongYou.util.DataApi.Core.getAreasOfJiangbei(function(res, scope) {
+//		scope = Ext.decode(res);
+//	}, ppts, {
+//		//'id' : industry2.id
+//	});
+	
 	//描画图层的部分
 	polygonArr=new Array();
 	for(i=0;i<ppts.length;i++)

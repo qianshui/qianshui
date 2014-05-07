@@ -7,10 +7,16 @@ Ext.define('YongYou.util.DataApi', {
         this.initConfig(config);
     },
     Core:{
+    	getAreasOfJiangbei:function(callback,scope,param){
+			YongYou.util.DataApi.queryData(
+		    		YongYou.util.Config.getService()+"MapService/getAreasOfJiangbei",param,
+		    		callback,scope)
+
+        },
     	getAdnameByPoint:function(callback,scope,param){
-		YongYou.util.DataApi.queryData(
-	    		YongYou.util.Config.getService()+"MapService/getAdnameByPoint",param,
-	    		callback,scope)
+			YongYou.util.DataApi.queryData(
+		    		YongYou.util.Config.getService()+"MapService/getAdnameByPoint",param,
+		    		callback,scope)
 
 	    },
 		getTzjyByInfo:function(callback,scope,param){

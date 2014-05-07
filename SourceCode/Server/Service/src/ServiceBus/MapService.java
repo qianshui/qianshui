@@ -31,6 +31,23 @@ public class MapService {
 	
 	/**
 	 * *************************************************************
+	 * FunName : getAreasOfJiangbei
+     * Description： 根据关键字获取匹配的街道地址
+     * Input: 关键字
+     * Output:JSON格式数据
+     * Call URL:localhost:8080/WebService/MapService/getAddressListByKey?key=
+     * *************************************************************
+	 */
+	@GET
+	@Path("getAreasOfJiangbei")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getAreasOfJiangbei() {
+		List<String> areasList = new ArrayList<String>();	
+		return CommonJson.list2Json(areasList);
+	}
+	
+	/**
+	 * *************************************************************
 	 * FunName : getAddressListByKey
      * Description： 根据关键字获取匹配的街道地址
      * Input: 关键字
