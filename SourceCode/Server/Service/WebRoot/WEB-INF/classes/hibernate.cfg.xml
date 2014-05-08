@@ -39,6 +39,7 @@
 		<mapping resource="DataBase/Classid.hbm.xml" />
 		<mapping resource="DataBase/Prrelation.hbm.xml" />
 		<mapping resource="DataBase/Icon.hbm.xml" />
+		<mapping resource="DataBase/Area.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

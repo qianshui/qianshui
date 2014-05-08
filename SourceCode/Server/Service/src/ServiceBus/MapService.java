@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ArrayList;
 import Business.Map;
 import Common.*;
+import DataBase.Area;
 /**
  * *************************************************************
  * MapService地图地址查询webservice接口，为客户端提供地址查询、行业分析
@@ -42,7 +43,9 @@ public class MapService {
 	@Path("getAreasOfJiangbei")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public String getAreasOfJiangbei() {
-		List<String> areasList = new ArrayList<String>();	
+		List<Area> areasList = new ArrayList<Area>();	
+		Map.getAreasOfJiangbei(areasList);
+		String temstr=CommonJson.list2Json(areasList);
 		return CommonJson.list2Json(areasList);
 	}
 	

@@ -15,6 +15,9 @@ import java.util.Iterator;
 import java.util.List;
 import Common.AreaInfo;
 import DataBase.Locationsite;
+import DataBase.Area;
+import DataBase.Street;
+
 import java.util.Iterator; 
 import java.util.List;   
 
@@ -22,6 +25,36 @@ public class Map {
 	private static final String HibernateSessionFactory = null;
 	private static String strUrlpre = "http://api.map.baidu.com/geocoder?address=";
 	private static String strUrlnext = "&output=xml&key=UB30QfDn5Gp7Pu7kHfHIagLH&city=";
+	
+	/**
+	 * *************************************************************
+	 * FunName : getAreasOfJiangbei
+	 * Description： 获取江北区的区域列表
+	 * @param addressList (输出)： 区域列表
+	 * *************************************************************
+	 */
+	public static void getAreasOfJiangbei(List<Area> areasList) {
+		try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List list = null;
+			//list = session.createQuery("from Street where CommonFlag=1").list();
+			list = session.createQuery("from Area").list();
+			if (list != null) {
+				Iterator it = list.iterator();
+				while (it.hasNext()) {
+					/*此处将获取到的list重新添加到了IndustryList中，应该可以直接对IndustryList赋值返回的*/
+					areasList.add((Area) it.next());
+				}
+			}
+			
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * *************************************************************
 	 * FunName : getAddressListByKey

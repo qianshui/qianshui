@@ -481,37 +481,78 @@ function initializeMap() {
 
 	// ========================区域层及其功能部分=======================//
 	// 模拟数据提供部分，做到与服务器或得到的完全一致
-	var ppt1={strName:"观音桥",strLat:"29.564098",strLng:"106.53422"
-		,strArea:"106.54253,29.574688;106.538654,29.579954;106.53422,29.564098;"};
-	var ppt2={strName:"华新街",strLat:"29.583942",strLng:"106.54586"
-		,strArea:"106.54253,29.574688;106.538654,29.579954;106.54586,29.583942;"};
-	var ppts=[ppt1,ppt2];
+//	var ppt1={strName:"观音桥",strLat:"29.564098",strLng:"106.53422"
+//		,strArea:"106.54253,29.574688;106.538654,29.579954;106.53422,29.564098;"};
+//	var ppt2={strName:"华新街",strLat:"29.583942",strLng:"106.54586"
+//		,strArea:"106.54253,29.574688;106.538654,29.579954;106.54586,29.583942;"};
+//	var ppts=[ppt1,ppt2];
 	
-//	YongYou.util.DataApi.Core.getAreasOfJiangbei(function(res, scope) {
-//		scope = Ext.decode(res);
-//	}, ppts, {
-//		//'id' : industry2.id
-//	});
-	
-	//描画图层的部分
-	polygonArr=new Array();
-	for(i=0;i<ppts.length;i++)
-	{
-		var polygoni = new BMap.Polygon(ppts[i].strArea, {
-			fillColor : 'red'
-		});
-		polygoni.mycnt=new BMap.Point(Number(ppts[i].strLng),Number(ppts[i].strLat));
-		polygoni.strname=ppts[i].strName;
-		polygoni.addEventListener("click", function() {
+	YongYou.util.DataApi.Core.getAreasOfJiangbei(function(res, scope) {
+		res = Ext.decode(res);
+		//描画图层的部分
+		polygonArr=new Array();
+		for(i=0;i<res.length;i++)
+		{
+			var polygoni = new BMap.Polygon(res[i].strArea, {
+				fillColor : 'red'
+			});
+			polygoni.mycnt=new BMap.Point(Number(res[i].strLng),Number(res[i].strLat));
+			polygoni.strname=res[i].strName;
+			polygoni.addEventListener("click", function() {
 
+				for(j=0;j<polygonArr.length;j++)
+				{
+					map.removeOverlay(polygonArr[j]);
+				}
+				polygonArr=[];
+				map.centerAndZoom(this.mycnt, 17);
+			
+				point_cur = this.mycnt;
+				var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
+						new BMap.Size(32, 32));
+				var marker_cur = new BMap.Marker(point_cur, {
+							icon : myIcon
+						});
+				map.addOverlay(marker_cur);
+				marker_cur.enableDragging();
+				var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
+				marker_cur.openInfoWindow(infoWindow1);
+				marker_cur.addEventListener("dragend", function(e) {
+					if (confirm("您选择了" + e.point.lng + "  " + e.point.lat + "，是否进行验证？")) {
+						point_cur = new BMap.Point(e.point.lng, e.point.lat);
+						for (i = 0; i < array_about_map.length; i++) {
+							array_about_map[i].closeInfoWindow();
+							map.removeOverlay(array_about_map[i]);
+						}
+						Ext.ComponentQuery.query("#list_about_map")[0].getStore()
+								.removeAll();
+					}
+				});
+				
+			});
+			map.addOverlay(polygoni);
+			polygonArr.push(polygoni);
+		}
+		
+		//======================判断是否需要打开某区域=====================//
+		if(scope.firewho!=null)
+		{
+			var ppidx=0;
+			for(i=0;i<polygonArr.length;i++)
+			{
+				if(scope.firewho==polygonArr[i].strname)
+				{
+					ppidx=i;
+				}
+			}
 			for(j=0;j<polygonArr.length;j++)
 			{
 				map.removeOverlay(polygonArr[j]);
 			}
-			polygonArr=[];
-			map.centerAndZoom(this.mycnt, 17);
-		
-			point_cur = this.mycnt;
+			map.centerAndZoom(polygonArr[ppidx].mycnt, 17);
+	        point_cur = polygonArr[ppidx].mycnt;
+	        polygonArr=[];
+	        
 			var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
 					new BMap.Size(32, 32));
 			var marker_cur = new BMap.Marker(point_cur, {
@@ -532,50 +573,10 @@ function initializeMap() {
 							.removeAll();
 				}
 			});
-			
-		});
-		map.addOverlay(polygoni);
-		polygonArr.push(polygoni);
-	}
+		}
+	}, this, {
+		//'id' : industry2.id
+	});
 	
-	//======================判断是否需要打开某区域=====================//
-	if(this.firewho!=null)
-	{
-		var ppidx=0;
-		for(i=0;i<polygonArr.length;i++)
-		{
-			if(this.firewho==polygonArr[i].strname)
-			{
-				ppidx=i;
-			}
-		}
-		for(j=0;j<polygonArr.length;j++)
-		{
-			map.removeOverlay(polygonArr[j]);
-		}
-		map.centerAndZoom(polygonArr[ppidx].mycnt, 17);
-        point_cur = polygonArr[ppidx].mycnt;
-        polygonArr=[];
-        
-		var myIcon = new BMap.Icon("resources/img/map/cur_posi.png",
-				new BMap.Size(32, 32));
-		var marker_cur = new BMap.Marker(point_cur, {
-					icon : myIcon
-				});
-		map.addOverlay(marker_cur);
-		marker_cur.enableDragging();
-		var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
-		marker_cur.openInfoWindow(infoWindow1);
-		marker_cur.addEventListener("dragend", function(e) {
-			if (confirm("您选择了" + e.point.lng + "  " + e.point.lat + "，是否进行验证？")) {
-				point_cur = new BMap.Point(e.point.lng, e.point.lat);
-				for (i = 0; i < array_about_map.length; i++) {
-					array_about_map[i].closeInfoWindow();
-					map.removeOverlay(array_about_map[i]);
-				}
-				Ext.ComponentQuery.query("#list_about_map")[0].getStore()
-						.removeAll();
-			}
-		});
-	}
+	
 }
