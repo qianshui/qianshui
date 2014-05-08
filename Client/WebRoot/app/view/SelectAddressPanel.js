@@ -89,6 +89,8 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 				//text : '我要在地图点选',
 				listeners : {
 					'tap' : function(b, e) {
+						point_cur = null;
+						array_about_map = new Array();
 						Ext.ComponentQuery.query("container[id='contain2']")[0]
       						.getLayout().setAnimation({
       									type : 'slide',

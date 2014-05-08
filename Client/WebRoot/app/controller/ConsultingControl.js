@@ -491,6 +491,7 @@ function initializeMap() {
 		res = Ext.decode(res);
 		//描画图层的部分
 		polygonArr=new Array();
+		//alert(point_cur);
 		for(i=0;i<res.length;i++)
 		{
 			var polygoni = new BMap.Polygon(res[i].strArea, {
@@ -529,12 +530,15 @@ function initializeMap() {
 					}
 				});
 				
+				address={name:this.strname,id:""};
+				
 			});
 			map.addOverlay(polygoni);
 			polygonArr.push(polygoni);
 		}
 		
 		//======================判断是否需要打开某区域=====================//
+		
 		if(scope.firewho!=null)
 		{
 			var ppidx=0;
