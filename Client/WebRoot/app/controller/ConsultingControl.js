@@ -316,15 +316,49 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				});
 				// a-2 通过经纬度获取周边配套
 				YongYou.util.DataApi.Core.getZbptByPoint(function(res, scope) {
-					
+					res = Ext.decode(res);
+					var strXueXiao="";
+					var strGongYuan="";
+					var strYiYuan="";
+					var strJiaoTong="";
+					var strXiaoQu="";
+					var strShangWu="";
+					for(var ii=0;ii<res.length;ii++)
+					{
+						
+						if(res[ii].strType=="学校")
+						{
+							strXueXiao=strXueXiao+res[ii].name+"、";
+						}
+						else if(res[ii].strType=="公园")
+						{
+							strGongYuan=strGongYuan+res[ii].name+"、";
+						}
+						else if(res[ii].strType=="医院")
+						{
+							strYiYuan=strYiYuan+res[ii].name+"、";
+						}
+						else if(res[ii].strType=="交通")
+						{
+							strJiaoTong=strJiaoTong+res[ii].name+"、";
+						}
+						else if(res[ii].strType=="小区")
+						{
+							strXiaoQu=strXiaoQu+res[ii].name+"、";
+						}
+						else if(res[ii].strType=="商务")
+						{
+							strShangWu=strShangWu+res[ii].name+"、";
+						}
+					}
 					scope.setAroundValue({
-								xuexiao : '中餐厅;超市;西餐厅;茶餐厅;美容美发;家政中心;娱乐中心;洗衣房;',
-								shangye : '嘉陵公园',
-								jiaotong : '嘉陵公园 查找周边公园',
-								gongyuan : '嘉陵公园',
-								biaojian : '二级长安医院、三级甲等三二四医院、二级甲等江北一院 查找周边医院',
-								yiyuan : '区级建新中学、重庆市直辖后首批重点中学重庆18中、区级华新小学 查找周边学校',
-								xiaoqu : '重百商场、北京华联商厦、苏宁电器、香港新世界百货、观音桥步行街等 查找周边商场'
+								xuexiao : strXueXiao,
+								shangye : strShangWu,
+								jiaotong : strJiaoTong,
+								gongyuan : strGongYuan,
+								biaojian : strXiaoQu,
+								yiyuan : strYiYuan,
+								xiaoqu : strXiaoQu
 							})
 					
 				}, infocon,
@@ -581,6 +615,5 @@ function initializeMap() {
 	}, this, {
 		//'id' : industry2.id
 	});
-	
 	
 }
