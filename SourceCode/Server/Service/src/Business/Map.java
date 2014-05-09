@@ -198,6 +198,7 @@ public class Map {
                 		.elementTextTrim("lat")));
                 obj.setLng(Double.parseDouble(element.element("location")
                 		.elementTextTrim("lng")));
+                obj.setStrType(poi);
                 areaInfo.add(obj);
             }
 			//System.out.println("获取成功\n");

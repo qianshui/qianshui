@@ -79,30 +79,21 @@ public class IndustryService {
 	@Path("getZbptByPoint")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public String getZbptByPoint(@QueryParam("lat") double lat,@QueryParam("lng") double lng) {
-		StringBuilder resultString=new StringBuilder();
+		//StringBuilder resultString=new StringBuilder();
 		String listPeitaoStr[]={"学校","公园","医院","交通","小区","商务"};
-		List<AreaInfo> areaInfo=null;
+		List<AreaInfo> areaInfo= new ArrayList<AreaInfo>();
 		try {
 			for(int i=0;i<listPeitaoStr.length;i++)
 			{
-				if(i!=0)
-				{
-					resultString.append(",");
-				}
-				resultString.append("{classname:\"公园\",results:");
-				areaInfo= new ArrayList<AreaInfo>();
 				Map.getPoiByBaidu(lat,lng,listPeitaoStr[i],areaInfo);
-				resultString.append(CommonJson.list2Json(areaInfo));
-				resultString.append("}");
 			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		System.out.println(areaInfo.get(0).getName()+" "
-//				+areaInfo.get(0).getLat()+" "+areaInfo.get(0).getLng());
-		return null;
+		String _my_tem_str=CommonJson.list2Json(areaInfo);
+		return CommonJson.list2Json(areaInfo);
 	}
 	
 	/**

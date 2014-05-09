@@ -12,6 +12,7 @@ public class AreaInfo {
 	private double strLng;
 	private double strLat;
 	private String strName;
+	private String strType;
 	
 	public AreaInfo() {
 	}
@@ -44,5 +45,13 @@ public class AreaInfo {
 	
 	public String getName() {
 		return this.strName;
+	}
+
+	public void setStrType(String strType) {
+		this.strType = strType;
+	}
+
+	public String getStrType() {
+		return strType;
 	}
 }
