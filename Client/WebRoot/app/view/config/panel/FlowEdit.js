@@ -7,7 +7,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 	autoScroll : true,
 	id : 'flow-edit',
 	autoDestory : true,
-	selectRow : null,
+	selectedRow : null,
 	lastRowId : 0,
 	selectItemId : '',
 	layout : {
@@ -20,7 +20,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 		icon : 'resources/images/icons/fam/add.png',
 		handler : function(view, rowIndex, colIndex, actionItem, event, record,
 				row) {
-			newrow=view.up('panel').createRow()
+			newrow = view.up('panel').createRow()
 			view.up('panel').add(newrow);
 			view.up('panel').selectRow(newrow);
 		}
@@ -31,7 +31,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 		handler : function(view, rowIndex, colIndex, actionItem, event, record,
 				row) {
 			YongYou.util.EventHandle.events.ShowForm(false, view.up('panel'),
-					record, '新建行业', 'YongYou.view.config.form.ActivityForm',
+					record, '添加节点', 'YongYou.view.config.form.ActivityForm',
 					actCallback)
 		}
 	}],
@@ -65,6 +65,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 				}, this, {
 					id : record.data.id
 				})
+				this.id=record.data.id
 	},
 	selectRow : function(panel) {
 		removeAllColor(this, 'transparent')
@@ -72,7 +73,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 				.setStyle(
 						'background',
 						'-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(235,241,246,1)), color-stop(50%,rgba(171,211,238,1)), color-stop(51%,rgba(137,195,235,1)), color-stop(100%,rgba(213,235,251,1)))');
-		this.selectRow=panel;
+		this.selectedRow = panel;
 	},
 	createRow : function() {
 		row = Ext.create('YongYou.view.config.panel.FlowEditRow', {
@@ -95,15 +96,17 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 
 });
 
-actCallback = function(form, row, isUpdate) {
-	this.callback = function(res, scope, typeid) {
-
+actCallback = function(form, flowpanel, isUpdate) {
+	this.callback = function(res, scope) {
+		act = flowpanel.createActivity(scope.getValues());
+		flowpanel.selectedRow.add(act);
 	}
 	if (form.isValid()) {
-
+		form.getForm().findField("rowid").setValue(flowpanel.selectedRow.rowId);
+		form.getForm().findField("flowId").setValue(flowpanel.id);
+		YongYou.util.DataApi.Core.addNode(this.callback, form,form.getValues());
 	}
 }
-
 removeAllColor = function(panel, color) {
 	panel.items.each(function(p) {
 				flow = Ext.getCmp('flow-edit');

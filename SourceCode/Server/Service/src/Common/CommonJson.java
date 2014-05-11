@@ -10,7 +10,10 @@
 package Common;
 import net.sf.json.*;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import DataBase.Flow;
 
@@ -65,4 +68,14 @@ public class CommonJson {
 		JSONObject jsonObject= JSONObject.fromObject(json);
 		return JSONObject.toBean(jsonObject, objClass);
 	}
+	
+	public static Map getMapFromJson(String jsonString) { 
+		        JSONObject jsonObject = JSONObject.fromObject(jsonString); 
+		        Map map = new HashMap(); 
+		        for(Iterator iter = jsonObject.keys(); iter.hasNext();){ 
+		            String key = (String)iter.next(); 
+		            map.put(key, jsonObject.get(key)); 
+		        } 
+		        return map; 
+		    } 
 }

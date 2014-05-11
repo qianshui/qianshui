@@ -10,6 +10,7 @@ package ServiceBus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -417,15 +418,28 @@ public class CategoryService {
      * Description： 增加Node
      * Input: JSON格式数据
      * Output:
-     * Call URL:localhost:8080/Service/CategoryService/addNode
+     * Call URL:localhost:8080/Service/CategoryService/createNode
      * *************************************************************
 	 */
 	@POST
-    @Path("/addNode")
+    @Path("/createNode")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addNode(Node node) {
-		node.setId(IDOperation.getClassID("Node"));
-        if (DBOperation.add(node)) {
+    public Response createNode(String node) {
+		Node bean = (Node)CommonJson.Json2Obj(node,Node.class);
+		bean.setId(IDOperation.getClassID("Node"));
+        if (DBOperation.add(bean)) {
+        	Map map= CommonJson.getMapFromJson(node);
+        	String attachment=(String)map.get("attachment");
+        	String[] attach_list=attachment.split(";");
+        	for(int i = 0; i<attach_list.length; i++){
+        		Narelation nr= new Narelation();
+        		nr.setId(IDOperation.getClassID("narelation"));
+        		nr.setAid(attach_list[i]);
+        		nr.setNid(bean.getId());
+        		DBOperation.add(nr);
+        		
+        	}
+        	
         	return Response.status(201).entity("Seccess").build();
         }
         else
@@ -446,8 +460,25 @@ public class CategoryService {
 	@POST
     @Path("/updateNode")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateNode(Node node) {
-        if (DBOperation.update(node)) {
+    public Response updateNode(String node) {
+		Node bean = (Node)CommonJson.Json2Obj(node,Node.class);   	
+        if (DBOperation.update(bean)) {
+        	
+        	Map map= CommonJson.getMapFromJson(node);
+        	String attachment=(String)map.get("attachment");
+        	if(attachment.length()>1){
+        		if(DBOperation.delete("delete from narelation where NID='"+bean.getId()+"'")){
+        		String[] attach_list=attachment.split(";");
+        		for(int i = 0; i<attach_list.length; i++){
+        			Narelation nr= new Narelation();
+        			nr.setId(IDOperation.getClassID("narelation"));
+        			nr.setAid(attach_list[i]);
+        			nr.setNid(bean.getId());
+        			DBOperation.add(nr);
+        		
+        		}
+        	}
+        	}
         	return Response.status(201).entity("Seccess").build();
         }
         else

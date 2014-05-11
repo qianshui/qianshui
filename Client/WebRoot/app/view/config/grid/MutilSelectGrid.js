@@ -17,9 +17,9 @@ Ext.define('YongYou.view.config.grid.MutilSelectGrid', {
 							var id = "";
 							for (i = 0; i < records.length; i++) {
 								if (records[i].data.name) {
-									name += records[i].data.name + ";\n\r";
+									name += records[i].data.name + ",\n\r";
 								} else {
-									name += records[i].data.title + ";\n\r";
+									name += records[i].data.title + ",\n\r";
 								}
 
 								if (id.length > 0) {

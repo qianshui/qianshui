@@ -9,8 +9,11 @@
 
 package Common;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class DBOperation {
@@ -87,5 +90,28 @@ public class DBOperation {
                 }  
             }
         }
+	}
+	
+	public static boolean delete(String sql){
+		Configuration cfg = new Configuration().configure(); 
+		 SessionFactory factory = cfg.buildSessionFactory();
+		Session session = null;
+		Transaction tx = null;
+		try {
+			    session = factory.openSession();
+			    tx = session.getTransaction();
+			    session.beginTransaction(); 
+			    Query query = session.createSQLQuery(sql);
+
+			    query.executeUpdate();
+			    tx.commit();
+			    return true;
+		} catch (HibernateException e) {
+			    tx.rollback();
+			    e.printStackTrace();
+			    return false;
+			   }finally{
+				   session.close();
+			   }
 	}
 }

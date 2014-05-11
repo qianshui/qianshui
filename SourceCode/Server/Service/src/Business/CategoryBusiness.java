@@ -279,7 +279,7 @@ public class CategoryBusiness {
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Node where FlowID = :strID")
+			list = session.createQuery("from Node where FlowID = :strID order by Rowid asc")
 			       .setParameter("strID", flowID).list();
 			//Transaction tx = session.beginTransaction();
 			if (list != null) {

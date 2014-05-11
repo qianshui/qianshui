@@ -96,13 +96,13 @@ Ext.define('YongYou.view.config.form.ActivityForm', {
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '联系人',
-				name : 'contactId'
-				//hidden : true
+				name : 'contactId',
+				hidden : true
 
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '行ID',
-				name : 'rowId',
+				name : 'rowid',
 				hidden : true
 
 			}, {
@@ -114,8 +114,8 @@ Ext.define('YongYou.view.config.form.ActivityForm', {
 			},{
 				xtype : 'textfield',
 				fieldLabel : '附件',
-				name : 'attachment'
-				//hidden : true
+				name : 'attachment',
+				hidden : true
 
 			}, {
 				xtype : 'textareafield',

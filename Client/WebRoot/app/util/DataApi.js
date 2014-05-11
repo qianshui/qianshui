@@ -140,6 +140,18 @@ Ext.define('YongYou.util.DataApi', {
     	    		callback,scope)
 
     	},
+    	addNode:function(callback,scope,param){
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+"CategoryService/createNode",param,
+    	    		callback,scope)
+
+    	},
+    	updateNode:function(callback,scope,param){
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+"CategoryService/updateNode",param,
+    	    		callback,scope)
+
+    	},
   /**×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
     	 * 联系人操作
     	 * @param {} callback
