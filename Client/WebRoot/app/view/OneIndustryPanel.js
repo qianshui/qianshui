@@ -54,6 +54,9 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 										res, scope) {
 									res = Ext.decode(res);
 									
+									scope.scope.parent.items.items[1].setActiveItem(0);
+									return;
+									
 									var store=scope.scope.parent.items.items[1].getStore();
 									store.removeAll();
 									store.add(res);
@@ -93,6 +96,9 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 										res, scope) {
 									res = Ext.decode(res);
 									
+									scope.scope.parent.items.items[1].setActiveItem(1);
+									return;
+									
 									var store=scope.scope.parent.items.items[1].getStore();
 									store.removeAll();
 									store.add(res);
@@ -128,34 +134,65 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 							}
 		}}}
 				
-			},{
-				xtype:'list',
-				id:'list_about_map',
-				flex:3,
-				store: {
-		            fields: ['lng','lat','name'],
-			        data: [
-			            
-			        ]
-		        },
-                itemTpl: '<span style="padding-left:40px;font-size:10px;">{name}</span>',
-                listeners:{
-		        	itemtap:function(container, target, index, e){
-			        	var me = this, store = me.getStore();
-						if (store.data.items[target]) {
-							record = store.data.items[target].data;
-							//alert(record.lng+"  "+record.lat);
-							var marker = new BMap.Marker(new BMap.Point(
-									record.lat, record.lng));
-							map.addOverlay(marker);
-							marker.openInfoWindow(new BMap.InfoWindow(record.name));
-							array_about_map.push(marker);
-						}
-		        	}
-		        }
+			},
+			{
+				xtype:'container',
+				layout: {
+	        		type: 'card',//重点理解
+	        	},
+	            style: 'border-top:1px solid gray;',
+	        	height:520,
+	        	items:[
+	        	   {
+						xtype:'list',
+						id:'list_about_map',
+						flex:3,
+						store: {
+				            fields: ['lng','lat','name'],
+					        data: [
+					            
+					        ]
+				        },
+		                itemTpl: '<span style="padding-left:40px;font-size:10px;">{name}</span>',
+		                listeners:{
+				        	itemtap:function(container, target, index, e){
+					        	var me = this, store = me.getStore();
+								if (store.data.items[target]) {
+									record = store.data.items[target].data;
+									//alert(record.lng+"  "+record.lat);
+									var marker = new BMap.Marker(new BMap.Point(
+											record.lat, record.lng));
+									map.addOverlay(marker);
+									marker.openInfoWindow(new BMap.InfoWindow(record.name));
+									array_about_map.push(marker);
+								}
+				        	}
+				        }
+					},
+					{
+						xtype:'dataview',
+						flex:3,
+					    store: {
+					        fields: ['name'],
+					        data: [
+					            {name: '学校'},
+					            {name: '学校'},
+					            {name: '学校'},
+					            {name: '学校'},
+					            {name: '学校'},
+					        ]
+					    },
+					    itemTpl : [
+					                '<div style="float:left;margin-left:20px;marin-right:20px;margin-top:26px;">'+
+									'<div class="image" style="margin-left:6px;width:60px;height:70px;background-image:url(\'resources/img/desktop/root_gr_ztfl_ns.png\')"></div>'+
+									'<div class="name" style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;{name}&nbsp;&nbsp;&nbsp;&nbsp;</div>'+
+									'</div>'
+
+							].join(''),
+					}
+	        	]
 			}
-					
-			]
+		    ]
 		},{
 			//style : 'float:right;',
 			xtype : 'component',
