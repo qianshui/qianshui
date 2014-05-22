@@ -176,15 +176,15 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 					        fields: ['name'],
 					        data: [
 					            {name: '学校'},
-					            {name: '学校'},
-					            {name: '学校'},
-					            {name: '学校'},
-					            {name: '学校'},
+					            {name: '公园'},
+					            {name: '医院'},
+					            {name: '公交'},
+					            {name: '商业'},
 					        ]
 					    },
 					    itemTpl : [
 					                '<div style="float:left;margin-left:20px;marin-right:20px;margin-top:26px;">'+
-									'<div class="image" style="margin-left:6px;width:60px;height:70px;background-image:url(\'resources/img/desktop/root_gr_ztfl_ns.png\')"></div>'+
+									'<div class="image" style="margin-left:6px;width:60px;height:70px;background-image:url(\'resources/img/desktop/root_gr_ztfl_sb.png\')"></div>'+
 									'<div class="name" style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;{name}&nbsp;&nbsp;&nbsp;&nbsp;</div>'+
 									'</div>'
 
