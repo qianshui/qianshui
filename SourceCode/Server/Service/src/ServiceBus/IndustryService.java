@@ -78,21 +78,34 @@ public class IndustryService {
 	@GET
 	@Path("getZbptByPoint")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public String getZbptByPoint(@QueryParam("lat") double lat,@QueryParam("lng") double lng) {
-		//StringBuilder resultString=new StringBuilder();
-		String listPeitaoStr[]={"学校","公园","医院","交通","小区","商务"};
+	public String getZbptByPoint(@QueryParam("lat") double lat,@QueryParam("lng") double lng
+			,@QueryParam("ptype") String ptype) {
+		
 		List<AreaInfo> areaInfo= new ArrayList<AreaInfo>();
-		try {
-			for(int i=0;i<listPeitaoStr.length;i++)
-			{
-				Map.getPoiByBaidu(lat,lng,listPeitaoStr[i],areaInfo);
+		if(ptype.equals("null"))
+		{
+			String listPeitaoStr[]={"学校","公园","医院","交通","小区","商务"};
+			try {
+				for(int i=0;i<listPeitaoStr.length;i++)
+				{
+					Map.getPoiByBaidu(lat,lng,listPeitaoStr[i],areaInfo);
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		String _my_tem_str=CommonJson.list2Json(areaInfo);
+		else
+		{
+			try {
+				Map.getPoiByBaidu(lat,lng,ptype,areaInfo);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		String tte=CommonJson.list2Json(areaInfo);
 		return CommonJson.list2Json(areaInfo);
 	}
 	

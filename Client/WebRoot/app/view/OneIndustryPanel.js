@@ -55,9 +55,8 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 									res = Ext.decode(res);
 									
 									scope.scope.parent.items.items[1].setActiveItem(0);
-									return;
 									
-									var store=scope.scope.parent.items.items[1].getStore();
+									var store=scope.scope.parent.items.items[1].items.items[0].getStore();
 									store.removeAll();
 									store.add(res);
 									
@@ -92,40 +91,41 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 									alert("请选择当前位置！");
 									return;
 								}
-								YongYou.util.DataApi.Core.getZbptByLngLat(function(
-										res, scope) {
-									res = Ext.decode(res);
-									
-									scope.scope.parent.items.items[1].setActiveItem(1);
-									return;
-									
-									var store=scope.scope.parent.items.items[1].getStore();
-									store.removeAll();
-									store.add(res);
-									
-									for(i=0;i<array_about_map.length;i++){
-										scope.map.removeOverlay(array_about_map[i]);
-									}
-									array_about_map=[];
-									for (i = 0; i < res.length; i++) {
-										var marker = new BMap.Marker(new BMap.Point(
-												res[i].lat, res[i].lng));
-										var info = res[i].name;
-										marker.setTitle(info);
-										marker.setLabel(info);
-										marker.addEventListener("click", function(
-												a, b) {
-											this
-													.openInfoWindow(new BMap.InfoWindow(a.currentTarget
-															.getTitle()));
-										});
-										scope.map.addOverlay(marker);
-										array_about_map.push(marker);
-									}
-								}, {'map':map,'scope':this}, {
-									'lng' : point_cur.lat,
-									'lat' : point_cur.lng
-								});
+								this.parent.items.items[1].setActiveItem(1);
+//								YongYou.util.DataApi.Core.getZbptByLngLat(function(
+//										res, scope) {
+//									res = Ext.decode(res);
+//									
+//									scope.scope.parent.items.items[1].setActiveItem(1);
+//									return;
+//									
+//									var store=scope.scope.parent.items.items[1].getStore();
+//									store.removeAll();
+//									store.add(res);
+//									
+//									for(i=0;i<array_about_map.length;i++){
+//										scope.map.removeOverlay(array_about_map[i]);
+//									}
+//									array_about_map=[];
+//									for (i = 0; i < res.length; i++) {
+//										var marker = new BMap.Marker(new BMap.Point(
+//												res[i].lat, res[i].lng));
+//										var info = res[i].name;
+//										marker.setTitle(info);
+//										marker.setLabel(info);
+//										marker.addEventListener("click", function(
+//												a, b) {
+//											this
+//													.openInfoWindow(new BMap.InfoWindow(a.currentTarget
+//															.getTitle()));
+//										});
+//										scope.map.addOverlay(marker);
+//										array_about_map.push(marker);
+//									}
+//								}, {'map':map,'scope':this}, {
+//									'lng' : point_cur.lat,
+//									'lat' : point_cur.lng
+//								});
 							}
 							else if(record.name=="点我确认")
 							{
@@ -189,7 +189,44 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 									'</div>'
 
 							].join(''),
-					}
+						listeners : {
+							itemtap : function(container, target, index, e) {
+
+								var me = this, store = me.getStore();
+								if (store.data.items[target]) {
+									record = store.data.items[target].data;
+									
+									YongYou.util.DataApi.Core.getZbptByPoint(function(res, scope) {
+										res = Ext.decode(res);
+										
+										for(i=0;i<array_about_map.length;i++){
+											scope.map.removeOverlay(array_about_map[i]);
+										}
+										array_about_map=[];
+										for (i = 0; i < res.length; i++) {
+											var marker = new BMap.Marker(new BMap.Point(
+													res[i].lng, res[i].lat));
+											var info = res[i].name;
+											marker.setTitle(info);
+											marker.addEventListener("click", function(
+													a, b) {
+												this
+														.openInfoWindow(new BMap.InfoWindow(a.currentTarget
+																.getTitle()));
+											});
+											scope.map.addOverlay(marker);
+											array_about_map.push(marker);
+										}
+									}, {'map':map,'scope':this},
+									{
+										'lat' : point_cur.lat,
+										'lng' : point_cur.lng,
+										'ptype':record.name
+									});
+								}
+					        }
+					    }//listener结束
+					}//dataview结束
 	        	]
 			}
 		    ]

@@ -364,7 +364,8 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				}, infocon,
 				{
 					'lat' : point_cur.lat,
-					'lng' : point_cur.lng
+					'lng' : point_cur.lng,
+					'ptype':'null'
 				});
 				// a-3 通过综合信息获取投资建议
 				YongYou.util.DataApi.Core.getTzjyByInfo(function(res, scope) {
