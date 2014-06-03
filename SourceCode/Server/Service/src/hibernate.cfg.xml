@@ -40,6 +40,7 @@
 		<mapping resource="DataBase/Prrelation.hbm.xml" />
 		<mapping resource="DataBase/Icon.hbm.xml" />
 		<mapping resource="DataBase/Area.hbm.xml" />
+		<mapping resource="DataBase/PeitaoObj.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

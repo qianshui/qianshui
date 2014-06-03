@@ -8,11 +8,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import Common.CommonJson;
+import Common.DBOperation;
 import DataBase.Category;
 import DataBase.Menu;
 import DataBase.Icon;
+import DataBase.PeitaoObj;
 import Business.CategoryBusiness;
 import Business.ConfigUtil;
 import Business.Map;
@@ -35,14 +38,27 @@ public class ConfigUtilService {
 				strlng.setLength(0);
 				strlat.setLength(0);
 				strerr.setLength(0);
-				Map.address2LngLat(newptl, strlng, strlat, strerr);
-				System.out.println(strlng+"  "+strlat);
+				Map.address2LngLat(ptnamelist[i], strlng, strlat, strerr);
+				
+				PeitaoObj pto=new PeitaoObj();
+				pto.setLat(Double.parseDouble(strlat.toString()));
+				pto.setLng(Double.parseDouble(strlng.toString()));
+				pto.setName(ptnamelist[i]);
+				pto.setType(pttype);
+				
+				if (DBOperation.add(pto)) {
+		        	//return "Success";
+		        }
+		        else
+		        {
+		        	return "Failure";
+		        }
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return strlng+"  "+strlat;
+		return "Success";
 	}
 	
 	@GET
