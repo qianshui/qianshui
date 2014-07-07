@@ -338,7 +338,7 @@ Ext.define('YongYou.controller.ConsultingControl', {
 						{
 							strYiYuan=strYiYuan+res[ii].name+"、";
 						}
-						else if(res[ii].strType=="交通")
+						else if(res[ii].strType=="公交站")
 						{
 							strJiaoTong=strJiaoTong+res[ii].name+"、";
 						}

@@ -193,7 +193,7 @@ public class Map {
                 Element element = (Element) ie.next();
                 //System.out.println(element.getName()+"\n");
                 AreaInfo obj=new AreaInfo();
-                obj.setName(element.elementTextTrim("name"));
+                obj.setName(element.elementTextTrim("name")+"<br>"+element.elementTextTrim("address"));
                 obj.setLat(Double.parseDouble(element.element("location")
                 		.elementTextTrim("lat")));
                 obj.setLng(Double.parseDouble(element.element("location")

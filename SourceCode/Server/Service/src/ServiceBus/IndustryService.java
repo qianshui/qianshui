@@ -84,7 +84,7 @@ public class IndustryService {
 		List<AreaInfo> areaInfo= new ArrayList<AreaInfo>();
 		if(ptype.equals("null"))
 		{
-			String listPeitaoStr[]={"学校","公园","医院","交通","小区","商务"};
+			String listPeitaoStr[]={"学校","公园","医院","公交站","小区","商务"};
 			try {
 				for(int i=0;i<listPeitaoStr.length;i++)
 				{
