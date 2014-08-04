@@ -487,6 +487,37 @@ public class CategoryService {
         }
     }
 	
+	
+	/**
+	 * *************************************************************
+	 * FunName : updateNode
+     * Description： 更新Node
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/updateNode
+     * *************************************************************
+	 */
+	@POST
+    @Path("/deleteNode")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteNode(String node) {
+		Node bean = (Node)CommonJson.Json2Obj(node,Node.class);   	
+        if (DBOperation.delete(bean)) {
+        	
+        	Map map= CommonJson.getMapFromJson(node);
+        	String attachment=(String)map.get("attachment");
+        	if(attachment!=null && attachment.length()>1){
+        		DBOperation.delete("delete from narelation where NID='"+bean.getId()+"'");
+        	}
+        	
+        	return Response.status(201).entity("Seccess").build();
+        }
+        else
+        {
+        	return Response.status(201).entity("Failure").build();
+        }
+    }
+	
 	/**
 	 * *************************************************************
 	 * FunName : addAttachment

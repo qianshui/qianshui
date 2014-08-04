@@ -10,6 +10,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 	selectedRow : null,
 	lastRowId : 0,
 	selectItemId : '',
+	record:null,
 	layout : {
 		type : 'vbox', // Arrange child items vertically
 		align : 'stretch'
@@ -34,6 +35,18 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 					record, '添加节点', 'YongYou.view.config.form.ActivityForm',
 					actCallback)
 		}
+	}, {
+		xtype : 'button',
+		text : '删除节点',
+		icon : 'resources/images/icons/fam/delete.png',
+		handler : function(view, rowIndex, colIndex, actionItem, event, record,
+				row) {
+			if (view.up('panel').selectItem) {
+				YongYou.util.DataApi.Core.deleteNode(function(res, scope) {
+							scope.initialPanel(scope.record);
+						}, view.up('panel'), view.up('panel').selectItem)
+			}
+		}
 	}],
 	listeners : {
 		itemdblclick : function(dataview, record, item, index, e, eOpts) {
@@ -43,6 +56,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 		}
 	},
 	initialPanel : function(record) {
+		this.record=record;
 		if (this.items.length > 0) {
 			this.removeAll();
 		}
@@ -65,7 +79,7 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 				}, this, {
 					id : record.data.id
 				})
-				this.id=record.data.id
+		this.id = record.data.id
 	},
 	selectRow : function(panel) {
 		removeAllColor(this, 'transparent')
@@ -98,13 +112,17 @@ Ext.define('YongYou.view.config.panel.FlowEdit', {
 
 actCallback = function(form, flowpanel, isUpdate) {
 	this.callback = function(res, scope) {
+		
+		
 		act = flowpanel.createActivity(scope.getValues());
-		flowpanel.selectedRow.add(act);
+		scope.up('panel').close();
+		flowpanel.initialPanel(flowpanel.record);//.selectedRow.add(act);
 	}
 	if (form.isValid()) {
 		form.getForm().findField("rowid").setValue(flowpanel.selectedRow.rowId);
 		form.getForm().findField("flowId").setValue(flowpanel.id);
-		YongYou.util.DataApi.Core.addNode(this.callback, form,form.getValues());
+		YongYou.util.DataApi.Core
+				.addNode(this.callback, form, form.getValues());
 	}
 }
 removeAllColor = function(panel, color) {
