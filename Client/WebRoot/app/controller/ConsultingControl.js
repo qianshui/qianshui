@@ -328,27 +328,27 @@ Ext.define('YongYou.controller.ConsultingControl', {
 						
 						if(res[ii].strType=="学校")
 						{
-							strXueXiao=strXueXiao+res[ii].name+"、";
+							strXueXiao=strXueXiao+res[ii].name.split("<br>")[0]+"、";
 						}
 						else if(res[ii].strType=="公园")
 						{
-							strGongYuan=strGongYuan+res[ii].name+"、";
+							strGongYuan=strGongYuan+res[ii].name.split("<br>")[0]+"、";
 						}
 						else if(res[ii].strType=="医院")
 						{
-							strYiYuan=strYiYuan+res[ii].name+"、";
+							strYiYuan=strYiYuan+res[ii].name.split("<br>")[0]+"、";
 						}
 						else if(res[ii].strType=="公交站")
 						{
-							strJiaoTong=strJiaoTong+res[ii].name+"、";
+							strJiaoTong=strJiaoTong+res[ii].name.split("<br>")[0]+"、";
 						}
 						else if(res[ii].strType=="小区")
 						{
-							strXiaoQu=strXiaoQu+res[ii].name+"、";
+							strXiaoQu=strXiaoQu+res[ii].name.split("<br>")[0]+"、";
 						}
 						else if(res[ii].strType=="商务")
 						{
-							strShangWu=strShangWu+res[ii].name+"、";
+							strShangWu=strShangWu+res[ii].name.split("<br>")[0]+"、";
 						}
 					}
 					scope.setAroundValue({
