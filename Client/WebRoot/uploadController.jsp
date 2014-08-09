@@ -33,7 +33,22 @@ while (iter.hasNext()) {
         long sizeInBytes = item.getSize();
         String path=application.getRealPath("/");
         path=path+"//files//attachments//";
-        filename=System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf("."));
+        if(fileName.indexOf("pdf")==fileName.length()-3)
+        {
+            filename=System.currentTimeMillis() + ".pdf";
+        }
+        else if(fileName.indexOf("doc")==fileName.length()-3)
+        {
+            filename=System.currentTimeMillis() + ".doc";
+        }
+        else if(fileName.indexOf("docx")==fileName.length()-4)
+        {
+            filename=System.currentTimeMillis() + ".docx";
+        }
+        else
+        {
+            filename=fileName;
+        }
         File uploadedFile = new File(path + filename);
         item.write(uploadedFile);
     }

@@ -11,16 +11,16 @@
             <generator class="assigned" />
         </id>
         <property name="title" type="string">
-            <column name="Title" length="100" />
+            <column name="Title" length="500" />
         </property>
         <property name="description" type="string">
-            <column name="Description" length="100" />
+            <column name="Description" length="500" />
         </property>
         <property name="comments" type="string">
-            <column name="Comments" length="100" />
+            <column name="Comments" length="500" />
         </property>
         <property name="downloadLink" type="string">
-            <column name="DownloadLink" length="100" />
+            <column name="DownloadLink" length="500" />
         </property>
 <!--        <set name="narelations" inverse="true">
             <key>
