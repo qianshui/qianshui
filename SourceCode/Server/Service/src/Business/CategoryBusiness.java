@@ -523,7 +523,14 @@ public class CategoryBusiness {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return list.get(0);   	
+		if(list.size()>0)
+		{
+			return list.get(0);   	
+		}
+		else
+		{
+			return null;
+		}
     }
     
     
@@ -539,6 +546,10 @@ public class CategoryBusiness {
     public void getNodeBySubjectID(String subnjectID,List<Node> nodeList) {
     	
     	Flow flow=getFlowBySubjectId(subnjectID);
+    	if(flow==null)
+    	{
+    		return;
+    	}
     	this.getNodeByFlowID(flow.getId(), nodeList);
     }
 	

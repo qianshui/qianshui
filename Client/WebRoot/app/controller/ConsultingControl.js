@@ -383,12 +383,16 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				});
 				// b 办事指南
 				YongYou.util.DataApi.Core.getNodeBySubjectID(function(res, scope) {
-							var bszn = Ext.create('YongYou.view.LawGuide', {});
+							//var bszn = Ext.create('YongYou.view.LawGuide', {});
 							flowview = Ext.create('YongYou.flow.FlowViewport',
 									{
 										title : '办事流程'
 							});
-							flowview.initialPanelCard(res, 'confirm-');
+							items = Ext.decode(res);
+							if(items.length>0)
+							{
+								flowview.initialPanelCard(res, 'confirm-');
+							}
 							// bszn.add(flowview);
 							scope.scope.getConfirm().add(flowview);
 							scope.scope.getConfirm().add(scope.flfg);
