@@ -71,11 +71,13 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 	setValue : function(node, mainEl) {
 		item_list = this.getItems();
 
+		var node_description=node.getData().description;
+		
 		item_list.items[2]
 				.setHtml( '<div style=text-align:center;font-size: 20px;font-weight: bold;>'
 						// + node.getData().title
 						// + '</div></br></br></br></br><div>'
-						+ node.getData().description + '</div>');
+						+ node_description + '</div>');
 
 		YongYou.util.DataApi.Core.getContactByContactID(function(res, scope) {
 					res = Ext.decode(res);

@@ -425,6 +425,7 @@ public class CategoryService {
     @Path("/createNode")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNode(String node) {
+		System.out.println("Node_Info"+node);
 		Node bean = (Node)CommonJson.Json2Obj(node,Node.class);
 		bean.setId(IDOperation.getClassID("Node"));
         if (DBOperation.add(bean)) {

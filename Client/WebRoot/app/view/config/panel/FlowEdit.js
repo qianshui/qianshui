@@ -121,6 +121,7 @@ actCallback = function(form, flowpanel, isUpdate) {
 	if (form.isValid()) {
 		form.getForm().findField("rowid").setValue(flowpanel.selectedRow.rowId);
 		form.getForm().findField("flowId").setValue(flowpanel.id);
+		//alert(form.getValues());
 		YongYou.util.DataApi.Core
 				.addNode(this.callback, form, form.getValues());
 	}
