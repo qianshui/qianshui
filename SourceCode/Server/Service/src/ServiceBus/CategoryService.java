@@ -187,6 +187,9 @@ public class CategoryService {
 	public String getNodeByFlowID(@QueryParam("id") String flowID) {
 		List<Node> NodeList = new ArrayList<Node>();
 		CategoryBusiness.getInstance().getNodeByFlowID(flowID,NodeList);
+		
+		System.out.println(CommonJson.list2Json(NodeList));
+		
 		return CommonJson.list2Json(NodeList);
 	}
 	
