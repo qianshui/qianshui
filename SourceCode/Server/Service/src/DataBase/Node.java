@@ -1,9 +1,6 @@
 package DataBase;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Node entity. @author MyEclipse Persistence Tools
@@ -17,6 +14,7 @@ public class Node implements java.io.Serializable {
 	private String flowId;
 	private String title;
 	private String description;
+	private String detail;
 	private String prevNode;
 	private Integer no;
 	private String contactId;
@@ -85,6 +83,14 @@ public class Node implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	public String getDetail() {
+		return detail;
 	}
 
 	public String getPrevNode() {

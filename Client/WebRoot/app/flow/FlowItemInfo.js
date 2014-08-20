@@ -24,7 +24,21 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 			collapsed : false,
 			layout : 'fit',
 			style : 'background: url(\'resources/image/zhengwu.gif\') no-repeat center',
-			height : 350
+			height : 350,
+			items:[{
+			    xtype:'button',
+			    html:'详情',
+				width: 80,
+				right:30,
+				bottom:30,
+				ui:'decline',
+				listeners : {
+					'tap' : function(b, e) {
+				         //alert(this.parent.parent.NodeInfo.detail);
+				         showDetail("",this.parent.parent.NodeInfo.detail);
+			        }
+			    }
+			}]
 		}, {
 			xtype : 'panel',
 			height : 36,
@@ -70,8 +84,9 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 	// },
 	setValue : function(node, mainEl) {
 		item_list = this.getItems();
-
-		var node_description=node.getData().description;
+		
+        this.NodeInfo=node.getData();
+		var node_description=this.NodeInfo.description;
 		
 		item_list.items[2]
 				.setHtml( '<div style=text-align:center;font-size: 20px;font-weight: bold;>'
@@ -153,3 +168,15 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 			}
 			
 });
+
+function showDetail(title,content) {
+	var win = Ext.create('YongYou.util.Window', {});
+	win.initialPanelControl(new Ext.Panel({
+						fullscreen : true,
+						scrollable : true,
+						layout : 'fit',
+						height : '100%',
+						width : '100%',
+						html : content
+					}), title)
+}

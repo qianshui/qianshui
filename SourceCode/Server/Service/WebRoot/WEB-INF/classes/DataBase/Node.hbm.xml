@@ -19,6 +19,9 @@
         <property name="description" type="string">
             <column name="Description" length="65535" />
         </property>
+        <property name="detail" type="string">
+            <column name="Detail" length="65535" />
+        </property>
         <property name="prevNode" type="string">
             <column name="PrevNode" length="100" />
         </property>

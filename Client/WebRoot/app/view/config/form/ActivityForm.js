@@ -80,9 +80,15 @@ Ext.define('YongYou.view.config.form.ActivityForm', {
 				xtype : 'htmleditor',
 				fieldLabel : '描述',
 				name : 'description',
-				height : 250
+				height : 120
 				// readOnly : true
-		}	, {
+		    }, {
+				xtype : 'htmleditor',
+				fieldLabel : '详情',
+				name : 'detail',
+				height : 150
+				// readOnly : true
+		    }, {
 				xtype : 'acticontrigger',
 				fieldLabel : '图标',
 				name : 'imgId'
@@ -123,7 +129,7 @@ Ext.define('YongYou.view.config.form.ActivityForm', {
 				enableKeyEvents : true,
 				name : 'attachmentName',
 				readOnly : true,
-				height:100,
+				height:70,
 				width:300,
 				listeners : {
 					'render' : function(textArea) {
