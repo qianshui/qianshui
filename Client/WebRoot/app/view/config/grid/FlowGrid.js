@@ -63,3 +63,15 @@ flowCallback = function(form, grid, isUpdate) {
 		}
 	}
 }
+
+cloneFlowCallBack=function(form, grid, isUpdate){
+	this.callback = function(res, scope, subjectId) {
+		Ext.Msg.alert('提示', '执行操作成功！');
+	}
+	if (form.isValid()) {
+		
+		YongYou.util.DataApi.Core.cloneFlow(this.callback, form, form
+						.getValues(), form.getValues().subjectId)
+	}
+}
+

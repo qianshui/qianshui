@@ -417,6 +417,26 @@ public class CategoryService {
 	
 	/**
 	 * *************************************************************
+	 * FunName : cloneFlow
+     * Description： 克隆Flow
+     * Input: JSON格式数据
+     * Output:
+     * Call URL:localhost:8080/Service/CategoryService/cloneFlow
+     * *************************************************************
+	 */
+	@POST
+    @Path("/cloneFlow")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response cloneFlow(String cloneflow) {
+		
+		System.out.println(cloneflow);
+        
+        return Response.status(201).entity("Seccess").build();
+        
+    }
+	
+	/**
+	 * *************************************************************
 	 * FunName : addNode
      * Description： 增加Node
      * Input: JSON格式数据

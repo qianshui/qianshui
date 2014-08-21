@@ -120,6 +120,12 @@ Ext.define('YongYou.util.DataApi', {
     	    		YongYou.util.Config.getService()+'CategoryService/addFlow',params,
     	    		callback,scope,uppa);
     	},
+    	cloneFlow:function(callback,scope,params,uppa)
+    	{
+    		YongYou.util.DataApi.postData(
+    	    		YongYou.util.Config.getService()+'CategoryService/cloneFlow',params,
+    	    		callback,scope,uppa);
+    	},
    /**********************************************************************************************************/ 
     /**×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
     	 * 流程节点操作
