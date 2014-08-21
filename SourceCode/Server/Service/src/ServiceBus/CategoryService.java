@@ -429,7 +429,7 @@ public class CategoryService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response cloneFlow(String cloneflow) {
 		
-		System.out.println(cloneflow);
+		System.out.println("ID_INFO  "+cloneflow);
         
         return Response.status(201).entity("Seccess").build();
         
