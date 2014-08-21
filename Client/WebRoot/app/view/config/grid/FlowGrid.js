@@ -67,6 +67,7 @@ flowCallback = function(form, grid, isUpdate) {
 cloneFlowCallBack=function(form, grid, isUpdate){
 	this.callback = function(res, scope, subjectId) {
 		Ext.Msg.alert('提示', '执行操作成功！');
+		scope.up('panel').close();
 	}
 	if (form.isValid()) {
 		
