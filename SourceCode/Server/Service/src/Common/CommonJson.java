@@ -52,6 +52,7 @@ public class CommonJson {
 	 */
 	public static <Object> String object2Json(Object obj) {
 	    JSONObject json = JSONObject.fromObject(obj);
+	    
 	    return json.toString();
 	}
 	
@@ -68,6 +69,19 @@ public class CommonJson {
 		JSONObject jsonObject= JSONObject.fromObject(json);
 		return JSONObject.toBean(jsonObject, objClass);
 	}
+	
+	/**
+	 * 
+	 * @param jsonString
+	 * @return
+	 */
+	public static String addAttrToJson(String json,String key,String value)
+	{
+		JSONObject jsonObject=JSONObject.fromObject(json);
+		jsonObject.put(key, value);
+		return jsonObject.toString();
+	}
+	
 	
 	public static Map getMapFromJson(String jsonString) { 
 		        JSONObject jsonObject = JSONObject.fromObject(jsonString); 

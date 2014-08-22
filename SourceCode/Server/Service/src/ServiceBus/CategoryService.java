@@ -9,6 +9,7 @@
 package ServiceBus;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 import net.sf.json.JSONObject;
 
@@ -430,7 +437,67 @@ public class CategoryService {
     public Response cloneFlow(String cloneflow) {
 		
 		System.out.println("ID_INFO  "+cloneflow);
-        
+		Map map= CommonJson.getMapFromJson(cloneflow);
+		
+		//1.Get the node list.
+		List<Node> NodeList = new ArrayList<Node>();
+    	try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			List list = null;
+			list = session.createQuery("from Node where flowId = :strID")
+		       .setParameter("strID", (String)map.get("sid")).list();
+			Transaction tx = session.beginTransaction();
+			if (list != null) {
+				Iterator it = list.iterator();
+				while (it.hasNext()) {
+					Node Temp = (Node) it.next();
+					NodeList.add(Temp);
+				}
+			}
+			tx.commit();
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		//2.Test
+		try {
+			SessionFactory sf = new Configuration().configure()
+					.buildSessionFactory();
+			Session session = sf.openSession();
+			//Work segment
+			for(int i=0;i<NodeList.size();i++)
+			{
+				Node tempNode=NodeList.get(i);
+				tempNode.setFlowId((String)map.get("id"));
+				String strNodeWithoutAttach=CommonJson.object2Json(tempNode);
+				//Get attachments
+				String Attachments="";
+				List list = null;
+				list = session.createQuery("from Narelation where nid = :strID")
+			       .setParameter("strID", tempNode.getId()).list();
+				Transaction tx = session.beginTransaction();
+				if (list != null) {
+					Iterator it = list.iterator();
+					while (it.hasNext()) {
+						Narelation Temp = (Narelation) it.next();
+						Attachments+=Temp.getAid()+";";
+					}
+				}
+				tx.commit();
+				
+				String strNodeWithAttch=CommonJson.addAttrToJson(strNodeWithoutAttach, "attachment", Attachments);
+				createNode(strNodeWithAttch);
+			}
+			
+			session.close();
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
         return Response.status(201).entity("Seccess").build();
         
     }
