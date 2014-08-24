@@ -25,6 +25,23 @@ Ext.define('YongYou.view.query.NavigationPanel', {
 												});
 									}
 								}
+							},{
+								xtype : 'button',
+								ui : 'action',
+								iconCls : 'arrow_left',
+								iconMask : true,
+								align : 'left',
+								style:"background:#8d2324",
+								listeners : {
+									'tap' : function(b, e) {
+										
+										Ext.Viewport.setActiveItem('#main', {
+													type : 'slide',
+													direction : 'left',
+													duration : 250
+												});
+									}
+								}
 							}]
 				},
 				items:[Ext.create('YongYou.view.query.Root')]
