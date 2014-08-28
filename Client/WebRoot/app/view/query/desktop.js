@@ -23,6 +23,7 @@ Ext.define('YongYou.view.query.desktop', {
 		this.removeAll();
 		items = Ext.decode(res);
 		for (i = 0; i < items.length; i++) {
+
 			inner = Ext.create('YongYou.view.query.DesktopInner', {
 						title : items[i].title,
 						id:items[i].id+'-inner'

@@ -1,18 +1,3 @@
-progressIndicator = Ext.create("Ext.ProgressIndicator");
-request = {
-            url: 'files/attachments/1407486305809.pdf',
-            responseType:"blob",
-            method: 'POST',
-            progress: progressIndicator,
-            xhr2: true,
-            success: function(response) {
-                alert(response.responseText);
-            },
-            failure: function(response) {
-                alert("failure");
-            }
-        };
-
 Ext.define('YongYou.flow.FlowItemInfo', {
 	extend : 'Ext.Panel',
 	id : 'iteminfo',

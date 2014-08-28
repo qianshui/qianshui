@@ -6,10 +6,65 @@ Ext.define('YongYou.view.query.DesktopInner', {
 		width : '100%',
 		dock : 'top',
 		cls:'x-fullscreen',
-		items : [{
+		items : [
+			{
+			    xtype: 'searchfield',
+			    name: 'inner_query',
+			    docked:'top',
+			    left: '80%',
+			    listeners : {
+				    keyup: function(mythis, newValue, oldValue, eOpts) {
+                    	//var mystore=mythis.parent.items.items[1].getStore();
+                    	var myarray=mythis.parent.initData;
+                    	var myvalue=mythis.getValue();
+                    	var myNewArray=[]
+                    	
+                    	if(myvalue!="")
+                    	{
+                    		for(var i=0;i<myarray.length;i++)
+                        	{
+                        		if(myarray[i].title.indexOf(myvalue)>=0)
+                        		{
+                        			myNewArray.push(myarray[i])
+                        		}
+                        	}
+                    	}
+                    	else
+                    	{
+                    		myNewArray=mythis.parent.initData;
+                    	}
+                    	var store=Ext.create("Ext.data.Store", {
+        					//storeId : "usersStore",
+        					fields : [{
+        								name : 'title',
+        								type : 'string'
+        							}, {
+        								name : 'icon',
+        								type : 'string'
+        							}, {
+        								name : 'parentid',
+        								type : 'string'
+        							}, {
+        								name : 'id',
+        								type : 'string'
+        							},{
+        								name : 'flowId',
+        								type : 'string'
+        							},{
+        								name : 'leaf',
+        								type : 'string'
+        							}],
+        					data : myNewArray
+        				});
+                    	mythis.parent.items.items[1].setStore(store);
+					}
+				}
+			},
+		    {
 			xtype : 'dataview',
 			store : 'QueryRoot',
 			flex : 1,
+			top:'6%',
 			width : '100%',
 			height : '100%',
 			scrollable : true,
@@ -27,8 +82,6 @@ Ext.define('YongYou.view.query.DesktopInner', {
 						record = store.data.items[target].data;
 						YongYou.util.ClientEventHandle.events.onCatrgotyItemTap(this.parent.parent, index,
 								target, record, e)
-//						this.parent.parent.fireEvent('itemtap', this.parent.parent, index,
-//								target, record, e);
 					}
 				}
 			}
@@ -59,7 +112,8 @@ Ext.define('YongYou.view.query.DesktopInner', {
 							}],
 					data : red
 				});
-				this.items.items[0].setStore(store);
+		this.items.items[1].setStore(store);
+		this.initData=red;
 	}
 
 });

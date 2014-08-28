@@ -8,8 +8,7 @@ Ext.define('YongYou.controller.QueryControl', {
 		refs : {
 			root : '#query-root',
 			desktop : '#query-desktop',
-			subinner : '#nav-query'
-
+			subinner : '#nav-query',
 		},
 
 		control : {
@@ -22,8 +21,10 @@ Ext.define('YongYou.controller.QueryControl', {
 			subinner : {
 				itemtap : 'onCatrgotyItemTap',
 				back:'onNavRootBack'
+			},
+			innerquery:{
+				action : 'onInnerQueryAction'
 			}
-
 		}
 	},
 	onRootTap : function(view, index, target, record, e) {
@@ -56,5 +57,4 @@ Ext.define('YongYou.controller.QueryControl', {
 			Ext.getCmp("nav_root_back").setHidden(false);
 		}
 	},
-	
 });
