@@ -1,3 +1,18 @@
+progressIndicator = Ext.create("Ext.ProgressIndicator");
+request = {
+            url: 'files/attachments/1407486305809.pdf',
+            responseType:"blob",
+            method: 'POST',
+            progress: progressIndicator,
+            xhr2: true,
+            success: function(response) {
+                alert(response.responseText);
+            },
+            failure: function(response) {
+                alert("failure");
+            }
+        };
+
 Ext.define('YongYou.flow.FlowItemInfo', {
 	extend : 'Ext.Panel',
 	id : 'iteminfo',
@@ -126,7 +141,7 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 	formatFiles : function(files) {
 		var html = "</br><div style='margin-left:10px'>";
 		for (i = 0; i < files.length; i++) {
-			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='attaches/"
+			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='files/attachments/"
 					+ files[i].downloadLink
 					+ "' style='color:black;'>"
 					+ files[i].title + "</a></br>";
@@ -134,6 +149,20 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 		html += "</br></br></div>";
 		return html;
 	},
+//	download_file:function(url)
+//	{
+//		window.location.href=url;
+//	},
+//	formatFiles : function(files) {
+//		var html = "</br><div style='margin-left:10px'>";
+//		for (i = 0; i < files.length; i++) {
+//			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='javascript:window.location=\"files/attachments/1407486305809.pdf\"' style='color:black;'>"
+//					+ files[i].title + "</a></br>";
+//		}
+//		html += "</br></br></div>";
+//		return html;
+//	},
+	
 	setContact : function(values,scope) {
 				html = '<div class="flow-item-info-contact-title"><div class="title" >姓名:&nbsp;</div>'
 						+ '<div class="title">联系电话:&nbsp;</div>'

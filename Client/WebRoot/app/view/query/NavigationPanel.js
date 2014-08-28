@@ -27,6 +27,7 @@ Ext.define('YongYou.view.query.NavigationPanel', {
 								}
 							},{
 								xtype : 'button',
+								id : 'nav_root_back',
 								ui : 'action',
 								iconCls : 'arrow_left',
 								iconMask : true,

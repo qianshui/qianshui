@@ -20,7 +20,8 @@ Ext.define('YongYou.controller.QueryControl', {
 				itemtap : 'onCatrgotyItemTap'
 			},
 			subinner : {
-				itemtap : 'onCatrgotyItemTap'
+				itemtap : 'onCatrgotyItemTap',
+				back:'onNavRootBack'
 			}
 
 		}
@@ -31,19 +32,29 @@ Ext.define('YongYou.controller.QueryControl', {
 			desktop = Ext.create('YongYou.view.query.desktop', {
 						title : record.label
 					});
-		view.parent.push(desktop);
+		    view.parent.push(desktop);
+		    
 		} else {
 			desktop.title=record.label
 			view.parent.setActiveItem(desktop);
 		}
-			YongYou.util.DataApi.Core.getChildByID(function(res, scope) {
+		Ext.getCmp("nav_root_back").setHidden(true);
+		YongYou.util.DataApi.Core.getChildByID(function(res, scope) {
 
-						scope.initialPanel(res);
+					scope.initialPanel(res);
 
-					}, desktop, {
-						'id' : record.id
-					})
+				}, desktop, {
+					'id' : record.id
+				})
 			
-	}
+	},
+	onNavRootBack : function( mythis, eOpts)
+	{
+		var cur_item = mythis.getActiveItem();
+		if(cur_item.xtype=="root")
+		{
+			Ext.getCmp("nav_root_back").setHidden(false);
+		}
+	},
 	
 });
