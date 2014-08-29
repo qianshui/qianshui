@@ -451,34 +451,32 @@ public class CategoryService {
 		       .setParameter("strID", (String)map.get("sid")).list();
 
 			//=============================NEW CODE=============================
-			//2.取得节点Id列表作为查询附件的参数
+			//2.取得节点Id列表作为查询附件的参数 并 初始化对应于各节点的附件列表字符串
 			ArrayList<String>  NodeIdArray = new ArrayList<String> (); 
+			HashMap AttachmentsForNodeMap = new HashMap();
 			for(int i=0;i<NodeList.size();i++)
 			{
 				NodeIdArray.add(NodeList.get(i).getId());
+				AttachmentsForNodeMap.put(NodeList.get(i).getId(), "");
 			}
 			//3.数据查询得到附件总列表
 			List<Narelation> AttachmentsList = session.createQuery("from Narelation where nid in (:nidArray)")
 		       .setParameterList("nidArray",NodeIdArray ).list();
-			//4.初始化对应于各节点的附件列表字符串
-			HashMap AttachmentsForNodeMap = new HashMap();
-			for(int i=0;i<NodeList.size();i++)
-			{
-				AttachmentsForNodeMap.put(NodeList.get(i).getId(), "");
-			}
-			//5.生成各节点的附件列表字符串
+
+			//4.生成各节点的附件列表字符串
 			for(int i=0;i<AttachmentsList.size();i++)
 			{
 				AttachmentsForNodeMap.put(AttachmentsList.get(i).getNid(),
 						AttachmentsForNodeMap.get(AttachmentsList.get(i).getNid())+AttachmentsList.get(i).getAid()+";");
 			}
-			//6.把附件添加到对应的节点上并将节点添加到数据库
+			//5.把附件添加到对应的节点上并将节点添加到数据库
 			for(int i=0;i<NodeList.size();i++)
 			{
 				Node tempNode=NodeList.get(i);
 				tempNode.setFlowId((String)map.get("id"));
 				String strNodeWithoutAttach=CommonJson.object2Json(tempNode);
-				String strNodeWithAttch=CommonJson.addAttrToJson(strNodeWithoutAttach, "attachment", (String)AttachmentsForNodeMap.get(tempNode.getId()));
+				String strNodeWithAttch=CommonJson.addAttrToJson(strNodeWithoutAttach, "attachment", 
+						(String)AttachmentsForNodeMap.get(tempNode.getId()));
 				createNode(strNodeWithAttch);
 			}
 			//===========================OLD CODE================================
