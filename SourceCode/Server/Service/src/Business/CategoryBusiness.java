@@ -58,7 +58,7 @@ public class CategoryBusiness {
 					
 					Category Temp = (Category) it.next();
 					
-					CategoryList.add(BuildCategoyTree(Temp));
+					CategoryList.add(BuildCategoyTree(Temp,0,null));
 				}
 			}
 			tx.commit();
@@ -72,24 +72,39 @@ public class CategoryBusiness {
     	
     }
     
-    Category BuildCategoyTree(Category item){
+    @SuppressWarnings("unchecked")
+	Category BuildCategoyTree(Category item,int flag,Session argSession){
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
-			List rs = session.createQuery("from Category where parentId= :pid")
+    		Session session=null;
+    		if(flag==0)
+    		{
+    			SessionFactory sf = new Configuration().configure()
+				.buildSessionFactory();
+		        session = sf.openSession();
+    		}
+    		else
+    		{
+    			session=argSession;
+    		}
+			List<Category> rs = session.createQuery("from Category where parentId= :pid")
 			.setParameter("pid", item.getId()).list();
+			//Transaction tx = session.beginTransaction();
 			if (rs != null) {
-				Iterator temp = rs.iterator();
+				Iterator<Category> temp = rs.iterator();
 				while (temp.hasNext()) {
 					Category cate= (Category)temp.next();
 					if(cate.getLeaf()!=null &&cate.getLeaf().contentEquals("1")){
 						item.setChildren(cate);
 					}else{
-					item.setChildren(BuildCategoyTree(cate));
+					    item.setChildren(BuildCategoyTree(cate,1,session));
 					}
 				}
-		}
+		    }
+			//tx.commit();
+			if(flag==0)
+			{
+				session.close();
+			}
 		}catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
