@@ -9,6 +9,7 @@
 package ServiceBus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -431,6 +432,7 @@ public class CategoryService {
      * Call URL:localhost:8080/Service/CategoryService/cloneFlow
      * *************************************************************
 	 */
+	@SuppressWarnings("unchecked")
 	@POST
     @Path("/cloneFlow")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -439,54 +441,74 @@ public class CategoryService {
 		System.out.println("ID_INFO  "+cloneflow);
 		Map map= CommonJson.getMapFromJson(cloneflow);
 		
-		
-		List<Node> NodeList = new ArrayList<Node>();
-    	try {
+		try {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			
-			//1.Get the node list.
-			List list = null;
-			list = session.createQuery("from Node where flowId = :strID")
+			//1.获取节点列表
+			List<Node> NodeList = session.createQuery("from Node where flowId = :strID")
 		       .setParameter("strID", (String)map.get("sid")).list();
-			//Transaction tx = session.beginTransaction();
-			if (list != null) {
-				Iterator it = list.iterator();
-				while (it.hasNext()) {
-					Node Temp = (Node) it.next();
-					NodeList.add(Temp);
-				}
+
+			//=============================NEW CODE=============================
+			//2.取得节点Id列表作为查询附件的参数
+			ArrayList<String>  NodeIdArray = new ArrayList<String> (); 
+			for(int i=0;i<NodeList.size();i++)
+			{
+				NodeIdArray.add(NodeList.get(i).getId());
 			}
-			//tx.commit();
-			//2.Work segment
+			//3.数据查询得到附件总列表
+			List<Narelation> AttachmentsList = session.createQuery("from Narelation where nid in (:nidArray)")
+		       .setParameterList("nidArray",NodeIdArray ).list();
+			//4.初始化对应于各节点的附件列表字符串
+			HashMap AttachmentsForNodeMap = new HashMap();
+			for(int i=0;i<NodeList.size();i++)
+			{
+				AttachmentsForNodeMap.put(NodeList.get(i).getId(), "");
+			}
+			//5.生成各节点的附件列表字符串
+			for(int i=0;i<AttachmentsList.size();i++)
+			{
+				AttachmentsForNodeMap.put(AttachmentsList.get(i).getNid(),
+						AttachmentsForNodeMap.get(AttachmentsList.get(i).getNid())+AttachmentsList.get(i).getAid()+";");
+			}
+			//6.把附件添加到对应的节点上并将节点添加到数据库
 			for(int i=0;i<NodeList.size();i++)
 			{
 				Node tempNode=NodeList.get(i);
 				tempNode.setFlowId((String)map.get("id"));
 				String strNodeWithoutAttach=CommonJson.object2Json(tempNode);
-				//Get attachments
-				String Attachments="";
-				List list1 = null;
-				list1 = session.createQuery("from Narelation where nid = :strID")
-			       .setParameter("strID", tempNode.getId()).list();
-				//Transaction tx = session.beginTransaction();
-				if (list1 != null) {
-					Iterator it = list1.iterator();
-					while (it.hasNext()) {
-						Narelation Temp = (Narelation) it.next();
-						Attachments+=Temp.getAid()+";";
-					}
-				}
-				//tx.commit();
-				
-				String strNodeWithAttch=CommonJson.addAttrToJson(strNodeWithoutAttach, "attachment", Attachments);
+				String strNodeWithAttch=CommonJson.addAttrToJson(strNodeWithoutAttach, "attachment", (String)AttachmentsForNodeMap.get(tempNode.getId()));
 				createNode(strNodeWithAttch);
 			}
+			//===========================OLD CODE================================
+//			for(int i=0;i<NodeList.size();i++)
+//			{
+//				Node tempNode=NodeList.get(i);
+//				tempNode.setFlowId((String)map.get("id"));
+//				String strNodeWithoutAttach=CommonJson.object2Json(tempNode);
+//				//Get attachments
+//				String Attachments="";
+//				List list1 = null;
+//				list1 = session.createQuery("from Narelation where nid = :strID")
+//			       .setParameter("strID", tempNode.getId()).list();
+//				//Transaction tx = session.beginTransaction();
+//				if (list1 != null) {
+//					Iterator it = list1.iterator();
+//					while (it.hasNext()) {
+//						Narelation Temp = (Narelation) it.next();
+//						Attachments+=Temp.getAid()+";";
+//					}
+//				}
+//				//tx.commit();
+//				String strNodeWithAttch=CommonJson.addAttrToJson(strNodeWithoutAttach, "attachment", Attachments);
+//				createNode(strNodeWithAttch);
+//			}
 			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			return Response.status(201).entity("Failure").build();
 		}
 
         return Response.status(201).entity("Seccess").build();
