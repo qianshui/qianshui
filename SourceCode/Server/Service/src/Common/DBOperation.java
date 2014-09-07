@@ -17,9 +17,20 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class DBOperation {
+	private static SessionFactory factory=null;
+	
+	public static SessionFactory getSessionFactory()
+	{
+		if(factory==null)
+		{
+			Configuration cfg = new Configuration().configure(); 
+			factory = cfg.buildSessionFactory();
+		}
+		return factory;
+	}
 	public static <Object> boolean add(Object obj) {
-		Configuration cfg = new Configuration().configure(); 
-        SessionFactory factory = cfg.buildSessionFactory();
+		//Configuration cfg = new Configuration().configure(); 
+        SessionFactory factory = getSessionFactory();
         
         Session session = null;
         try {  
@@ -43,8 +54,8 @@ public class DBOperation {
 	}
 	
 	public static <Object> boolean update(Object obj) {
-		Configuration cfg = new Configuration().configure(); 
-        SessionFactory factory = cfg.buildSessionFactory();
+		//Configuration cfg = new Configuration().configure(); 
+        SessionFactory factory = getSessionFactory();
         
         Session session = null;
         try {  
@@ -68,8 +79,8 @@ public class DBOperation {
 	}
 	
 	public static <Object> boolean delete(Object obj) {
-		Configuration cfg = new Configuration().configure(); 
-        SessionFactory factory = cfg.buildSessionFactory();
+		//Configuration cfg = new Configuration().configure(); 
+        SessionFactory factory = getSessionFactory();
         
         Session session = null;
         try {  
@@ -93,8 +104,8 @@ public class DBOperation {
 	}
 	
 	public static boolean delete(String sql){
-		Configuration cfg = new Configuration().configure(); 
-		 SessionFactory factory = cfg.buildSessionFactory();
+		//Configuration cfg = new Configuration().configure(); 
+		SessionFactory factory = getSessionFactory();
 		Session session = null;
 		Transaction tx = null;
 		try {

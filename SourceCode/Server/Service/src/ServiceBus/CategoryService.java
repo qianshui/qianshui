@@ -440,11 +440,10 @@ public class CategoryService {
 		
 		System.out.println("ID_INFO  "+cloneflow);
 		Map map= CommonJson.getMapFromJson(cloneflow);
-		
+		Session session = null;
 		try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+			SessionFactory sf = DBOperation.getSessionFactory();
+			session = sf.openSession();
 			
 			//1.获取节点列表
 			List<Node> NodeList = session.createQuery("from Node where flowId = :strID")
@@ -507,7 +506,14 @@ public class CategoryService {
 			// TODO: handle exception
 			e.printStackTrace();
 			return Response.status(201).entity("Failure").build();
-		}
+		}finally {
+            if (session != null) {  
+                if (session.isOpen()) {  
+                    //关闭session  
+                    session.close();  
+                }  
+            }
+        }
 
         return Response.status(201).entity("Seccess").build();
         

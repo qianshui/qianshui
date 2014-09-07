@@ -16,6 +16,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import Common.DBOperation;
 import DataBase.Category;
 import DataBase.Contact;
 import DataBase.Flow;
@@ -45,8 +46,7 @@ public class CategoryBusiness {
     public List<Category> getCategoryTree(){
     	List<Category> CategoryList = new ArrayList<Category>();
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
+			SessionFactory sf = DBOperation.getSessionFactory();
 			Session session = sf.openSession();
 			List list = null;
 			list = session.createQuery("from Category where parentId = :strID")
@@ -78,8 +78,7 @@ public class CategoryBusiness {
     		Session session=null;
     		if(flag==0)
     		{
-    			SessionFactory sf = new Configuration().configure()
-				.buildSessionFactory();
+    			SessionFactory sf = DBOperation.getSessionFactory();
 		        session = sf.openSession();
     		}
     		else
@@ -262,10 +261,11 @@ public class CategoryBusiness {
      * *************************************************************
 	 */
     public Flow getFlowByID(String ID) {
+    	Session session = null;
     	try {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
-			Session session = sf.openSession();
+			session = sf.openSession();
 			List<Flow> list = session.createQuery("from Flow where id = :id").setParameter("id", ID).list();
 			session.close();
 			if (list.size() != 0) {
@@ -276,7 +276,14 @@ public class CategoryBusiness {
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}
+		}finally {
+            if (session != null) {  
+                if (session.isOpen()) {  
+                    //关闭session  
+                    session.close();  
+                }  
+            }
+        }
 		
 		return null;
     }
