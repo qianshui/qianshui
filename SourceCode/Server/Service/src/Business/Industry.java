@@ -69,7 +69,7 @@ public class Industry {
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Subjecttype where CommonFlag=1").list();
+			list = session.createQuery("from Subjecttype").list();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {

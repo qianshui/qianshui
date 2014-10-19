@@ -42,7 +42,7 @@
 						{
 							if(temp_arr[adi].value==icid)
 							{
-								industry1={description:temp_arr[adi].description,id:icid};
+								industry1={description:temp_arr[adi].text,id:icid};
 								break;
 							}
 						}
