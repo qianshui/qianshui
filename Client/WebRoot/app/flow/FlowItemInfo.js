@@ -123,7 +123,7 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 		this.items.items[6].setHtml('<div></div>')
 	},
 
-	formatFiles : function(files) {
+	/*formatFiles : function(files) {
 		var html = "</br><div style='margin-left:10px'>";
 		for (i = 0; i < files.length; i++) {
 			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='files/attachments/"
@@ -133,20 +133,18 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 		}
 		html += "</br></br></div>";
 		return html;
+	},*/
+	
+	formatFiles : function(files) {
+		var html = "</br><div style='margin-left:10px'>";
+		for (i = 0; i < files.length; i++) {
+			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a"
+				+" href='javascript:forSendMail(\""+files[i].downloadLink+"\");' style='color:black;'>"
+					+ files[i].title + "</a></br>";
+		}
+		html += "</br></br></div>";
+		return html;
 	},
-//	download_file:function(url)
-//	{
-//		window.location.href=url;
-//	},
-//	formatFiles : function(files) {
-//		var html = "</br><div style='margin-left:10px'>";
-//		for (i = 0; i < files.length; i++) {
-//			html += "<img src='resources/image/fujian_logo2.jpg' width='15' height='15' /><a href='javascript:window.location=\"files/attachments/1407486305809.pdf\"' style='color:black;'>"
-//					+ files[i].title + "</a></br>";
-//		}
-//		html += "</br></br></div>";
-//		return html;
-//	},
 	
 	setContact : function(values,scope) {
 				html = '<div class="flow-item-info-contact-title"><div class="title" >姓名:&nbsp;</div>'
