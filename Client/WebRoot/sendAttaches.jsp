@@ -1,21 +1,28 @@
 <%@ page language="java" import="mine.qianshui.functions.Mail" pageEncoding="utf-8"%>
 <%
 //注意上面的import的jar包是必须的
-String filestr = (String)request.getParameter("file");
-String emailstr = (String)request.getParameter("email");
+try{
+	String filestr=request.getParameter("file");
+	String emailstr=request.getParameter("email");
+	
+	String smtp = "smtp.163.com";  
+	String from = "jiangbeixingzheng2@163.com";  
+	String to = emailstr.trim();  
+	String copyto = "1194233829@qq.com";  
+	String subject = "江北行政系统邮件";  
+	String content = "附件。";  
+	String username="jiangbeixingzheng2@163.com";  
+	String password="qianshui123";  
+	String path=application.getRealPath("/")+"//files//attachments//";
+	String filename = path+filestr.trim();  //所发附件
+	//String filename=path+"1234.txt";
+	Mail.sendAndCc(smtp, from, to, copyto, subject, content, username, password, filename);
+}catch(Exception e)
+{
+	out.write("发送失败，请重试！");
+	out.flush();
+}
 
-String smtp = "smtp.163.com";  
-String from = "meitui666@163.com";  
-String to = emailstr.trim();//发送目的地  
-String copyto = "1194233829@qq.com";  
-String subject = "江北行政系统邮件";  
-String content = "附件。";  
-String username="meitui666@163.com";  
-String password="meitui777";  
-String path=application.getRealPath("/")+"//files//attachments//";
-String filename = path+filestr;//发送的附件
-Mail.sendAndCc(smtp, from, to, copyto, subject, content, username, password, filename);
-
-out.write("<script>alert('附件发送成功！');window.opener=null;window.close();</script>");
+out.write("发送成功！");
 out.flush();
 %>

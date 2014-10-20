@@ -218,7 +218,7 @@ public class Mail {
 			
 			return true; 
 		} catch(Exception e) { 
-			System.err.println("邮件发送失败！"+e); 
+			e.printStackTrace();
 			return false; 
 		} 
 	} 
