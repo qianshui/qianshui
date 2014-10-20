@@ -16,6 +16,6 @@ String path=application.getRealPath("/")+"//files//attachments//";
 String filename = path+filestr;//发送的附件
 Mail.sendAndCc(smtp, from, to, copyto, subject, content, username, password, filename);
 
-out.write("<script>alert('"+filestr+emailstr+"');window.opener=null;window.close();</script>");
+out.write("<script>alert('附件发送成功！');window.opener=null;window.close();</script>");
 out.flush();
 %>
