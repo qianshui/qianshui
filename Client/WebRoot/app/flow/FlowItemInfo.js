@@ -13,11 +13,11 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 		// },
 		items : [{
 			xtype : 'panel',
-			height : 30,
+			height : 0,
 			style : 'background: url(\'resources/image/about.gif\') no-repeat center'
 		}, {
 			xtype : 'panel',
-			height : 10,
+			height : 3,
 			style : 'background: url(\'resources/image/line.gif\') no-repeat center'
 		}, {
 			xtype : 'panel',
@@ -27,8 +27,8 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 			height : 350,
 			items:[{
 			    xtype:'button',
-			    html:'详情',
-				width: 80,
+			    html:'点击查看详情',
+				width: 150,
 				right:30,
 				bottom:30,
 				ui:'decline',

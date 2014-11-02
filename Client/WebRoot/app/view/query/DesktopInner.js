@@ -69,6 +69,11 @@ Ext.define('YongYou.view.query.DesktopInner', {
 			height : '100%',
 			scrollable : true,
 			baseCls : 'desktop-list',
+			layout: {
+			    type: 'hbox',
+			    align: 'middle ',
+			    pack: 'center'
+			},
 			itemTpl : [
 					'<div class="image" style="background-image:url(\'resources/img/desktop/{icon}\')"></div>',
 					'<div class="name">{title}</div>'

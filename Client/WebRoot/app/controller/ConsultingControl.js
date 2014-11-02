@@ -286,6 +286,13 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				var flfg = Ext.create('YongYou.view.FlfgDetailList', {});
 				YongYou.util.DataApi.Core.getFG(function(res, scope) {
 							res = Ext.decode(res);
+							//alert(res.length==0);
+							if(res.length==0)
+							{
+								var myobj={imgId:"logo.gif",title:"木有数据！"
+									,subtitle:"真的木有数据！",content:"",id:""};
+								res.push(myobj);
+							}
 							scope.getFlfg_list().getStore().removeAll();
 							scope.getFlfg_list().getStore().add(res);
 						}, this, {
@@ -295,6 +302,12 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				var yhzc = Ext.create('YongYou.view.QueryPanelDetailList', {});
 				YongYou.util.DataApi.Core.getZC(function(res, scope) {
 							res = Ext.decode(res);
+							if(res.length==0)
+							{
+								var myobj={imgId:"logo.gif",title:"木有数据！"
+									,subtitle:"真的木有数据！",content:"",id:""};
+								res.push(myobj);
+							}
 							scope.getYhzc_list().getStore().removeAll();
 							scope.getYhzc_list().getStore().add(res);
 						}, this, {

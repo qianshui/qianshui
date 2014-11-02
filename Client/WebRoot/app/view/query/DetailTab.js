@@ -37,6 +37,12 @@ Ext.define('YongYou.view.query.DetailTab', {
 									scope) {
 								if (res) {
 									lawres = Ext.decode(res);
+									if(lawres.length==0)
+									{
+										var myobj={imgId:"logo.gif",title:"木有数据！"
+											,subtitle:"真的木有数据！",content:"",id:""};
+										lawres.push(myobj);
+									}
 									lawpanel = Ext.create(
 											'YongYou.view.query.DetailList', {
 												title : '法律法规',
@@ -60,6 +66,12 @@ Ext.define('YongYou.view.query.DetailTab', {
 									res, scope) {
 								if (res) {
 									pres = Ext.decode(res);
+									if(pres.length==0)
+									{
+										var myobj={imgId:"logo.gif",title:"木有数据！"
+											,subtitle:"真的木有数据！",content:"",id:""};
+										pres.push(myobj);
+									}
 									policypanel = Ext.create(
 											'YongYou.view.query.DetailList', {
 												title : '优惠政策',

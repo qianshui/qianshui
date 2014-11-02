@@ -80,9 +80,9 @@ Ext.define('YongYou.flow.FlowItem', {
 		this
 				.setHtml('<div class="icon" style="background-image: url(\'resources/image/flow/'
 						+ item.imgId
-						+ '\');">');
-//						+ '</div><div class="name">'
-//						+ item.title + '</div>');
+//						+ '\');">');
+						+ '\');"></div><div>'
+						+ item.title + '</div>');
 		this.setId(item.id);
 		this.setData(item);
 	}

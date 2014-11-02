@@ -4,7 +4,7 @@ Ext.define('YongYou.model.ListItem', {
     	fields: [
         	{name: 'title', type: 'string'},
         	{name: 'subTitle', type: 'string'},
-        	{name:'content',type:'string'},
+        	{name: 'content',type:'string'},
         	{name: 'imgId', type: 'string'},
         	{name: 'id', type: 'string'}
     	]

@@ -62,6 +62,7 @@ Ext.define('YongYou.controller.QueryPanelControl', {
 				if (this.QueryType == "fg") {
 					YongYou.util.DataApi.Core.getFGList(function(res, scope) {
 								res = Ext.decode(res);
+								
 								scope.getDetailList().getItems().items[0]
 										.getStore().removeAll();
 								scope.getDetailList().getItems().items[0]
@@ -93,6 +94,7 @@ Ext.define('YongYou.controller.QueryPanelControl', {
 				} else if (this.QueryType == "zc") {
 					YongYou.util.DataApi.Core.getZCList(function(res, scope) {
 								res = Ext.decode(res);
+								
 								scope.getDetailList().getItems().items[0]
 										.getStore().removeAll();
 								scope.getDetailList().getItems().items[0]
