@@ -50,47 +50,46 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				stack : []
 			},
 			onPeopleItemTap : function(view, index, target, record, e) {
-				YongYou.util.DataApi.Core.getCommonSectors(
-						function(res, scope) {
-							res = Ext.decode(res);
+				YongYou.util.DataApi.Core.getAddressList(function(res, scope) {
+					res = Ext.decode(res);
 
-							commonIclist=new Array();
-							otherIclist=new Array();
-							for(var adi in res)
-							{
-								
-								if(res[adi].commonFlag==1)
-								{
-									
-									commonIclist.push(res[adi]);
-								}
-								else
-								{
-									
-									otherIclist.push({text:res[adi].title,value:res[adi].id});
-								}
-							}
+					commonAdlist=new Array();
+					otherAdlist=new Array();
+					for(var adi in res)
+					{
+						if(res[adi].commonFlag==1)
+						{
+							commonAdlist.push(res[adi]);
+						}
+						else
+						{
+							otherAdlist.push({text:res[adi].name,value:res[adi].id});
+						}
+					}
+					
+					scope.getAddress().getStore().removeAll();
+					scope.getAddress().getStore().add(commonAdlist);
+					scope.getOther_address().setOptions(otherAdlist);
+					
+					Ext.ComponentQuery
+							.query("container[id='contain2']")[0]
+							.getLayout().setAnimation({
+										type : 'slide',
+										direction : 'left',
+										duration : 250
+									})
 
-							scope.getSubject().getStore().removeAll();
-							scope.getSubject().getStore().add(commonIclist);
-							scope.getOther_subclass().setOptions(otherIclist);
-							
-						}, this, {});
-				Ext.ComponentQuery.query("container[id='contain2']")[0]
-						.getLayout().setAnimation({
-									type : 'slide',
-									direction : 'left',
-									duration : 250
-								})
-				Ext.ComponentQuery.query("container[id='contain2']")[0]
-						.setActiveItem('#SubjectPanel', {
-									type : 'slide',
-									direction : 'right',
-									duration : 250
-								});
-
-				flag = 0;
-				this.getNavibar().setTitle("选择行业类别");
+					Ext.ComponentQuery
+							.query("container[id='contain2']")[0]
+							.setActiveItem('#SelectAddressPanel', {
+										type : 'slide',
+										direction : 'right',
+										duration : 250
+									});
+					scope.getNavibar().setTitle("选择地址");
+				}, this, {
+				// 'HYID' : record.internalId
+				});
 				prsngrp=record;
 			},
 			onSubjectItemTap : function(view, index, target, record, e) {
@@ -145,46 +144,22 @@ Ext.define('YongYou.controller.ConsultingControl', {
 			},
 			onIndustryListItemTap : function(view, index, target, record, e) {
 
-				YongYou.util.DataApi.Core.getAddressList(function(res, scope) {
-							res = Ext.decode(res);
+				Ext.ComponentQuery
+						.query("container[id='contain2']")[0]
+						.getLayout().setAnimation({
+									type : 'slide',
+									direction : 'left',
+									duration : 250
+								})
 
-							commonAdlist=new Array();
-							otherAdlist=new Array();
-							for(var adi in res)
-							{
-								if(res[adi].commonFlag==1)
-								{
-									commonAdlist.push(res[adi]);
-								}
-								else
-								{
-									otherAdlist.push({text:res[adi].name,value:res[adi].id});
-								}
-							}
-							
-							scope.getAddress().getStore().removeAll();
-							scope.getAddress().getStore().add(commonAdlist);
-							scope.getOther_address().setOptions(otherAdlist);
-							
-							Ext.ComponentQuery
-									.query("container[id='contain2']")[0]
-									.getLayout().setAnimation({
-												type : 'slide',
-												direction : 'left',
-												duration : 250
-											})
-
-							Ext.ComponentQuery
-									.query("container[id='contain2']")[0]
-									.setActiveItem('#SelectAddressPanel', {
-												type : 'slide',
-												direction : 'right',
-												duration : 250
-											});
-							scope.getNavibar().setTitle("选择地址");
-						}, this, {
-						// 'HYID' : record.internalId
-						});
+				Ext.ComponentQuery
+						.query("container[id='contain2']")[0]
+						.setActiveItem('#SelectPeoplePanel', {
+									type : 'slide',
+									direction : 'right',
+									duration : 250
+								});
+				this.getNavibar().setTitle("选择人群");
 				industry2 = record;
 				
 			},
@@ -243,6 +218,14 @@ Ext.define('YongYou.controller.ConsultingControl', {
 					this.getList_about_map().getStore().removeAll();
 				} else if (activeid == 'SelectAddressPanel') {
 					Ext.ComponentQuery.query("container[id='contain2']")[0]
+							.setActiveItem("#SelectPeoplePanel", {
+										type : 'slide',
+										direction : 'right',
+										duration : 250
+									});
+					this.getNavibar().setTitle("选择人群");
+				} else if (activeid == 'SelectPeoplePanel') {
+					Ext.ComponentQuery.query("container[id='contain2']")[0]
 							.setActiveItem("#IndustrylistPanel", {
 										type : 'slide',
 										direction : 'right',
@@ -258,14 +241,6 @@ Ext.define('YongYou.controller.ConsultingControl', {
 									});
 					this.getNavibar().setTitle("选择行业类别");
 				} else if (activeid == 'SubjectPanel') {
-					Ext.ComponentQuery.query("container[id='contain2']")[0]
-							.setActiveItem("#SelectPeoplePanel", {
-										type : 'slide',
-										direction : 'right',
-										duration : 250
-									});
-					this.getNavibar().setTitle("选择投资人群");
-				} else if (activeid == 'SelectPeoplePanel') {
 					Ext.Viewport.setActiveItem('#main', {
 								type : 'slide',
 								direction : 'right',

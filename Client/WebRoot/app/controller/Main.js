@@ -7,6 +7,7 @@ Ext.define('YongYou.controller.Main', {
 		refs : {
 			main : 'main',
 			subject:'subject',
+			other_subclass:'#get_subclass',
             navibar:'#navigationbar',
             query:'#nav-query'
 		},
@@ -77,11 +78,78 @@ Ext.define('YongYou.controller.Main', {
 							title : 'title2',
 							fullscreen : true
 						});
+				YongYou.util.DataApi.Core.getCommonSectors(
+						function(res, scope) {
+							res = Ext.decode(res);
+
+							commonIclist=new Array();
+							otherIclist=new Array();
+							for(var adi in res)
+							{
+								
+								if(res[adi].commonFlag==1)
+								{
+									
+									commonIclist.push(res[adi]);
+								}
+								else
+								{
+									
+									otherIclist.push({text:res[adi].title,value:res[adi].id});
+								}
+							}
+                            
+							scope.getSubject().getStore().removeAll();
+							scope.getSubject().getStore().add(commonIclist);
+							scope.getOther_subclass().setOptions(otherIclist);
+//							Ext.ComponentQuery
+//								.query("SubjectPanel")[0]
+//								.getStore().removeAll();
+//					        Ext.ComponentQuery
+//								.query("SubjectPanel")[0]
+//								.getStore().add(commonIclist);
+//
+//					        Ext.getCmp("get_subclass").setOptions(otherIclist);
+							
+						}, this, {});
 				Ext.Viewport.add(navigationPanel);
 			} else {
-				
+				YongYou.util.DataApi.Core.getCommonSectors(
+						function(res, scope) {
+							res = Ext.decode(res);
+
+							commonIclist=new Array();
+							otherIclist=new Array();
+							for(var adi in res)
+							{
+								
+								if(res[adi].commonFlag==1)
+								{
+									
+									commonIclist.push(res[adi]);
+								}
+								else
+								{
+									
+									otherIclist.push({text:res[adi].title,value:res[adi].id});
+								}
+							}
+                            
+							scope.getSubject().getStore().removeAll();
+							scope.getSubject().getStore().add(commonIclist);
+							scope.getOther_subclass().setOptions(otherIclist);
+//							Ext.ComponentQuery
+//								.query("SubjectPanel")[0]
+//								.getStore().removeAll();
+//					        Ext.ComponentQuery
+//								.query("SubjectPanel")[0]
+//								.getStore().add(commonIclist);
+//
+//					        Ext.getCmp("get_subclass").setOptions(otherIclist);
+							
+						}, this, {});
 				Ext.ComponentQuery.query("container[id='contain2']")[0]
-						.setActiveItem('#SelectPeoplePanel', {
+						.setActiveItem('#SubjectPanel', {
         					type: 'slide',
         					direction: 'right',
         					duration:250
@@ -92,7 +160,7 @@ Ext.define('YongYou.controller.Main', {
 							direction : 'right'
 						});
 				flag=0;
-				this.getNavibar().setTitle("选择投资人群");
+				this.getNavibar().setTitle("选择行业类别");
 
 		}
 
