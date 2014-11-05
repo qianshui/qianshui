@@ -17,17 +17,18 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 			items:[{
 				xtype:'dataview',
 				scrollable : false,
-				flex:1,
+				flex:3,
 			    store: {
 			        fields: ['name'],
 			        data: [
+			            {name: '使用说明'},
 			            {name: '行业占比'},
 			            {name: '周边配套'},
-			            {name: '点我确认'}
+			            
 			        ]
 			    },
 			    itemTpl : [
-			                '<div style="float:left;margin-left:20px;marin-right:20px;margin-top:26px;">'+
+			                '<div style="float:left;margin-left:20px;marin-right:20px;margin-top:10px;">'+
 							'<div class="image" style="margin-left:6px;width:60px;height:70px;background-image:url(\'resources/img/desktop/root_gr_ztfl_ns.png\')"></div>'+
 							'<div class="name" style="font-weight:bold">{name}</div>'+
 							'</div>'
@@ -54,9 +55,9 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 										res, scope) {
 									res = Ext.decode(res);
 									
-									scope.scope.parent.items.items[1].setActiveItem(0);
+									scope.scope.parent.items.items[1].setActiveItem(1);
 									
-									var store=scope.scope.parent.items.items[1].items.items[0].getStore();
+									var store=scope.scope.parent.items.items[1].items.items[1].getStore();
 									store.removeAll();
 									store.add(res);
 									
@@ -91,46 +92,12 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 									alert("请选择当前位置！");
 									return;
 								}
-								this.parent.items.items[1].setActiveItem(1);
-//								YongYou.util.DataApi.Core.getZbptByLngLat(function(
-//										res, scope) {
-//									res = Ext.decode(res);
-//									
-//									scope.scope.parent.items.items[1].setActiveItem(1);
-//									return;
-//									
-//									var store=scope.scope.parent.items.items[1].getStore();
-//									store.removeAll();
-//									store.add(res);
-//									
-//									for(i=0;i<array_about_map.length;i++){
-//										scope.map.removeOverlay(array_about_map[i]);
-//									}
-//									array_about_map=[];
-//									for (i = 0; i < res.length; i++) {
-//										var marker = new BMap.Marker(new BMap.Point(
-//												res[i].lat, res[i].lng));
-//										var info = res[i].name;
-//										marker.setTitle(info);
-//										marker.setLabel(info);
-//										marker.addEventListener("click", function(
-//												a, b) {
-//											this
-//													.openInfoWindow(new BMap.InfoWindow(a.currentTarget
-//															.getTitle()));
-//										});
-//										scope.map.addOverlay(marker);
-//										array_about_map.push(marker);
-//									}
-//								}, {'map':map,'scope':this}, {
-//									'lng' : point_cur.lat,
-//									'lat' : point_cur.lng
-//								});
+								this.parent.items.items[1].setActiveItem(2);
+
 							}
-							else if(record.name=="点我确认")
+							else if(record.name=="使用说明")
 							{
-								this.parent.parent.fireEvent('itemtap', this.parent.parent, index,
-										target, record, e);
+								this.parent.items.items[1].setActiveItem(0);
 							}
 		}}}
 				
@@ -141,12 +108,17 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 	        		type: 'card',//重点理解
 	        	},
 	            style: 'border-top:1px solid gray;',
-	        	height:520,
+	            flex:12,
+	        	//height:520,
 	        	items:[
+	        	   {
+	        		   xtype:'panel',
+	        		   html:'使用说明。。。。。',
+	        	   },
 	        	   {
 						xtype:'list',
 						id:'list_about_map',
-						flex:3,
+						//flex:3,
 						store: {
 				            fields: ['lng','lat','name'],
 					        data: [
@@ -171,7 +143,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 					},
 					{
 						xtype:'dataview',
-						flex:3,
+						//flex:3,
 					    store: {
 					        fields: ['name'],
 					        data: [
@@ -228,6 +200,19 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 					    }//listener结束
 					}//dataview结束
 	        	]
+			},
+			{
+			    xtype:'button',
+			    flex:1,
+			    width:'100%',
+			    text:'点击进入下一步',
+			    style:'font-weight:bold;font-size:25px;',
+			    listeners : {
+					'tap' : function(b, e) {
+						this.parent.parent.fireEvent('itemtap', this.parent.parent, null,
+								null, null, e);
+					}
+			    }
 			}
 		    ]
 		},{
