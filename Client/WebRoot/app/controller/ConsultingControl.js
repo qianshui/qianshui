@@ -594,7 +594,7 @@ function initializeMap() {
 			var infoWindow1 = new BMap.InfoWindow("我代表您选择的位置，<br/>请拖动我去您要选择的地方");
 			marker_cur.openInfoWindow(infoWindow1);
 			marker_cur.addEventListener("dragend", function(e) {
-				if (confirm("您选择了" + e.point.lng + "  " + e.point.lat + "，是否进行验证？")) {
+				if (true) {
 					point_cur = new BMap.Point(e.point.lng, e.point.lat);
 					for (i = 0; i < array_about_map.length; i++) {
 						array_about_map[i].closeInfoWindow();

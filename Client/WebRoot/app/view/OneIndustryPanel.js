@@ -21,7 +21,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 			    store: {
 			        fields: ['name'],
 			        data: [
-			            {name: '使用说明'},
+			            {name: '功能介绍'},
 			            {name: '行业占比'},
 			            {name: '周边配套'},
 			            
@@ -95,7 +95,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 								this.parent.items.items[1].setActiveItem(2);
 
 							}
-							else if(record.name=="使用说明")
+							else if(record.name=="功能介绍")
 							{
 								this.parent.items.items[1].setActiveItem(0);
 							}
@@ -113,7 +113,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 	        	items:[
 	        	   {
 	        		   xtype:'panel',
-	        		   html:'使用说明。。。。。',
+	        		   html:'区域功能介绍信息。。。。',
 	        	   },
 	        	   {
 						xtype:'list',

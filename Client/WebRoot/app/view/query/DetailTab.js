@@ -11,10 +11,14 @@ Ext.define('YongYou.view.query.DetailTab', {
 		activeTab : 0,
 		title : '详细信息',
 		tabBar : {
-			ui:'red',
+			ui : 'red',
+			height:'60px',
+			//width:'',
 			layout : {
 				pack : 'center'
-			}
+			},
+			style:'font-size:30px;',
+			// style : 'background:#99FFFF'
 		},
 		items : []
 	},
@@ -33,6 +37,11 @@ Ext.define('YongYou.view.query.DetailTab', {
 				flowpanel.initialPanelCard(res, scope.id + '-');
 				scope.add(flowpanel);
 				if (flow.subjectId) {
+					lawpanel = Ext.create(
+							'YongYou.view.query.DetailList', {
+								title : '法律法规',
+								type : 'fg'
+							});
 					YongYou.util.DataApi.Core.getLawsByIndustryID(function(res,
 									scope) {
 								if (res) {
@@ -43,22 +52,18 @@ Ext.define('YongYou.view.query.DetailTab', {
 											,subtitle:"真的木有数据！",content:"",id:""};
 										lawres.push(myobj);
 									}
-									lawpanel = Ext.create(
-											'YongYou.view.query.DetailList', {
-												title : '法律法规',
-												type : 'fg'
-											})
+									
 									store = new Ext.data.Store({
 												autoLoad : true,
 												model : 'YongYou.model.ListItem',
 												data : lawres
-											}), lawpanel.getItems().items[0]
+											});
+									scope.getItems().items[0]
 											.setStore(store)
-									// .add(res);
-									scope.add(lawpanel);
+									//scope.add(lawpanel);
 								}
 
-							}, scope, {
+							}, lawpanel, {
 								'id' : flow.subjectId
 							});
 
@@ -81,12 +86,14 @@ Ext.define('YongYou.view.query.DetailTab', {
 												autoLoad : true,
 												model : 'YongYou.model.ListItem',
 												data : pres
-											}), policypanel.getItems().items[0]
+											});
+									policypanel.getItems().items[0]
 											.setStore(store)// .add(res);
-									scope.add(policypanel);
+									scope.scope.add(policypanel);
+									scope.scope.add(scope.lawpanel);
 								}
 
-							}, scope, {
+							}, {scope:scope,lawpanel:lawpanel}, {
 								'id' : flow.subjectId
 							});
 				}
