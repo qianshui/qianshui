@@ -167,8 +167,8 @@ Ext.define('YongYou.controller.ConsultingControl', {
 			},
 			onAddressItemTap : function(view, index, target, record, e) {
 				
-				//alert(record.id);
-				
+				//areaname——全局变量
+				areaname=record.strName;
 				YongYou.util.DataApi.Core.getStreetList(function(res, scope) {
 					res = Ext.decode(res);
 					streetlist=new Array();
@@ -313,16 +313,18 @@ Ext.define('YongYou.controller.ConsultingControl', {
 				// a 信息确认
 
 				var infocon = Ext.create('YongYou.view.InformationConfirm', {});
-				// a-1 通过经纬度获取地址名称
-                YongYou.util.DataApi.Core.getAdnameByPoint(function(res, scope) {
-					
-                	scope.setSelectValue(industry1.description + '业&nbsp;&nbsp;' + industry2.description,
-    						prsngrp.description, address.strName+"  "+res);
-				}, infocon,
-				{
-					'lat' : point_cur.lat,
-					'lng' : point_cur.lng
-				});
+				infocon.setSelectValue(industry1.description + '&nbsp;&nbsp;' + industry2.description,
+						prsngrp.description, areaname+"&nbsp;&nbsp;"+address.name);
+				// a-1 通过经纬度获取地址名称==========老代码14-11-09废弃
+//                YongYou.util.DataApi.Core.getAdnameByPoint(function(res, scope) {
+//					
+//                	scope.setSelectValue(industry1.description + '业&nbsp;&nbsp;' + industry2.description,
+//    						prsngrp.description, address.name+"  "+res);
+//				}, infocon,
+//				{
+//					'lat' : point_cur.lat,
+//					'lng' : point_cur.lng
+//				});
 				// a-2 通过经纬度获取周边配套
 				YongYou.util.DataApi.Core.getZbptByPoint(function(res, scope) {
 					res = Ext.decode(res);
