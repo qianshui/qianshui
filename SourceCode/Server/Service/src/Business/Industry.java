@@ -124,14 +124,16 @@ public class Industry {
      * Output:void
      * *************************************************************
 	 */
-    public void getStreetList(List<Street> StreetList) {
+    public void getStreetList(List<Street> StreetList,String AreaId) {
     	try {
 			SessionFactory sf = new Configuration().configure()
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List list = null;
 			//list = session.createQuery("from Street where CommonFlag=1").list();
-			list = session.createQuery("from Street").list();
+			list = session.createQuery("from Street where areaId=:AreaId")
+			.setParameter("AreaId", AreaId)
+			.list();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {

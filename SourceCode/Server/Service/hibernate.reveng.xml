@@ -7,9 +7,15 @@
 			<generator class="native"></generator>
 		</primary-key>
 	</table>
-<table name="ptlist" catalog="qianshui" class="DataBase.PeitaoObj">
+	<table name="ptlist" catalog="qianshui"
+		class="DataBase.PeitaoObj">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="street" catalog="qianshui" class="DataBase.Street">
 	<primary-key>
-		<generator class="identity"></generator>
+		<generator class="native"></generator>
 	</primary-key>
 </table>
 </hibernate-reverse-engineering>

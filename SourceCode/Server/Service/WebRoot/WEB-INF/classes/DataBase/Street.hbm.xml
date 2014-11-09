@@ -6,17 +6,26 @@
 -->
 <hibernate-mapping>
     <class name="DataBase.Street" table="street" catalog="qianshui">
-        <id name="id" type="string">
+        <id name="id" type="java.lang.String">
             <column name="ID" length="10" />
-            <generator class="assigned" />
+            <generator class="native"></generator>
         </id>
-        <property name="name" type="string">
+        <property name="name" type="java.lang.String">
             <column name="Name" length="100" not-null="true" />
         </property>
-        <property name="commonFlag" type="boolean">
+        <property name="areaId" type="java.lang.String">
+            <column name="AreaID" length="5" />
+        </property>
+        <property name="strLat" type="java.lang.String">
+            <column name="StrLat" />
+        </property>
+        <property name="strLng" type="java.lang.String">
+            <column name="StrLng" />
+        </property>
+        <property name="commonFlag" type="java.lang.Boolean">
             <column name="CommonFlag" />
         </property>
-        <property name="imgPath" type="string">
+        <property name="imgPath" type="java.lang.String">
             <column name="ImgPath" length="100" />
         </property>
     </class>

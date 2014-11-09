@@ -6,20 +6,23 @@
 -->
 <hibernate-mapping>
     <class name="DataBase.Area" table="areas" catalog="qianshui">
-        <id name="id" type="string">
+        <id name="id" type="java.lang.String">
             <column name="ID" length="5" />
             <generator class="native"></generator>
         </id>
-        <property name="strName" type="string">
+        <property name="strName" type="java.lang.String">
             <column name="strName" />
         </property>
-        <property name="strLat" type="string">
+        <property name="imgPath" type="java.lang.String">
+            <column name="imgPath" />
+        </property>
+        <property name="strLat" type="java.lang.String">
             <column name="strLat" />
         </property>
-        <property name="strLng" type="string">
+        <property name="strLng" type="java.lang.String">
             <column name="strLng" />
         </property>
-        <property name="strArea" type="string">
+        <property name="strArea" type="java.lang.String">
             <column name="strArea" />
         </property>
     </class>

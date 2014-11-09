@@ -10,6 +10,7 @@ public class Area implements java.io.Serializable {
 
 	private String id;
 	private String strName;
+	private String imgPath;
 	private String strLat;
 	private String strLng;
 	private String strArea;
@@ -21,8 +22,10 @@ public class Area implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Area(String strName, String strLat, String strLng, String strArea) {
+	public Area(String strName, String imgPath, String strLat, String strLng,
+			String strArea) {
 		this.strName = strName;
+		this.imgPath = imgPath;
 		this.strLat = strLat;
 		this.strLng = strLng;
 		this.strArea = strArea;
@@ -44,6 +47,14 @@ public class Area implements java.io.Serializable {
 
 	public void setStrName(String strName) {
 		this.strName = strName;
+	}
+
+	public String getImgPath() {
+		return this.imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	public String getStrLat() {

@@ -310,7 +310,7 @@ Ext.define('YongYou.util.DataApi', {
     	    		callback,scope);
 
     	},
-    	getAddressList:function(callback,scope,params)
+    	getStreetList:function(callback,scope,params)
     	{
     		YongYou.util.DataApi.queryData(
     	    		YongYou.util.Config.getService()+"IndustryService/getStreetList",params,

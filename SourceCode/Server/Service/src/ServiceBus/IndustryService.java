@@ -174,9 +174,9 @@ public class IndustryService {
 	@GET
 	@Path("getStreetList")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public String getStreetList() {
+	public String getStreetList(@QueryParam("areaid") String AreaId) {
 		List<Street> StreetList = new ArrayList<Street>();
-		Industry.getInstance().getStreetList(StreetList);
+		Industry.getInstance().getStreetList(StreetList,AreaId);
 		return CommonJson.list2Json(StreetList);
 	}
 	/**

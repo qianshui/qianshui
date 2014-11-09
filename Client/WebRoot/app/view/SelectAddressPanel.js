@@ -8,7 +8,7 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 		//style : "background-color:white;!important",
 		itemTpl : [
 				'<div class="image" style="background-image:url(\'resources/image/location/{imgPath}\')"></div>'
-				//'<div class="name">{name}</div>'
+				+'<div class="name" style="color:red;">{strName}</div>'
 
 		].join(''),
 		store : 'AddressMenu',
@@ -24,7 +24,7 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 //				border : 3,
 //				height:52,
 				xtype: 'selectfield',
-				label:'更多地址：',
+				label:'详细地址：',
 				id : 'get_address',
 				width : 300,
 				labelWidth:'40%',
@@ -37,7 +37,7 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 			}, {
 				xtype : 'button',
 				ui : 'round',
-				style:'float:left;background-image:url(\'resources/image/submit.jpg\')',
+				style:'float:right;margin-right:164px;background-image:url(\'resources/image/submit.jpg\')',
 				height : 52,
 				width : 149,
 				//style : 'height:50px;float:left;background:-webkit-linear-gradient(left, rgba(167,207,223,1) 0%,rgba(35,83,138,1) 85%);',
@@ -58,7 +58,9 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 						{
 							if(temp_arr[adi].value==adid)
 							{
-								address={name:temp_arr[adi].text,id:adid};
+								address={name:temp_arr[adi].text,id:adid
+										,strLat:temp_arr[adi].strLat
+										,strLng:temp_arr[adi].strLng};
 								break;
 							}
 						}
@@ -76,36 +78,38 @@ Ext.define('YongYou.view.SelectAddressPanel', {
 								});
 						new Ext.onReady(initializeMap,{ 
 								me:navigationPanel,
-								firewho:address.name
+								firewho:address
 						});
 					}
 				}
-			}, {
-				xtype : 'image',
-				//ui : 'round',
-				height : 73,
-				style : 'float:right;margin-right:164px;background-image:url(\'resources/image/mapbutton.gif\')',
-				width : 304,
-				//text : '我要在地图点选',
-				listeners : {
-					'tap' : function(b, e) {
-						point_cur = null;
-						array_about_map = new Array();
-						Ext.ComponentQuery.query("container[id='contain2']")[0]
-      						.getLayout().setAnimation({
-      									type : 'slide',
-      									direction : 'left',
-      									duration : 250
-      								})
-						Ext.ComponentQuery.query("container[id='contain2']")[0]
-								.setActiveItem('#OneIndustryPanel');
-						new Ext.onReady(initializeMap,{ 
-							me:navigationPanel,
-							firewho:null
-					    });
-					}
-				}
-			}]
+			}, 
+//			{
+//				xtype : 'image',
+//				//ui : 'round',
+//				height : 73,
+//				style : 'float:right;margin-right:164px;background-image:url(\'resources/image/mapbutton.gif\')',
+//				width : 304,
+//				//text : '我要在地图点选',
+//				listeners : {
+//					'tap' : function(b, e) {
+//						point_cur = null;
+//						array_about_map = new Array();
+//						Ext.ComponentQuery.query("container[id='contain2']")[0]
+//      						.getLayout().setAnimation({
+//      									type : 'slide',
+//      									direction : 'left',
+//      									duration : 250
+//      								})
+//						Ext.ComponentQuery.query("container[id='contain2']")[0]
+//								.setActiveItem('#OneIndustryPanel');
+//						new Ext.onReady(initializeMap,{ 
+//							me:navigationPanel,
+//							firewho:null
+//					    });
+//					}
+//				}
+//			}
+			]
 		}]
 
 	},
