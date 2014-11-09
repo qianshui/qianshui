@@ -205,7 +205,7 @@ public class CategoryBusiness {
 					.buildSessionFactory();
 			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Category where parentId = :strID")
+			list = session.createQuery("from Category where parentId = :strID order by order")
 			       .setParameter("strID", strID).list();
 			//Transaction tx = session.beginTransaction();
 			if (list != null) {

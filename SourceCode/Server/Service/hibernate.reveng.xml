@@ -13,7 +13,12 @@
 			<generator class="identity"></generator>
 		</primary-key>
 	</table>
-<table name="street" catalog="qianshui" class="DataBase.Street">
+	<table name="street" catalog="qianshui" class="DataBase.Street">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+<table name="category" catalog="qianshui" class="DataBase.Category">
 	<primary-key>
 		<generator class="native"></generator>
 	</primary-key>

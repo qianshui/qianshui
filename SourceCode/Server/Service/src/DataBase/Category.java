@@ -17,6 +17,7 @@ public class Category implements java.io.Serializable {
 	private String parentId;
 	private String leaf;
 	private String flowId;
+	private String order;
 	private ArrayList<Category> children= new ArrayList<Category>();
 	// Constructors
 
@@ -24,21 +25,16 @@ public class Category implements java.io.Serializable {
 	public Category() {
 	}
 
-	/** minimal constructor */
-	public Category(String id) {
-		this.id = id;
-	}
-
 	/** full constructor */
-	public Category(String id, String title, String icon, String type,
-			String parentId, String leaf,String flowId) {
-		this.id = id;
+	public Category(String title, String icon, String type, String parentId,
+			String leaf, String flowId, String order) {
 		this.title = title;
 		this.icon = icon;
 		this.type = type;
 		this.parentId = parentId;
 		this.leaf = leaf;
-		this.flowId=flowId;
+		this.flowId = flowId;
+		this.order = order;
 	}
 
 	// Property accessors
@@ -90,6 +86,7 @@ public class Category implements java.io.Serializable {
 	public void setLeaf(String leaf) {
 		this.leaf = leaf;
 	}
+
 	public String getFlowId() {
 		return this.flowId;
 	}
@@ -97,13 +94,18 @@ public class Category implements java.io.Serializable {
 	public void setFlowId(String flowId) {
 		this.flowId = flowId;
 	}
-	
+
+	public String getOrder() {
+		return this.order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
+    
 	public void setChildren(Category node){
 		if(this.id.equals(node.getParentId()) && !this.children.contains(node)){	
 			this.children.add(node);
 		}	
-	}
-	public ArrayList<Category> getChildren(){
-		return children;
 	}
 }

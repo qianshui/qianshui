@@ -29,7 +29,6 @@
 		<mapping resource="DataBase/Sprelation.hbm.xml" />
 		<mapping resource="DataBase/Flow.hbm.xml" />
 		<mapping resource="DataBase/Locationsite.hbm.xml"></mapping>
-		<mapping resource="DataBase/Category.hbm.xml" />
 		<mapping resource="DataBase/Menu.hbm.xml" />
 		<mapping resource="DataBase/Node.hbm.xml" />
 		<mapping resource="DataBase/Contact.hbm.xml" />
@@ -41,6 +40,7 @@
 		<mapping resource="DataBase/PeitaoObj.hbm.xml" />
 		<mapping resource="DataBase/Area.hbm.xml" />
 		<mapping resource="DataBase/Street.hbm.xml" />
+		<mapping resource="DataBase/Category.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>
