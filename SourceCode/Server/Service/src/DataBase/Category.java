@@ -108,4 +108,7 @@ public class Category implements java.io.Serializable {
 			this.children.add(node);
 		}	
 	}
+	public ArrayList<Category> getChildren(){
+		return children;
+	}
 }

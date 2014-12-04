@@ -19,6 +19,7 @@ import org.hibernate.cfg.Configuration;
 import Common.DBOperation;
 import DataBase.Category;
 import DataBase.Contact;
+import DataBase.DaoFactory;
 import DataBase.Flow;
 import DataBase.Node;
 import DataBase.Attachment;
@@ -46,12 +47,13 @@ public class CategoryBusiness {
     public List<Category> getCategoryTree(){
     	List<Category> CategoryList = new ArrayList<Category>();
     	try {
-			SessionFactory sf = DBOperation.getSessionFactory();
-			Session session = sf.openSession();
-			List list = null;
-			list = session.createQuery("from Category where parentId = :strID")
-		       .setParameter("strID", "0").list();
-			Transaction tx = session.beginTransaction();
+//			SessionFactory sf = DBOperation.getSessionFactory();
+//			Session session = sf.openSession();
+//			List list = null;
+//			list = session.createQuery("from Category where parentId = :strID")
+//		       .setParameter("strID", "0").list();
+//			Transaction tx = session.beginTransaction();
+			List list=DaoFactory.getInstance().getCategory_dao().findByProperty("parentId", "0");
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -61,8 +63,8 @@ public class CategoryBusiness {
 					CategoryList.add(BuildCategoyTree(Temp,0,null));
 				}
 			}
-			tx.commit();
-			session.close();
+//			tx.commit();
+//			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -75,18 +77,19 @@ public class CategoryBusiness {
     @SuppressWarnings("unchecked")
 	Category BuildCategoyTree(Category item,int flag,Session argSession){
     	try {
-    		Session session=null;
-    		if(flag==0)
-    		{
-    			SessionFactory sf = DBOperation.getSessionFactory();
-		        session = sf.openSession();
-    		}
-    		else
-    		{
-    			session=argSession;
-    		}
-			List<Category> rs = session.createQuery("from Category where parentId= :pid")
-			.setParameter("pid", item.getId()).list();
+//    		Session session=null;
+//    		if(flag==0)
+//    		{
+//    			SessionFactory sf = DBOperation.getSessionFactory();
+//		        session = sf.openSession();
+//    		}
+//    		else
+//    		{
+//    			session=argSession;
+//    		}
+    		List<Category> rs=DaoFactory.getInstance().getCategory_dao().findByProperty("parentId", item.getId());
+//			List<Category> rs = session.createQuery("from Category where parentId= :pid")
+//			.setParameter("pid", item.getId()).list();
 			//Transaction tx = session.beginTransaction();
 			if (rs != null) {
 				Iterator<Category> temp = rs.iterator();
@@ -95,15 +98,15 @@ public class CategoryBusiness {
 					if(cate.getLeaf()!=null &&cate.getLeaf().contentEquals("1")){
 						item.setChildren(cate);
 					}else{
-					    item.setChildren(BuildCategoyTree(cate,1,session));
+					    item.setChildren(BuildCategoyTree(cate,1,null));
 					}
 				}
 		    }
 			//tx.commit();
-			if(flag==0)
-			{
-				session.close();
-			}
+//			if(flag==0)
+//			{
+//				session.close();
+//			}
 		}catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -201,12 +204,10 @@ public class CategoryBusiness {
 	 */
     public void getChildByID(String strID, List<Category> childList) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+			
 			List list = null;
-			list = session.createQuery("from Category where parentId = :strID order by order")
-			       .setParameter("strID", strID).list();
+			list = DaoFactory.getInstance().getCategory_dao().query("select * from Category where parentId ='"+strID+"'");
+			
 			//Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
@@ -217,7 +218,7 @@ public class CategoryBusiness {
 			}
 			
 			//tx.commit();
-			session.close();
+			
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -234,11 +235,8 @@ public class CategoryBusiness {
 	 */
     public Flow getFlowByCategoryID(String categoryID) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
-			List<Flow> list = session.createQuery("from Flow where CategoryId = :id").setParameter("id", categoryID).list();
-			session.close();
+			
+			List<Flow> list =  DaoFactory.getInstance().getFlow_dao().findByProperty("CategoryId", categoryID);
 			if (list.size() != 0) {
 				return list.get(0);
 			}
@@ -261,13 +259,10 @@ public class CategoryBusiness {
      * *************************************************************
 	 */
     public Flow getFlowByID(String ID) {
-    	Session session = null;
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			session = sf.openSession();
-			List<Flow> list = session.createQuery("from Flow where id = :id").setParameter("id", ID).list();
-			session.close();
+
+			List<Flow> list = DaoFactory.getInstance().getFlow_dao().findByProperty("id", ID);
+			
 			if (list.size() != 0) {
 				return list.get(0);
 			}
@@ -277,12 +272,7 @@ public class CategoryBusiness {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally {
-            if (session != null) {  
-                if (session.isOpen()) {  
-                    //关闭session  
-                    session.close();  
-                }  
-            }
+          
         }
 		
 		return null;
@@ -297,13 +287,10 @@ public class CategoryBusiness {
 	 */
     public void getNodeByFlowID(String flowID,List<Node> nodeList) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Node where FlowID = :strID order by Rowid asc")
-			       .setParameter("strID", flowID).list();
-			//Transaction tx = session.beginTransaction();
+			list =  DaoFactory.getInstance().getNode_dao().query("select * from  Node where FlowID = '"+flowID+"' order by Rowid asc");
+					
+				
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -313,7 +300,7 @@ public class CategoryBusiness {
 			}
 			
 			//tx.commit();
-			session.close();
+			
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -331,12 +318,8 @@ public class CategoryBusiness {
     
     public void getAttachmentByNodeID(String nodeID,List<Attachment> attachmentList) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
-			List<Attachment> list = session.createSQLQuery("select a.* from Attachment a,Narelation n " +
-					"where a.id = n.aid  and n.nid = :nodeID").addEntity(Attachment.class)
-			        .setParameter("nodeID", nodeID).list();
+			List<Attachment> list = DaoFactory.getInstance().getAttachment_dao().query("select a.* from Attachment a,Narelation n " +
+					"where a.id = n.aid  and n.nid = '"+nodeID+"'");
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -345,7 +328,7 @@ public class CategoryBusiness {
 				}
 			}
 			
-			session.close();
+			
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
