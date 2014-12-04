@@ -2,6 +2,8 @@ Ext.define('YongYou.flow.FlowRow', {
 			extend : 'Ext.Container',
 			config : {
 				xtype : 'panel',
+				cls : 'flow-row',
+				alias : 'widget.flowRow',
 				centered : false,
 				height : 75,
 				rowid:'',

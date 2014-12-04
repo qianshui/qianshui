@@ -116,6 +116,16 @@ body:not(.x-phone).x-landscape .categories-list.root .categories-list-item:first
 body:not(.x-phone).x-portrait .categories-list.root .categories-list-inner {
 	padding-top:280px
 }
+.flow-row{
+	background: rgba(250,250,250,0.1);
+}
+.flow-row.out{
+	-webkit-transform: translateX(0px) !important;
+}
+.flow-row.hover{
+	
+	-webkit-transform: translateX(300px) !important;
+}
 .flow-item{
 	margin-right:10px;
 	border-radius: 15px;
