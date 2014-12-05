@@ -27,31 +27,34 @@ Ext.define('YongYou.util.ClientEventHandle', {
 
 			if (record.flowId) {
 
-				detailTab = Ext.create('YongYou.view.query.DetailTab', {
-					title : record.title
-				})
-				YongYou.util.DataApi.Core.getFlowByID(function(res, scope) {
-					flow = Ext.decode(res);
-					scope.title = flow.title;
-					scope.initialPanel(flow);
+				if (record.flowType == '0') {
+					detailTab = Ext.create('YongYou.view.query.DetailTab', {
+						title : record.title
+					})
+					YongYou.util.DataApi.Core.getFlowByID(function(res, scope) {
+						flow = Ext.decode(res);
+						scope.title = flow.title;
+						scope.initialPanel(flow);
 
-				}, detailTab, {
-					'id' : record.flowId
-				})
-				navPort.push(detailTab);
-			} else if (record.flowType == '1') {
-				detailTab = Ext.create('YongYou.view.query.CategoryContent', {
-					title : record.title
-				})
-				YongYou.util.DataApi.Core.getCategorycontentByID(function(res, scope) {
-					content = Ext.decode(res);
-					//scope.title = flow.title;
-					scope.initialPanel(content.content);
+					}, detailTab, {
+						'id' : record.flowId
+					})
+					navPort.push(detailTab);
+				} else if (record.flowType == '1') {
+					detailTab = Ext.create(
+							'YongYou.view.query.staticDetailTab', {
+								title : record.title
+							})
+					YongYou.util.DataApi.Core.getFlowByID(function(res, scope) {
+						flow = Ext.decode(res);
+						scope.title = flow.title;
+						scope.initialPanel(flow);
 
-				}, detailTab, {
-					'id' : record.id
-				})
-				navPort.push(detailTab);
+					}, detailTab, {
+						'id' : record.flowId
+					})
+					navPort.push(detailTab);
+				}
 			} else if (record.leaf == '0') {
 
 				inner = Ext.create('YongYou.view.query.DesktopInner', {

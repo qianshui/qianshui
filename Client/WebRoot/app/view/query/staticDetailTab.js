@@ -1,5 +1,5 @@
 
-Ext.define('YongYou.view.query.DetailTab', {
+Ext.define('YongYou.view.query.staticDetailTab', {
 	extend : 'Ext.TabPanel',
 	requires : [],
 	config : {
@@ -29,7 +29,7 @@ Ext.define('YongYou.view.query.DetailTab', {
 			YongYou.util.DataApi.Core.getNodeByFlowID(function(res, scope) {
 			//	flowpanel= Ext.ComponentQuery.query("container[id='flowviewport']")[0];
 			//if(!flowpanel){
-				flowpanel = Ext.create('YongYou.flow.FlowViewport', {
+				flowpanel = Ext.create('YongYou.staticflow.staticFlowViewport', {
 							title : '办事流程'
 							
 						})
