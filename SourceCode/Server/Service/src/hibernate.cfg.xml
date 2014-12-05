@@ -22,8 +22,8 @@
 		</property>
 		<property name="hibernate.connection.provider_class">
 			org.hibernate.connection.C3P0ConnectionProvider
-	 	</property>
-	 	
+		</property>
+
 		<property name="hibernate.c3p0.max_size">20</property>
 		<property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.timeout">120</property>
@@ -34,7 +34,7 @@
 		<property name="c3p0.testConnectionOnCheckout">true</property>
 		<property name="c3p0.idleConnectionTestPeriod">18</property>
 		<property name="c3p0.maxIdleTime">25</property>
-		<property name="c3p0.idle_test_period">120</property> 
+		<property name="c3p0.idle_test_period">120</property>
 
 		<mapping resource="DataBase/Subject.hbm.xml" />
 		<mapping resource="DataBase/Slrelation.hbm.xml" />
@@ -56,6 +56,7 @@
 		<mapping resource="DataBase/Area.hbm.xml" />
 		<mapping resource="DataBase/Street.hbm.xml" />
 		<mapping resource="DataBase/Category.hbm.xml" />
+		<mapping resource="DataBase/Categorycontent.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

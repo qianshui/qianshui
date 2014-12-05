@@ -79,6 +79,12 @@ Ext.define('YongYou.util.DataApi', {
     	    		callback,scope)
 
     	},
+    	getCategorycontentByID:function(callback,scope,param,uppa){
+    		YongYou.util.DataApi.queryData(
+    	    		YongYou.util.Config.getService()+"CategoryService/getCategorycontentByID",param,
+    	    		callback,scope)
+
+    	},
     	updateCategory:function(callback,scope,params,uppa)
     	{
     		YongYou.util.DataApi.postData(

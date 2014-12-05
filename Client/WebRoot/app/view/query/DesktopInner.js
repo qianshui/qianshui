@@ -87,6 +87,7 @@ Ext.define('YongYou.view.query.DesktopInner', {
 						record = store.data.items[target].data;
 						YongYou.util.ClientEventHandle.events.onCatrgotyItemTap(this.parent.parent, index,
 								target, record, e)
+						
 					}
 				}
 			}
@@ -113,6 +114,9 @@ Ext.define('YongYou.view.query.DesktopInner', {
 								type : 'string'
 							},{
 								name : 'leaf',
+								type : 'string'
+							},{
+								name : 'flowType',
 								type : 'string'
 							}],
 					data : red

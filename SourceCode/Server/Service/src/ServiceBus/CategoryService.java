@@ -38,6 +38,7 @@ import Common.DBOperation;
 import Common.IDOperation;
 import DataBase.Attachment;
 import DataBase.Category;
+import DataBase.Categorycontent;
 import DataBase.Contact;
 import DataBase.Flow;
 import DataBase.Laws;
@@ -781,7 +782,16 @@ public class CategoryService {
 		CategoryList = CategoryBusiness.getInstance().getFlowNotInCategoryAndSubjecIDIsNull();
 		return CommonJson.list2Json(CategoryList);
 	}	
+
 	
+	@GET
+	@Path("getCategorycontentByID")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public String getCategorycontentByID(@QueryParam("id") String ID) {
+
+		Categorycontent content = CategoryBusiness.getInstance().getCategorycontentByID(ID);
+		return CommonJson.object2Json(content);
+	}	
 }
 
 

@@ -1,62 +1,77 @@
 Ext.define('YongYou.util.ClientEventHandle', {
-    singleton : true,
+	singleton : true,
 
-    config : {   
-    },
-    constructor : function(config) {
-        this.initConfig(config);
-    },
-    events:{
-    	/**
-    	 * 
-    	 * @param {} view
-    	 * @param {} index
-    	 * @param {} target
-    	 * @param {} record
-    	 * @param {} e
-    	 */
-    	onCatrgotyItemTap : function(view, index, target, record, e) {
-			if(view.getId()=='query-desktop')
-				navPort=view.parent;
+	config : {},
+	constructor : function(config) {
+		this.initConfig(config);
+	},
+	events : {
+		/**
+		 * 
+		 * @param {}
+		 *            view
+		 * @param {}
+		 *            index
+		 * @param {}
+		 *            target
+		 * @param {}
+		 *            record
+		 * @param {}
+		 *            e
+		 */
+		onCatrgotyItemTap : function(view, index, target, record, e) {
+			if (view.getId() == 'query-desktop')
+				navPort = view.parent;
 			else
-				navPort=view;
-			
+				navPort = view;
+
 			if (record.flowId) {
 
 				detailTab = Ext.create('YongYou.view.query.DetailTab', {
-							title : record.title
-						})
+					title : record.title
+				})
 				YongYou.util.DataApi.Core.getFlowByID(function(res, scope) {
-							flow = Ext.decode(res);
-							scope.title = flow.title;
-							scope.initialPanel(flow);
-	
-						}, detailTab, {
-							'id' : record.flowId
-						})
+					flow = Ext.decode(res);
+					scope.title = flow.title;
+					scope.initialPanel(flow);
+
+				}, detailTab, {
+					'id' : record.flowId
+				})
 				navPort.push(detailTab);
-			} else {
+			} else if (record.flowType == '1') {
+				detailTab = Ext.create('YongYou.view.query.CategoryContent', {
+					title : record.title
+				})
+				YongYou.util.DataApi.Core.getCategorycontentByID(function(res, scope) {
+					content = Ext.decode(res);
+					//scope.title = flow.title;
+					scope.initialPanel(content.content);
+
+				}, detailTab, {
+					'id' : record.id
+				})
+				navPort.push(detailTab);
+			} else if (record.leaf == '0') {
 
 				inner = Ext.create('YongYou.view.query.DesktopInner', {
-							title : record.title
-						})
-//				inner.add({
-//							xtype : 'titlebar',
-//							title : record.title
-//						})
+					title : record.title
+				})
+				// inner.add({
+				// xtype : 'titlebar',
+				// title : record.title
+				// })
 				YongYou.util.DataApi.Core.getChildByID(function(res, scope) {
-	
-							scope.initialPanel(res);
-	
-						}, inner, {
-							'id' : record.id
-						})
+
+					scope.initialPanel(res);
+
+				}, inner, {
+					'id' : record.id
+				})
 				navPort.push(inner);
 			}
-	    }
-    	
-    	
-    }
-    
-    
+		}
+
+	}
+
 });

@@ -18,6 +18,7 @@ import org.hibernate.cfg.Configuration;
 
 import Common.DBOperation;
 import DataBase.Category;
+import DataBase.Categorycontent;
 import DataBase.Contact;
 import DataBase.DaoFactory;
 import DataBase.Flow;
@@ -556,6 +557,15 @@ public class CategoryBusiness {
     		return;
     	}
     	this.getNodeByFlowID(flow.getId(), nodeList);
+    }
+    
+    
+    public Categorycontent getCategorycontentByID(String CategoryID){
+    	List<Categorycontent>  list = DaoFactory.getInstance().getCategorycontent_dao().findByProperty("categoryId", CategoryID);
+    	if(list!=null && list.size()>0){
+    		return list.get(0);
+    	}
+    	return null;
     }
 	
 }

@@ -28,24 +28,6 @@
         <property name="title" type="string">
             <column name="Title" length="100" />
         </property>
-        <!-- <set name="flows" inverse="true">
-            <key>
-                <column name="SubjectID" length="10" />
-            </key>
-            <one-to-many class="DataBase.Flow" />
-        </set>
-        <set name="sprelations" inverse="true">
-            <key>
-                <column name="SID" length="10" />
-            </key>
-            <one-to-many class="DataBase.Sprelation" />
-        </set>
-        <set name="slrelations" inverse="true">
-            <key>
-                <column name="SID" length="10" not-null="true" />
-            </key>
-            <one-to-many class="DataBase.Slrelation" />
-        </set>
-         -->
+    
     </class>
 </hibernate-mapping>

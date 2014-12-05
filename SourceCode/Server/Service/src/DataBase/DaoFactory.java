@@ -72,6 +72,10 @@ public class DaoFactory {
 		return new BaseHibernateDAO<Slrelation>(Slrelation.class);
 	}
 	
+	public IBaseHibernateDAO<Categorycontent> getCategorycontent_dao() {
+		return new BaseHibernateDAO<Categorycontent>(Categorycontent.class);
+	}
+	
 	// public IBaseHibernateDAO<Sortconfig> getSortconfigDao(){
 	// return new BaseHibernateDAO<Sortconfig>(Sortconfig.class);
 	// }

@@ -17,24 +17,34 @@ public class Category implements java.io.Serializable {
 	private String parentId;
 	private String leaf;
 	private String flowId;
-	private String order;
-	private ArrayList<Category> children= new ArrayList<Category>();
-	// Constructors
+	private String fororder;
+	private String flowType;
 
+	// Constructors
+	private ArrayList<Category> children= new ArrayList<Category>();
+	public void setChildren(Category node){
+		if(this.id.equals(node.getParentId()) && !this.children.contains(node)){	
+			this.children.add(node);
+		}	
+	}
+	public ArrayList<Category> getChildren(){
+		return children;
+	}
 	/** default constructor */
 	public Category() {
 	}
 
 	/** full constructor */
 	public Category(String title, String icon, String type, String parentId,
-			String leaf, String flowId, String order) {
+			String leaf, String flowId, String fororder, String flowType) {
 		this.title = title;
 		this.icon = icon;
 		this.type = type;
 		this.parentId = parentId;
 		this.leaf = leaf;
 		this.flowId = flowId;
-		this.order = order;
+		this.fororder = fororder;
+		this.flowType = flowType;
 	}
 
 	// Property accessors
@@ -95,20 +105,20 @@ public class Category implements java.io.Serializable {
 		this.flowId = flowId;
 	}
 
-	public String getOrder() {
-		return this.order;
+	public String getFororder() {
+		return this.fororder;
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
+	public void setFororder(String fororder) {
+		this.fororder = fororder;
 	}
-    
-	public void setChildren(Category node){
-		if(this.id.equals(node.getParentId()) && !this.children.contains(node)){	
-			this.children.add(node);
-		}	
+
+	public String getFlowType() {
+		return this.flowType;
 	}
-	public ArrayList<Category> getChildren(){
-		return children;
+
+	public void setFlowType(String flowType) {
+		this.flowType = flowType;
 	}
+
 }
