@@ -103,6 +103,22 @@ Ext.define('YongYou.view.config.form.CategoryForm', {
 				fieldLabel : '叶节点',
 				name : 'leaf',
 				hidden : true
+			},{
+				xtype : 'combobox',
+				fieldLabel : '流程展示类型',
+				name:'flowType',
+				displayField : 'title',
+				valueField : 'id',
+				store:Ext.create('Ext.data.Store', {  
+					fields: [
+					        	{name: 'id', type: 'string'},
+					        	{name: 'title', type: 'string'},
+					    	],
+					data:[  
+		                    {id:'0',title:'动态'}  
+		                    ,{id:'1',title:'静态'}
+		                    ]  
+		                }) 
 			}]
 
 		// buttons : [{
