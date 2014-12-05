@@ -12,6 +12,7 @@ import org.hibernate.cfg.Configuration;
 
 import DataBase.Attachment;
 import DataBase.Category;
+import DataBase.DaoFactory;
 import DataBase.Icon;
 import DataBase.Menu;
 
@@ -32,19 +33,19 @@ public class ConfigUtil {
     public List<Menu> getMenuList() {
     	List<Menu> MenuList = new ArrayList<Menu>();
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//					.buildSessionFactory();
+//			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Menu where parentid is null").list();
-			Transaction tx = session.beginTransaction();
+			list = DaoFactory.getInstance().getMenu_dao().query("select * from menu where parentid is NULL");//session.createQuery("from Menu where parentid is null").list();
+			//Transaction tx = session.beginTransaction();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
 					
 					Menu Temp = (Menu) it.next();
-					List rs = session.createQuery("from Menu where parentid= :pid")
-					.setParameter("pid", Temp.getId()).list();
+					List rs = DaoFactory.getInstance().getMenu_dao().findByProperty("parentid", Temp.getId());//session.createQuery("from Menu where parentid= :pid")
+					//.setParameter("pid", Temp.getId()).list();
 					if (rs != null) {
 						Iterator item = rs.iterator();
 						while (item.hasNext()) {
@@ -54,8 +55,8 @@ public class ConfigUtil {
 					MenuList.add(Temp);
 				}
 			}
-			tx.commit();
-			session.close();
+//			tx.commit();
+//			session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -70,17 +71,17 @@ public class ConfigUtil {
     public List getIconList() {
     	List list = null;
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//					.buildSessionFactory();
+//			Session session = sf.openSession();
 			
-			list = session.createQuery("from Icon").list();
+			list = DaoFactory.getInstance().getIcon_dao().findAll("id", true);//session.createQuery("from Icon").list();
 			if (list != null) {
 				Iterator it = list.iterator();
 			
 			}
 			
-			session.close();
+		//	session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -95,11 +96,11 @@ public class ConfigUtil {
     public List getIconListByIconType(String strIconType) {
     	List IconList = null;
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();			
-			IconList = session.createSQLQuery("select * from Icon where type = :strID").addEntity(Icon.class).setParameter("strID", strIconType).list();	
-			session.close();
+//			SessionFactory sf = new Configuration().configure()
+//					.buildSessionFactory();
+//			Session session = sf.openSession();			
+			IconList = DaoFactory.getInstance().getIcon_dao().findByProperty("type", strIconType);// session.createSQLQuery("select * from Icon where type = :strID").addEntity(Icon.class).setParameter("strID", strIconType).list();	
+//			session.close();
 			
 		} catch (HibernateException e) {
 			// TODO: handle exception

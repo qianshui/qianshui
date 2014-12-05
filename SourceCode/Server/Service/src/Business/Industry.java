@@ -9,6 +9,7 @@
 package Business;
 import Common.DBOperation;
 import DataBase.Attachment;
+import DataBase.DaoFactory;
 import DataBase.Laws;
 import DataBase.Policy;
 import DataBase.Street;
@@ -65,11 +66,11 @@ public class Industry {
 	 */
     public void getIndustryList(List<Subjecttype> IndustryList) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//					.buildSessionFactory();
+//			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Subjecttype").list();
+			list = DaoFactory.getInstance().getSubjecttypeDao().findAll("id", true);//session.createQuery("from Subjecttype").list();
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -78,7 +79,7 @@ public class Industry {
 				}
 			}
 			
-			session.close();
+			//session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -95,12 +96,11 @@ public class Industry {
 	 */
     public void getSubjectList(String SubjecttypeID, List<Subject> SubjectList) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//					.buildSessionFactory();
+//			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Subject where SubjecttypeID=:SubjecttypeID")
-					.setParameter("SubjecttypeID", SubjecttypeID).list();
+			list =  DaoFactory.getInstance().getSubjectDao().findByProperty("subjectTypeId", SubjecttypeID);
 			if (list != null) {
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
@@ -109,7 +109,7 @@ public class Industry {
 				}
 			}
 			
-			session.close();
+			//session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -176,11 +176,11 @@ public class Industry {
 	 */
     public void getLawsList(List<Laws> lowsList) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//					.buildSessionFactory();
+//			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Laws").list();
+			list = DaoFactory.getInstance().getLaws_dao().findAll("id", true);//session.createQuery("from Laws").list();
 			
 			if (list != null) {
 				Iterator it = list.iterator();
@@ -190,7 +190,7 @@ public class Industry {
 				}
 			}
 			
-			session.close();
+			//session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -207,11 +207,11 @@ public class Industry {
 	 */
     public void getPolicyList(List<Policy> policyList) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//					.buildSessionFactory();
+//			Session session = sf.openSession();
 			List list = null;
-			list = session.createQuery("from Policy").list();
+			list = DaoFactory.getInstance().getPolicy_dao().findAll("id", true);//session.createQuery("from Policy").list();
 			
 			if (list != null) {
 				Iterator it = list.iterator();
@@ -221,7 +221,7 @@ public class Industry {
 				}
 			}
 			
-			session.clear();
+			//session.clear();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -237,19 +237,23 @@ public class Industry {
      * *************************************************************
 	 */
     public Subject getIndustryByID(String strID) {
-    	Subject st = null;
-    	Session session = null;
-        try{
+//    	Subject st = null;
+//    	Session session = null;
+//        try{
             /*获取session对象*/
-        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
-	        session = sf.openSession();
-	        st = (Subject)session.get(Subject.class, strID);
-            return st;
-        }finally {//保证资源得到释放
-               if(session != null) {
-                  session.close();
-               }
-        }
+//        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+//	        session = sf.openSession();
+//	        st = (Subject)session.get(Subject.class, strID);
+//            return st;
+        	List<Subject> list = DaoFactory.getInstance().getSubjectDao().findByProperty("id", strID);
+        	if(list!=null&&list.size()>0){
+        		return list.get(0);
+        	}
+        	return null;
+//               if(session != null) {
+//                  session.close();
+//               }
+//        }
         
     }
     
@@ -262,17 +266,22 @@ public class Industry {
      * *************************************************************
 	 */
     public Laws getLawByLawID(String lawID) {
-    	Session session = null;
-        try{
-            /*获取session对象*/
-        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
-	        session = sf.openSession();
-            return (Laws)session.get(Laws.class, lawID);
-        }finally {//保证资源得到释放
-               if(session != null) {
-                  session.close();
-               }
-        }
+    	List<Laws> list = DaoFactory.getInstance().getLaws_dao().findByProperty("id", lawID);
+    	if(list!=null&&list.size()>0){
+    		return list.get(0);
+    	}
+    	return null;
+//    	Session session = null;
+//        try{
+//            /*获取session对象*/
+//        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+//	        session = sf.openSession();
+//            return (Laws)session.get(Laws.class, lawID);
+//        }finally {//保证资源得到释放
+//               if(session != null) {
+//                  session.close();
+//               }
+//        }
     }
     
     /**
@@ -284,17 +293,22 @@ public class Industry {
      * *************************************************************
 	 */
     public Policy getPolicyByPolicyID(String policyID) {
-    	Session session = null;
-        try{
-            /*获取session对象*/
-        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
-	        session = sf.openSession();
-            return (Policy)session.get(Policy.class, policyID);
-        }finally {//保证资源得到释放
-               if(session != null) {
-                  session.close();
-               }
-        }
+    	List<Policy> list = DaoFactory.getInstance().getPolicy_dao().findByProperty("id", policyID);
+    	if(list!=null&&list.size()>0){
+    		return list.get(0);
+    	}
+    	return null;
+//    	Session session = null;
+//        try{
+//            /*获取session对象*/
+//        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+//	        session = sf.openSession();
+//            return (Policy)session.get(Policy.class, policyID);
+//        }finally {//保证资源得到释放
+//               if(session != null) {
+//                  session.close();
+//               }
+//        }
     }
 	
 	/**
@@ -307,14 +321,15 @@ public class Industry {
 	 */
 	public void getLawsByIndustryID(String industryID,List<Laws> lawsList) {
 		try {
-			SessionFactory sf = new Configuration().configure().buildSessionFactory();
-	        Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure().buildSessionFactory();
+//	        Session session = sf.openSession();
 //	        List<Laws> list = session.createSQLQuery("select l.* from Laws l,Slrelation s " +
 //					"where l.id = s.lid  and s.sid = :industryID").addEntity(Laws.class)
 //					.setParameter("industryID", industryID).list();
-	        List<Laws> list = session.createSQLQuery("select l.* from Laws l " +
-			"where l.SubjectId = :industryID").addEntity(Laws.class)
-			.setParameter("industryID", industryID).list();
+	        List<Laws> list = DaoFactory.getInstance().getLaws_dao().findByProperty("subjectId", industryID);
+//	        		session.createSQLQuery("select l.* from Laws l " +
+//			"where l.SubjectId = :industryID").addEntity(Laws.class)
+//			.setParameter("industryID", industryID).list();
 	        if (list.size() != 0) {
 		        Iterator it = list.iterator();
 		        while (it.hasNext()) {
@@ -323,7 +338,7 @@ public class Industry {
 		        }
 	        }
 			
-			session.close();
+		//	session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -340,15 +355,16 @@ public class Industry {
 	 */
 	public void getPolicyByIndustryID(String industryID,List<Policy> policyList) {
 		try {
-			SessionFactory sf = new Configuration().configure()
-			.buildSessionFactory();
-	        Session session = sf.openSession();       
+//			SessionFactory sf = new Configuration().configure()
+//			.buildSessionFactory();
+//	        Session session = sf.openSession();       
 //	        List<Policy> list = session.createSQLQuery("select p.* from Policy p,Sprelation s " +
 //					"where p.id = s.pid  and s.sid = :industryID").addEntity(Policy.class)
 //					.setParameter("industryID", industryID).list();
-	        List<Policy> list = session.createSQLQuery("select p.* from Policy p " +
-					"where p.SubjectId = :industryID").addEntity(Policy.class)
-					.setParameter("industryID", industryID).list();
+	        List<Policy> list =  DaoFactory.getInstance().getPolicy_dao().findByProperty("subjectId", industryID);
+//	        		session.createSQLQuery("select p.* from Policy p " +
+//					"where p.SubjectId = :industryID").addEntity(Policy.class)
+//					.setParameter("industryID", industryID).list();
 	        if (list.size() != 0) {
 		        Iterator it = list.iterator();
 		        while (it.hasNext()) {
@@ -357,7 +373,7 @@ public class Industry {
 		        }
 	        }
 			
-			session.close();
+			//session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
