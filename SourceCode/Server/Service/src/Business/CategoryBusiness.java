@@ -206,7 +206,7 @@ public class CategoryBusiness {
 					.getInstance()
 					.getCategory_dao()
 					.query("select * from Category where parentId ='" + strID
-							+ "'");
+							+ "' order by fororder");
 
 			// Transaction tx = session.beginTransaction();
 			if (list != null) {

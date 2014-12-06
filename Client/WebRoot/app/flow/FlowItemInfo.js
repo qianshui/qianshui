@@ -147,7 +147,7 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 	},
 	
 	setContact : function(values,scope) {
-				html = '<div class="flow-item-info-contact-title"><div class="title" >姓名:&nbsp;</div>'
+				html = '<div class="flow-item-info-contact-title"><div class="title" >办事窗口:&nbsp;</div>'
 						+ '<div class="title">联系电话:&nbsp;</div>'
 						+ '<div class="title">地址:&nbsp;</div></div>'
 						+ '<div class="flow-item-info-contact-content">'
@@ -163,7 +163,7 @@ Ext.define('YongYou.flow.FlowItemInfo', {
 				scope.setHtml(html);
 			},
 	clearContact : function(scope) {
-				html = '<div class="flow-item-info-contact-title"><div class="title" >姓名:&nbsp;</div>'
+				html = '<div class="flow-item-info-contact-title"><div class="title" >办事窗口:&nbsp;</div>'
 						+ '<div class="title">联系电话:&nbsp;</div>'
 						+ '<div class="title">地址:&nbsp;</div></div>'
 						+ '<div class="flow-item-info-contact-content">'

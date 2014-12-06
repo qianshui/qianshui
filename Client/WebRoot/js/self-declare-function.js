@@ -39,7 +39,7 @@ function forSendMail(filestr)
 					                }]
 					       },
 	 					]
-						}), 'pdf显示实验')
+						}), '附件展示')
 }
 function forSendMail_bak(filestr){
 	Ext.Msg.prompt('提示','请输入您的邮箱:',function(id,msg){

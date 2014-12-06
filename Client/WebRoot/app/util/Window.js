@@ -33,12 +33,12 @@ Ext.define('YongYou.util.Window', {
 							docked : 'top',
 							xtype : 'toolbar',
 							title : '',
-							items:[{
-								xtype:'button',
-								docked : 'right',
-								style:'padding-top:6px;',
-								html:'<span style="font-size:16px;">打印</span>'
-							}]
+//							items:[{
+//								xtype:'button',
+//								docked : 'right',
+//								style:'padding-top:6px;',
+//								html:'<span style="font-size:16px;">打印</span>'
+//							}]
 						})
 				this.add(this.toolBar);
 			},

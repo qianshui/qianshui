@@ -26,11 +26,11 @@ Ext.define('YongYou.util.ClientEventHandle', {
 				navPort = view;
 
 			if (record.flowId) {
-
-				if (record.flowType == '0') {
-					detailTab = Ext.create('YongYou.view.query.DetailTab', {
-						title : record.title
-					})
+				if (record.flowType == '1') {
+					detailTab = Ext.create(
+							'YongYou.view.query.staticDetailTab', {
+								title : record.title
+							})
 					YongYou.util.DataApi.Core.getFlowByID(function(res, scope) {
 						flow = Ext.decode(res);
 						scope.title = flow.title;
@@ -40,11 +40,11 @@ Ext.define('YongYou.util.ClientEventHandle', {
 						'id' : record.flowId
 					})
 					navPort.push(detailTab);
-				} else if (record.flowType == '1') {
-					detailTab = Ext.create(
-							'YongYou.view.query.staticDetailTab', {
-								title : record.title
-							})
+				}
+				else {
+					detailTab = Ext.create('YongYou.view.query.DetailTab', {
+						title : record.title
+					})
 					YongYou.util.DataApi.Core.getFlowByID(function(res, scope) {
 						flow = Ext.decode(res);
 						scope.title = flow.title;

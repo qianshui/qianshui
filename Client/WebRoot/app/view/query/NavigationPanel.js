@@ -8,6 +8,12 @@ Ext.define('YongYou.view.query.NavigationPanel', {
 				defaultBackButtonText: '返回',
 				navigationBar : {
 					ui :'dark', //"background:#9d2627;!important",
+					height:'60px',
+					//width:'',
+					layout : {
+						pack : 'center'
+					},
+					style:'font-size:30px;',
 					items : [{
 								xtype : 'button',
 								ui : 'action',
