@@ -5,7 +5,7 @@ Ext.define('YongYou.staticflow.staticFlowRow', {
 				cls : 'flow-row',
 				alias : 'widget.staticflowRow',
 				centered : false,
-				height : 75,
+				height : 90,
 				rowid:'',
 				width : '100%',
 				style:"text-align:center;",

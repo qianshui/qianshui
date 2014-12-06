@@ -10,7 +10,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 			xtype:'container',
 			height : '100%',
 			docked : 'left',
-			style:'border:1px gray solid;width:326px;background-color:white;!important',
+			style:'border:1px gray solid;width:25%;background-color:white;!important',
 			layout : {
 				type : 'vbox'
 			},
@@ -113,7 +113,8 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 	        	items:[
 	        	   {
 	        		   xtype:'panel',
-	        		   html:'区域功能介绍信息。。。。',
+	        		   html:'<div style=\'width:220px;margin:0 auto;\'><p style=\'margin-top:40px;\'>行业占比 ： 用于分析此地点周围同行业的信息。</p>'+
+	        			   '<p style=\'margin-top:20px;\'>周边配套 ： 分析此地点周围的学校/医院等基本配套信息。</p></div>',
 	        	   },
 	        	   {
 						xtype:'list',
@@ -220,7 +221,7 @@ Ext.define('YongYou.view.OneIndustryPanel', {
 			xtype : 'component',
 			width:'100%',
 			height:'100%',
-			html : '<div id=\'mapDiv\' style=\'width:978px;height:655px;\'>您的设备没有联网，请保证网络连接，然后重新尝试一次。。。</div>'
+			html : '<div id=\'mapDiv\' style=\'width:950px;height:800px;\'>您的设备没有联网，请保证网络连接，然后重新尝试一次。。。</div>'
 		}
 
 		]

@@ -5,7 +5,7 @@ Ext.define('YongYou.flow.FlowRow', {
 				cls : 'flow-row',
 				alias : 'widget.flowRow',
 				centered : false,
-				height : 75,
+				height : 90,
 				rowid:'',
 				width : '100%',
 				style:"text-align:center;",

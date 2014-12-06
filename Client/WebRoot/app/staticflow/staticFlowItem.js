@@ -93,7 +93,7 @@ Ext
 								.setHtml('<div class="icon" style="background-image: url(\'resources/image/flow/'
 										+ item.imgId
 										// + '\');">');
-										+ '\');"></div><div>'
+										+ '\');"></div><div style=\'margin-left:-70px;width:300px;\'>'
 										+ item.title
 										+ '</div>');
 						this.setId(item.id);

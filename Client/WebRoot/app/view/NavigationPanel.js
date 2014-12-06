@@ -29,10 +29,19 @@ Ext.define('YongYou.view.NavigationPanel', {
                 		id:'navigationbar',
                  		docked: 'top',
               			xtype: 'titlebar',
+              			ui : 'red',
+            			height:'60px',
+            			//width:'',
+            			layout : {
+            				pack : 'center'
+            			},
+            			style:'font-size:30px;background: -webkit-linear-gradient(left, rgba(169,3,41,1) 71%,rgba(109,0,25,1) 100%);!important;',
               			title: 'Navigation',
               			items: [
               			    {
            					 	iconCls: 'home',
+           					    ui : 'action',
+           					    style:"background:#8d2324",
             					align: 'right',
             					listeners:
             					{
@@ -48,7 +57,9 @@ Ext.define('YongYou.view.NavigationPanel', {
         					{
         						id:'navibar_back',
            					 	iconCls: 'arrow_left',
-            					align: 'left',
+           					    ui : 'action',
+           					    style:"background:#8d2324",
+           					    align: 'left',
             					listeners:
             					{
                 					'tap': function (b, e) {
