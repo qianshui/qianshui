@@ -23,6 +23,12 @@ function forSendMail(filestr)
 					                	width:'30%',
 					                	ui:'round',
 					                	text:'直接下载',
+					                	listeners : {
+					    					'tap' : function(b, e) {
+					    				         //alert(this.parent.parent.NodeInfo.detail);
+					                			forDownloadFile(filestr);
+					    			        }
+					    			    }
 					                },
 					                {
 					                	xtype:'button',
@@ -70,27 +76,16 @@ function forSendMail_bak(filestr){
 		}
 	},this,true);
 }
-//function forSendMail_bak(filestr)
-//{
-//	var emailstr = prompt('输入您的邮箱：', '1194233829@qq.com');  
-//    //window.open('sendAttaches.jsp?email='+emailstr+'&file='+filestr);
-//	if(emailstr){
-//		if(verifyAddress(emailstr)){
-//			YongYou.util.DataApi.Core.forSendMail(function(res,scope){
-//				
-//				alert(res);
-//			},null,{
-//				'email':emailstr,
-//				'file' :filestr
-//			});
-//		}else{
-//			forSendMail(filestr);
-//		}
-//	}else
-//	{
-//		alert("您取消了发送附件！");
-//	}
-//}
+function forDownloadFile(filestr)
+{
+//	YongYou.util.DataApi.Core.forDownload(function(res,scope){
+//		//sending.hide();
+//		//Ext.Msg.alert("提示",res);
+//	},null,{
+//		'file' :filestr
+//	});
+	window.location="servlet/DownloadFiles?file="+filestr;
+}
 function verifyAddress(email)    
 {    
 	 //var email = obj.email.value;    

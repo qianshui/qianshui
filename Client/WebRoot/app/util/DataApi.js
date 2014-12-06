@@ -12,6 +12,11 @@ Ext.define('YongYou.util.DataApi', {
 		    		"sendAttaches.jsp",param,
 		    		callback,scope)
         },
+        forDownload:function(callback,scope,param){
+        	YongYou.util.DataApi.queryData(
+		    		"servlet/DownloadFiles",param,
+		    		callback,scope)
+        },
     	addPeitaoInfo:function(callback,scope,param){
 			YongYou.util.DataApi.queryData(
 		    		YongYou.util.Config.getService()+"ConfigUtilService/addPeitaoInfo",param,
