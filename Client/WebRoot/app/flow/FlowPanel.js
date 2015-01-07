@@ -9,7 +9,7 @@ Ext.define('YongYou.flow.FlowPanel', {
 				dock : 'top',
 				title : '流程图',
 				scrollable : true,
-				style : "background-color:#FFF;!important",
+				style : "background-color:#FFF4D6;!important",
 				layout : {
 					type : 'vbox'
 				},

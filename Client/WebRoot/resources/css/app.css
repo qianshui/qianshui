@@ -266,7 +266,7 @@ background: white;
  
 .slide.out {
 -webkit-animation-name: slideout !important;
--webkit-transform: translateX(-550px) !important;
+-webkit-transform: translateX(-614px) !important;
 
 }
  
@@ -316,7 +316,7 @@ font-size: 15px;
 }
 .card-item{
 -webkit-box-shadow: inset 15px 0px 30px -15px rgba(0,0,0,1);
-background: white;
+background: background: -webkit-linear-gradient(left, rgba(169,3,41,1) 71%,rgba(109,0,25,1) 100%);!important;
 }
 
 .desktop-list {

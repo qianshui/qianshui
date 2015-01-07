@@ -35,7 +35,7 @@ Ext.define('YongYou.view.NavigationPanel', {
             			layout : {
             				pack : 'center'
             			},
-            			style:'font-size:30px;background: -webkit-linear-gradient(left, rgba(169,3,41,1) 71%,rgba(109,0,25,1) 100%);!important;',
+            			style:'font-size:30px;color:white;background: -webkit-linear-gradient(left, rgba(169,3,41,1) 71%,rgba(109,0,25,1) 100%);!important;',
               			title: 'Navigation',
               			items: [
               			    {

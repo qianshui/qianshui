@@ -16,7 +16,7 @@
 					layout : {
 						pack : 'center'
 					},
-					title : '<p style=\'font-size:40px;\'>江北区行政服务中心顾问信息库</p>',
+					title : '<p style=\'font-size:40px;color:white\'>江北区行政服务中心顾问信息库</p>',
 					style : "background: -webkit-linear-gradient(left, rgba(169,3,41,1) 71%,rgba(109,0,25,1) 100%);!important;"
 				}, { 
 					xtype : 'dataview',

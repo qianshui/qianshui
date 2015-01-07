@@ -18,11 +18,11 @@ Ext.define('YongYou.staticflow.staticFlowViewport', {
 					this.child('#iteminfo').clearValue();
 				} else {
 					flow = Ext.create('YongYou.staticflow.staticFlowPanel', {
-								width : '70%',
+								width : '10%',
 								cls : 'card-item'
 							})
 					info = Ext.create('YongYou.staticflow.staticFlowItemInfo', {
-								width : '30%',
+								width : '90%',
 								cls : 'card-item'
 							})
 					flow.initialPanel(res);
@@ -40,12 +40,12 @@ Ext.define('YongYou.staticflow.staticFlowViewport', {
 					this.child('#'+key+'iteminfo').clearValue();
 				} else {
 					flow = Ext.create('YongYou.staticflow.staticFlowPanel', {
-								width : '60%',
+								width : '40%',
 								//cls : 'slide',
 								id:key+'flowpanel'
 							})
 					info = Ext.create('YongYou.staticflow.staticFlowItemInfo', {
-								width : '40%',
+								width : '60%',
 								cls : 'nav-list',
 								id:key+'iteminfo'
 							})
