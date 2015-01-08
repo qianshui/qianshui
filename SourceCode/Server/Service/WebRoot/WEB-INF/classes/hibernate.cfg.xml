@@ -57,6 +57,7 @@
 		<mapping resource="DataBase/Street.hbm.xml" />
 		<mapping resource="DataBase/Category.hbm.xml" />
 		<mapping resource="DataBase/Categorycontent.hbm.xml" />
+		<mapping resource="DataBase/VisitInfo.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

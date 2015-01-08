@@ -16,25 +16,32 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import DataBase.HibernateSessionFactory;
+
 public class DBOperation {
 	private static SessionFactory factory=null;
-	
-	public static SessionFactory getSessionFactory()
+	public static Session getHibernateSession()
 	{
-		if(factory==null)
-		{
-			Configuration cfg = new Configuration().configure(); 
-			factory = cfg.buildSessionFactory();
-		}
-		return factory;
+		return HibernateSessionFactory.getSession();
 	}
+//	public static SessionFactory getSessionFactory()
+//	{
+//		if(factory==null)
+//		{
+//			Configuration cfg = new Configuration().configure(); 
+//			factory = cfg.buildSessionFactory();
+//		}
+//		return factory;
+//	}
+	@SuppressWarnings("hiding")
 	public static <Object> boolean add(Object obj) {
 		//Configuration cfg = new Configuration().configure(); 
-        SessionFactory factory = getSessionFactory();
+        //SessionFactory factory = getSessionFactory();
         
         Session session = null;
         try {  
-            session = factory.openSession();    
+            //session = factory.openSession();   
+            session=getHibernateSession();
             session.beginTransaction(); 
             session.save(obj);   
             session.getTransaction().commit();  
@@ -55,11 +62,12 @@ public class DBOperation {
 	
 	public static <Object> boolean update(Object obj) {
 		//Configuration cfg = new Configuration().configure(); 
-        SessionFactory factory = getSessionFactory();
+        //SessionFactory factory = getSessionFactory();
         
         Session session = null;
         try {  
-            session = factory.openSession();    
+        	//session = factory.openSession();   
+            session=getHibernateSession();
             session.beginTransaction(); 
             session.update(obj);
             session.getTransaction().commit();  
@@ -80,11 +88,12 @@ public class DBOperation {
 	
 	public static <Object> boolean delete(Object obj) {
 		//Configuration cfg = new Configuration().configure(); 
-        SessionFactory factory = getSessionFactory();
+        //SessionFactory factory = getSessionFactory();
         
         Session session = null;
         try {  
-            session = factory.openSession();    
+        	//session = factory.openSession();   
+            session=getHibernateSession();
             session.beginTransaction(); 
             session.delete(obj);   
             session.getTransaction().commit();  
@@ -105,11 +114,12 @@ public class DBOperation {
 	
 	public static boolean delete(String sql){
 		//Configuration cfg = new Configuration().configure(); 
-		SessionFactory factory = getSessionFactory();
+		//SessionFactory factory = getSessionFactory();
 		Session session = null;
 		Transaction tx = null;
 		try {
-			    session = factory.openSession();
+				//session = factory.openSession();   
+	            session=getHibernateSession();
 			    tx = session.getTransaction();
 			    session.beginTransaction(); 
 			    Query query = session.createSQLQuery(sql);
@@ -121,8 +131,13 @@ public class DBOperation {
 			    tx.rollback();
 			    e.printStackTrace();
 			    return false;
-			   }finally{
-				   session.close();
-			   }
+	    } finally{
+	    	if (session != null) {  
+                if (session.isOpen()) {  
+                    //关闭session  
+                    session.close();  
+                }  
+            }
+	    }
 	}
 }

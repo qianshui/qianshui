@@ -15,6 +15,7 @@ import DataBase.Policy;
 import DataBase.Street;
 import DataBase.Subject;
 import DataBase.Subjecttype;
+import DataBase.HibernateSessionFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -126,9 +127,10 @@ public class Industry {
 	 */
     public void getStreetList(List<Street> StreetList,String AreaId) {
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//				.buildSessionFactory();
+//			Session session = sf.openSession();
+    		Session session = HibernateSessionFactory.getSession();
 			List list = null;
 			//list = session.createQuery("from Street where CommonFlag=1").list();
 			list = session.createQuery("from Street where areaId=:AreaId")
@@ -153,9 +155,10 @@ public class Industry {
     public List<Street> getAllStreetList() {
     	List<Street> list=new ArrayList<Street>();
     	try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//				.buildSessionFactory();
+//	        Session session = sf.openSession();
+			Session session = HibernateSessionFactory.getSession();
 			
 			list = session.createQuery("from Street").list();
 			
@@ -390,9 +393,10 @@ public class Industry {
 	 */
 	public void getIndustryListByKey(String strKey,List<String> addressList) {
 		try {
-			SessionFactory sf = new Configuration().configure()
-			.buildSessionFactory();
-	        Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//				.buildSessionFactory();
+//			Session session = sf.openSession();
+			Session session = HibernateSessionFactory.getSession();
 	        //Transaction tx = session.beginTransaction();
 	        List<String> list = null;
 	        String sql = "{call getIndustryListByKey(?)}";

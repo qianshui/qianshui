@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import DataBase.Classid;
+import DataBase.HibernateSessionFactory;
 
 /** 
  * *************************************************************
@@ -37,8 +38,10 @@ public class IDOperation {
 		String baseValue = "00000";//数值基准部分
 		
         try{
-        	SessionFactory sf = new Configuration().configure().buildSessionFactory();
-	        session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//			.buildSessionFactory();
+//		Session session = sf.openSession();
+		session = HibernateSessionFactory.getSession();
 	        Transaction tx = session.beginTransaction();
 	        Classid obj = ((Classid)session.get(Classid.class, className));
 			if (obj != null) {

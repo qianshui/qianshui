@@ -14,15 +14,17 @@ import org.hibernate.cfg.Configuration;
 import java.util.Iterator;
 import java.util.List;
 import Common.AreaInfo;
+import DataBase.HibernateSessionFactory;
 import DataBase.Locationsite;
 import DataBase.Area;
 import DataBase.Street;
+import DataBase.HibernateSessionFactory;
 
 import java.util.Iterator; 
 import java.util.List;   
 
 public class Map {
-	private static final String HibernateSessionFactory = null;
+	//private static final String HibernateSessionFactory = null;
 	private static String strUrlpre = "http://api.map.baidu.com/geocoder?address=";
 	private static String strUrlnext = "&output=xml&key=UB30QfDn5Gp7Pu7kHfHIagLH&city=";
 	
@@ -35,9 +37,10 @@ public class Map {
 	 */
 	public static void getAreasOfJiangbei(List<Area> areasList) {
 		try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//			.buildSessionFactory();
+//	Session session = sf.openSession();
+	Session session = HibernateSessionFactory.getSession();
 			List list = null;
 			//list = session.createQuery("from Street where CommonFlag=1").list();
 			list = session.createQuery("from Area").list();
@@ -67,9 +70,10 @@ public class Map {
 		//String keyUTF8 = URLEncoder.encode(strKey, "UTF-8");
 		
 		try {
-			SessionFactory sf = new Configuration().configure()
-					.buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//			.buildSessionFactory();
+//	Session session = sf.openSession();
+	Session session = HibernateSessionFactory.getSession();
 			//Transaction tx = session.beginTransaction();
 			List<String> list = null;
 			String sql = "{call getAddressListByKey(?)}";
@@ -222,8 +226,10 @@ public class Map {
 	public static void getAreaByLngLat(double Lng,double Lat,List<AreaInfo> areaInfo) /*throws Exception*/{
 		
 		try {
-			SessionFactory sf = new Configuration().configure().buildSessionFactory();
-			Session session = sf.openSession();
+//			SessionFactory sf = new Configuration().configure()
+//			.buildSessionFactory();
+//	Session session = sf.openSession();
+	Session session = HibernateSessionFactory.getSession();
 			Transaction tx = session.beginTransaction();
 			int distance = 1;//暂为1公里的范围，没有设置参数传递
 			List<Locationsite> list = null;

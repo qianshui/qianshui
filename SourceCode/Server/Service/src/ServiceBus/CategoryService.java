@@ -46,7 +46,7 @@ import DataBase.Narelation;
 import DataBase.Node;
 import DataBase.Policy;
 import DataBase.Sprelation;
-
+import DataBase.VisitInfo;
 
 /**
  * *************************************************************
@@ -177,7 +177,8 @@ public class CategoryService {
 	@GET
 	@Path("getFlowByID")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public String getFlowByID(@QueryParam("id") String ID) {
+	public String getFlowByID(@QueryParam("id") String ID,@QueryParam("cid") String cid) {
+		System.out.println("CategoryId:"+cid);
 		return CommonJson.object2Json(CategoryBusiness.getInstance().getFlowByID(ID));
 	}
 	
@@ -443,8 +444,9 @@ public class CategoryService {
 		Map map= CommonJson.getMapFromJson(cloneflow);
 		Session session = null;
 		try {
-			SessionFactory sf = DBOperation.getSessionFactory();
-			session = sf.openSession();
+			//SessionFactory sf = DBOperation.getSessionFactory();
+			//session = sf.openSession();
+			session=DBOperation.getHibernateSession();
 			
 			//1.获取节点列表
 			List<Node> NodeList = session.createQuery("from Node where flowId = :strID")
@@ -502,7 +504,7 @@ public class CategoryService {
 //				String strNodeWithAttch=CommonJson.addAttrToJson(strNodeWithoutAttach, "attachment", Attachments);
 //				createNode(strNodeWithAttch);
 //			}
-			session.close();
+			//session.close();
 		} catch (HibernateException e) {
 			// TODO: handle exception
 			e.printStackTrace();
